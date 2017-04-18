@@ -250,3 +250,7 @@ comment .comment-content .finger{
     display:inline-block;
     vertical-align:middle;
 }
+.comment .comment-header{
+    background-color:#ff503e;
+    color:#fff;
+}

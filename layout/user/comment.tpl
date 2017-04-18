@@ -3,7 +3,7 @@
 </header>
 <div class="content comment">
     <div class="comment-content">
-        <div class="card-header">商品满意度：</div>
+        <div class="card-header comment-header">商品满意度：<span ></span></div>
         <div class="c-title">评价详情</div>
         <div class="comment-list">
             <div class="list-list">
