@@ -3,7 +3,7 @@ define(function(require,exports,module){
     require('mockjs');
     var data=Mock.mock("/getData",{
         "id":"13167161025",
-        "date":new Date(),
+        "date":new Date().toLocaleDateString(),
         "text":"一开始担心里面的牛仔那层会有点厚，但是很薄，而且不会透，外面也不会显得很臃肿，非常喜欢。"
     });
     require.async('handlebars',function(){

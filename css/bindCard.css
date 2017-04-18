@@ -187,8 +187,10 @@
 }
 
 /*********用户评价*********/
-.comment .card{
-    margin:0;
+.comment .comment-content{
+    position: relative;
+    font-size: .7rem;
+    background: #fff;
 }
 .comment .c-title{
     color:#999999;
@@ -208,9 +210,43 @@
     color:#999999;
 }
 .comment .user-con img{
+    width:0.8rem;
+    height:0.8rem;
     vertical-align:middle;
 }
 .comment .user-con span{
+    display:inline-block;
+    vertical-align:middle;
+}
+.comment .c-re-con{
+    font-size:0.789rem;
+    padding:0 0.75rem 0.97rem 0.75rem;
+    color:#212121;
+
+}
+.comment .comment-content .comment-list .list-list{
+    margin:0 0.75rem 0 0.75rem;
+    border-bottom:solid 1px #e6e6e6;
+}
+.comment .footer{
+    text-align:center;
+    padding-top:0.65rem;
+    padding-bottom:1.2rem;
+}
+.comment .footer .line{
+    display:inline-block;
+    width:60px;
+    height:1px;
+    background-color:#e6e6e6;
+    vertical-align:middle;
+}
+.comment .footer .more{
+    display:inline-block;
+    vertical-align:middle;
+    color:#999999;
+    font-size:0.67rem;
+}
+comment .comment-content .finger{
     display:inline-block;
     vertical-align:middle;
 }
