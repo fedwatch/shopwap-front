@@ -11,15 +11,5 @@ define(function(require,exports,module){
 
     });
 
-    // // loginPage
-    // require.async('handlebars',function(){
-    //     var data = {
-    //
-    //     };
-    //     var tpl = require('/layout/my/login.tpl');
-    //     var template = Handlebars.compile(tpl);
-    //     var html = template(data);
-    //     $("#loginPage").html(html);
-    // });
 
 });

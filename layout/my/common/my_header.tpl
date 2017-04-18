@@ -37,24 +37,6 @@
 </div>
 
 
-
-<!--<div class="user_profile">-->
-    <!--<div class="user_profile_icon">-->
-        <!--<a href="/login.html" class="clearfix external">-->
-            <!--<img src="/assets/images/cool-girl.jpg" alt="" class="user_profile_avatar">-->
-        <!--</a>-->
-    <!--</div>-->
-<!--</div>-->
-<!--<div class="login_button_group">-->
-    <!--<a href="/login.html" class="button button-primary external">-->
-        <!--登录-->
-    <!--</a>-->
-    <!--<a href="/register.html" class="button button-primary external">-->
-        <!--注册-->
-    <!--</a>-->
-<!--</div>-->
-
-
 <div class="user_link_btn">
     <div class="unpaid link_btn">
         <a href="javascript:void(0)">

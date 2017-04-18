@@ -1,4 +1,7 @@
-
+* {
+    margin: 0;
+    padding: 0;
+}
 /*S--表单错误提示样式--*/
 .error-tips {
     background-color: #fff0e6;
@@ -18,10 +21,7 @@
 .null-data img {
 	width:1rem;
 }
-* {
-  margin: 0;
- 	padding: 0;
-}
+
 h1,h2,h3,h4,h5,i,b,em{
   	font-weight: normal;
   	font-style: normal;

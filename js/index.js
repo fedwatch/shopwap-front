@@ -8,7 +8,6 @@ define(function(require,exports,module){
     require("/js/utils/getCurrentPage");
 
     $(function () {
-
         Mock.mock(/\/initShopData$/, {
             'images': [
                 {"url": "../assets/images/shop1-index.png","alt":"AD"},
@@ -26,25 +25,8 @@ define(function(require,exports,module){
             ]
         });
 
-
-
-
         initShopData();
         getCurrentPage();
-        // //底部菜单切换
-        // $(".foot-con a").on("click", function () {
-        //     $(".foot-con a").each(function () {
-        //         var $this = $(this);
-        //         var cla = $this.find('i').attr('class');
-        //         cla = cla.replace(/2/, '');
-        //         $this.find('i').attr('class', cla);
-        //     })
-        //     var $this = $(this);
-        //     var cname = $this.find('i').attr('class');
-        //     cname = cname.replace(/2/, '');
-        //     $this.find('i').attr('class', cname + 2);
-        //     $this.addClass('active').siblings().removeClass('active');
-        // });
 
         var bannerSwiper = new Swiper('.swiper-banner', {
             pagination: '.pagination',
@@ -83,7 +65,7 @@ define(function(require,exports,module){
     require.async('handlebars',function(){
         var data = {
             data:'499',
-            img:"../assets/images/banner1.png"
+            img: ["../assets/images/banner1.png", "../assets/images/banner2.png", "../assets/images/banner3.png"]
         };
         var tpl = require('/layout/index/banner.tpl');
         var template = Handlebars.compile(tpl);
