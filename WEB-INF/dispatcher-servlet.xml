@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<!-- property -->
+	<bean id="propertyPlaceholderConfigurer" class="com.shop.redis.RedisPropertyPlaceholderConfigurer">
+		<property name="systemPropertiesMode" value="2" />
+		<property name="client" ref="redissonClient" />
+	</bean>
+
+	<!-- context scan -->
+	<context:component-scan base-package="com.shop.controller"
+		scoped-proxy="targetClass" use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<!-- interceptors -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="com.shop.web.interceptor.CSRFTokenGeneratorInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="com.shop.web.interceptor.RequestParametersInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<!-- 静态资源映射 -->
+	<!-- <mvc:resources mapping="/static/**" location="/static/" cache-period="31536000" 
+		/> -->
+
+	<!-- annotation driven -->
+	<mvc:annotation-driven
+		content-negotiation-manager="contentNegotiationManager" validator="validator">
+		<mvc:message-converters>
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html</value>
+						<value>text/html;charset=UTF-8</value>
+						<value>application/json;charset=UTF-8</value>
+						<value>application/json</value>
+					</list>
+				</property>
+				<property name="objectMapper">
+					<bean class="com.shop.web.jsonmapper.XssSerializerMapper" />
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<!-- validate -->
+	<bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+		<!-- default resource is ValidationMessages.properties -->
+		<property name="validationMessageSource" ref="validatemessageSource" />
+	</bean>
+
+	<!-- user-defined properties resource -->
+	<bean id="validatemessageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:validateMessage" />
+		<property name="cacheSeconds" value="3600" />
+	</bean>
+	
+	<!-- 开启方法级别的验证 -->
+	<bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor">  
+	    <!-- 可以引用自己的 validator 配置，在本文中（下面）可以找到 validator 的参考配置，如果不指定则系统使用默认的 -->
+	    <property name="validator" ref="validator"/>  
+	</bean>
+
+	<!-- 配置静态资源 -->
+	<mvc:default-servlet-handler
+		default-servlet-name="default" />
+
+	<!-- multipart Resolver -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="30000000" />
+	</bean>
+
+	<!-- content Negotiation Manager -->
+	<bean id="contentNegotiationManager"
+		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+		<property name="mediaTypes">
+			<map>
+				<entry key="json" value="application/json" />
+				<entry key="xml" value="application/xml" />
+				<entry key="html" value="text/html" />
+			</map>
+		</property>
+		<property name="defaultContentType" value="text/html" />
+		<property name="ignoreAcceptHeader" value="true" />
+		<property name="favorPathExtension" value="true" />
+
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="contentNegotiationManager" ref="contentNegotiationManager" />
+		<property name="viewResolvers">
+			<list>				
+				<bean
+					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+					<property name="prefix" value="/WEB-INF//"></property>
+					<property name="suffix" value=".jsp"></property>
+					<property name="viewClass"
+						value="org.springframework.web.servlet.view.JstlView"></property>
+				</bean>
+				<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+			</list>
+		</property>
+
+		<property name="defaultViews">
+			<list>
+				<!-- <bean class="org.springframework.web.servlet.view.xml.MappingJackson2XmlView" 
+					/> -->
+				<bean
+					class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+					<property name="objectMapper">
+						<bean class="com.shop.web.jsonmapper.XssSerializerMapper" />
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- error message bundle -->
+	<bean id="errMessageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames" value="errorMessage" />
+	</bean>
+
+	<!-- 统一异常处理 -->	
+	<bean id="defaultExceptionResolver" class="com.shop.web.errhandler.MvcErrorHandler">
+		<property name="order" value="1" />
+		<property name="messageSource" ref="errMessageSource" />
+	</bean>
+
+	<!-- aop -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<!-- auto release transport aop -->
+	<bean id="formValidatorAdvice" class="com.shop.aop.FormValidatorAdvice" />
+	
+	<aop:config>
+		<aop:pointcut expression="@annotation(com.shop.aop.FormValidator)"
+			id="formValidatorPointcut" />
+		<aop:aspect id="formValidatorAspect" ref="formValidatorAdvice">
+			<aop:before method="doBefore" pointcut-ref="formValidatorPointcut" />
+		</aop:aspect>
+	</aop:config>
+
+</beans>

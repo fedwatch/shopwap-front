@@ -1,0 +1,66 @@
+.bar-nav {background:transparent;}
+.bar-nav ~ .content {top:0;}
+.bg-sign {
+	background:#D44C5F url(../images/game/yao_bg.png) top center/100% no-repeat;
+	min-height:6.63rem;color:#fff;
+    margin-bottom: .3rem;
+}
+.game-rule {
+    color: #7B1521;
+    background: #FFE04F;
+    position: absolute;
+    top: .55rem;
+    right: 0;
+    border-radius: .4rem 0 0 .4rem;
+    width: .8rem;
+    line-height: .3rem;
+}
+.egg-box {background:url(../images/game/yao_dan.png) top center/100% no-repeat;background-size:2.9rem,2.7rem;height:2.7rem;width:2.9rem;margin:2.8rem auto 0;position:relative;}
+.egg-box.hitted {background-image: url(../images/game/yao_zakai.png);}
+.hit-layer { height: 2.4rem; width: 2.2rem; margin: 0 auto;}
+.hammer {width:.7rem;height:.65rem;position:absolute;right:.46rem;top:.03rem;}
+.user-tip {color:#fff;margin-bottom: .3rem;-webkit-user-select:none;}
+.user-tip .user-num {color:#922323;}
+.fix-bottom {position:fixed;bottom:0;width:100%;color:#F7C5CC;background:#BD3A4C;font-size: .12rem;line-height: .3rem;height:.3rem;overflow: hidden;-webkit-user-select:none;}
+.fix-bottom img {width:.16rem; vertical-align: -4px;}
+
+
+.modal-layer2 {position:absolute;bottom:0;width:100%;background:rgba(0,0,0,0.4);height:100%;z-index:9999;text-align:center;}
+.modal-layer2 .box-cont {position:relative;top:18%;width:95%;left:2.5%;background:#fff;border-radius:.08rem; padding: .3rem .15rem .1rem;}
+.modal-layer2 .aui-icon-close {font-size: .24rem; text-align: right; padding: .05rem .1rem 0 0; color: #999; position: absolute; right: 0; top: 0; }
+.modal-layer2 h3 {line-height:.4rem;color:#C23E16;font-weight:bold;font-size:.2rem;}
+.modal-layer2 .img-box img {width:2.7rem;}
+.modal-layer2 .warm-msgTip {color:#B52E05;}
+.modal-layer2 .pwd-box {margin:.3rem 0;}
+.modal-layer2 .pwd-box input {border:1px solid #E6E6E6;height:.4rem;width:80%;margin:0 10%;border-radius:.05rem;}
+.modal-layer2 .btns {line-height:.4rem;text-align:center;margin:.3rem 0 .15rem;}
+.modal-layer2 .btns a {width:100%;float:left;line-height:.5rem;background:#FF673A;color:#fff;border-radius:.05rem;font-size:.2rem;}
+.modal-layer2 .btns a.share {background:#FFCA15;margin:.2rem 0 .3rem;}
+.rule-text .rule-img {background:url(../images/game/activity_rule.png) top center/100% no-repeat;background-size:1.55rem auto;width:1.55rem;height:.35rem;margin:-.48rem auto 0;}
+.text-p {margin-top:.3rem;}
+.rule-text p{text-align:left;margin:.1rem;color:#C23E16;font-size:.16rem;}
+.rule-text p img {width:.17rem;}
+.modal-layer2 .img-box.rate-bg {background:url(../images/game/yao_quan.png) top center/100% 100% no-repeat;height:2.35rem; padding: .8rem .3rem 0;}
+.rate-bg .upRate {
+    color: #FFD3CF;
+    position: relative;
+    width: 80%;
+    //margin: auto;
+    font-size: .25rem;
+    font-family: "arial";
+}
+.rate-bg .upRate b {font-size:.48rem;color:#fff;}
+.rate-bg .upRate .tip-limit {
+    background: url(../images/game/yao_tian.png) top center/100% no-repeat;
+    width: .5rem;
+    height: .25rem;
+    position: absolute;
+    top:.1rem;
+    right: 0;
+    line-height: .25rem;
+    color: #DB4334;
+    font-weight: bold;
+    font-size: .13rem;
+}
+.rate-bg p {color:#FBD860;font-weight: 600;}
+.warm-msgTip strong {font-size: .18rem;}

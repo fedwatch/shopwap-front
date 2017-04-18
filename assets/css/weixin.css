@@ -1,0 +1,185 @@
+.page {background:#F2F2F2;}
+/*头部APP下载*/
+.linkApp {
+	color:#B18724;background:#F9DA6D url(../images/button_ljxz.png) 80% center no-repeat;
+	background-size:auto .26rem;
+	line-height:.35rem;padding:0 .15rem;
+	position:relative;
+	z-index:1000;
+}
+.linkApp .linkHref {display:block;width:95%;}
+.linkApp .imgBox {position:absolute;right:15px;top:0;}
+.linkApp .imgBox img {width:.15rem;}
+/*表单区域*/
+.form-area {padding:.15rem;background:#fff;}
+.form-area ul li {height:.44rem;line-height:.44rem;position:relative;margin-bottom:.1rem;background:#fff;border-radius:.06rem;}
+.form-area ul li:only-child {margin:0;}
+.form-area ul li:last-of-type {margin-bottom:0;}
+.form-area ul li.aui-border:after {border-radius:.06rem;}
+.form-area ul li .input-icon {width:.18rem;margin:0 -.05rem 0 .12rem;vertical-align:-.04rem;}
+.form-area ul li .input-label {display: inline-block; position: absolute; left: .1rem; }
+.form-area ul li .input-label ~ input {padding-left:.8rem;width:100%;}
+.form-area ul li input {
+	border:0;
+    width:-webkit-calc(100% - .4rem);
+    width:-moz-calc(100% - .4rem);
+    width:-o-calc(100% - .4rem);
+	height:.43rem;
+	width: calc(100% - .4rem);
+	padding-left: .1rem;
+}
+/*获取验证码按钮*/
+.form-area ul li input[type="button"] {
+	width: 26%;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    padding: 0;
+    background-color: #fff;
+    color: #666;
+}
+.form-area ul li b {position:absolute;right:.1rem;top:0;color:#333;}
+.form-area ul li b img {width:.12rem;}
+.form-area .money-num {color:#666;margin:.15rem 0;}
+.form-area .money-num span:last-child {float:right;}
+.form-area .valicode_img {
+    position: absolute;
+    right: .05rem;
+    top: .04rem;
+}
+/*协议*/
+.protocol-box {color:#999;}
+.protocol-box label {width:.14rem;height:.14rem;background:url(../images/icon_xz_no.png) center/100% no-repeat;display:inline-block;}
+.protocol-box label.checked {background-image:url(../images/icon_xz.png); }
+.protocol-box a.protocol {color:#45C4EF;}
+/*底部第三方资金保障*/
+.safe-pro {margin:.1rem 0;text-align:center;color:#999;font-size:.12rem;}
+.safe-pro img {height:.13rem;margin-right:.05rem;}
+/*列表*/
+.list-block {margin:0 0 .08rem;}
+.list-block .item-title {color:#333;font-size:.16rem;}
+.list-block .item-after {color:#999;font-size:.15rem;}
+.list-block .item-after img {width:.2rem;height:.2rem;}
+.list-block .list-name {padding:0 .15rem;font-size: .14rem;color:#666;line-height: .35rem;}
+/*按钮*/
+.button.button-fill {background:#fd6739;margin:.15rem;font-size: .18rem;}
+.button.button-fill.active,
+.button.button-fill:active {
+  background: #f1501f;
+}
+/*表单内的按钮*/
+.operator .button.button-fill {margin:.15rem 0;}
+/*tipMsg样式*/
+.tipMsg-box {text-align:center;padding:.2rem;background:#fff;}
+.tipMsg-box span {font-size:.6rem;color:#45C4EF;}
+.tipMsg-box h3 {font-size:.25rem;color:#333;margin:.1rem;}
+.tipMsg-box p {color:#999;}
+.failed .tipMsg-box span {color:#FD6739;}
+.failed .tipMsg-box h3 {color:#FD6739;}
+
+/*layermobile成功样式*/
+.layer-succ.aui-iconfont.aui-icon-roundcheck {color:#45C4EF;margin:0 auto 20px;font-size:45px;}
+.layer-fail.aui-iconfont.aui-icon-roundclose {color:#FD6739;margin:0 auto 20px;font-size:45px;}
+
+/*pc layer样式type=1*/
+.xubox_page {width:100%;}
+.tipsWrap {
+    padding-top: 15px;
+}
+.tipsWrap .tipsTxt {
+    text-align: center;
+    font-size: 16px;
+    line-height: 35px;
+}
+.tipsWrap .tipsTxt span {
+    display: inline-block;
+    line-height: 35px;
+    vertical-align: middle;
+}
+.tipsWrap .tipsTxt .okIco {
+    color: #87D068;
+    font-size: 35px;
+    position: relative;
+    top: 6px;
+    margin-right: 5px;
+}
+.tipsWrap .tipsTxt .subtitle {
+    font-size: 13px;
+    color: #999;
+}
+.tipsWrap .tipsBtnBar {
+    text-align: center;
+    margin: 10px 0;
+}
+.tipsWrap .tipsBtnBar a {
+    display: inline-block;
+    line-height: 35px;
+    width: 104px;
+    font-size: 16px;
+    text-align: center;
+    margin: 0 10px;
+    border-radius: 5px;
+}
+.tipsWrap .tipsBtnBar a.okBtn {
+    background-color: #fe673a;
+}
+.tipsWrap .tipsBtnBar a.okBtn:link, .tipsBtnBar a.okBtn:visited {
+    color: #fff;
+}
+.list-plan {padding:0 .15rem 0 .45rem;background:#fff;color:#333;}
+.list-plan .list-item {position:relative;padding-left:.25rem;border-left:.02rem solid #BABABA;padding-bottom:.3rem;}
+.list-plan .list-item:last-child {border:0;}
+.list-plan .list-item:only-child {border:0;}
+.list-plan .list-item.current {color:#45C4EF;border-color:#45C4EF;}
+.list-plan .list-item .top-pos {position:absolute;width:.22rem;top:0;left:-.11rem;}
+.list-plan .list-item p {margin:.05rem 0 0 0;color:#999;}
+.operator.margin-50 {padding:0 30% .2rem;background:#fff;}
+.operator .color-gray {border-color:#666;color:#666;}
+
+/*红文黄底色提示*/
+.top-tip {
+	line-height:1.5;font-size:.13rem;background:#F8F2C2;color:#fd6739;padding:.05rem .15rem;
+}
+/*温馨提示*/
+.warm-tip {padding:.15rem;color:#666;}
+.warm-tip p {color:#999;font-size:.13rem;}
+/*tab*/
+.buttons-block {padding:0 10%;margin:.1rem 0 0 0;}
+.buttons-block .button {
+	height:.3rem;line-height:.3rem;color:#fd6739;border-color:#fd6739;background:#fff;
+	font-size:.14rem;
+}
+.buttons-row .button.active {background:#fd6739;}
+
+/*两个按钮并排*/
+.btns-two {display:-webkit-flex;display:flex;padding:.2rem 2%;}
+.btns-two .button {width:40%;color:#fd6739;border-color:#fd6739;width:48%;margin:0 1%;background:#fff;}
+.btns-two .button.button-fill {margin:0 1%;color:#fff;background:#fd6739;}
+
+/*页面固定区*/
+.bar-nav ~ .fix-area {position:absolute;width:100%;top:.44rem;}
+
+/*小按钮*/
+.button.little-btn {
+	height:.35rem;padding:0;line-height:.35rem;width:.8rem;color:#fd6739;border-color:#fd6739;
+}
+/*swith开关按钮*/
+.label-switch input[type="checkbox"]:checked + .checkbox {background:#fd6739;}
+
+/*固定底部*/
+.fix-foot {position:absolute;bottom:.2rem;width:100%;}
+/*头部自定义图标*/
+.bar .icon-img {
+    position: relative;
+    z-index: 20;
+    padding: .1rem .02rem;
+}
+.bar .button.pull-right{margin-left: 0;}
+.bar .button.bar-text {
+    color:inherit;
+    border:0;
+    padding:0;
+    top:0;
+}
+
+
