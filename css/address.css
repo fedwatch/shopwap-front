@@ -34,6 +34,9 @@
 .rg-col{
     background-color:#ff503e !important;
 }
+.manage-address{
+    margin-bottom:2.5rem;
+}
 .manage-address .edit{
     display:inline-block;
     font-size:0.67rem;
