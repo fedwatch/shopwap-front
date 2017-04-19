@@ -31,3 +31,8 @@
 .rg-col{
     background-color:#ff503e !important;
 }
+.manage-address .edit{
+    display:inline-block;
+    font-size:0.67rem;
+    padding-right:0.75rem;
+}

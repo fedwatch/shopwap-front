@@ -17,121 +17,26 @@
     <link rel="stylesheet" type="text/css" href="/assets/plugin/light7/dist/css/light7-swiper.min.css"/>
     <link rel="stylesheet" type="text/css" href="/assets/plugin/light7/dist/css/light7-swipeout.css"/>
 
-    <!--<script type="text/javascript" src="/assets/plugin/sea.js"></script>-->
-    <!--<script type="text/javascript" src="/assets/plugin/seajs-text.js"></script>-->
-    <!--<script>-->
-        <!--seajs.use(['/js/api','/js/my/address/add-address'])-->
-    <!--</script>-->
+    <script type="text/javascript" src="/assets/plugin/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/plugin/light7/dist/js/light7.min.js"></script>
+    <script type="text/javascript" src="/assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
+    <script type="text/javascript" src="/assets/plugin/light7/dist/js/light7-swipeout.js"></script>
+    <script type="text/javascript" src="/assets/plugin/light7/dist/js/light7-city-picker.min.js"></script>
+    <script type="text/javascript" src="/assets/plugin/light7/dist/js/light7-city-picker.js"></script>
 
-    <script src="http://www.light7.cn/assets/js/zepto.js"></script>
+
+    <script type="text/javascript" src="/assets/plugin/sea.js"></script>
+    <script type="text/javascript" src="/assets/plugin/seajs-text.js"></script>
+
     <script>
-        $(function() {
-            $(document).on("pageInit", function() {
-
-                $("#city-picker").cityPicker({
-                    toolbarTemplate: '<header class="bar bar-nav">\
-      <button class="button button-link pull-right close-picker">OK</button>\
-      <h1 class="title">Address</h1>\
-      </header>'
-                });
-            });
-            $.init();
-        });
+        seajs.use(['/js/api','/js/my/address/add-address'])
     </script>
 </head>
 <body>
 <div  class="page">
-    <!--<div id="add-address" class=" add-address">-->
+    <div id="add-address" class=" add-address">
 
-    <!--</div>-->
-
-    <header class="bar bar-nav">
-        <h1 class='title'>地址管理</h1>
-    </header>
-    <div class="content">
-        <div class="list-block">
-            <ul>
-                <!-- Text inputs -->
-                <li>
-                    <div class="item-content">
-
-                        <div class="item-inner">
-                            <div class="item-title label">联系人</div>
-                            <div class="item-input">
-                                <input type="text" placeholder="小英">
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="item-content">
-
-                        <div class="item-inner">
-                            <div class="item-title label">电话</div>
-                            <div class="item-input">
-                                <input type="text" placeholder="13167161025">
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="item-content">
-
-                        <div class="item-inner">
-                            <div class="item-title label">地址</div>
-                            <div class="item-input">
-                                <input type="text"  placeholder="" id="city-picker"  value='上海 浦东新区 ' />
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="item-content">
-
-                        <div class="item-inner">
-                            <div class="item-title label">设置为默认</div>
-                            <div class="item-input">
-                                <input type="password" placeholder="可选" class="">
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <!-- Switch (Checkbox) -->
-                <li>
-                    <div class="item-content">
-                        <div class="item-media"><i class="icon icon-form-toggle"></i></div>
-                        <div class="item-inner">
-                            <div class="item-title label">Switch</div>
-                            <div class="item-input">
-                                <label class="label-switch">
-                                    <input type="checkbox">
-                                    <div class="checkbox"></div>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="content-block">
-            <div class="row">
-                <a href="#" class="button button-big button-fill button-success">确认提交</a>
-            </div>
-        </div>
     </div>
 </div>
-
-
-
-
-<!--<script type="text/javascript" src="/assets/plugin/jquery.min.js"></script>-->
-<!--<script type="text/javascript" src="/assets/plugin/light7/dist/js/light7.min.js"></script>-->
-<!--<script type="text/javascript" src="/assets/plugin/light7/dist/js/light7-swiper.min.js"></script>-->
-<!--<script type="text/javascript" src="/assets/plugin/light7/dist/js/light7-swipeout.js"></script>-->
-<!--<script type="text/javascript" src="/assets/plugin/light7/dist/js/light7-city-picker.js"></script>-->
-<script src="http://www.light7.cn/dist/js/light7.js"></script>
-<script src="http://www.light7.cn/dist/js/light7-swiper.js"></script>
-<script src="http://www.light7.cn/dist/js/light7-swipeout.js"></script>
-<script src="http://www.light7.cn/dist/js/light7-city-picker.js"></script>
 </body>
 </html>

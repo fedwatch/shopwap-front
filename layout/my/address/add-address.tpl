@@ -1,4 +1,8 @@
 <header class="bar bar-nav">
+    <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)"
+       data-transition='slide-out'>
+        <span class="icon icon-left"></span>
+    </a>
     <h1 class='title'>地址管理</h1>
 </header>
 <div class="content">
@@ -75,10 +79,7 @@
     </div>
     <div class="content-block">
         <div class="row">
-            <a href="#" class="button button-big button-fill button-success submit-review rg-col">提交评价</a>
+            <a href="./manage-address.html" class="button external button-big button-fill button-success submit-review rg-col">提交评价</a>
         </div>
     </div>
 </div>
-<script>
-
-</script>
