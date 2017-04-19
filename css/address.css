@@ -28,6 +28,9 @@
     padding-bottom:0;
     padding-top: 0;
 }
+.add-address .list-block{
+    margin-top: 0.75rem !important;
+}
 .rg-col{
     background-color:#ff503e !important;
 }
