@@ -18,7 +18,7 @@
 
 }
 .pay .button.button-fill{
-    background-color:#ff503e;
+    background-color:#ff503e!important;
 }
 .pay .button.button-fill.active, .button.button-fill:active{
     background-color:#ff6a10 !important;
