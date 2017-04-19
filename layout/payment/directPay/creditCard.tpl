@@ -46,10 +46,35 @@
             <!-- Date -->
             <li>
                 <div class="item-content">
+                    <!--<div class="item-media"><i class="icon icon-user"></i></div>-->
                     <div class="item-media">有&nbsp;&nbsp;效&nbsp;&nbsp;期</div>
-                    <div class="item-inner">
+                    <div class="item-inner" style="border:none;">
                         <div class="item-input">
-                            <input type="date" placeholder="Birth day" value="2014-04-30">
+                            <select name="creditMonth" id="creditMonth" class="creditMonth">
+                                <option value="" selected>请选择</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                            <span>∨</span> 月
+                            <select name="creditYear" id="creditYear" class="creditMonth">
+                                <option value="" selected>请选择</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                            </select>
+                            <span>∨</span>年
                         </div>
                     </div>
                 </div>

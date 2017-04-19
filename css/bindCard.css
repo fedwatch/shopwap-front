@@ -82,7 +82,14 @@
     border-radius:0.8rem;
     padding:0.2rem 0.5rem;
 }
+.creditCard .creditMonth{
+     display:inline-block;
+     width:60px;
+     font-size:0.789rem;
+     color:#999999;
+     border-bottom: 1px solid #e7e7e7;
 
+}
 /*********review***********/
 .review .list-block{
       margin:0;

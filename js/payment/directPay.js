@@ -13,7 +13,7 @@ define(function(require,exports,module){
                 if(flag===true){
                     $.toast("银行卡正确",2000);
                     setTimeout(function(){
-                        location.href="www.baidu.com";
+                        location.href="./creditCard.html";
                     },3000);
                 }else{
                     $.toast("银行卡账号错误",2000);

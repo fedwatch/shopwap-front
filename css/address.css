@@ -1,0 +1,25 @@
+.address .address-bottom{
+    height: 2.5rem;
+    line-height:2.5rem;
+    background-color:#eb4c1e;
+    text-align:center;
+}
+.address .address-button{
+    color:#f8f8f8;
+    font-size:0.789rem;
+}
+.address .address-w{
+    font-size:0.789rem;
+    color:#9a999a;
+    text-align:center;
+}
+.address .tip-img{
+    width:8.2875rem;
+    height:7.4375rem;
+    text-align:center;
+    margin:auto;
+}
+.address .tip-img img{
+    width:100%;
+    height:100%;
+}

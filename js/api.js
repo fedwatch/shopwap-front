@@ -20,7 +20,9 @@ seajs.config({
         "touchSwipe":"/assets/plugin/jquery.touchSwipe.min.js",
         "store":"/js/utils/store.min.js",
         "weixin":"https://res.wx.qq.com/open/js/jweixin-1.0.0.js",
-        "transDetails":"/js/utils/transDetails"
+        "transDetails":"/js/utils/transDetails",
+        "swipeout":"/assets/plugin/light7/dist/js/light7-swipeout.js",
+        "city-swiper":"/assets/plugin/light7/dist/js/light7-city-picker.js"
     },
     map: [
         // [/^.*$/, function(url) {
