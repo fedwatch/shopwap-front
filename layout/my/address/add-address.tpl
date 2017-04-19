@@ -33,7 +33,7 @@
                     <div class="item-inner">
                         <div class="item-title label">地址</div>
                         <div class="item-input">
-                            <input type="text"  id='city-picker'  value='内蒙古 呼和浩特 回民区' />
+                            <input type="text"  placeholder="" id='city-picker'  value='上海 浦东新区 ' />
                         </div>
                     </div>
                 </div>

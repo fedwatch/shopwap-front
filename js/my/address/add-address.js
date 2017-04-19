@@ -3,6 +3,7 @@ define(function(require,exports,module){
     require('light7');
     require('swipeout');
     require('city-swiper');
+
     $(function(){
         $(document).on("pageInit", function() {
             $("#city-picker").cityPicker({
@@ -21,4 +22,9 @@ define(function(require,exports,module){
         var html=template(data);
         $("#add-address").html(html);
     });
+
+
+
+
+
 })

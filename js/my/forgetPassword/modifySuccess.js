@@ -6,7 +6,6 @@
 define(function(require,exports,module){
     require('jquery');
     require('swiper');
-    require('');
     require('moclight7kjs');
 
     $(function () {

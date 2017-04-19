@@ -1,157 +1,101 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            border:0;
-        }
-        html,body{
-            font-size:14px;
-        }
-        .nav-sub-tabs{
-            position: relative;
-            box-sizing: border-box;
-            display: flex;
-            -webkit-box-orient: vertical;
-            flex-direction: column;
-            width: 100%;
-            overflow: hidden;
-            -webkit-box-flex: 1;
-            flex: 1 1 0%;
-            z-index: 1;
-        }
-        .nav-sub-tabbar{
-            position: relative;
-            box-sizing: border-box;
-            display: flex;
-            -webkit-box-orient: horizontal;
-            flex-direction: row;
-            width: 100%;
-            height: 1rem;
-            background-color: #fff;
-            z-index: 1000;
-            flex: 0 0 auto;
-        }
-        .nav-sub-tabbar-itemlist{
-            position: relative;
-            box-sizing: border-box;
-            display: flex;
-            -webkit-box-orient: horizontal;
-            flex-direction: row;
-            -webkit-box-flex: 1;
-            flex: 1 1 0%;
-        }
-        .nav-sub-scrollview{
-            position: relative;
-            box-sizing: border-box;
-            display: flex;
-            -webkit-box-orient: horizontal;
-            flex-direction: row;
-            transform: translateZ(0px);
-            padding-bottom: 2rem;
-            height: 3rem;
-            /*width: 100%;*/
-            z-index: 1001;
-            -webkit-box-flex: 1;
-            flex: 1 1 0%;
-            overflow-x: scroll;
-            overflow-y: hidden;
-        }
-        .nav-sub-tabbar-item{
-            position: relative;
-            box-sizing: border-box;
-            display: flex;
-            -webkit-box-orient: vertical;
-            flex-direction: column;
-            -webkit-tap-highlight-color: transparent;
-            -webkit-box-pack: center;
-            justify-content: center;
-            -webkit-box-align: center;
-            align-items: center;
-            /*height: 69.552px;*/
-            flex: 0 0 auto;
-        }
-        
-        .nav-sub-render{
-            position: relative;
-            box-sizing: border-box;
-            display: flex;
-            -webkit-box-orient: vertical;
-            flex-direction: column;
-            /*width: 71.76px;*/
-            /*height: 2rem;*/
-            -webkit-box-pack: start;
-            justify-content: flex-start;
-            -webkit-box-align: stretch;
-            align-items: center;
-            flex: 0 0 auto;
-        }
-        span.nav-sub-text{
-            position: relative;
-            box-sizing: border-box;
-            display: block;
-            overflow: hidden;
-            width: auto;
-            /*height:1.5rem;*/
-            font-size:.7rem;
-            line-height: 1rem;
-            flex: 0 0 auto;
-            text-align: center;
-            align-items: center;
-            color: #212121;
-            padding:.25rem .85rem;
-        }
-        span.nav-sub-text.active{
-            background: #f84b15;
-            color:#fff;
-            padding:.25rem .85rem;
-            border-radius:1rem;
-        }
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SUI Mobile Demo</title>
+    <meta name="description" content="light7: Build mobile apps with simple HTML, CSS, and JS components.">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
+    <!-- Google Web Fonts -->
 
+    <link rel="stylesheet" href="http://www.light7.cn/dist/css/light7.css">
+    <link rel="stylesheet" href="http://www.light7.cn/dist/css/light7-swiper.css">
+    <link rel="stylesheet" href="http://www.light7.cn/dist/css/light7-swipeout.css">
 
-    </style>
+    <link rel="apple-touch-icon-precomposed" href="http://www.light7.cn/assets/img/apple-touch-icon-114x114.png">
+    <script src="http://www.light7.cn/assets/js/zepto.js"></script>
+
 </head>
 <body>
-<div class=" nav-sub-tabs">
-    <div class=" nav-sub-tabbar">
-        <div class=" nav-sub-tabbar-itemlist">
-            <div class=" nav-sub-scrollview">
-                <div class="nav-sub-tabbar-item">
-                    <div class="nav-sub-render" >
-                        <span class="nav-sub-text active">衬衫</span>
-                    </div>
-                </div>
-                <div class="nav-sub-tabbar-item">
-                    <div class="nav-sub-render" >
-                        <span class="nav-sub-text">T恤</span>
-                    </div>
-                </div>
-                <div class="nav-sub-tabbar-item">
-                    <div class="nav-sub-render" >
-                        <span class="nav-sub-text">牛仔裤</span>
-                    </div>
-                </div>
-                <div class="nav-sub-tabbar-item">
-                    <div class="nav-sub-render" >
-                        <span class="nav-sub-text">短外套</span>
-                    </div>
-                </div>
-                <div class="nav-sub-tabbar-item">
-                    <div class="nav-sub-render" >
-                        <span class="nav-sub-text">针织衫</span>
-                    </div>
-                </div>
+<div class="page">
+    <header class="bar bar-nav">
+        <h1 class='title'>省市区选择</h1>
+    </header>
+    <div class="content">
+        <div class="content-block-title">省市区</div>
+        <div class="content-block">
+            <div class="list-block">
+                <ul>
+                    <!-- Text inputs -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">收获地址</div>
+                                <div class="item-input">
+                                    <input type="text" placeholder="" id='city-picker' value='内蒙古 呼和浩特 回民区'/>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(function() {
+        $(document).on("pageInit", function() {
+            $("#picker").picker({
+                toolbarTemplate: '<header class="bar bar-nav">\
+      <button class="button button-link pull-right close-picker">OK</button>\
+      <h1 class="title">Choose your phone</h1>\
+      </header>',
+                cols: [
+                    {
+                        textAlign: 'center',
+                        values: ['iPhone 4', 'iPhone 4S', 'iPhone 5', 'iPhone 5S', 'iPhone 6', 'iPhone 6 Plus', 'iPad 2', 'iPad Retina', 'iPad Air', 'iPad mini', 'iPad mini 2', 'iPad mini 3']
+                    }
+                ]
+            });
+            $("#picker-name").picker({
+                toolbarTemplate: '<header class="bar bar-nav">\
+      <button class="button button-link pull-right close-picker">OK</button>\
+      <h1 class="title">Your Name</h1>\
+      </header>',
+                cols: [
+                    {
+                        textAlign: 'center',
+                        values: ['Mr', 'Ms']
+                    },
+                    {
+                        textAlign: 'center',
+                        values: ['Amy', 'Bob', 'Cat', 'Dog', 'Ella', 'Fox', 'Google']
+                    }
+                ]
+            });
+            $("#datetime-picker").datetimePicker({
+                toolbarTemplate: '<header class="bar bar-nav">\
+      <button class="button button-link pull-right close-picker">OK</button>\
+      <h1 class="title">Datetime</h1>\
+      </header>'
+            });
+            $("#city-picker").cityPicker({
+                toolbarTemplate: '<header class="bar bar-nav">\
+      <button class="button button-link pull-right close-picker">OK</button>\
+      <h1 class="title">Address</h1>\
+      </header>'
+            });
+        });
+        $.init();
+    });
+</script>
+<script src="http://www.light7.cn/dist/js/light7.js"></script>
+<script src="http://www.light7.cn/dist/js/light7-swiper.js"></script>
+<script src="http://www.light7.cn/dist/js/light7-swipeout.js"></script>
+<script src="http://www.light7.cn/dist/js/light7-city-picker.js"></script>
 </body>
 </html>

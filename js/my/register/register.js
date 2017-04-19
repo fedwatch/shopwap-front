@@ -7,7 +7,12 @@ define(function(require,exports,module){
     require('light7');
     require('mockjs');
 
+
+    var genData = {};
+
+
     $(function () {
+
         var $userPhone = $("#userPhone");//手机号
         var $userPass = $("#userPass");//登录密码
         var $getSMSCodeBtn = $("#getSMSCodeBtn");//获取验证码按钮
@@ -212,9 +217,7 @@ define(function(require,exports,module){
 
     // registerPage
     require.async('handlebars',function(){
-        var data = {
-
-        };
+        var data = genData;
         var tpl = require('/layout/my/register.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);

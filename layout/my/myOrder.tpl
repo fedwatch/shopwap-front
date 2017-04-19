@@ -8,31 +8,32 @@
 </header>
 
 <div class="content">
-    <div class=" " style="background: #fff;font-size:.85rem;">
+    <div class="orderColumn">
         <div class="row text-center ">
-            <div class="col-20 active" style="color:#eb4c1e;border-bottom: 1px solid #eb4c1e;padding:.35rem .15rem ;" >
+            <div class="col-20 ocItem active"  >
                 全部
             </div>
-            <div class="col-20" style="color:#212121;padding:.35rem .15rem ;">
+            <div class="col-20 ocItem" >
                 待付款
             </div>
-            <div class="col-20" style="color:#212121;padding:.35rem .15rem ;">
+            <div class="col-20 ocItem" >
                 待发货
             </div>
-            <div class="col-20" style="color:#212121;padding:.35rem .15rem ;">
+            <div class="col-20 ocItem" >
                 待收货
             </div>
-            <div class="col-20" style="color:#212121;padding:.35rem .15rem ;">
+            <div class="col-20 ocItem" >
                 待评价
             </div>
         </div>
     </div>
 
-    <div class="myOrderList list-block" style="margin:.3rem 0;">
+    <div class="myOrderList list-block">
+
         <div class="cart-item">
             <div class="cart-store-title-label">
-                <span class="pull-left" style="width:15rem;font-size: 0.7rem;"><i class="icon icon-store-icon"></i> 苏菲专卖店</span>
-                <span class="pull-right tradeStatus" style="padding:0 .2rem;font-size: 0.7rem;color:#eb4c1e;"> 交易成功 </span>
+                <span class="pull-left storeName"><i class="icon icon-store-icon"></i> 苏菲专卖店</span>
+                <span class="pull-right tradeStatus"> 交易成功 </span>
             </div>
             <div class="cart-store-img-text-label">
                 <div class="cart-item-image">
@@ -45,30 +46,29 @@
                            <span class="cart-item-buying-desc">颜色分类：一二三四五六七八九十一二三四五六七八九十</span>
                        </div>
 
-                       <div class="col-33 " style="text-align: right;padding-right:.8rem;">
-                           <span class="nowPrice" style="font-size:.7rem;color:#3c3c3c;">￥ 1399.00</span><br>
-                           <del class="pastPrice" style="font-size:.7rem;color:#999999;;">￥ 1399.00</del>
+                       <div class="priceWrapper col-33" >
+                           <span class="nowPrice">￥ 1399.00</span><br>
+                           <del class="pastPrice">￥ 1399.00</del>
                            <br>
-                           <span>x <span>1</span></span>
+                           <span>x <span class="quant">1</span></span>
                        </div>
                    </div>
 
                 </div>
 
             </div>
-            <div style="border-bottom:1px solid #e1e1e1;font-size:.7rem;text-align: right;line-height: 1rem;padding: .5rem .5rem .5rem 1rem;background:#fff;">
-                共 <span>1</span> 件商品 合计：￥<span class="" style="font-size:.9rem">1399</span>.<span>00</span> (含运费 ￥<span>25.00</span>)
+            <div class="totalBox">
+                共 <span class="totalQuant">1</span> 件商品 合计：￥<span class="totalPrice">1399</span>.<span>00</span> (含运费 ￥<span class="logPrice">25.00</span>)
             </div>
-            <div  style="font-size:.7rem;text-align: right;line-height: 1rem;padding: .5rem .5rem .5rem 1rem;background:#fff;">
-                <a href="" style="margin:0 .5rem;color:#505050;border:1px solid #505050;background: transparent;padding:.123rem .6rem;"> 查看物流 </a>
-                <a href="/html/user/comment.html" style="margin:0 .5rem;color:#eb4c1e;border:1px solid #eb4c1e;background: transparent;padding:.123rem 1.6rem;"> 评价 </a>
+            <div class="userChooseCol" >
+                <a href="javascript:void(0);" class="checkLogBtn uccButton"> 查看物流 </a>
+                <a href="/html/user/comment.html" class="commentBtn uccButton external"> 评价 </a>
             </div>
         </div>
-
         <div class="cart-item">
             <div class="cart-store-title-label">
-                <span class="pull-left" style="width:13.9rem;font-size: 0.7rem;"><i class="icon icon-store-icon"></i> 联赢科技</span>
-                <span class="pull-right tradeStatus" style="padding:0 .2rem;font-size: 0.7rem;color:#eb4c1e;"> 卖家已发货 </span>
+                <span class="pull-left storeName" ><i class="icon icon-store-icon"></i> 联赢科技</span>
+                <span class="pull-right tradeStatus"> 卖家已发货 </span>
             </div>
             <div class="cart-store-img-text-label">
                 <div class="cart-item-image">
@@ -81,10 +81,10 @@
                             <span class="cart-item-buying-desc">颜色分类：一二三四五六七八九十一二三四五六七八九十</span>
                         </div>
 
-                        <div class="col-33 " style="text-align: right;padding-right:.8rem;">
-                            <span class="nowPrice" style="font-size:.7rem;color:#3c3c3c;">￥ 15.00</span>
+                        <div class="priceWrapper col-33 " >
+                            <span class="nowPrice" >￥ 15.00</span>
                             <br>
-                            <del class="pastPrice" style="font-size:.7rem;color:#999999;;">￥ 21.00</del>
+                            <del class="pastPrice" >￥ 21.00</del>
                             <br>
                             <span>x <span>1</span></span>
                         </div>
@@ -93,19 +93,18 @@
                 </div>
 
             </div>
-            <div style="border-bottom:1px solid #e1e1e1;font-size:.7rem;text-align: right;line-height: 1rem;padding: .5rem .5rem .5rem 1rem;background:#fff;">
-                共 <span>1</span> 件商品 合计：￥<span class="" style="font-size:.9rem">1399</span>.<span>00</span> (含运费 ￥<span>25.00</span>)
+            <div  class="totalBox" >
+                共 <span>1</span> 件商品 合计：￥<span class="totalPrice">1399</span>.<span>00</span> (含运费 ￥<span>25.00</span>)
             </div>
-            <div  style="font-size:.7rem;text-align: right;line-height: 1rem;padding: .5rem .5rem .5rem 1rem;background:#fff;">
-                <a href="" style="margin:0 .5rem;color:#505050;border:1px solid #505050;background: transparent;padding:.123rem .6rem;"> 查看物流 </a>
-                <a href="" style="margin:0 .5rem;color:#eb4c1e;border:1px solid #eb4c1e;background: transparent;padding:.123rem .6rem;"> 确认收货 </a>
+            <div class="userChooseCol">
+                <a href="javascript:void(0)" class="checkLogBtn uccButton" > 查看物流 </a>
+                <a href="javascript:void(0)" class="confirmReceiptBtn uccButton" > 确认收货 </a>
             </div>
         </div>
-
         <div class="cart-item">
             <div class="cart-store-title-label">
-                <span class="pull-left" style="width:15.5rem;font-size: 0.7rem;"><i class="icon icon-store-icon"></i> 卡罗莎旗舰店</span>
-                <span class="pull-right tradeStatus" style="padding:0 .2rem;font-size: 0.7rem;color:#eb4c1e;"> 待付款 </span>
+                <span class="pull-left storeName" ><i class="icon icon-store-icon"></i> 卡罗莎旗舰店</span>
+                <span class="pull-right tradeStatus" > 待付款 </span>
             </div>
             <div class="cart-store-img-text-label">
                 <div class="cart-item-image">
@@ -118,9 +117,9 @@
                             <span class="cart-item-buying-desc">颜色分类：一二三四五六七八九十一二三四五六七八九十</span>
                         </div>
 
-                        <div class="col-33 " style="text-align: right;padding-right:.8rem;">
-                            <span class="nowPrice" style="font-size:.7rem;color:#3c3c3c;">￥ 1399.00</span><br>
-                            <del class="pastPrice" style="font-size:.7rem;color:#999999;;">￥ 1399.00</del>
+                        <div class="priceWrapper col-33 ">
+                            <span class="nowPrice" >￥ 1399.00</span><br>
+                            <del class="pastPrice" >￥ 1399.00</del>
                             <br>
                             <span>x <span>1</span></span>
                         </div>
@@ -129,18 +128,17 @@
                 </div>
 
             </div>
-            <div style="border-bottom:1px solid #e1e1e1;font-size:.7rem;text-align: right;line-height: 1rem;padding: .5rem .5rem .5rem 1rem;background:#fff;">
-                共 <span>1</span> 件商品 合计：￥<span class="" style="font-size:.9rem">21</span>.<span>00</span> (含运费 ￥<span>25.00</span>)
+            <div class="totalBox" >
+                共 <span class="totalQuant">1</span> 件商品 合计：￥<span class="totalPrice">21</span>.<span>00</span> (含运费 ￥<span>25.00</span>)
             </div>
-            <div  style="font-size:.7rem;text-align: right;line-height: 1rem;padding: .5rem .5rem .5rem 1rem;background:#fff;">
-                <!--<a href="" style="margin:0 .5rem;color:#505050;border:1px solid #505050;background: transparent;padding:.123rem .6rem;"> 查看物流 </a>-->
-                <a href="" style="margin:0 .5rem;color:#eb4c1e;border:1px solid #eb4c1e;background: transparent;padding:.123rem .6rem;"> 立即付款 </a>
+            <div class="userChooseCol" >
+                <a href="" class="paymentBtn uccButton" > 立即付款 </a>
             </div>
         </div>
         <div class="cart-item">
             <div class="cart-store-title-label">
-                <span class="pull-left" style="width:15rem;font-size: 0.7rem;"><i class="icon icon-store-icon"></i> 热季菲专卖店</span>
-                <span class="pull-right tradeStatus" style="padding:0 .2rem;font-size: 0.7rem;color:#eb4c1e;"> 待发货 </span>
+                <span class="pull-left storeName" ><i class="icon icon-store-icon"></i> 热季菲专卖店</span>
+                <span class="pull-right tradeStatus"> 待发货 </span>
             </div>
             <div class="cart-store-img-text-label">
                 <div class="cart-item-image">
@@ -153,9 +151,9 @@
                             <span class="cart-item-buying-desc">颜色分类：中国地质大学珠宝检测中心</span>
                         </div>
 
-                        <div class="col-33 " style="text-align: right;padding-right:.8rem;">
-                            <span class="nowPrice" style="font-size:.7rem;color:#3c3c3c;">￥ 599.00</span><br>
-                            <del class="pastPrice" style="font-size:.7rem;color:#999999;;">￥ 1399.00</del>
+                        <div class="priceWrapper col-33 " >
+                            <span class="nowPrice" >￥ 599.00</span><br>
+                            <del class="pastPrice" >￥ 1399.00</del>
                             <br>
                             <span>x <span>1</span></span>
                         </div>
@@ -164,19 +162,17 @@
                 </div>
 
             </div>
-            <div style="border-bottom:1px solid #e1e1e1;font-size:.7rem;text-align: right;line-height: 1rem;padding: .5rem .5rem .5rem 1rem;background:#fff;">
-                共 <span>1</span> 件商品 合计：￥<span class="" style="font-size:.9rem">599</span>.<span>00</span> (含运费 ￥<span>25.00</span>)
+            <div class="totalBox">
+                共 <span class="totalQuant">1</span> 件商品 合计：￥<span class="totalPrice">599</span>.<span>00</span> (含运费 ￥<span>25.00</span>)
             </div>
-            <div  style="font-size:.7rem;text-align: right;line-height: 1rem;padding: .5rem .5rem .5rem 1rem;background:#fff;">
-                <!--<a href="" style="margin:0 .5rem;color:#505050;border:1px solid #505050;background: transparent;padding:.123rem .6rem;"> 查看物流 </a>-->
-                <a href="" style="margin:0 .5rem;color:#eb4c1e;border:1px solid #eb4c1e;background: transparent;padding:.123rem .6rem;"> 等待卖家发货 </a>
+            <div class="userChooseCol">
+                <a href="" class="waitSendBtn uccButton"> 等待卖家发货 </a>
             </div>
         </div>
-
         <div class="cart-item">
             <div class="cart-store-title-label">
-                <span class="pull-left" style="width:15rem;font-size: 0.7rem;"><i class="icon icon-store-icon"></i> 苏菲专卖店</span>
-                <span class="pull-right tradeStatus" style="padding:0 .2rem;font-size: 0.7rem;color:#eb4c1e;"> 交易关闭 </span>
+                <span class="pull-left storeName"><i class="icon icon-store-icon"></i> 苏菲专卖店</span>
+                <span class="pull-right tradeStatus" > 交易关闭 </span>
             </div>
             <div class="cart-store-img-text-label">
                 <div class="cart-item-image">
@@ -188,9 +184,9 @@
                             <h2 class="cart-item-buying-title">耐克 AIR JORDAN 6 RETRO 复刻男子运动鞋</h2>
                             <span class="cart-item-buying-desc">颜色分类：一二三四五六七八九十一二三四五六七八九十</span>
                         </div>
-                        <div class="col-33 " style="text-align: right;padding-right:.8rem;">
-                            <span class="nowPrice" style="font-size:.7rem;color:#3c3c3c;">￥ 520.00</span><br>
-                            <del class="pastPrice" style="font-size:.7rem;color:#999999;;">￥ 1399.00</del>
+                        <div class="priceWrapper col-33 " >
+                            <span class="nowPrice" >￥ 520.00</span><br>
+                            <del class="pastPrice" >￥ 1399.00</del>
                             <br>
                             <span>x <span>1</span></span>
                         </div>
@@ -198,14 +194,10 @@
                 </div>
 
             </div>
-            <div style="border-bottom:1px solid #e1e1e1;font-size:.7rem;text-align: right;line-height: 1rem;padding: .5rem .5rem .5rem 1rem;background:#fff;">
-                共 <span>1</span> 件商品 合计：￥<span class="" style="font-size:.9rem">1399</span>.<span>00</span> (含运费 ￥<span>25.00</span>)
+            <div class="totalBox" >
+                共 <span class="totalQuant">1</span> 件商品 合计：￥<span class="totalPrice">1399</span>.<span>00</span> (含运费 ￥<span>25.00</span>)
             </div>
         </div>
 
-        <!--<div class="text-center">-->
-            <!--<div id="" style="background: url(/assets/images/myOrder-no-image.png) no-repeat 50% 50%;width:100%;height:20rem;display: block;background-size: cover;"></div>-->
-            <!--<span>还没有任何订单呢</span>-->
-        <!--</div>-->
     </div>
 </div>
