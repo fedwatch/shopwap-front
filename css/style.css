@@ -1766,3 +1766,6 @@ span.nav-sub-text.active {
     background: transparent;
     padding: .123rem .6rem;
 }
+.rg-col{
+    background-color:#ff503e !important;
+}

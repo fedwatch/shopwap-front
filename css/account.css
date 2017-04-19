@@ -37,3 +37,27 @@
 .security-mask  .modal{
     top:30%;
 }
+.com-icon{
+    display:inline-block;
+    width:1.15rem;
+    height:0.546rem;
+}
+#changePasswordPage2 .icon-p-1{
+    background:url(../assets/images/icon-show.png) no-repeat;
+    background-size:100% 100%;
+}
+#changePasswordPage2 .icon-p-2{
+    background:url(../assets/images/icon-hide.png) no-repeat;
+    background-size:100% 100%;
+}
+#changePasswordPage2 .icon-p-3{
+    background:url(../assets/images/icon-hide.png) no-repeat;
+    background-size:100% 100%;
+}
+#changePasswordPage2 .list-block .item-title.label{
+    width:auto;
+}
+.button-password{
+    border:none  !important;
+    color:#fff !important;
+}
