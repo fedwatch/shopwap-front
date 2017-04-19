@@ -23,3 +23,11 @@
     width:100%;
     height:100%;
 }
+.add-address .list-block textarea{
+    height: auto;
+    padding-bottom:0;
+    padding-top: 0;
+}
+.rg-col{
+    background-color:#ff503e !important;
+}

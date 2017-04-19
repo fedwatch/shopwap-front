@@ -29,7 +29,6 @@
             </li>
             <li>
                 <div class="item-content">
-
                     <div class="item-inner">
                         <div class="item-title label">地址</div>
                         <div class="item-input">
@@ -40,11 +39,20 @@
             </li>
             <li>
                 <div class="item-content">
-
                     <div class="item-inner">
-                        <div class="item-title label">设置为默认</div>
+                        <div class="item-title label"></div>
                         <div class="item-input">
-                            <input type="password" placeholder="可选" class="">
+                            <textarea  placeholder="详细地址（至少5个）" ></textarea>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title label">邮编</div>
+                        <div class="item-input">
+                            <input type="password" placeholder="可选填" class="">
                         </div>
                     </div>
                 </div>
@@ -52,11 +60,10 @@
             <!-- Switch (Checkbox) -->
             <li>
                 <div class="item-content">
-                    <div class="item-media"><i class="icon icon-form-toggle"></i></div>
                     <div class="item-inner">
-                        <div class="item-title label">Switch</div>
+                        <div class="item-title label">设置默认</div>
                         <div class="item-input">
-                            <label class="label-switch">
+                            <label class="label-switch pull-right">
                                 <input type="checkbox">
                                 <div class="checkbox"></div>
                             </label>
@@ -68,7 +75,7 @@
     </div>
     <div class="content-block">
         <div class="row">
-            <div class="col-50"><a href="#" class="button button-big button-fill button-success">Submit</a></div>
+            <a href="#" class="button button-big button-fill button-success submit-review rg-col">提交评价</a>
         </div>
     </div>
 </div>
