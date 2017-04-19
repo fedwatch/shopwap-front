@@ -1,0 +1,39 @@
+.security .item-content{
+    background-color:#ffffff;
+    font-size:0.789rem;
+}
+.security .item-content .item-inner .reset-password{
+    color:#212121;
+}
+.security .item-content .item-inner .arrow{
+    display:inline-block;
+    color:#999999;
+}
+.security-mask{
+    display:none;
+}
+.security-mask .modal-inner{
+    border-radius: .35rem;
+}
+.security-mask .old-password{
+    width:90%;
+    text-align:left;
+    height:2.05rem;
+    line-height:2.05rem;
+    color:#212121;
+    font-size:0.789rem;
+}
+.security-mask .modal-inner{
+    background-color:#ffffff;
+}
+.security-mask  .pass-2{
+
+    border-bottom:solid 1px #e6e6e6;
+}
+.security-mask  .link-address{
+    display:inline-block;
+    color:#212121;
+}
+.security-mask  .modal{
+    top:30%;
+}
