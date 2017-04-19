@@ -9,6 +9,6 @@
 </div>
 <nav class="bar bar-tab">
     <div class="address-bottom">
-        <a href="./add-address.html" class="address-button"  >添加新地址</a>
+        <a href="./add-address.html" class="address-button rg-col"  >添加新地址</a>
     </div>
 </nav>
