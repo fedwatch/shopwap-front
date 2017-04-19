@@ -39,3 +39,49 @@
     font-size:0.67rem;
     padding-right:0.75rem;
 }
+.manage-address .ad-list{
+    background-color:#ffffff;
+    margin-bottom:0.607rem;
+}
+.manage-address .ad-title{
+    line-height:1.6rem;
+    padding:0.85rem 0.75rem 0.546rem 0.75rem;
+}
+.manage-address .address-list .ad-list .ad-title span{
+    display:inline-block;
+
+}
+.manage-address .name,.manage-address .phone{
+    color:#212121;
+    font-size:0.789rem;
+}
+.manage-address .default-address{
+    width:4rem;
+    height:1.456rem;
+    line-height:1.456rem;
+    color:#fa5120;
+    font-size:0.667rem;
+    border:solid 1px #fa5120;
+    border-radius:1rem;
+    text-align:center;
+}
+.manage-address .address-text{
+    font-size:0.789rem;
+    padding:0 0.75rem 0.97rem 0.75rem;
+}
+.manage-address .address-operate{
+    padding:0.72rem 0;
+    border-top:solid 1px #e6e6e6;
+}
+.edit-op{
+    padding-left:1.3rem;
+    background:url(../assets/images/edit.png) no-repeat;
+    background-size:1rem 1.09rem;
+}
+.delete{
+    padding-left:1.3rem;
+    margin-left:1.15rem;
+    padding-right:0.75rem;
+    background:url(../assets/images/delete.png) no-repeat;
+    background-size:1.15rem 1.15rem;
+}
