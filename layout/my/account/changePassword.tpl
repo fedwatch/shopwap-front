@@ -5,7 +5,7 @@
     <h1 class='title'>修改登录密码</h1>
 </header>
 <div class="content">
-    <div class="list-block">
+    <div class="list-block change-mar">
         <ul>
             <!-- Text inputs -->
             <li>

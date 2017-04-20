@@ -5,7 +5,7 @@
     <h1 class='title'>修改登录密码</h1>
 </header>
 <div class="content">
-    <div class="list-block">
+    <div class="list-block change-mar">
         <ul>
             <li>
                 <p  id="userPassError" class="danger">您输入的登录密码有误，请重新输入！</p>
@@ -41,15 +41,18 @@
                     </div>
                 </div>
             </li>
+            <li>
+                <div class="content-block">
+                    <div class="row">
+                        <!--<div class="col-50"><a href="#" class="button button-big button-fill button-danger">Cancel</a></div>-->
+                        <div class="col-100">
+                            <a href="./changePasswordSuccess.html" class="external button button-big rg-col next-step">下一步</a>
+                        </div>
+                        <!--<div class="col-50"><a href="#" class="button button-big button-fill button-success">Submit</a></div>-->
+                    </div>
+                </div>
+            </li>
         </ul>
-    </div>
-    <div class="content-block">
-        <div class="row">
-            <!--<div class="col-50"><a href="#" class="button button-big button-fill button-danger">Cancel</a></div>-->
-            <div class="col-100">
-                <a href="./changePasswordSuccess.html" class="external button button-big rg-col next-step">下一步</a>
-            </div>
-            <!--<div class="col-50"><a href="#" class="button button-big button-fill button-success">Submit</a></div>-->
-        </div>
+
     </div>
 </div>
