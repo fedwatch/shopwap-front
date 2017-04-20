@@ -3,6 +3,7 @@
  */
 define(function(require,exports,module){
     require('jquery');
+    require('store');
     // require('mockjs');
     $(function(){
         var $searchHint = $('#searchHint');
@@ -14,6 +15,8 @@ define(function(require,exports,module){
         var $leftFixNav = $('#leftFixNav');
         var $rightSearchNav = $('#rightSearchNav');
         var $cancelTextIcon = $('#cancelTextIcon');
+
+
 
         $searchHint.on("focus",function () {
             var $this = $(this);
@@ -29,10 +32,32 @@ define(function(require,exports,module){
                 alignItems: "center"
             });
             $this.on("keydown",function(){
+
+                // searchPrompt
+                require.async('handlebars',function(){
+                    var data = genData;
+                    var tpl = require('/layout/search/searchPrompt.tpl');
+                    var template = Handlebars.compile(tpl);
+                    var html = template(data);
+                    $("#searchPrompt").html(html);
+                    // $("#navbarSearch").html(tpl);
+                });
                 $cancelSearchBtn.hide();
                 $cancelTextIcon.show();
             })
+            $this.on('mouseleave',function () {
+                $("#searchPrompt").hide();
+            })
         });
+
+        $("#searchForm").on('submit',function () {
+            console.log('search keywords submit ');
+            var insertSearch = store.get("historySearch").historySearch || [];
+            var searchHint = $("#searchHint").val();
+            insertSearch.push(searchHint);
+
+            store.set("historySearch",{historySearch:insertSearch});
+        })
 
         $cancelTextIcon.on('click',function () {
             $rightSearchNav.css({
@@ -44,22 +69,36 @@ define(function(require,exports,module){
             $leftFixNav.show();
             $cancelTextIcon.hide();
             $searchHint.val("");
-        })
+        });
 
         $clearHistoryBtn.on("click",function () {
-            localStorage.clear();
+            store.set('historySearch','');
             $historySearch.empty();
+            $(".history").hide();
         });
     });
+
+    var genData = {
+        hotSearch:[
+            "飘正阳绿翡翠A货",
+            "手表",
+            "钱包",
+            "香水",
+            "烟酒",
+            "保健品",
+            "手链",
+            "腰带",
+            "鞋子",
+            "戒指",
+        ]
+    };
 
 
     
 
     // searchHeader
     require.async('handlebars',function(){
-        var data = {
-            data:'男装春上新'
-        };
+        var data = genData;
         var tpl = require('/layout/search/searchHeader.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);
@@ -67,23 +106,11 @@ define(function(require,exports,module){
         // $("#navbarSearch").html(tpl);
     });
 
-    // searchPrompt
-    require.async('handlebars',function(){
-        var data = {
-            data:'738950'
-        };
-        var tpl = require('/layout/search/searchPrompt.tpl');
-        var template = Handlebars.compile(tpl);
-        var html = template(data);
-        $("#searchPrompt").html(html);
-        // $("#navbarSearch").html(tpl);
-    });
+
 
     // searchVague
     require.async('handlebars',function(){
-        var data = {
-            data:'738951'
-        };
+        var data = genData;
         var tpl = require('/layout/search/searchVague.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);
@@ -93,25 +120,26 @@ define(function(require,exports,module){
 
     // historySearch
     require.async('handlebars',function(){
-        var data = {
-            data:'738951'
-        };
-        var tpl = require('/layout/search/historySearch.tpl');
-        var template = Handlebars.compile(tpl);
-        var html = template(data);
-        $("#historySearch").html(html);
+        // store.set("historySearch",{historySearch:["飘正阳绿翡翠A货", "手表", "钱包", "香水", "烟酒", "保健品", "手链", "腰带", "鞋子", "戒指",]});
+        var historySearch = store.get('historySearch');
+        console.log(historySearch);
+        if( historySearch == ''){
+            $(".history").hide();
+        }else if(historySearch !== ''){
+            var data = historySearch;
+            var tpl = require('/layout/search/historySearch.tpl');
+            var template = Handlebars.compile(tpl);
+            var html = template(data);
+            $("#historySearch").html(html);
+        }
     });
 
     // hotSearch
     require.async('handlebars',function(){
-        var data = {
-            data:'738951'
-        };
+        var data = genData;
         var tpl = require('/layout/search/hotSearch.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);
         $("#hotSearch").html(html);
     });
-
-
-})
+});

@@ -10,9 +10,7 @@ define(function(require,exports,module){
 
     var genData = {};
 
-
     $(function () {
-
         var $userPhone = $("#userPhone");//手机号
         var $userPass = $("#userPass");//登录密码
         var $getSMSCodeBtn = $("#getSMSCodeBtn");//获取验证码按钮
@@ -59,8 +57,6 @@ define(function(require,exports,module){
             background:"#c7c7c7",
             color:"#515151",
             border:"#c7c7c7",
-
-
         };
         /**
          * 注册按钮 成功
