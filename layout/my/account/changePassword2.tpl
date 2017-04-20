@@ -46,7 +46,9 @@
     <div class="content-block">
         <div class="row">
             <!--<div class="col-50"><a href="#" class="button button-big button-fill button-danger">Cancel</a></div>-->
-            <div class="col-100"><a href="javascript:;" class="button button-big rg-col rg-col" id="nextBtn">下一步</a></div>
+            <div class="col-100">
+                <a href="./changePasswordSuccess.html" class="external button button-big rg-col next-step">下一步</a>
+            </div>
             <!--<div class="col-50"><a href="#" class="button button-big button-fill button-success">Submit</a></div>-->
         </div>
     </div>

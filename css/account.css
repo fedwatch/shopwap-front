@@ -57,7 +57,58 @@
 #changePasswordPage2 .list-block .item-title.label{
     width:auto;
 }
+#changePasswordPage2 .next-step{
+    border:none;
+    color:#fff;
+}
 .button-password{
     border:none  !important;
     color:#fff !important;
+}
+#changePasswordPage .vert-code{
+    height:1.94rem;
+    line-height:1.94rem;
+    background-color:#ff503e;
+    border-radius:1rem;
+    color:#fff;
+    font-size:0.789rem;
+    padding:0px 0.5rem;
+    margin-left:0.758rem;
+}
+#changePasswordPage .item-vert{
+    border:none;
+    padding:0px;
+    margin-right:0.75rem;
+}
+#changePasswordPage .vert-input{
+    width:4.5rem;
+    border-bottom:1px solid #e7e7e7;
+}
+#changePasswordPage .item-phone{
+    border-bottom:1px solid #e7e7e7;
+}
+/*******重置成功********/
+.success .success-content{
+
+    position:relative;
+}
+ .success .text-s{
+    vertical-align:middle;
+     text-align: center;
+     margin:4.49rem 0 6.8rem 0;
+
+}
+.success .reset-success{
+    margin:auto;
+    width:3.278rem;
+    height:3.278rem;
+    background:url(../assets/images/Check.png) no-repeat;
+    -webkit-background-size:100% 100%;
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+.success .reset-succ{
+    margin-top:1.09rem;
+    font-size:0.85rem;
+    color:#000000;
 }
