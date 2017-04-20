@@ -132,7 +132,7 @@
                 共 <span class="totalQuant">1</span> 件商品 合计：￥<span class="totalPrice">21</span>.<span>00</span> (含运费 ￥<span>25.00</span>)
             </div>
             <div class="userChooseCol" >
-                <a href="" class="paymentBtn uccButton" > 立即付款 </a>
+                <a href="../../payment/alipay/commonPay.html" class="external paymentBtn uccButton" > 立即付款 </a>
             </div>
         </div>
         <div class="cart-item">

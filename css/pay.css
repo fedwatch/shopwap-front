@@ -1,0 +1,22 @@
+.pay-content{
+    background-color:#fff;
+}
+.pay-content .title-p{
+    background-color:#eb4c1e;
+    padding:0.667rem 0.75rem;
+}
+.pay-content .title-p .order-img img{
+    height:1.88rem;
+    width:1.88rem;
+}
+.pay-content .or-title{
+    font-size:0.789rem;
+    color:#fff;
+}
+.pay-content .or-title2{
+    font-size:0.667rem;
+    color:#fff;
+}
+.pay-content .order-done{
+    margin-left:0.6rem;
+}

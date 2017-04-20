@@ -11,11 +11,11 @@
             <li>
                 <p  id="userPhoneError" class="danger">您输入的手机号码有误，请重新输入！</p>
                 <div class="item-content">
-                    <div class="item-media">手机号码</div>
+                    <div class="item-media" >手机号码</div>
                     <div class="item-inner item-vert">
                         <!--<div class="item-title label"></div>-->
                         <div class="item-input item-phone">
-                            <input type="text" placeholder="请输入您的手机号" id="userPhone" maxlength="11">
+                            <input type="text" placeholder="请输入您的手机号" id="phone-num" maxlength="11">
                         </div>
                     </div>
                 </div>
@@ -25,17 +25,17 @@
                     <div class="item-media">验&nbsp;&nbsp;证&nbsp;&nbsp;码</div>
                     <div class="item-inner item-vert">
                         <div class="item-input vert-input">
-                            <input type="text">
+                            <input type="text" id="security-code">
                         </div>
                       <div class="item-title vert-code">获取验证码</div>
                     </div>
                 </div>
             </li>
             <li>
-                <div class="content-block">
+                <div class="content-block" id="next">
                     <div class="row">
                         <div class="col-100">
-                            <a href="./changePassword3.html" class="external button button-big button-password rg-col" >下一步</a>
+                            <a class="external button button-big button-password rg-col" >下一步</a>
                         </div>
                     </div>
                 </div>
