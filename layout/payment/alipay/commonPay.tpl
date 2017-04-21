@@ -27,7 +27,8 @@
             </div>
         </div>
     </div>
-    <div class="list-block cards-list">
+    <div class="pay-way">支付方式</div>
+    <div class="list-block cards-list" style="margin-top:0;">
         <ul>
             <li class="card">
                 <div class="card-header">
@@ -44,6 +45,13 @@
                 </div>
             </li>
         </ul>
+    </div>
+</div>
+<div class="bankMask">
+    <div class="cont">
+        <div class="bank-li"><a href="javascript:;" class="external bank-a"><span class="attract">招商银行</span><span>储蓄卡（6479）</span><span class="pull-right arrw">&gt;</span></a></div>
+        <div class="bank-li"><a href="javascript:;" class="external bank-a"><span class="attract">招商银行</span><span>储蓄卡（6479）</span><span class="pull-right arrw">&gt;</span></a></div>
+        <div class="bank-li"><a href="javascript:;" class="external bank-a"><span class="attract">招商银行</span><span>储蓄卡（6479）</span><span class="pull-right arrw">&gt;</span></a></div>
     </div>
 </div>
 
