@@ -43,7 +43,7 @@
 }
 .pay-content .detail-addr{
     display:inline-block;
-    line-height:1.2rem;
+    line-height:1.4rem;
     padding-left:3.946rem;
     padding-bottom:0.9rem;
 }
@@ -119,4 +119,45 @@
 .bank-but-radius{
    border-bottom-left-radius:0.3rem;
    border-bottom-right-radius:0.3rem;
+}
+
+/*******支付成功*******/
+.paySuccess-bg{
+    margin:1.821rem 0.75rem 1rem 0.75rem;
+    background:url("../assets/images/sucess-bg.png") no-repeat;
+    -webkit-background-size:100% 100%;
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+.paySuccess-bg .title5{
+    padding-bottom:1.275rem;
+    font-size:0.789rem;
+    color:#212121;
+    text-align:center;
+    border-bottom:dashed 1px #999999;
+}
+.paySuccess-bg .ang8{
+    width:1.88rem;
+    height:1.88rem;
+    margin-top:0.5rem;
+    background:url('../assets/images/ang9.png') no-repeat;
+    -webkit-background-size:100% 100%;
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+.paySuccess-bg .pay-succ-con{
+    padding:1.94rem 1.214rem 0.971rem 1.214rem;
+}
+.paySuccess-bg  .sum-am{
+    padding-left:0.607rem;
+}
+.paySuccess-bg  .sum-am div{
+    text-align:left;
+}
+.paySuccess-bg  .sum-t{
+    padding-bottom:0.4rem;
+}
+.paySuccess-bg .user-desc{
+    padding-top:1.275rem;
+    font-size:0.667rem;
 }
