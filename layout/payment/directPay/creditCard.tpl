@@ -132,7 +132,7 @@
                 </div>
             </li>
         </ul>
-        <div class="credit-button"><a href="#" class="button button-big button-fill button-success">确认开通并支付</a></div>
+        <div class="credit-button"><a href="./alipay/paySuccess.html" class="external button button-big button-fill button-success">确认开通并支付</a></div>
     </div>
 
 </div>

@@ -38,11 +38,12 @@
                     <div class="pay-logo2">微信</div>
                     <div>&gt;</div>
                 </div>
-                <div class="card-footer">
-                    <div class="pay-logo3">快捷支付</div>
+                <div class="card-footer " id="logo3">
+                    <div class="pay-logo3">快捷支付 </div>
                     <div>&gt;</div>
                 </div>
             </li>
         </ul>
     </div>
 </div>
+
