@@ -9,33 +9,23 @@
     display:inline-block;
     color:#999999;
 }
-.security-mask{
-    display:none;
-}
-.security-mask .modal-inner{
-    border-radius: .35rem;
-}
-.security-mask .old-password{
-    width:90%;
+.secu-li{
     text-align:left;
-    height:2.05rem;
-    line-height:2.05rem;
+    background-color:#fff;
+}
+.secu-li a{
+    display:inline-block;
+    width:94%;
+    margin-left:3%;
     color:#212121;
     font-size:0.789rem;
+    border-bottom:solid #e6e6e6;
 }
-.security-mask .modal-inner{
-    background-color:#ffffff;
+.secu-bot{
+    border-bottom:none !important;
 }
-.security-mask  .pass-2{
-
-    border-bottom:solid 1px #e6e6e6;
-}
-.security-mask  .link-address{
-    display:inline-block;
-    color:#212121;
-}
-.security-mask  .modal{
-    top:30%;
+.secu-but-radius{
+    border-radius:0.3rem;
 }
 .com-icon{
     display:inline-block;

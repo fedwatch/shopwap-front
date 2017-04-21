@@ -17,6 +17,11 @@
     <script type="text/javascript" src="/assets/plugin/sea.js"></script>
     <script type="text/javascript" src="/assets/plugin/seajs-text.js"></script>
 
+
+    <script type="text/javascript" src="/assets/plugin/light7/dist/js/light7.min.js"></script>
+    <script type="text/javascript" src="/assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
+    <script type="text/javascript" src="/assets/plugin/light7/dist/js/light7-swipeout.js"></script>
+
     <link rel="stylesheet" type="text/css" href="/assets/plugin/light7/dist/css/light7.css"/>
     <link rel="stylesheet" type="text/css" href="/assets/plugin/light7/dist/css/light7-swiper.min.css"/>
 
@@ -24,25 +29,33 @@
         seajs.use(['/js/api'])
     </script>
     <script>
-        function popLink(id){
-            $("#"+id).click(function(){
-                $(".security-mask").css({display:"block"});
-                $(".old-password").each(function(index,item){
-                    $(this).click(function(){
-                        $(".security-mask").css({display:"none"});
-                    });
+        $(function(){
+            var $logoThree=$("#reset-pass");
+
+            $logoThree.on('click', function () {
+                $.modal({
+                    verticalButtons: true,
+                    buttons: [
+                        {
+                            text: '<div class="secu-li"><a href="javascript:;">通过手机验证码找回<span class="arrow pull-right"> &gt;</span></a></div>',
+                            onClick: function() {
+                                window.location.href="./changePassword.html";
+                            }
+                        },
+                        {
+                            text: '<div class="secu-li"><a href="javascript:;" class="secu-bot">通过旧密码找回<span class="arrow pull-right"> &gt;</span></a></div>',
+                            onClick: function() {
+                                window.location.href="./changePassword2.html";
+                            }
+                        }
+                    ]
                 });
+                $(".modal-buttons").addClass("secu-but-radius");
             });
-            $(".modal-overlay").click(function(){
-                $(".security-mask").css({display:"none"});
-            });
-        }
-       $(function(){
-           popLink("reset-pass");
-       });
+        });
     </script>
 </head>
-<body>
+<body class="page">
 <div id="securityPage">
     <header class="bar bar-nav">
         <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)"  data-transition='slide-out'>
@@ -60,16 +73,6 @@
                     <span class="arrow pull-right"> &gt;</span>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-<!------弹框------>
-<div  class="security-mask" >
-    <div class="modal-overlay modal-overlay-visible"></div>
-    <div class="modal modal-in" style="display:block;">
-        <div class="modal-inner">
-            <a href="./changePassword.html" class="external old-password pass-2 link-address">通过手机验证码找回<span class="arrow pull-right"> &gt;</span></a>
-            <a href="./changePassword2.html" class="external old-password link-address">通过旧密码找回<span class="arrow pull-right"> &gt;</span></a>
         </div>
     </div>
 </div>
