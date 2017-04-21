@@ -1,5 +1,6 @@
 .pay-content{
     background-color:#fff;
+
 }
 .pay-content .title-p{
     background-color:#eb4c1e;
@@ -19,4 +20,58 @@
 }
 .pay-content .order-done{
     margin-left:0.6rem;
+}
+.pay-content .desc-content{
+    padding:0 0.75rem;
+}
+.pay-content .pay-amount{
+    color:#212121;
+    font-size:0.789rem;
+    padding:1.5rem 0 0.9rem 0;
+    margin-bottom:0.91rem;
+    border-bottom:dashed 1px #999999;
+}
+.pay-content .pay-span2{
+    font-size:1.457rem;
+    color:#eb4c1e;
+}
+.pay-content .pay-span3{
+    font-size:0.971rem;
+}
+.pay-content .order-addr{
+   font-size:0.789rem;
+}
+.pay-content .detail-addr{
+    display:inline-block;
+    line-height:1.2rem;
+    padding-left:3.946rem;
+    padding-bottom:0.9rem;
+}
+#commonPay .cards-list .card{
+    margin:0;
+    box-shadow: none;
+}
+#commonPay .pay-logo1{
+    font-size:0.789rem;
+    padding-left:1.4rem;
+    background:url(../assets/images/zhifubao.png) left center no-repeat;
+    -webkit-background-size:1.09rem 1.09rem;
+    -moz-background-size:1.09rem 1.09rem;
+    background-size:1.09rem 1.09rem;
+}
+#commonPay .pay-logo2{
+    font-size:0.789rem;
+    padding-left:1.4rem;
+    background:url(../assets/images/weixin.png) left center no-repeat;
+    -webkit-background-size:1.09rem 1.09rem;
+    -moz-background-size:1.09rem 1.09rem;
+    background-size:1.09rem 1.09rem;
+}
+#commonPay .pay-logo3{
+    font-size:0.789rem;
+    padding-left:1.4rem;
+    background:url(../assets/images/quickbank.png) left center no-repeat;
+    -webkit-background-size:1.09rem 1.09rem;
+    -moz-background-size:1.09rem 1.09rem;
+    background-size:1.09rem 1.09rem;
 }
