@@ -1,6 +1,5 @@
 .pay-content{
     background-color:#fff;
-
 }
 .pay-content .title-p{
     background-color:#eb4c1e;
@@ -9,6 +8,7 @@
 .pay-content .title-p .order-img img{
     height:1.88rem;
     width:1.88rem;
+    margin-top:0.35rem;
 }
 .pay-content .or-title{
     font-size:0.789rem;
@@ -20,6 +20,7 @@
 }
 .pay-content .order-done{
     margin-left:0.6rem;
+    line-height:1.4rem;
 }
 .pay-content .desc-content{
     padding:0 0.75rem;
@@ -88,7 +89,6 @@
     right:0.91rem;
     color:#1b949f;
     font-size:0.789rem;
-
 }
 .bank-li{
     width:100%;
