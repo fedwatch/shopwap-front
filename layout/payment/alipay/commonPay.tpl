@@ -47,6 +47,7 @@
         </ul>
     </div>
 </div>
+<!-----弹框------>
 <div class="bankMask">
     <div class="cont">
         <div class="bank-li"><a href="javascript:;" class="external bank-a"><span class="attract">招商银行</span><span>储蓄卡（6479）</span><span class="pull-right arrw">&gt;</span></a></div>

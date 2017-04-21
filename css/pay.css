@@ -129,7 +129,9 @@
    border-bottom-left-radius:0.3rem;
    border-bottom-right-radius:0.3rem;
 }
-
+.bankMask{
+    display:none;
+}
 /*******支付成功*******/
 .paySuccess-bg{
     margin:1.821rem 0.75rem 1rem 0.75rem;
