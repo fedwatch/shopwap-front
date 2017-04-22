@@ -20,7 +20,9 @@
     <div class="detail-item-content" style="background: #fff;margin: .5rem 0;">
         <div class="user-reviews pull-left">用户评价</div>
         <div class="user-reviews-details pull-right">
+            <a href="/html/user/comment.html" class="external">
             {{transUserReviews review}}<i class="icon icon-more-link"></i>
+            </a>
         </div>
     </div>
 </div>

@@ -62,7 +62,7 @@
             </div>
             <div class="userChooseCol" >
                 <a href="javascript:void(0);" class="checkLogBtn uccButton"> 查看物流 </a>
-                <a href="/html/user/comment.html" class="commentBtn uccButton external"> 评价 </a>
+                <a href="/html/user/review.html" class="commentBtn uccButton external"> 评价 </a>
             </div>
         </div>
         <div class="cart-item">

@@ -52,10 +52,23 @@ define(function(require,exports,module){
 
         $("#searchForm").on('submit',function () {
             console.log('search keywords submit ');
+
+
             var insertSearch = store.get("historySearch").historySearch || [];
             var searchHint = $("#searchHint").val();
             insertSearch.push(searchHint);
+            $.ajax({
+                url:"/search/keywords",
+                type:"POST",
+                dataType:"json",
+                data:{
 
+                },
+                success:function (data) {
+
+                }
+
+            })
             store.set("historySearch",{historySearch:insertSearch});
         })
 
@@ -80,16 +93,16 @@ define(function(require,exports,module){
 
     var genData = {
         hotSearch:[
-            "飘正阳绿翡翠A货",
-            "手表",
-            "钱包",
-            "香水",
-            "烟酒",
-            "保健品",
-            "手链",
-            "腰带",
-            "鞋子",
-            "戒指",
+            {keyword:"飘正阳绿翡翠A货",url:""},
+            {keyword:"手表",url:""},
+            {keyword:"钱包",url:""},
+            {keyword:"香水",url:""},
+            {keyword:"烟酒",url:""},
+            {keyword:"保健品",url:""},
+            {keyword:"手链",url:""},
+            {keyword:"腰带",url:""},
+            {keyword:"鞋子",url:""},
+            {keyword:"戒指",url:""}
         ]
     };
 

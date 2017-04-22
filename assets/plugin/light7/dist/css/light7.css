@@ -1116,6 +1116,18 @@ i.icon.icon-f7 {
     height: 1.45rem;
     background-image: url("../img/i-f7.png");
 }
+i.icon.icon-address-icon {
+    width: 1.45rem;
+    height: 1.95rem;
+    background-image: url("../img/icon-address-icon.png");
+    background-size: .8rem;
+}
+i.icon.icon-address-right-arrow {
+    width: 1.45rem;
+    height: 1.95rem;
+    background-image: url("../img/icon-address-right-arrow.png");
+    background-size: .8rem;
+}
 
 i.icon.icon-form-name {
     width: 1.45rem;

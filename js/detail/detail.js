@@ -246,7 +246,8 @@ define(function (require, exports, module) {
 
         //立即下单
         $(".buyNowBtn").on('click', function () {
-            location.href = "/html/payment/payment.html";
+            // location.href = "/html/payment/payment.html";
+            location.href = "/html/order/order.html";
         });
 
         //边缘遮罩层 *

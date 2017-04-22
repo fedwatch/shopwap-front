@@ -1769,3 +1769,152 @@ span.nav-sub-text.active {
 .rg-col{
     background-color:#ff503e !important;
 }
+
+/**
+    提交订单
+ */
+
+/*提交订单 顶部*/
+/*提交订单 地址*/
+.addressBox{
+    margin: 0!important;
+    background: #eb4c1e;
+    color: #fff;
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+}
+.addressWrapper{
+    display: flex;
+    justify-content: space-between;
+    padding: .9rem 0;
+    color: #fff;
+}
+.addressWrapper .leftIcon{
+    padding-top:.8rem;padding-left:.43rem;
+}
+.addressWrapper .addressUserProfile{
+    padding:0 .2rem;font-size:.8rem;
+}
+.addressWrapper .rightIcon{
+    padding-top:.3rem;
+}
+/*提交订单 详情*/
+.orderDetailHeader{
+    margin:0!important;
+    background: #fff;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: .333rem .55rem
+}
+.orderDetailHeader .storeName{
+    font-weight: 400;
+    color: #212121;
+}
+.orderDetailHeader .tradeStatus{
+    color:#ea5125;
+}
+.order-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .6rem 0;
+    width: 100%;
+    background: #f5f5f5;
+}
+.order-item .order-item-img{
+    padding:.36rem .93rem;
+}
+.order-item .order-item-img img{
+    width:3rem
+}
+.order-item .order-item-desc{
+    padding:0 .348rem;
+}
+.order-item-desc .desc-title{
+    font-weight: 400;
+    font-size: .8rem;
+    color: #515151;
+}
+.order-item-desc .desc-content{
+    color: #999;
+    font-size: .6rem;
+}
+.order-item .order-item-price{
+    padding: 0 .348rem;
+    text-align: right
+}
+.order-item-price .nowPrice{
+    font-size: .8rem;
+    line-break: normal;
+}
+.order-item-price .pastPrice{
+    font-size: .8rem;
+    line-break: normal;
+}
+.orderDetailAddons{
+    background: #fff;
+    margin: 0!important;
+}
+
+.orderDetailAddons .shipping-method .shipping-cost span {
+    color: #ea5125;
+}
+.fs8{
+    font-size: .8rem
+}
+.detail-total{
+    height: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.detail-total-quant{
+    padding:0 .535rem;
+}
+.detail-total-nums{
+    padding:0 .535rem;
+}
+.detail-total-nums span{
+    color: #ea5125;
+}
+/*提交订单 底部*/
+.orderBottomBar{
+    border-top: 1px solid #eee;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: flex-end;
+    align-items: center;
+    background: #fff;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    right: 0;
+    left: 0;
+    display: flex;
+    z-index: 1001;
+}
+.orderBottomBar .detailSums{
+    padding: 0 .332rem;
+    height: 3rem;
+}
+.orderBottomBar .detailSums{
+    color:#212121;
+    font-size:.8rem;
+}
+.orderBottomBar .detailSums p span{
+    color:#ea5125;
+    font-size:.9rem;
+}
+.orderBottomBar .detailOrderBtn{
+    background: #ea5125;
+    color: #fff;
+    height: 3rem;
+    align-items: center;
+    display: flex;
+    padding: 0 .5rem;
+}
+.orderBottomBar .detailOrderBtn span {
+    font-size:.8rem;
+}

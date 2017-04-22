@@ -22,6 +22,12 @@ seajs.config({
         "weixin":"https://res.wx.qq.com/open/js/jweixin-1.0.0.js",
         "transDetails":"/js/utils/transDetails",
 
+        "rsa":"/js/utils/rsa/rsa.js",
+        "base64":"/js/utils/rsa/base64.js",
+        "rng":"/js/utils/rsa/rng.js",
+        "jsbn":"/js/utils/rsa/jsbn.js",
+        "prng4":"/js/utils/rsa/prng4.js",
+
         "zepto":"https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js",
         "swipeout":"/assets/plugin/light7/dist/js/light7-swipeout.js",
         "city-swiper":"/assets/plugin/light7/dist/js/light7-city-picker.js"

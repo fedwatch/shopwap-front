@@ -1,9 +1,16 @@
-/**
- * Created by Administrator on 2017/3/10.
- */
+"use strict";
+
 define(function (require, exports, module) {
     require('jquery');
+    require('light7');
     require('swiper');
+    require('rsa');
+    require('base64');
+
+    require('jsbn');
+    require('prng4');
+    require('rng');
+
 
     $(function () {
         var $userPhone = $('#userPhone');
@@ -11,29 +18,30 @@ define(function (require, exports, module) {
         var $loginBtn = $('#loginBtn');
         var resultState = {};
         var regex = /^1\d{10}$/;
-        if ($userPhone !== '' && regex.test($userPhone) == true) {
-            return resultState.phoneable = true;
-        } else {
-            return resultState.phoneable = false;
-        }
 
-        if ($userPass !== '' && $userPass.length >= 8 && $userPass.length <= 16) {
-            return resultState.passable = true;
-        } else {
-            return resultState.passable = false;
+        function getRSAKey(){
+
         }
 
 
-        $loginBtn.on('click', function () {
-            console.log("click login btn")
-            if (resultState.passable == true && resultState.phoneable == true) {
-                location.href = '/html/my/my.html';
-            }else{
-                console.log("login failed so you need change something.");
-            }
-        })
 
-
+        $(document).on('click','#loginBtn',function () {
+            $.ajax({
+                url: "//192.168.88.75:8080/shopwap/common/public_key",
+                type: "get",
+                dataType: "json",
+                cache: false,
+                // error:function (data) {
+                //     console.log("error")
+                // },
+                success: function(data) {
+                    var rsaKey = new RSAKey();
+                    rsaKey.setPublic(b64tohex(data.modulus), b64tohex(data.exponent));
+                    var enPassword = hex2b64(rsaKey.encrypt($userPass.val()));
+                    console.log(enPassword)
+                }
+            });
+        });
     });
 
     // loginPage
