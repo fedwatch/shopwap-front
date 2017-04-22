@@ -1,5 +1,6 @@
 define(function(require,exports,module){
     require('jquery');
+    require("light7");
     require('mockjs');
     var data=Mock.mock("/getData",{
         "id":"13167161025",
