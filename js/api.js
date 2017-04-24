@@ -27,6 +27,7 @@ seajs.config({
         "rng":"/js/utils/rsa/rng.js",
         "jsbn":"/js/utils/rsa/jsbn.js",
         "prng4":"/js/utils/rsa/prng4.js",
+        "jsonp":"/js/utils/jquery.jsonp.js",
 
         "zepto":"https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js",
         "swipeout":"/assets/plugin/light7/dist/js/light7-swipeout.js",

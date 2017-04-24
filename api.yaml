@@ -1,0 +1,1068 @@
+swagger: '2.0'
+info:
+  description: >-
+    街街网API前端数据接口列表
+  version: 1.0.2
+  title: Shopwap
+  # termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email:  jwg@cnzqjt.com
+  license:
+    name: MIT
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: m.jie.net
+basePath: /v2
+tags:
+  - name: product
+    description: 商品信息
+  - name: store
+    description: 店铺信息
+  - name: user
+    description: 用户信息
+  - name: init
+    description: 初始化
+  - name: promo
+    description: 促销信息
+  - name: feedback
+    description: 用户反馈
+  - name: config
+    description: 系统配置
+  - name: address
+    description: 地址管理
+  - name: coupon
+    description: 优惠券
+  - name: logistics
+    description: 物流信息
+  - name: reviews
+    description: 评价信息
+  - name: orders
+    description: 订单详情
+  - name: cart
+    description: 购物车信息
+  - name: search
+    description: 搜索信息
+schemes:
+  - http
+paths:
+  # 商品信息 Start
+  # 添加商品
+  /product/add:
+    post:
+      tags:
+        - product
+      summary: 添加商品信息
+      description: ''
+      operationId: addProduct
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: id
+          description: '商品id'
+          required: true
+       -  in: query
+          name: name
+          description: '商品名称'
+          required: false
+      responses:
+        default:
+          description: '商品添加成功'
+  # 商品删除
+  /product/remove:
+    post:
+      tags:
+        - product
+      summary: 删除商品信息
+      description: ''
+      operationId: removeProduct
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: id
+          description: '商品id'
+          required: true
+      responses:
+        default:
+          description: '商品删除成功'
+  # 商品更新
+  /product/update:
+    post:
+      tags:
+        - product
+      summary: '更新商品信息'
+      description: ''
+      operationId: updateProduct
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: id
+          description: '商品id'
+          required: true
+      responses:
+        default:
+          description: Invalid input
+  # 商品分类
+  /product/categoryLists:
+    post:
+      tags:
+        - product
+      summary: '获取分类店铺商品列表'
+      description: ''
+      operationId: updateProduct
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: mainCategory
+          description: '分类主目录'
+          type:  number
+          required: true
+        - in: body
+          name: secondCategory
+          type:  number
+          description: '分类二级目录'
+          required: true
+      responses:
+        '405':
+          description: Invalid input
+      default:
+        schema:
+          type: object
+          properties:
+            name:
+  # 商品信息 End
+  # 店铺信息 Start
+  /store/list:
+    get:
+      tags:
+        - store
+      summary: '获取店铺列表'
+      description: ''
+      operationId: storeList
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: id
+          required: true
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: object
+            additionalProperties:
+              type: integer
+              format: int32
+  '/store/{storeId}':
+    get:
+      tags:
+        - store
+      summary: 获取店铺ID详情
+      description: ''
+      operationId: storeIdDetail
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+  /store/order:
+    post:
+      tags:
+        - store
+      summary: Place an order for a pet
+      description: ''
+      operationId: placeOrder
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: order placed for purchasing the pet
+          required: true
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid Order
+  '/store/order/{orderId}':
+    get:
+      tags:
+        - store
+      summary: ''
+      description: >-
+        For valid response try integer IDs with value >= 1 and <= 10.
+        Other values will generated exceptions
+      operationId: getOrderById
+      produces:
+        - application/json
+      parameters:
+        - name: orderId
+          in: path
+          description: ID of pet that needs to be fetched
+          required: true
+          type: integer
+          maximum: 10
+          minimum: 1
+          format: int64
+      responses:
+        default:
+          description: successful operation
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Order not found
+  # 店铺信息 End
+
+  # 用户信息 Start
+  /user/userRegister:
+    post:
+      tags:
+        - user
+      summary: '用户注册'
+      description: ''
+      operationId: registerUser
+      produces:
+        - application/json
+      parameters:
+        - name: userPhone
+          in: query
+          description: 用户手机号
+          required: true
+          type: string
+        - name: enPassword
+          in: query
+          description: 已加密用户密码
+          required: true
+          type: string
+        - name: smsCode
+          description: 短信验证码
+          type: string
+          in: query
+          required: true
+      responses:
+        '200':
+          description: '用户注册成功'
+          schema:
+            type: string
+          headers:
+            X-Rate-Limit:
+              type: integer
+              format: int32
+              description: calls per hour allowed by the user
+            X-Expires-After:
+              type: string
+              format: date-time
+              description: date in UTC when token expires
+        '400':
+          description: Invalid username/password supplied
+  /user/userLogin:
+    post:
+      tags:
+        - user
+      summary: '用户登录系统'
+      description: ''
+      operationId: loginUser
+      produces:
+        - application/json
+      parameters:
+        - name: userPhone
+          in: query
+          description: 用户手机号
+          required: true
+          type: string
+        - name: enPassword
+          in: query
+          description: 已加密用户密码
+          required: true
+          type: string
+        - name: smsCode
+          description: 短信验证码
+          type: string
+          in: query
+          required: true
+      responses:
+        '200':
+          description: '用户登录成功'
+          schema:
+            type: string
+          headers:
+            X-Rate-Limit:
+              type: integer
+              format: int32
+              description: calls per hour allowed by the user
+            X-Expires-After:
+              type: string
+              format: date-time
+              description: date in UTC when token expires
+        '400':
+          description: Invalid username/password supplied
+  /user/userLogout:
+    post:
+      tags:
+        - user
+      summary: '用户登出系统'
+      description: ''
+      operationId: logoutUser
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+  /user/changePassword:
+    post:
+      tags:
+        - user
+      summary: '用户修改密码'
+      description: ''
+      operationId: changePassword
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+  /user/forgetPassword:
+    post:
+      tags:
+        - user
+      summary: '用户忘记密码'
+      description: ''
+      operationId: forgetPassword
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+  /user/checkSmsCode:
+    post:
+      tags:
+        - user
+      summary: '检查短信验证码'
+      description: ''
+      operationId: checkSmsCode
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+  # 用户信息 End
+
+  # 初始化 Start
+  /init/banner:
+    get:
+      tags:
+        - init
+      summary: 初始化首页滑动图
+      description: ''
+      operationId: getBanner
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '405':
+          description: Invalid input
+  /init/promo/shop:
+    get:
+      tags:
+        - init
+      summary: '初始化首页促销店铺'
+      description: ''
+      operationId: initPromoShop
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '405':
+          description: Invalid input
+  /init/category:
+    get:
+      tags:
+        - init
+      summary: '初始化商品分类'
+      description: ''
+      operationId: initCategory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: mainCategory
+          description: 商品主目录
+          required: true
+        - in: body
+          name: secondCategory
+          description: 商品二级目录
+          required: true
+      responses:
+        '401':
+          description: Invalid input
+        '402':
+          description: Invalid input
+        '403':
+          description: Invalid input
+        '404':
+          description: Invalid input
+        '405':
+          description: Invalid input
+  # 初始化 End
+
+
+  # 促销信息 Start
+  /promo/getPromoShop:
+    post:
+      tags:
+        - promo
+      summary: ''
+      description: Multiple status values can be provided with comma separated strings
+      operationId: getPromoShop
+      produces:
+        - application/json
+      parameters:
+        - name: status
+          in: query
+          description: Status values that need to be considered for filter
+          required: true
+          type: array
+          items:
+            type: string
+            enum:
+              - available
+              - pending
+              - sold
+            default: available
+          collectionFormat: multi
+      responses:
+        '200':
+          description: '请求成功'
+  # 促销信息 End
+
+  # 反馈信息 Start
+  /feedback:
+    post:
+      tags:
+        - feedback
+      summary: '客户反馈入口'
+      description: ''
+      operationId: feedback
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: query
+          description: '当前用户ID'
+          required: true
+        - name: content
+          description: '用户输入的反馈信息'
+          in: query
+          required: true
+      responses:
+        '200':
+          description: '请求成功'
+
+  /feedback/add:
+    post:
+      tags:
+        - feedback
+      summary: '添加客户反馈'
+      description: ''
+      operationId: addFeedback
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: body
+          description: '当前用户ID'
+          required: true
+        - name: content
+          in: body
+          description: '客户反馈内容'
+          required: true
+      responses:
+        '200':
+          description: '感谢您的反馈，我们会尽快改进！'
+
+  /feedback/getLists:
+    post:
+      tags:
+        - feedback
+      summary: '获取用户ID反馈消息列表'
+      description: ''
+      operationId: getFbLists
+      produces:
+        - application/json
+      parameters:
+        - name: status
+          in: query
+          description: Status values that need to be considered for filter
+          required: true
+          type: array
+          items:
+            type: string
+            enum:
+              - available
+              - pending
+              - sold
+            default: available
+          collectionFormat: multi
+      responses:
+        '200':
+          description: '请求成功'
+
+  /feedback/getAllLists:
+    post:
+      tags:
+        - feedback
+      summary: '获取反馈全部消息列表'
+      description: ''
+      operationId: getFbAllLists
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: query
+          description: '当前用户ID'
+          required: true
+          type: array
+          items:
+            type: string
+            enum:
+              - available
+              - pending
+              - sold
+            default: available
+          collectionFormat: multi
+      responses:
+        '200':
+          description: '请求成功'
+  # 反馈信息 End
+
+  # 系统配置 Start
+  /config/add:
+    post:
+      tags:
+        - config
+      summary: '添加系统配置'
+      description: ''
+      operationId: addConfig
+      produces:
+        - application/json
+      parameters:
+        - name: status
+          in: query
+          description: Status values that need to be considered for filter
+          required: true
+          type: array
+          items:
+            type: string
+            enum:
+              - available
+              - pending
+              - sold
+            default: available
+          collectionFormat: multi
+      responses:
+        '200':
+          description: '请求成功'
+  # 系统配置 End
+
+  # 地址管理 Start
+  /address/add:
+    post:
+      tags:
+        - address
+      summary: '添加收货地址'
+      description: ''
+      operationId: addAddress
+      produces:
+        - application/json
+      parameters:
+        - name: status
+          in: query
+          description: Status values that need to be considered for filter
+          required: true
+          type: array
+          items:
+            type: string
+            enum:
+              - available
+              - pending
+              - sold
+            default: available
+          collectionFormat: multi
+      responses:
+        '200':
+          description: '请求成功'
+  /address/update:
+    post:
+      tags:
+        - address
+      summary: '更新收货地址'
+      description: ''
+      operationId: updateAddress
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: query
+          description: '收货地址ID'
+          required: true
+        - name: address
+          in: query
+          description: '收货地址'
+          required: true
+      responses:
+        '200':
+          description: '收货地址更新成功'
+  /address/remove:
+    post:
+      tags:
+        - address
+      summary: '删除收货地址'
+      description: ''
+      operationId: removeAddress
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          required: true
+      responses:
+        '200':
+          description: '收货地址删除成功'
+  # 地址管理 End
+
+  # 优惠券 Start
+  /coupon/add:
+    post:
+      tags:
+        - coupon
+      summary: '添加优惠券'
+      description: ''
+      operationId: addCoupon
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          required: true
+      responses:
+        '200':
+          description: '添加优惠券成功'
+  /coupon/list:
+    post:
+      tags:
+        - coupon
+      summary: '优惠券列表'
+      description: ''
+      operationId: listCoupon
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          required: true
+      responses:
+        '200':
+          description: '优惠券列表'
+  # 优惠券 End
+  # 物流信息 Start
+  /logistics/check:
+    post:
+      tags:
+        - logistics
+      summary: '查询物流信息'
+      description: ''
+      operationId: checkLogistics
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          description: '订单ID'
+      responses:
+        default:
+          description: successful operation
+  /logistics/list:
+    post:
+      tags:
+        - logistics
+      summary: '展示评论信息'
+      description: ''
+      operationId: listLogistics
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          description: '订单ID'
+      responses:
+        default:
+          description: successful operation
+  # 物流信息 End
+
+  # 评价信息 Start
+  /reviews/list:
+    post:
+      tags:
+        - reviews
+      summary: '展示评论信息'
+      description: ''
+      operationId: reviewsList
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          description: '订单ID'
+      responses:
+        default:
+          description: successful operation
+  /reviews/add:
+    post:
+      tags:
+        - reviews
+      summary: '添加评论'
+      description: ''
+      operationId: addReviews
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          description: '订单ID'
+        - name: store
+          description: '评论分数'
+        - name: content
+          description: '评论内容'
+      responses:
+        default:
+          description: successful operation
+  # 评价信息 End
+  # 订单详情 Start
+  /order/add:
+    post:
+      tags:
+        - order
+      summary: '添加购物车商品'
+      description: ''
+      operationId: addOrder
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          description: '商品ID'
+        - name: name
+          description: '商品名称'
+        - name: quant
+          description: '商品数量'
+      responses:
+        '200':
+          description: '订单添加成功'
+
+        default:
+          description: successful operation
+  /order/myOrders:
+    post:
+      tags:
+        - order
+      summary: '我的订单'
+      description: ''
+      operationId: myOrders
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          description: '用户ID'
+      responses:
+        default:
+          description: successful operation
+  # 订单详情 End
+
+
+  # 购物车 Start
+  /cart/add:
+    post:
+      tags:
+        - cart
+      summary: '添加购物车商品'
+      description: ''
+      operationId: cartAddItem
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          description: '商品ID'
+        - name: name
+          description: '商品名称'
+        - name: quant
+          description: '商品数量'
+      responses:
+        default:
+          description: successful operation
+  /cart/list:
+    post:
+      tags:
+        - cart
+      summary: '购物车商品列表'
+      description: ''
+      operationId: cartListItems
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          description: '购物车商品ID'
+        - name: name
+          description: '购物车商品名称'
+        - name: state
+          description: '购物车商品状态'
+          type: boolean
+      responses:
+        default:
+          description: successful operation
+  /cart/update:
+    post:
+      tags:
+        - cart
+      summary: '更新购物车商品'
+      description: ''
+      operationId: cartUpdateItem
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          description: '购物车商品ID'
+        - name: name
+          description: '购物车商品名称'
+      responses:
+        default:
+          description: successful operation
+  /cart/delete:
+    post:
+      tags:
+        - cart
+      summary: '删除购物车商品'
+      description: ''
+      operationId: cartDeleteItem
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: query
+          description: '购物车商品ID'
+      responses:
+        '200':
+          description: '购物车商品删除成功'
+        default:
+          description: successful operation
+  # 购物车 End
+  # 搜索信息 Start
+  /search/keywords:
+    get:
+      tags:
+        - search
+      summary: '搜索关键词'
+      description: ''
+      operationId: searchKeywords
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: keyword
+          type: string
+      responses:
+        '405':
+          description: Invalid input
+  /search/hotSearch:
+    get:
+      tags:
+        - search
+      summary: '大家都在搜索'
+      description: ''
+      operationId: searchHotSearch
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        default:
+          description: 'Memo'
+        '404':
+          description: Invalid input
+  # 搜索信息 End
+
+
+
+
+
+
+
+securityDefinitions:
+  petstore_auth:
+    type: oauth2
+    authorizationUrl: 'http://petstore.swagger.io/oauth/dialog'
+    flow: implicit
+    scopes:
+      'write:pets': modify pets in your account
+      'read:pets': read your pets
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
+definitions:
+  Order:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      petId:
+        type: integer
+        format: int64
+      quantity:
+        type: integer
+        format: int32
+      shipDate:
+        type: string
+        format: date-time
+      status:
+        type: string
+        description: Order Status
+        enum:
+          - placed
+          - approved
+          - delivered
+      complete:
+        type: boolean
+        default: false
+    xml:
+      name: Order
+  Category:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+    xml:
+      name: Category
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      username:
+        type: string
+      userPhone:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      userStatus:
+        type: integer
+        format: int32
+        description: User Status
+    xml:
+      name: User
+  Product:
+    type: object
+    required:
+      - name
+      - photoUrls
+    properties:
+      id:
+        type: integer
+        format: int64
+      category:
+        $ref: '#/definitions/Category'
+      name:
+        type: string
+        example: doggie
+      photoUrls:
+        type: array
+        xml:
+          name: photoUrl
+          wrapped: true
+        items:
+          type: string
+      tags:
+        type: array
+        xml:
+          name: tag
+          wrapped: true
+        items:
+          $ref: '#/definitions/Tag'
+      status:
+        type: string
+        description: pet status in the store
+        enum:
+          - available
+          - pending
+          - sold
+    xml:
+      name: Product
+  Store:
+    type: object
+    required:
+      - storeId
+    properties:
+      storeId:
+        type: integer
+        format: int64
+      storeName:
+        type: string
+        example: doggie
+      status:
+        type: string
+        description: pet status in the store
+        enum:
+          - available
+          - pending
+          - sold
+    xml:
+      name: Product
+  Feedback:
+    type: object
+    required:
+      - userId
+      - userContent
+    properties:
+      userId:
+        type: integer
+        format: int64
+      userContent:
+        type: string
+    xml:
+      name: Feedback
+  ApiResponse:
+    type: object
+    required:
+      - code
+      - type
+    properties:
+      code:
+        type: integer
+        format: int32
+      type:
+        type: string
+      message:
+        type: string
