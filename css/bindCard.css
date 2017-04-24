@@ -261,3 +261,30 @@ comment .comment-content .finger{
     background-color:#ff503e;
     color:#fff;
 }
+.comment-header .satisf{
+   padding-right:0.5rem;
+}
+.comment-header ul{
+    position:relative;
+    margin-top:0.1rem;
+}
+.comment-header ul li{
+    display:inline-block;
+}
+.evaluate{
+    width:0.971rem;
+    height:0.971rem;
+    background:url(../assets/images/white-pointer2.png) center center no-repeat;
+    background-size:100% 100%;
+}
+.eval-offset{
+    display:inline-block;
+    width:0.971rem;
+    height:0.971rem;
+    background:url(../assets/images/star-1.png) center center no-repeat;
+    background-size:100% 100%;
+}
+.eval-con{
+    height:0.971rem;
+    overflow:hidden;
+}
