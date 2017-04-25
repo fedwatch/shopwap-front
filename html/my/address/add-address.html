@@ -49,7 +49,7 @@
     </header>
     <div class="content  add-address">
         <div class="list-block">
-            <ul>
+            <ul id="input-list">
                 <!-- Text inputs -->
                 <li>
                     <div class="item-content">
@@ -57,7 +57,7 @@
                         <div class="item-inner">
                             <div class="item-title label">联&nbsp;&nbsp;系&nbsp;&nbsp;人</div>
                             <div class="item-input">
-                                <input type="text" placeholder="小英">
+                                <input type="text" placeholder="小英" id="ad-user-name">
                             </div>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                         <div class="item-inner">
                             <div class="item-title label">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话</div>
                             <div class="item-input">
-                                <input type="text" placeholder="13167161025">
+                                <input type="text" placeholder="13167161025" id="user-phone">
                             </div>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                         <div class="item-inner">
                             <div class="item-title label">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编</div>
                             <div class="item-input">
-                                <input type="password" placeholder="可选填" class="">
+                                <input type="password" placeholder="可选填" class="" id="mail">
                             </div>
                         </div>
                     </div>
@@ -130,5 +130,56 @@
 <script src="http://www.light7.cn/dist/js/light7-swiper.js"></script>
 <script src="http://www.light7.cn/dist/js/light7-swipeout.js"></script>
 <script src="http://www.light7.cn/dist/js/light7-city-picker.js"></script>
+<script>
+    //用户名验证
+    var $userNameAddr=$("#ad-user-name");
+    var $userPhone=$("#user-phone");
+    var inputList=$("#input-list");
+    var $mail=$("#mail");
+    //寻找除当前input元素之外的其他input元素
+    function selectInput(elem,flag){
+            if(flag==true){
+                elem.parents("li").nextAll().find("input").attr("disabled",true);
+            }else{
+                elem.parents("li").nextAll().find("input").removeAttr("disabled");
+            }
+    }
+    //姓名验证
+    function checkUserNameAddr(val){
+        var reg = /^[\u4E00-\u9FA5]{2,4}$/;
+        var flag;
+        if(!reg.test(val)){
+          $.toast("不符合标准！");
+          flag=true;
+          selectInput($userNameAddr,flag);
+        }else{
+            flag=false;
+            selectInput($userNameAddr,flag);
+            console.log("符合标准！");
+        }
+    }
+    //手机号验证
+    function checkUserPhone(val){
+        var regex = /^1\d{10}$/;
+        var flag;
+        if(!regex.test(val)){
+            $.toast("不符合标准！");
+            flag=true;
+            selectInput($userPhone,flag);
+        }else{
+            flag=false;
+            selectInput($userPhone,flag);
+            console.log("符合标准！");
+        }
+    }
+    $userNameAddr.on('blur',function () {
+        var userPhoneVal =  $userNameAddr.val();
+        checkUserNameAddr(userPhoneVal);
+    });
+    $userPhone.on("blur",function(){
+        var userPhoneVal=$userPhone.val();
+        checkUserPhone(userPhoneVal);
+    });
+</script>
 </body>
 </html>
