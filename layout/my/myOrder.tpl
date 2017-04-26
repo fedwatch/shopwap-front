@@ -61,7 +61,7 @@
                 共 <span class="totalQuant">1</span> 件商品 合计：￥<span class="totalPrice">1399</span>.<span>00</span> (含运费 ￥<span class="logPrice">25.00</span>)
             </div>
             <div class="userChooseCol" >
-                <a href="javascript:void(0);" class="checkLogBtn uccButton"> 查看物流 </a>
+                <a href="/html/user/logistics.html" class="checkLogBtn uccButton"> 查看物流 </a>
                 <a href="/html/user/review.html" class="commentBtn uccButton external"> 评价 </a>
             </div>
         </div>

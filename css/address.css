@@ -71,6 +71,7 @@
     padding:0 0.75rem 0.97rem 0.75rem;
 }
 .manage-address .address-operate{
+    display:none;
     padding:0.72rem 0;
     border-top:solid 1px #e6e6e6;
 }

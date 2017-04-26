@@ -13,9 +13,10 @@
                     <div class="item-media">旧&nbsp;&nbsp;密&nbsp;&nbsp;码</div>
                     <div class="item-inner">
                         <div class="item-input">
-                            <input type="password" placeholder="请输入旧密码">
+                            <input type="password" placeholder="请输入旧密码" id="old-userPassword">
+                           <!--- <span id="hidden1"> <input type="text" placeholder="请输入旧密码" ></span>--->
                         </div>
-                        <div class="item-title label"><i class="com-icon icon-p-1"></i></div>
+                        <div class="item-title label"><i class="com-icon icon-p-2"></i></div>
                     </div>
                 </div>
             </li>
@@ -24,7 +25,8 @@
                     <div class="item-media">新&nbsp;&nbsp;密&nbsp;&nbsp;码</div>
                     <div class="item-inner">
                         <div class="item-input">
-                            <input type="password" placeholder="请输入新密码">
+                            <input type="password" placeholder="请输入新密码" id="new-password"  minlength="6"    maxLength="16">
+                            <!--- <span id="hidden2"> <input type="text" placeholder="请输入新密码" ></span>--->
                         </div>
                         <div class="item-title label"><i class="com-icon icon-p-2"></i></div>
                     </div>
@@ -35,9 +37,10 @@
                    <div class="item-media">确认密码</div>
                     <div class="item-inner">
                         <div class="item-input">
-                            <input type="password" placeholder="请再次输入新密码">
+                            <input type="password" placeholder="请再次输入新密码" id="new-password-two" >
+                            <!---<span id="hidden3"> <input type="text" placeholder="请再次输入新密码" ></span>-->
                         </div>
-                        <div class="item-title label"><i class="com-icon icon-p-3"></i></div>
+                        <div class="item-title label"><i class="com-icon icon-p-2"></i></div>
                     </div>
                 </div>
             </li>
@@ -46,7 +49,7 @@
                     <div class="row">
                         <!--<div class="col-50"><a href="#" class="button button-big button-fill button-danger">Cancel</a></div>-->
                         <div class="col-100">
-                            <a href="./changePasswordSuccess.html" class="external button button-big rg-col next-step">下一步</a>
+                            <a href="javascript:;" class="external button button-big rg-col next-step">下一步</a>
                         </div>
                         <!--<div class="col-50"><a href="#" class="button button-big button-fill button-success">Submit</a></div>-->
                     </div>

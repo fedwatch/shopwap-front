@@ -15,7 +15,7 @@
                     <div class="item-inner item-vert">
                         <!--<div class="item-title label"></div>-->
                         <div class="item-input item-phone">
-                            <input type="text" placeholder="请输入您的手机号" id="userPhone" maxlength="11">
+                            <input type="text" placeholder="请输入密码" id="userPhone" maxlength="11">
                         </div>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
                     <div class="item-inner item-vert">
                         <!--<div class="item-title label"></div>-->
                         <div class="item-input item-phone">
-                            <input type="text" placeholder="请输入您的手机号"  maxlength="11">
+                            <input type="text" placeholder="请输入新密码"  maxlength="11">
                         </div>
                     </div>
                 </div>
@@ -44,16 +44,6 @@
         </ul>
     </div>
 </div>
+<script>
 
-<li>
-    <p  id="userPassError" class="danger">您输入的登录密码有误，请重新输入！</p>
-    <div class="item-content">
-        <!--<div class="item-media"><i class="icon icon-form-email"></i></div>-->
-        <div class="item-inner">
-            <!--<div class="item-title label"></div>-->
-            <div class="item-input">
-                <input type="password" placeholder="请输入登录密码" id="userPass">
-            </div>
-        </div>
-    </div>
-</li>
+</script>

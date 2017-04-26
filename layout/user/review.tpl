@@ -44,7 +44,7 @@
     </div>
     <div class="content-block">
         <div class="row">
-            <a href="#" class="button button-big button-fill button-success submit-review">提交评价</a>
+            <a href="../my/myOrder/myOrder.html" class="button button-big button-fill button-success submit-review">提交评价</a>
         </div>
     </div>
 </div>
