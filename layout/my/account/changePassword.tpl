@@ -9,7 +9,6 @@
         <ul>
             <!-- Text inputs -->
             <li>
-                <p  id="userPhoneError" class="danger">您输入的手机号码有误，请重新输入！</p>
                 <div class="item-content">
                     <div class="item-media" >手机号码</div>
                     <div class="item-inner item-vert">
@@ -43,16 +42,3 @@
         </ul>
     </div>
 </div>
-
-<li>
-    <p  id="userPassError" class="danger">您输入的登录密码有误，请重新输入！</p>
-    <div class="item-content">
-        <!--<div class="item-media"><i class="icon icon-form-email"></i></div>-->
-        <div class="item-inner">
-            <!--<div class="item-title label"></div>-->
-            <div class="item-input">
-                <input type="password" placeholder="请输入登录密码" id="userPass">
-            </div>
-        </div>
-    </div>
-</li>

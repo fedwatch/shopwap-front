@@ -6,27 +6,60 @@ define(function(require,exports,module){
     $(function(){
          var $phoneNumber=$("#phone-num");//获取手机号
          var $securityCode=$("#security-code");//获取验证码
-          var $vertCode=$(".vert-code");
-          var $next=$("#next");
+         var $getVertCode=$(".vert-code");
+         var $next=$("#next");
          function checkPhone(str){
 
                if(!(/^1[3|4|5|7|8]\d{9}$/.test(str))){
+                   $.toast("请输入正确的手机号");
                    $securityCode.attr("disabled","disabled");
-                   $vertCode.css({backgroundColor:"#b2aead"})
-                  $("#userPhoneError").css({display:"block"})
+                  $getVertCode.css({backgroundColor:"#b2aead"});
+
                }else{
-                   $securityCode.attr("disabled",false);
-                   $("#userPhoneError").css({display:"none"})
-                   $next.click(function(){
-                       window.location.href="./changePassword3.html";
-                   })
+                   $securityCode.removeAttr("disabled");
+                   $getVertCode.css({backgroundColor:"#ff503e"});
+
                }
+
          }
+
+
         $phoneNumber.on("blur",function(){
-           var  $textPhoneVal=$phoneNumber.val();
-            checkPhone($textPhoneVal);
+            var  $phoneNumberVal=$phoneNumber.val();
+            var res=checkPhone($phoneNumberVal);
         });
 
+        $getVertCode.click(function(){
+            var $phoneNumberVal=$phoneNumber.val();
+                checkPhone($phoneNumberVal);
+                if($phoneNumberVal){
+                    Mock.mock(/\/getSMSCode$/, {
+                        'result|1': [{
+                            'status': true,
+                        }]
+                    });
+
+                    $.ajax({
+                        url:'/getSMSCode',
+                        type:'post',
+                        dataType:'json',
+                        data:$phoneNumberVal,
+                        success:function (data) {
+                            var data = data['result'];
+                            if (data.status && data.status == true){
+                                console.log("验证码获取成功");
+                            }
+                           // getSMSTimer();
+
+
+                        }
+                    })
+                }else{
+                    $.toast("请输入正确的手机号");
+                }
+        });
+
+        
 
     });
     require.async('handlebars',function(){
