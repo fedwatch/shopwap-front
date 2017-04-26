@@ -13,5 +13,6 @@ define(function(require,exports,module){
         var template=Handlebars.compile(tpl);
         var html=template(data);
         $("#logistics").html(html);
+        $.init();
     });
 })

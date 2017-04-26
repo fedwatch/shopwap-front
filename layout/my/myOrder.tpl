@@ -61,8 +61,8 @@
                 共 <span class="totalQuant">1</span> 件商品 合计：￥<span class="totalPrice">1399</span>.<span>00</span> (含运费 ￥<span class="logPrice">25.00</span>)
             </div>
             <div class="userChooseCol" >
-                <a href="/html/user/logistics.html" class="checkLogBtn uccButton"> 查看物流 </a>
-                <a href="/html/user/review.html" class="commentBtn uccButton external"> 评价 </a>
+                <a href="/html/user/logistics.html" class="external checkLogBtn uccButton"> 查看物流 </a>
+                <a href="/html/user/review.html" class="external commentBtn uccButton"> 评价 </a>
             </div>
         </div>
         <div class="cart-item">
@@ -97,7 +97,7 @@
                 共 <span>1</span> 件商品 合计：￥<span class="totalPrice">1399</span>.<span>00</span> (含运费 ￥<span>25.00</span>)
             </div>
             <div class="userChooseCol">
-                <a href="javascript:void(0)" class="checkLogBtn uccButton" > 查看物流 </a>
+                <a href="javascript:void(0)" class="external checkLogBtn uccButton" > 查看物流 </a>
                 <a href="javascript:void(0)" class="confirmReceiptBtn uccButton" > 确认收货 </a>
             </div>
         </div>
