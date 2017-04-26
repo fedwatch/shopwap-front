@@ -57,9 +57,12 @@ define(function(require,exports,module){
                 }else{
                     $.toast("请输入正确的手机号");
                 }
+                $("#next").click(function(){
+                    window.location.href="./changePassword3.html";
+                })
         });
 
-        
+
 
     });
     require.async('handlebars',function(){
