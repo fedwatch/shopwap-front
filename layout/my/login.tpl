@@ -36,7 +36,7 @@
     </div>
     <div class="content-block" style="padding:0 2rem;">
         <a id="loginBtn" class="button button-big  external "
-           style="background: linear-gradient(0,#ee4e15,#ff6a10);color:#fff;border:0;border-radius: 5rem;" href="javascript:void(0)"
+           style="background: linear-gradient(0,#ee4e15,#ff6a10);color:#fff;border:0;border-radius: 5rem;background: -moz-linear-gradient(bottom,#ee4e15,#ff6a10);-moz-border-radius: 5rem;" href="javascript:void(0)"
            data-transition="fade">
             登录
         </a>

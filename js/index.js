@@ -6,6 +6,11 @@ define(function(require,exports,module){
     require("swiper");
     require("mockjs");
     require("/js/utils/getCurrentPage");
+    var fastclick = require("fastclick");
+
+    // fastclick.attach(document)
+
+
 
     $(function () {
         Mock.mock(/\/initShopData$/, {
