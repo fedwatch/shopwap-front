@@ -15,7 +15,7 @@
                     <div class="item-inner item-vert">
                         <!--<div class="item-title label"></div>-->
                         <div class="item-input item-phone">
-                            <input type="text" placeholder="请输入密码" id="userPhone" maxlength="11">
+                            <input type="password" placeholder="请输入密码" id="userPassword" maxlength="11">
                         </div>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
                     <div class="item-inner item-vert">
                         <!--<div class="item-title label"></div>-->
                         <div class="item-input item-phone">
-                            <input type="text" placeholder="请输入新密码"  maxlength="11">
+                            <input type="password" placeholder="请输入新密码"  id="userPasswordT" maxlength="11">
                         </div>
                     </div>
                 </div>
