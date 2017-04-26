@@ -4,7 +4,6 @@ define(function(require,exports,module){
     require('mockjs');
 
     $(function(){
-
          var $phoneNumber=$("#phone-num");//获取手机号
          var $securityCode=$("#security-code");//获取验证码
           var $vertCode=$(".vert-code");

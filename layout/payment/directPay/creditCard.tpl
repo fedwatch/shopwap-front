@@ -122,7 +122,7 @@
             </li>
             <li>
                 <div class="item-content">
-                    <div class="item-media">验证码</div>
+                    <div class="item-media">验&nbsp;&nbsp;证&nbsp;&nbsp;码</div>
                     <div class="item-inner verification">
                         <div class="item-input">
                             <input type="text" placeholder="">

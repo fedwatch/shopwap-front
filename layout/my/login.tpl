@@ -41,9 +41,9 @@
             登录
         </a>
         <p class="text-center signup">
-            <a href="/html/my/register/register.html" class="pull-left external" style="color:#fff;margin-left:3rem;">立即注册</a>
+            <a href="/html/my/register/register.html" class="external" style="color:#fff;">立即注册</a>
             <span style="color:#fff;">|</span>
-            <a href="/html/my/forgetPassword/forgetPassword.html" class="pull-right external" style="color:#fff;margin-right:3rem;">忘记密码</a>
+            <a href="/html/my/forgetPassword/forgetPassword.html" class="external" style="color:#fff;">忘记密码</a>
         </p>
     </div>
 </div>

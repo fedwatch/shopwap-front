@@ -10,7 +10,7 @@ define(function(require,exports,module){
                 title:  '<div class="select-bank">选择银行卡<span class="pull-right cancel-m">取消</span></div>',
                 afterText:$mainContent,
                buttons:[{
-                   text: '<div class="bank-but"><a href="javascript:;" class="but-a" style="border:none;"><span>+</span>添加新卡</a></div>',
+                   text: '<div class="bank-but"><a href="javascript:;" class="external but-a" style="border:none;"><span>+</span>添加新卡</a></div>',
                    onClick: function() {
                        window.location.href = "../payment.html";
                    }

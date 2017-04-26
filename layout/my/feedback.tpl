@@ -19,7 +19,7 @@
 
         <div class="content-block">
             <p>
-                <a id="feedbackSubmitBtn" class="button button-big button-fill external" href="javascript:;" data-transition="fade">
+                <a id="feedbackSubmitBtn" class="button button-big button-fill external rg-col" href="javascript:;" data-transition="fade">
                     提交
                 </a>
             </p>
