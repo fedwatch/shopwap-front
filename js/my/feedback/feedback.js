@@ -50,7 +50,7 @@ define(function(require,exports,module){
                     require.async('handlebars',function(){
                         $("#feedbackPage").empty();
                         var data = {};
-                        var tpl = require('/layout/my/feedbackSuccess.tpl');
+                        var tpl = require('/layout/my/feedback.tpl');
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#feedbackPage").html(html);
