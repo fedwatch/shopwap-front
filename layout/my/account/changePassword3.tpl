@@ -36,7 +36,7 @@
                 <div class="content-block">
                     <div class="row">
                         <div class="col-100">
-                            <a href="./changePasswordSuccess.html" class="external button button-big button-password rg-col" >下一步</a>
+                            <a href="javascript:;" class="external button button-big button-password rg-col" id="next" >下一步</a>
                         </div>
                     </div>
                 </div>
