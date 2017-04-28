@@ -41,7 +41,10 @@ define(function(require,exports,module){
         var data = {
             data:'7795'
         };
-        var tpl = require('/layout/my/common/my_header.tpl');
+        //未登陆
+       // var tpl = require('/layout/my/common/notLogin.tpl');
+        //登陆
+        var tpl = require('/layout/my/common/myHeader.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);
         $("#my_header").html(html);

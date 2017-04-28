@@ -12,26 +12,20 @@
                     <img src="/assets/images/cool-girl.jpg" alt="" class="user_profile_avatar">
                 </a>
             </div>
-
-           <div class="login_button_group">
-                  <a href="/html/my/login/login.html" class="button button-primary external register-button">
-                      登录
-                  </a>
-                  <a href="/html/my/register/register.html" class="button button-primary external register-button">
-                      注册
-                  </a>
-              </div>
-
+            <div >
+                <div  class="user-id">132461646136164</div>
+                <div class="rest-money"><span class="reset2-img"></span><span class="reset2">2888.32</span><a class="reset-detail">余额明细</a></div>
+            </div>
         </div>
         <div class="content-block obligation">
-            <div >
-                <ul class="clearfix">
-                    <li style="border-left:none;">待付款</li>
-                    <li>待发货</li>
-                    <li>待收货</li>
-                    <li>待评价</li>
-                </ul>
-            </div>
+               <div >
+                   <ul class="clearfix">
+                       <li style="border-left:none;">待付款<span class="show-amount">14</span></li>
+                       <li>待发货<span class="show-amount">14</span></li>
+                       <li>待收货<span class="show-amount">14</span></li>
+                       <li>待评价<span class="show-amount">14</span></li>
+                   </ul>
+               </div>
         </div>
     </div>
 
@@ -40,8 +34,8 @@
             <div id="userColumn"></div>
         </div>
     </div>
-
 </div>
 <div id="footerNavPage">
 
 </div>
+
