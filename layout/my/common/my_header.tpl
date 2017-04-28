@@ -35,9 +35,13 @@
         </div>
     </div>
 
-    <div class="list-block">
+    <div class="list-block" style="margin-bottom:3.5rem;">
         <div class="content-block"  style="padding:0;margin:0;">
             <div id="userColumn"></div>
         </div>
     </div>
+
+</div>
+<div id="footerNavPage">
+
 </div>

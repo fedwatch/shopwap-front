@@ -80,5 +80,14 @@ define(function(require,exports,module){
         $("#footer").html(html);
     });
 
+    require.async('handlebars',function(){
+        var data = {};
+        var tpl = require('/layout/common/footerBar.tpl');
+        var template = Handlebars.compile(tpl);
+        var html = template(data);
+        $("#footer").html(html);
+    });
+
+
 
 });
