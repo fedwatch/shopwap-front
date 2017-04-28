@@ -115,7 +115,7 @@ padding:0.5rem 0
     line-height:1.5rem;
     border:none;
     border-radius: 1.0rem;
-    font-size:0.91rem;
+    font-size:0.677rem;
 }
 .user_link_btn {
     width: 100%;
@@ -124,8 +124,6 @@ padding:0.5rem 0
     display: -webkit-flex;
     align-items: center;
     -webkit-align-items: center;
-    /*border-top: 1px solid #ddd;*/
-    /*box-shadow: 0 0 5px #ccc;*/
 }
 
 .user_link_btn .link_btn {
