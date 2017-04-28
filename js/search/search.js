@@ -4,7 +4,10 @@
 define(function(require,exports,module){
     require('jquery');
     require('store');
-    // require('mockjs');
+    require('mockjs');
+    Mock.mock(/\/search\/keywords$/, {
+        "stateCode": "200",
+    });
     $(function(){
         var $searchHint = $('#searchHint');
         var $searchPrompt = $('#searchPrompt');
@@ -32,16 +35,15 @@ define(function(require,exports,module){
                 alignItems: "center"
             });
             $this.on("keydown",function(){
-
                 // searchPrompt
-                require.async('handlebars',function(){
-                    var data = genData;
-                    var tpl = require('/layout/search/searchPrompt.tpl');
-                    var template = Handlebars.compile(tpl);
-                    var html = template(data);
-                    $("#searchPrompt").html(html);
-                    // $("#navbarSearch").html(tpl);
-                });
+                // require.async('handlebars',function(){
+                //     var data = genData;
+                //     var tpl = require('/layout/search/searchPrompt.tpl');
+                //     var template = Handlebars.compile(tpl);
+                //     var html = template(data);
+                //     $("#searchPrompt").html(html);
+                //     // $("#navbarSearch").html(tpl);
+                // });
                 $cancelSearchBtn.hide();
                 $cancelTextIcon.show();
             })
@@ -50,10 +52,10 @@ define(function(require,exports,module){
             })
         });
 
-        $("#searchForm").on('submit',function () {
+        $("#searchForm").on('submit',function (e) {
+            e.preventDefault();
+
             console.log('search keywords submit ');
-
-
             var insertSearch = store.get("historySearch").historySearch || [];
             var searchHint = $("#searchHint").val();
             insertSearch.push(searchHint);
@@ -61,16 +63,33 @@ define(function(require,exports,module){
                 url:"/search/keywords",
                 type:"POST",
                 dataType:"json",
-                data:{
-
-                },
                 success:function (data) {
+                    if(data.stateCode == "200"){
+                        $("#searchPrompt").hide();
+                        // shopListSort
+                        require.async('handlebars',function(){
+                            var data = {
+                                data:'738951'
+                            };
+                            var tpl = require('/layout/shopList/shopListSort.tpl');
+                            var template = Handlebars.compile(tpl);
+                            var html = template(data);
+                            $("#shopListSort").html(html);
+                            // $("#navbarSearch").html(tpl);
+                        });
 
+                        require.async('handlebars',function(){
+                            var getData = data;
+                            var tpl = require('/layout/cartgory/productCategory.tpl');
+                            var template = Handlebars.compile(tpl);
+                            var html = template(getData);
+                            $("#shopListShowIndex").html(html);
+                        });
+                    }
                 }
-
-            })
+            });
             store.set("historySearch",{historySearch:insertSearch});
-        })
+        });
 
         $cancelTextIcon.on('click',function () {
             $rightSearchNav.css({
@@ -89,7 +108,134 @@ define(function(require,exports,module){
             $historySearch.empty();
             $(".history").hide();
         });
+
+
+
+        var menuwidth = 250;
+        var menuspeed = 300;
+        var $body = $('body');
+        var $burger = $('#hamburgermenu');
+        var $menubtn = $('.menubtn');
+
+        $menubtn.on("touchend", function (e) {
+            e.stopPropagation();
+        });
+
+        $menubtn.on('click', function (e) {
+            $('html,body').addClass('ovfHiden');
+            var wap_height = document.documentElement.clientHeight;
+            var hidden_height = $('#sxContent').height() + 80 - wap_height;
+            var visible_height = $('#sxContent').height() - hidden_height;
+            document.getElementById("sxContent").style.height = visible_height + "px";
+            $('#sxContent').css("overflow-y", "auto");
+            if ($body.hasClass('openmenu')) {
+                animateMenu('close');
+            } else {
+                animateMenu('open');
+            }
+        });
+        $('#sxContent a').on('click', function () {
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+            } else {
+                $(this).addClass('active');
+            }
+        })
+        $('.menuSmall').on('click', function () {
+            if ($(this).hasClass('active')) {
+                $(this).siblings('ul').slideDown();
+            } else {
+                $(this).siblings('ul').slideUp();
+            }
+        });
+        $('.overlay').on('click', function (e) {
+            if ($body.hasClass('openmenu')) {
+                animateMenu('close');
+                $('html,body').removeClass('ovfHiden');
+            }
+        });
+
+        function animateMenu(tog) {
+            if (tog == 'open') {
+                $body.addClass('openmenu');
+                $burger.animate({width: "230px"}, menuspeed);
+                $('.overlay').animate({left: 0}, menuspeed);
+            }
+            if (tog == 'close') {
+                $body.removeClass('openmenu');
+                $burger.animate({width: "0"}, menuspeed);
+                $('.overlay').animate({right: "0"}, menuspeed);
+            }
+        }
+
     });
+
+    // // shopListShowIndex
+    // require.async('handlebars',function(){
+    //     var data = {
+    //         name:'KAMJOVE/金灶 K7智能电茶壶自动上水 304不锈钢烧水壶 电热水壶',
+    //         brandName:'KAMJOVE',
+    //         productName:'金灶',
+    //         productCategory:'K7',
+    //         feature:'智能电茶壶自动上水',
+    //         keyword1:'304不锈钢烧水壶',
+    //         keyword2:'电热水壶',
+    //         keyword3:'不锈钢烧水壶',
+    //         price:'200',
+    //         decimalPrice:'30',
+    //         purchasePeoples:'35837'
+    //     };
+    //     var tpl = require('/layout/shopList/shopListShowIndex.tpl');
+    //     var template = Handlebars.compile(tpl);
+    //     var html = template(data);
+    //     $("#shopListShowIndex").html(html);
+    //     // $("#navbarSearch").html(tpl);
+    // });
+
+
+
+
+
+
+
+
+    function GetSlideDirection(startX, startY, endX, endY) {
+        var dy = startY - endY;
+        var result = 0;
+        if (dy > 0) {
+            return result = 1;
+        } else {
+            return result = 2;
+        }
+    }
+    var startX, startY;
+    document.addEventListener('touchstart', function (ev) {
+        startX = ev.touches[0].pageX;
+        startY = ev.touches[0].pageY;
+    }, false);
+    document.addEventListener('touchend', function (ev) {
+        var endX, endY;
+        endX = ev.changedTouches[0].pageX;
+        endY = ev.changedTouches[0].pageY;
+        var direction = GetSlideDirection(startX, startY, endX, endY);
+        var shopListSort = document.getElementById('shopListSort');
+        var shopTop = document.getElementById('shopTop');
+        switch (direction) {
+            case 0:
+                break;
+            case 1:
+                shopTop.className = "";
+                shopTop.style.height = "40px"
+                shopListSort.style.position = "fixed";
+                shopListSort.style.top = "0px";
+                break;
+            case 2:
+                shopTop.className = "shopSort";
+                shopListSort.style.position = "static";
+                break;
+            default:
+        }
+    }, false);
 
     var genData = {
         hotSearch:[
@@ -133,9 +279,7 @@ define(function(require,exports,module){
 
     // historySearch
     require.async('handlebars',function(){
-        // store.set("historySearch",{historySearch:["飘正阳绿翡翠A货", "手表", "钱包", "香水", "烟酒", "保健品", "手链", "腰带", "鞋子", "戒指",]});
         var historySearch = store.get('historySearch');
-        console.log(historySearch);
         if( historySearch == ''){
             $(".history").hide();
         }else if(historySearch !== ''){
