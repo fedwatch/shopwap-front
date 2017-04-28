@@ -110,9 +110,9 @@ padding:0.5rem 0
     background: #ffffff;
 }
 .reset-con .register-button{
-    width:5.464rem;
-    height:1.82rem;
-    line-height:1.82rem;
+    width:5rem;
+    height:1.5rem;
+    line-height:1.5rem;
     border:none;
     border-radius: 1.0rem;
     font-size:0.91rem;
@@ -2001,4 +2001,11 @@ span.nav-sub-text.active {
 }
 #my_header .content-block{
    margin:0;
+}
+.my-login{
+    width:100%;
+    text-align:center;
+}
+.my-login .register-button{
+    display:inline-block;
 }

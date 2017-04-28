@@ -14,13 +14,11 @@
             </div>
 
            <div class="login_button_group">
-                  <a href="/html/my/login/login.html" class="button button-primary external register-button">
-                      登录
-                  </a>
-                  <a href="/html/my/register/register.html" class="button button-primary external register-button">
-                      注册
-                  </a>
-              </div>
+               <div class="my-login">
+                   <a  href="/html/my/login/login.html"  class="external register-button">登陆</a>
+                   <a href="/html/my/register/register.html" class="external register-button">注册</a>
+               </div>
+           </div>
 
         </div>
         <div class="content-block obligation">
