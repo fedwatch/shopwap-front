@@ -31,6 +31,18 @@ define(function(require,exports,module){
             speed: 600
         });
 
+        $(document).on('click','.logoutButton',function () {
+            $.ajax({
+                url:"//swagger.cqdai.cn:9090/shopwap/user/userLogout",
+                type:"post",
+                dataType:"json",
+                data:{userId:$("#userId").val()},
+                success:function (data) {
+
+                }
+            });
+        })
+
     });
 
 

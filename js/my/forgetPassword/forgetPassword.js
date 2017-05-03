@@ -7,7 +7,9 @@ define(function(require,exports,module){
     require('jquery');
     require('swiper');
     require('light7');
-    require('mockjs');
+    // require('mockjs');
+
+
 
     $(function () {
         var $userPhone = $("#userPhone");//手机号
@@ -138,37 +140,34 @@ define(function(require,exports,module){
         $smsCode.on('blur',function () {
             var smsCodeVal = $smsCode.val();
             checkSMSCode(smsCodeVal);
-            checkRegisterBtn()
+            // checkRegisterBtn()
         })
 
 
         $getSMSCodeBtn.on('click',function () {
-            console.log('$getSMSCodeBtn on click')
             if($userPhone.val() && $userPhone.val() !== ''){
-                Mock.mock(/\/getSMSCode$/, {
-                    'result|1': [{
-                        'status': true,
-                    }]
-                });
-
                 var phoneNum = $userPhone.val();
                 $.ajax({
-                    url:'/getSMSCode',
+                    url:'//swagger.cqdai.cn:9090/shopwap/user/sendDynamicCode',
                     type:'post',
                     dataType:'json',
-                    data:phoneNum,
+                    cache:false,
+                    async:false,
+                    data: {
+                        userPhone: phoneNum,
+                        codeFlag: "0"
+                    },
                     success:function (data) {
-                        var data = data['result'];
-                        if (data.status && data.status == true){
-                            console.log("验证码获取成功");
+                        var spData = data;
+                        if (spData.authStatus == "200" && spData.setAuthMsg == true){
+                            $.toast(spData.authMsg,2000);
                         }
                         getSMSTimer();
                     }
                 })
             }else{
-                console.log("你需要填写你的手机号")
+                $.toast("你需要填写你的手机号")
             }
-
         })
 
 

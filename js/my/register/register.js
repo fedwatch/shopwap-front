@@ -5,11 +5,18 @@ define(function(require,exports,module){
     require('jquery');
     require('swiper');
     require('light7');
-    require('mockjs');
+    // require('mockjs');
+
+    require('rsa');
+    require('base64');
+    require('jsbn');
+    require('prng4');
+    require('rng');
 
 
     var genData = {};
 
+    jQuery.support.cors = true;
     $(function () {
         var $userPhone = $("#userPhone");//手机号
         var $userPass = $("#userPass");//登录密码
@@ -72,8 +79,53 @@ define(function(require,exports,module){
         $userPhone.on('blur',function () {
             var userPhoneVal =  $userPhone.val();
             checkMobile(userPhoneVal);
-            checkRegisterBtn()
+            // checkRegisterBtn()
         });
+
+
+        $(document).on('click','#registerBtn',function () {
+            if(registerResult.userPass == true && registerResult.userPhone == true && registerResult.smsCode == true){
+                $registerBtn.addClass('button-success').css($registerBtn_SUCCESS);
+                var enPassword;
+
+                $.ajax({
+                    url: "//swagger.cqdai.cn:9090/shopwap/common/public_key",
+                    type: "get",
+                    cache:false,
+                    async:false,
+                    dataType:"json",
+                    success: function(data) {
+                        var rsaKey = new RSAKey();
+                        rsaKey.setPublic(b64tohex(data.modulus), b64tohex(data.exponent));
+                        enPassword = hex2b64(rsaKey.encrypt($userPass.val()));
+                    }
+                });
+
+                $.ajax({
+                    url:"//swagger.cqdai.cn:9090/shopwap/user/userRegister",
+                    dataType:"json",
+                    type:"post",
+                    cache:false,
+                    async:false,
+                    data:{
+                        username:$.trim($userPhone.val()),
+                        enPassword:enPassword,
+                        smsCode:$.trim($smsCode.val())
+                    },
+                    success:function (data) {
+                        if(data.authStatus == "200"){
+                            $.toast(data.authMsg,2000);
+                            return location.href="/html/my/my.html"
+                        }else{
+                            $.toast(data.authMsg,2000);
+                        }
+                    }
+                });
+
+            }else if (registerResult.userPass == false || registerResult.userPhone == false || registerResult.smsCode == false){
+                $registerBtn.removeClass('button-success').css($registerBtn_FAILED);
+            }
+        })
 
 
         function checkMobile(str) {
@@ -115,7 +167,7 @@ define(function(require,exports,module){
 
 
         function checkSMSCode(str) {
-            if(str.length <6 || str == ''){
+            if(str.length <4 || str == ''){
                 $userSMSCodeError.show();
                 console.log("验证码不正确");
                 registerResult.smsCode = false;
@@ -132,53 +184,49 @@ define(function(require,exports,module){
 
         $userPass.on('blur',function () {
             var userPassVal = $userPass.val();
-            checkPassword(userPassVal)
-            checkRegisterBtn()
+            checkPassword(userPassVal);
+            // checkRegisterBtn()
         })
 
         $smsCode.on('blur',function () {
             var smsCodeVal = $smsCode.val();
             checkSMSCode(smsCodeVal);
-            checkRegisterBtn()
+            // checkRegisterBtn()
         })
 
 
-        $getSMSCodeBtn.on('click',function () {
-            console.log('$getSMSCodeBtn on click')
+        $getSMSCodeBtn.on('click',function (e) {
+            e.preventDefault();
+            // console.log('$getSMSCodeBtn on click');
             if($userPhone.val() && $userPhone.val() !== ''){
-                Mock.mock(/\/getSMSCode$/, {
-                    'result|1': [{
-                        'status': true,
-                    }]
-                });
-
                 var phoneNum = $userPhone.val();
                 $.ajax({
-                    url:'/getSMSCode',
-                    type:'post',
+                    url:"//swagger.cqdai.cn:9090/shopwap/user/sendDynamicCode",
+                    type:"post",
                     dataType:'json',
-                    data:phoneNum,
+                    cache:false,
+                    async:false,
+                    data: {userPhone: phoneNum,codeFlag:"1"},
                     success:function (data) {
-                        var data = data['result'];
-                        if (data.status && data.status == true){
-                            console.log("验证码获取成功");
+                        console.log(data);
+                        var spData = data;
+                        if (spData.authStatus == "200" && spData.setAuthMsg == true){
+                            $.toast(spData.authMsg,2000);
                         }
                         getSMSTimer();
-
-
                     }
                 })
             }else{
-                console.log("你需要填写你的手机号")
+                $.toast("请填写您的手机号！",2000);
             }
 
-        })
+        });
 
 
         function getSMSTimer() {
             var smsCodeBtn = '';
 
-            var SETTIMESECOND = 10
+            var SETTIMESECOND = 10;
             var nums = SETTIMESECOND;
             $getSMSCodeBtn.css($getSMSCodeBtn_FAILED);
             //将按钮置为 不可点击
@@ -199,16 +247,7 @@ define(function(require,exports,module){
             }, 1000); //一秒执行一次
         }
 
-        function checkRegisterBtn() {
-            if(registerResult.userPass == true && registerResult.userPhone == true && registerResult.smsCode == true){
-                $registerBtn.addClass('button-success').css($registerBtn_SUCCESS);
-                console.log('http:// register success result')
-                location.href="/html/my/my.html"
-            }else if (registerResult.userPass == false || registerResult.userPhone == false || registerResult.smsCode == false){
-                $registerBtn.removeClass('button-success').css($registerBtn_FAILED);
-                console.log('http:// register failed result')
-            }
-        }
+
     });
 
     // registerPage

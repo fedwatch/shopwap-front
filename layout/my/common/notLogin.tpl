@@ -17,6 +17,9 @@
                <div class="my-login">
                    <a  href="/html/my/login/login.html"  class="external register-button">登陆</a>
                    <a href="/html/my/register/register.html" class="external register-button">注册</a>
+
+                   <a href="javascript:void(0);"  class="external register-button">帐号详情</a>
+                   <a href="javascript:void(0);" class="external register-button logoutButton">退出</a>
                </div>
            </div>
 

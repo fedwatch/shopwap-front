@@ -1,7 +1,7 @@
 define(function(require,exports,module){
     require('jquery');
     require('light7');
-    require('mockjs');
+    // require('mockjs');
 
     $(function(){
          var $phoneNumber=$("#phone-num");//获取手机号
@@ -33,25 +33,19 @@ define(function(require,exports,module){
             var $phoneNumberVal=$phoneNumber.val();
                 checkPhone($phoneNumberVal);
                 if($phoneNumberVal){
-                    Mock.mock(/\/getSMSCode$/, {
-                        'result|1': [{
-                            'status': true,
-                        }]
-                    });
-
                     $.ajax({
-                        url:'/getSMSCode',
-                        type:'post',
+                        url:"//swagger.cqdai.cn:9090/shopwap/user/sendDynamicCode",
+                        type:"post",
                         dataType:'json',
-                        data:$phoneNumberVal,
+                        cache:false,
+                        async:false,
+                        data: {userPhone: $phoneNumberVal,codeFlag:"1"},
                         success:function (data) {
-                            var data = data['result'];
-                            if (data.status && data.status == true){
-                                console.log("验证码获取成功");
+                            console.log(data);
+                            var spData = data;
+                            if (spData.authStatus == "200" && spData.setAuthMsg == true){
+                                $.toast(spData.authMsg,2000);
                             }
-                           // getSMSTimer();
-
-
                         }
                     })
                 }else{

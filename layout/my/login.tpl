@@ -32,6 +32,22 @@
                     </div>
                 </div>
             </li>
+            <!--<li class="login_input">-->
+                <!--<div class="item-content">-->
+                    <!--<div class="item-media"><i class="icon icon-userpass"></i></div>-->
+                    <!--<div class="item-inner">-->
+                        <!--<div class="item-input">-->
+                            <!--<div class="col-66">-->
+                                <!--<input id="smsCode" type="password" placeholder="验证码">-->
+                            <!--</div>-->
+                            <!--<div class="col-33">-->
+                                <!--<button id="smsCodeBtn">获取验证码</button>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</li>-->
         </ul>
     </div>
     <div class="content-block" style="padding:0 2rem;">
