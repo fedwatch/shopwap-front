@@ -3,7 +3,7 @@
        data-transition='slide-out'>
         <span class="icon icon-left"></span>
     </a>
-    <h1 class='title'>发表评论</h1>
+    <h1 class='title'>物流信息</h1>
 </header>
 <div class="content review logistics">
     <div class="list-block media-list">
