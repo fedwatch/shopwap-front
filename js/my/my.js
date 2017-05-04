@@ -4,6 +4,7 @@
 define(function(require,exports,module){
     require('jquery');
     require("swiper");
+    require("store");
 
     $(function () {
         //底部菜单切换
@@ -36,9 +37,15 @@ define(function(require,exports,module){
                 url:"//swagger.cqdai.cn:9090/shopwap/user/userLogout",
                 type:"post",
                 dataType:"json",
-                data:{userId:$("#userId").val()},
+                cache:false,
+                async:false,
+                data: {
+                    userId: store.get('userId')
+                },
                 success:function (data) {
-
+                    if(data.authStatus == '200'){
+                        $.toast(data.authMsg,2000)
+                    }
                 }
             });
         })
