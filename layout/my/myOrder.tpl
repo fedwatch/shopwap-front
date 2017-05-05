@@ -98,7 +98,7 @@
             </div>
             <div class="userChooseCol">
                 <a href="javascript:void(0)" class="external checkLogBtn uccButton" > 查看物流 </a>
-                <a href="javascript:void(0)" class="confirmReceiptBtn uccButton" > 确认收货 </a>
+                <span class="confirmReceiptBtn uccButton"> 确认收货 </span>
             </div>
         </div>
         <div class="cart-item">

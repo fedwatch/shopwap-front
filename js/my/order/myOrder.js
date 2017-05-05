@@ -31,10 +31,31 @@ define(function(require,exports,module){
             var $this = $(this);
             $(".ocItem").removeClass("active");
             $this.addClass("active");
-        })
+        });
+        $(".confirmReceiptBtn").click(function(){
+            var text=$(".confirmReceiptBtn").text();
+            if(text!="已收货"){
+               $.alert("确认收货","",function(){
+                   $(".confirmReceiptBtn").text("已收货");
+               });
+            }else{
+                $.alert("已收货","",function(){
+                    console.log("收获成功");
+                });
+            }
+          /***  $.modal({
+                text: "确认收货",
+                buttons: [ {text:"OK",onClick:function(){
+                    var text=$(".confirmReceiptBtn").text();
+                    if(text!="已收货"){
+                        $(".confirmReceiptBtn").text("已收货");
+                    }else{
 
+                    }
 
-
+                }} ]
+            });***/
+        });
     });
 
     getAllOrders();
