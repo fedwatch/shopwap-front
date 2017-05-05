@@ -8,7 +8,7 @@
     <div class="list-block reset-con">
         <div class="content-block con-b2">
             <div class="user_profile_icon u-p-i2" >
-                <a href="/html/my/login/login.html" class="clearfix external">
+                <a href="/html/my/personalCenter.html" class="clearfix external">
                     <img src="/assets/images/cool-girl.jpg" alt="" class="user_profile_avatar">
                 </a>
             </div>
