@@ -43,18 +43,6 @@ define(function(require,exports,module){
                     console.log("收获成功");
                 });
             }
-          /***  $.modal({
-                text: "确认收货",
-                buttons: [ {text:"OK",onClick:function(){
-                    var text=$(".confirmReceiptBtn").text();
-                    if(text!="已收货"){
-                        $(".confirmReceiptBtn").text("已收货");
-                    }else{
-
-                    }
-
-                }} ]
-            });***/
         });
     });
 
