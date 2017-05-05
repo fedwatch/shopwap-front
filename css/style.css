@@ -1876,10 +1876,10 @@ span.nav-sub-text.active {
     align-items: center;
 }
 .detail-total-quant{
-    padding:0 .535rem;
+
 }
 .detail-total-nums{
-    padding:0 .535rem;
+
 }
 .detail-total-nums span{
     color: #ea5125;
@@ -2006,4 +2006,42 @@ span.nav-sub-text.active {
 }
 .my-login .register-button{
     display:inline-block;
+}
+.balance{
+    margin:0.5rem 0 1.75rem 0 !important;
+}
+.balance .bala-content{
+    background-color:#fff;
+}
+.balance .item-inner{
+    margin-left: auto;
+    width:auto !important;
+}
+.balance .item-media{
+    font-size:0.667rem;
+}
+.jin-e{
+   font-size:0.667rem;
+    color:#eb4c1e;
+}
+.buy-amount{
+    display:inline-block;
+    color:#505050;
+}
+.dollar{
+    font-size:0.667rem;
+}
+.int-part{
+   font-size:0.85rem;
+}
+.summation{
+    display:inline-block;
+    margin-left:0.4rem;
+}
+.balance .account-ret{
+     display:inline-block;
+     margin-right:0.607rem;
+}
+.fs8 {
+    border-bottom:solid 1px #e6e6e6;
 }

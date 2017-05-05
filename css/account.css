@@ -105,3 +105,9 @@
 .change-mar{
     margin-top:0.607rem !important;
 }
+.log-out{
+    position:absolute;
+    bottom:1.2rem;
+    width:100%;
+    font-size:0.789rem;
+}

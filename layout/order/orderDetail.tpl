@@ -64,9 +64,28 @@
         <div class=" pull-left">卖家留言</div>
         <div class=" pull-right">选填</div>
     </div>
+    <div class="item-inner">
+        <div >&nbsp;</div>
+        <div  class="jin-e">
+            <span class="buy-amount">共<span>1</span>件商品<span class="summation">合计：</span></span>
+            <span class="dollar">￥</span>
+            <span class="int-part">1399</span>.<span class="small-part">00</span>
+        </div>
+    </div>
+</div>
+<div class="list-block balance">
+    <div class="item-content bala-content">
+        <div class="item-media">
+            <span class="account-ret">余额</span>共￥<span>1100.00</span>，使用￥<span>1100.00</span>
+        </div>
+        <div class="item-inner">
+            <div class="item-input">
+                <label class="label-switch">
+                    <input type="checkbox">
+                    <div class="checkbox"></div>
+                </label>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="detail-total detail-item-content" >
-    <span class="detail-total-quant" >共 <span>1</span>件商品 </span>
-    <span class="detail-total-nums" >合计： ￥ <span>1399.00</span></span>
-</div>
