@@ -12,9 +12,7 @@
 
     <div class="totalGoodsPrices cart-item-price-box">
         <span style="">￥</span>
-        <span class="sign-number">0</span>
-        .
-        <span class="deci-number">00</span>
+        <span class="sign-number">0</span>.<span class="deci-number">00</span>
     </div>
 
 
