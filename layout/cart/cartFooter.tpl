@@ -19,6 +19,6 @@
 
 
     <div id="checkoutBtn">
-        下单结算
+        <a href="../payment/alipay/commonPay.html" class="external" style="color:#fff;">下单结算</a>
     </div>
 </div>

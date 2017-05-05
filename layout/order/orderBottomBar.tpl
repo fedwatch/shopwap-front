@@ -3,6 +3,6 @@
         <p>总计： ￥ <span >299.00</span></p>
     </div>
     <div class="detailOrderBtn">
-        <span>下单结算</span>
+        <a href="../payment/alipay/commonPay.html" class="external" style="color:#fff;">下单结算</a>
     </div>
 </div>
