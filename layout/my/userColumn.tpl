@@ -25,14 +25,14 @@
                 </a>
             </div>
         </li>
-        <li class="item-content item-link">
-            <!--<div class="item-media"><i class="icon icon-star"></i></div>-->
-            <div class="item-inner">
-                <a href="/html/my/account/accountSecurity.html" style="width:100%;display: block;" class="external">
-                    <div class="item-title">账号安全</div>
-                </a>
-            </div>
-        </li>
+        <!--<li class="item-content item-link">-->
+            <!--&lt;!&ndash;<div class="item-media"><i class="icon icon-star"></i></div>&ndash;&gt;-->
+            <!--<div class="item-inner">-->
+                <!--<a href="/html/my/account/accountSecurity.html" style="width:100%;display: block;" class="external">-->
+                    <!--<div class="item-title">账号安全</div>-->
+                <!--</a>-->
+            <!--</div>-->
+        <!--</li>-->
         <li class="item-content item-link">
             <!--<div class="item-media"><i class="icon icon-friends"></i></div>-->
             <div class="item-inner">
@@ -50,7 +50,7 @@
                     <div class="item-title">
                         联系客服
 
-                        <span class="pull-right">
+                        <span class="pull-right" style="color:#ff503e;">
                             400-921-7818
                         </span>
                     </div>

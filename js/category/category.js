@@ -6,12 +6,23 @@ define(function (require, exports, module) {
     require('jquery');
     require('/js/utils/getCurrentPage');
     require('mockjs');
+    require('store');
 
+
+    jQuery.support.cors = true;
 
 
     $(function () {
         getCurrentPage();
         initCategoryActive();
+        initDataToLS();
+        function initDataToLS(){
+            store.set("username","jiangwangui");
+        }
+
+
+
+
 
 
 
@@ -71,7 +82,9 @@ define(function (require, exports, module) {
             }
         });
 
-        $(".nav-tabbar-item").on('click',function(){
+        $(".nav-tabbar-item").on('click',function(e){
+            // e.preventDefault();
+            console.log("nav-tabbar-item clicked");
             var $this = $(this);
             var w = $this.offset().left;
             $(".nav-tabbar-item .nav-text").removeClass("active");
@@ -84,7 +97,6 @@ define(function (require, exports, module) {
                 type:'post',
                 data:{},
                 success:function (data) {
-                    console.log("run")
                     // navSubPosition
                     require.async('handlebars',function(){
                         var getData = data;
@@ -118,9 +130,19 @@ define(function (require, exports, module) {
         getNavSubText();
     });
 
+    var username = store.get("username");
+
     function getNavSubText() {
         $(".nav-sub-text").on('click',function (e) {
-            e.preventDefault();
+            $.ajax({
+                url:BASE_URL+PRODUCT_SITE_URLS.FIND_SUBS.URL,
+                type:PRODUCT_SITE_URLS.FIND_SUBS.METHOD,
+                data:{username:username,id:$("#categoryId").val()},
+                dataType:PRODUCT_SITE_URLS.DATATYPE,
+                success:function (data) {
+
+                }
+            });
             var $this = $(this);
             $(".nav-sub-render .nav-sub-text").removeClass("active");
             $this.addClass("active");
@@ -154,44 +176,90 @@ define(function (require, exports, module) {
         // $("#navbarSearch").html(tpl);
     });
 
+    var BASE_URL = "//swagger.cqdai.cn:9090/shopwap";
+    var PRODUCT_SITE_URLS = {
+        //数据接收类型
+        DATATYPE:"json",
+        //计算运费
+        CALCULATE_FREIGHT:{URL:"/product/calculateFreight",METHOD:"GET"},
+        //查询商品详情
+        PRODUCT_VIEW:{URL:"/product/view",METHOD:"GET"},
+        //一级菜单查询
+        FIND_ROOTS:{URL:"/product_category/findRoots",METHOD:"GET"},
+        //子级菜单查询
+        FIND_SUBS:{URL:"/product_category/findSubs",METHOD:"GET"},
+        //商品查询
+        PRODUCT_SEARCH: {URL:"/product/search",METHOD:"GET"}
+    };
+
 
 
     // mainNav
     require.async('handlebars',function(){
-        var data = {
-            mainTitle: ["家居","女装","男装","鞋帽","配饰","家纺"]
-        };
-        var tpl = require('/layout/cartgory/mainNav.tpl');
-        var template = Handlebars.compile(tpl);
-        var html = template(data);
-        $("#mainNav").html(html);
+
+        $.ajax({
+            url:BASE_URL+PRODUCT_SITE_URLS.FIND_ROOTS.URL,
+            type:PRODUCT_SITE_URLS.FIND_ROOTS.METHOD,
+            dataType:"json",
+            data:{username:username},
+            success:function (data) {
+                if(data.authStatus == "200"){
+                    var tpl = require('/layout/cartgory/mainNav.tpl');
+                    var template = Handlebars.compile(tpl);
+                    var html = template(data);
+                    $("#mainNav").html(html);
+                }
+            }
+        })
+
+
+
+
     });
 
     // navSubPosition
     require.async('handlebars',function(){
-        var data = {
-            navSubTitle: [
-                {subTitle: "Polo 杉"},
-                {subTitle: "BQ"},
-                {subTitle: "CQ"},
-                {subTitle: "DQ"},
-                {subTitle: "EQ"},
-                {subTitle: "FQ"}
-            ]
-        };
-        var tpl = require('/layout/cartgory/navSubPosition.tpl');
-        var template = Handlebars.compile(tpl);
-        var html = template(data);
-        $("#navSubPosition").html(html);
+        var categoryId = $("#categoryId").val();
+
+        $.ajax({
+            url:BASE_URL+PRODUCT_SITE_URLS.FIND_SUBS.URL,
+            type:PRODUCT_SITE_URLS.FIND_SUBS.METHOD,
+            data:{username:username,id:'105'},
+            dataType:PRODUCT_SITE_URLS.DATATYPE,
+            success:function (data) {
+                var tpl = require('/layout/cartgory/navSubPosition.tpl');
+                var template = Handlebars.compile(tpl);
+                var html = template(data);
+                $("#navSubPosition").html(html);
+            }
+        });
+
     });
 
     // productCategory
     require.async('handlebars',function(){
-        var data = {};
-        var tpl = require('/layout/cartgory/productCategory.tpl');
-        var template = Handlebars.compile(tpl);
-        var html = template(data);
-        $("#productCategory").html(html);
+        $.ajax({
+            url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
+            type:PRODUCT_SITE_URLS.PRODUCT_SEARCH.METHOD,
+            data: {
+                keyword: keyword,
+                pageNumber: pageNumber,
+                categoryIds: categoryIds,
+                brandIds: brandIds,
+                startPrice: startPrice,
+                endPrice: endPrice,
+                pageSize: pageSize
+            },
+            dataType:PRODUCT_SITE_URLS.DATATYPE,
+            success:function (data) {
+                var tpl = require('/layout/cartgory/productCategory.tpl');
+                var template = Handlebars.compile(tpl);
+                var html = template(data);
+                $("#productCategory").html(html);
+            }
+        });
+
+
     });
 
     // footerNav

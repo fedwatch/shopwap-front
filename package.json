@@ -7,9 +7,5 @@
     "start": "webpack-dev-server ."
   },
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.4.1"
-  }
+  "license": "ISC"
 }

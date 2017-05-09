@@ -73,6 +73,7 @@
         </div>
     </div>
 </div>
+
 <div class="list-block balance">
     <div class="item-content bala-content">
         <div class="item-media">

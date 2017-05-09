@@ -1,4 +1,5 @@
-<!--产品目录-->
+
+<!--商品列表-->
 {{#each productLists}}
 <div class="col-50" >
     <a href="{{this.url}}" class="external">
