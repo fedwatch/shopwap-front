@@ -53,21 +53,21 @@
                      <div class="pay-logo1">支付宝</div>
                      <div class="remainPay">
                          <span class="morePay">支付<span style="color:#ff503e;" id="aliPay">455.00</span></span>
-                         <span class="tick"></span>
+                         <span class="tick tickys"></span>
                      </div>
                 </div>
                 <div class="card-header checkPay">
                     <div class="pay-logo2">微信</div>
                     <div class="remainPay">
                         <span class="morePay">支付<span style="color:#ff503e;" id="wechatPay">455.00</span></span>
-                        <span class="tick"></span>
+                        <span class="tick tickys"></span>
                     </div>
                 </div>
                 <div class="card-footer checkPay" id="logo3">
                     <div class="pay-logo3">快捷支付 </div>
                     <div class="remainPay">
                         <span class="morePay">支付<span style="color:#ff503e;" id="shortcutPay">455.00</span></span>
-                        <span class="tick"></span>
+                        <span class="tick tickys"></span>
                     </div>
                 </div>
             </li>

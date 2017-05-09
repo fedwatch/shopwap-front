@@ -26,7 +26,7 @@ define(function(require,exports,module){
 
         $(".checkPay").each(function(index,item){
             $(this).click(function(){
-               $(this).find(".tick").addClass("tickSelected").parents().siblings().find(".tick").removeClass("tickSelected");
+               $(this).find(".tickys").addClass("tickSelected").removeClass("tick").parents().siblings().find(".tickys").removeClass("tickSelected").addClass("tick");
                $(this).find(".morePay").css({visibility:"visible"}).parents().siblings().find(".morePay").css({visibility:"hidden"});
             })
         })
