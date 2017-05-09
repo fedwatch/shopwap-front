@@ -76,6 +76,30 @@
     -moz-background-size:1.09rem 1.09rem;
     background-size:1.09rem 1.09rem;
 }
+#commonPay .tick{
+    display:inline-block;
+    width:20px;
+    height:20px;
+    border:solid 1px #e2e2e2;
+    border-radius:2px;
+    vertical-align:middle;
+}
+#commonPay .tickSelected{
+    display:inline-block;
+    width:20px;
+    height:20px;
+    background:url("../assets/images/tickSelected.png") no-repeat;
+    background-size:100% 100%;
+    vertical-align:middle;
+}
+#commonPay .morePay{
+    display:inline-block;
+    text-align:center;
+    vertical-align:middle;
+    margin-right:0.4rem;
+    font-size:0.789rem;
+    visibility:hidden;
+}
 .select-bank{
     background-color:#f0f0f0;
     font-size:0.789rem;

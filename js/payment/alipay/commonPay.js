@@ -23,6 +23,12 @@ define(function(require,exports,module){
               $.closeModal();
           });
         });
+
+        $(".checkPay").each(function(index,item){
+            $(this).click(function(){
+               $(this).find(".tick").addClass("tickSelected").parents().siblings().find(".tick").removeClass("tickSelected");
+            })
+        })
     });
 
     require.async("handlebars",function(){
