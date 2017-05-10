@@ -6,11 +6,8 @@ define(function(require,exports,module){
     require("swiper");
     require("mockjs");
     require("/js/utils/getCurrentPage");
-    var fastclick = require("fastclick");
-
+    // var fastclick = require("fastclick");
     // fastclick.attach(document)
-
-
 
     $(function () {
         Mock.mock(/\/initShopData$/, {
@@ -62,21 +59,21 @@ define(function(require,exports,module){
             }
         })
     }
-    
-
-
 
     // banner
     require.async('handlebars',function(){
         var data = {
             data:'499',
-            img: ["../assets/images/banner1.png", "../assets/images/banner2.png", "../assets/images/banner3.png"]
+            img: [
+                "../assets/images/banner1.png",
+                "../assets/images/banner2.png",
+                "../assets/images/banner3.png"
+            ]
         };
         var tpl = require('/layout/index/banner.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);
         $("#banner").html(html);
-        // $("#navbarSearch").html(tpl);
     });
 
     // navbarSearch
@@ -90,10 +87,6 @@ define(function(require,exports,module){
         $("#navbarSearch").html(html);
         // $("#navbarSearch").html(tpl);
     });
-
-
-
-
 
     // footerNav
     require.async('handlebars',function(){

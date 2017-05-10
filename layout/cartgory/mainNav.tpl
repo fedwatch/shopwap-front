@@ -17,3 +17,4 @@
 
 
 <input type="hidden" id="categoryId" value="105">
+<input type="hidden" id="categorySubId" value="">

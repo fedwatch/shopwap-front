@@ -5,7 +5,7 @@ define(function (require, exports, module) {
 
     require('jquery');
     require('/js/utils/getCurrentPage');
-    require('mockjs');
+    // require('mockjs');
     require('store');
     require('siteUrl');
 
@@ -19,75 +19,50 @@ define(function (require, exports, module) {
             store.set("username","jiangwangui");
         }
 
+        $(document).on('click','.productCategory a',function (e) {
+            e.preventDefault();
+            // console.log(this);
+            getProductDetail($(this).data("product-id"));
 
-        Mock.mock(/\/getNavSubTitle$/, {
-            'result': [{
-                'status': true,
-            }],
-            'navSubTitle': [
-                {'subTitle': "日立"},
-                {'subTitle': "松下"},
-                {'subTitle': "海尔"},
-                {'subTitle': "格力"},
-                {'subTitle': "田荣"},
-                {'subTitle': "丽景"}
-            ]
         });
 
-        Mock.mock(/\/getProductCategory$/, {
-            'productLists': [
-                {"name": "金兆 A510迷你 电磁茶炉","pngImg":"/assets/images/shop-list.png","price":"88.88","buyerNumber":"2000000","url":"/html/detail/detail.html"},
-                {"name": "R9s 玫瑰金 前后1600万像素","pngImg":"http://static.oppo.com/archives/201702/20170209020257589c0a8583ba9.png","price":"2799.00","buyerNumber":"2000000","url":""},
-                {"name": "蟹知秋 麻辣虾尾 500g 第二件半价","pngImg":"http://img35.iblimg.com/photo-5/2000/321150024_360x360.jpg","price":"128.00","buyerNumber":"524811","url":""},
-                {"name": "狮王（LION）ETIQUETTE清新口喷(木糖醇薄荷)5ml","pngImg":"http://img31.iblimg.com/goods-42/3030/2016/11/SP_3030_303001502041_01_10007.jpg","price":"21.90","buyerNumber":"2000000","url":""},
-                {"name": "德佩龙侯爵 精选干红葡萄酒红酒 IGP","pngImg":"http://img35.iblimg.com/goods-42/3030/2016/11/SP_3030_303001375173_01_10007.jpg","price":"50.00","buyerNumber":"5689901","url":""},
-                {"name": "MICHAEL KORS 迈克科尔斯 女士黑色牛皮手提单肩包","pngImg":"http://img32.iblimg.com/photo-5/3030/1553638115_360x360.jpg","price":"2630.00","buyerNumber":"65001","url":""},
-            ]
-        });
 
-        Mock.mock(/\/getProductCategoryFirst$/, {
-            'productLists': [
-                {"name": "MICHAEL KORS 迈克科尔斯 女士黑色牛皮手提单肩包","pngImg":"http://img32.iblimg.com/photo-5/3030/1553638115_360x360.jpg","price":"2630.00","buyerNumber":"65001","url":""},
-                {"name": "R9s 玫瑰金 前后1600万像素","pngImg":"http://static.oppo.com/archives/201702/20170209020257589c0a8583ba9.png","price":"2799.00","buyerNumber":"2000000","url":""},
-                {"name": "金兆 A510迷你 电磁茶炉","pngImg":"/assets/images/shop-list.png","price":"88.88","buyerNumber":"2000000","url":"/html/detail/detail.html"},
-                {"name": "蟹知秋 麻辣虾尾 500g 第二件半价","pngImg":"http://img35.iblimg.com/photo-5/2000/321150024_360x360.jpg","price":"128.00","buyerNumber":"524811","url":""},
-                {"name": "狮王（LION）ETIQUETTE清新口喷(木糖醇薄荷)5ml","pngImg":"http://img31.iblimg.com/goods-42/3030/2016/11/SP_3030_303001502041_01_10007.jpg","price":"21.90","buyerNumber":"2000000","url":""},
-                {"name": "德佩龙侯爵 精选干红葡萄酒红酒 IGP","pngImg":"http://img35.iblimg.com/goods-42/3030/2016/11/SP_3030_303001375173_01_10007.jpg","price":"50.00","buyerNumber":"5689901","url":""},
-            ]
-        });
 
-        $.ajax({
-            url:"/getProductCategoryFirst",
-            dataType:"json",
-            type:"post",
-            data:{},
-            success:function (data) {
-                // productCategory
-                require.async('handlebars',function(){
-                    var getData = data;
-                    var tpl = require('/layout/cartgory/productCategory.tpl');
-                    var template = Handlebars.compile(tpl);
-                    var html = template(getData);
-                    $("#productCategory").html(html);
-                    getNavSubText();
-                });
-            }
-        });
 
-        $(".nav-tabbar-item").on('click',function(e){
+        // $.ajax({
+        //     url:"",
+        //     dataType:"json",
+        //     type:"post",
+        //     data:{},
+        //     success:function (data) {
+        //         // productCategory
+        //         require.async('handlebars',function(){
+        //             var getData = data;
+        //             var tpl = require('/layout/cartgory/productCategory.tpl');
+        //             var template = Handlebars.compile(tpl);
+        //             var html = template(getData);
+        //             $("#productCategory").html(html);
+        //             getNavSubText();
+        //         });
+        //     }
+        // });
+
+        //主分类
+        $(document).on('click','.nav-tabbar-item .nav-text',function(e){
             // e.preventDefault();
-            console.log("nav-tabbar-item clicked");
             var $this = $(this);
+            $("#categoryId").val($this.data("category-id"));
             var w = $this.offset().left;
             $(".nav-tabbar-item .nav-text").removeClass("active");
             $this.find("span.nav-text").addClass("active");
             $("#tabbar-bottomline").css("transform","translate3d("+w+"px, 0px, 0px)");
 
+            //点击获取二级菜单
             $.ajax({
-                url:"/getNavSubTitle",
-                dataType:'json',
-                type:'post',
-                data:{},
+                url:BASE_URL+PRODUCT_SITE_URLS.FIND_SUBS.URL,
+                dataType:PRODUCT_SITE_URLS.DATATYPE,
+                type:PRODUCT_SITE_URLS.FIND_SUBS.METHOD,
+                data:{username:username,id:$("#categoryId").val()},
                 success:function (data) {
                     // navSubPosition
                     require.async('handlebars',function(){
@@ -96,55 +71,84 @@ define(function (require, exports, module) {
                         var template = Handlebars.compile(tpl);
                         var html = template(getData);
                         $("#navSubPosition").html(html);
+                        $("#categorySubId").val($this.data("category-sub-id"));
                         $(".nav-sub-text").first().addClass("active");
                     });
 
-                    $.ajax({
-                        url:"/getProductCategory",
-                        dataType:"json",
-                        type:"post",
-                        data:{},
-                        success:function (data) {
-                            // productCategory
-                            require.async('handlebars',function(){
-                                var getData = data;
-                                var tpl = require('/layout/cartgory/productCategory.tpl');
-                                var template = Handlebars.compile(tpl);
-                                var html = template(getData);
-                                $("#productCategory").html(html);
-                                getNavSubText();
-                            });
-                        }
-                    });
+                    getProductInfo();
                 }
             });
         });
-        getNavSubText();
-    });
-
-    var username = store.get("username");
-
-    function getNavSubText() {
-        $(".nav-sub-text").on('click',function (e) {
-            $.ajax({
-                url:BASE_URL+PRODUCT_SITE_URLS.FIND_SUBS.URL,
-                type:PRODUCT_SITE_URLS.FIND_SUBS.METHOD,
-                data:{username:username,id:$("#categoryId").val()},
-                dataType:PRODUCT_SITE_URLS.DATATYPE,
-                success:function (data) {
-
-                }
-            });
+        //二级分类
+        $(document).on('click','.nav-sub-tabbar-item .nav-sub-text',function (e) {
             var $this = $(this);
             $(".nav-sub-render .nav-sub-text").removeClass("active");
             $this.addClass("active");
+            $("#categorySubId").val($this.data("category-sub-id"));
+            getProductInfo();
+        });
+
+
+        // getNavSubText();
+    });
+
+    function getProductDetail(id){
+        var productId = id;
+        store.set("currentProductID",productId);
+        location.href = '/html/detail/detail.html';
+    }
+
+
+
+
+    function getProductInfo(){
+        var categoryIdsHidden = $("#categoryId").val();
+        var categorySubId = $("#categorySubId").val();
+        var keyword = '';
+        var pageNumber = '';
+        var categoryIds = [categoryIdsHidden,categorySubId];
+        var brandIds = '';
+        var startPrice = '';
+        var endPrice = '';
+        var pageSize = '';
+
+        $.ajax({
+            url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
+            dataType:PRODUCT_SITE_URLS.DATATYPE,
+            type:PRODUCT_SITE_URLS.PRODUCT_SEARCH.METHOD,
+            data: {
+                keyword: keyword,
+                pageNumber: pageNumber,
+                categoryIds: categoryIds,
+                brandIds: brandIds,
+                startPrice: startPrice,
+                endPrice: endPrice,
+                pageSize: pageSize
+            },
+            success:function (data) {
+                // productCategory
+                require.async('handlebars',function(){
+                    if(data.authStatus == "200"){
+                        var tpl = require('/layout/cartgory/productCategory.tpl');
+                        var template = Handlebars.compile(tpl);
+                        var html = template(data);
+                        $("#productCategory").html(html);
+                    }
+                });
+            }
         });
     }
+
+    var username = store.get("username");
+
+
 
     function initCategoryActive(){
         $(".nav-tabbar-item").first().find(".nav-render > .nav-text").addClass("active");
         $(".nav-sub-text").first().addClass("active");
     }
+
+
 
     // shopListShowIndex
     require.async('handlebars',function(){
@@ -174,7 +178,6 @@ define(function (require, exports, module) {
 
     // mainNav
     require.async('handlebars',function(){
-
         $.ajax({
             url:BASE_URL+PRODUCT_SITE_URLS.FIND_ROOTS.URL,
             type:PRODUCT_SITE_URLS.FIND_ROOTS.METHOD,
@@ -189,16 +192,11 @@ define(function (require, exports, module) {
                 }
             }
         })
-
-
-
-
     });
 
     // navSubPosition
     require.async('handlebars',function(){
         var categoryId = $("#categoryId").val();
-
         $.ajax({
             url:BASE_URL+PRODUCT_SITE_URLS.FIND_SUBS.URL,
             type:PRODUCT_SITE_URLS.FIND_SUBS.METHOD,
@@ -218,7 +216,7 @@ define(function (require, exports, module) {
     require.async('handlebars',function(){
         var keyword = '';
         var pageNumber = '';
-        var categoryIds = '';
+        var categoryIds = [105,112];
         var brandIds = '';
         var startPrice = '';
         var endPrice = '';
@@ -237,14 +235,15 @@ define(function (require, exports, module) {
             },
             dataType:PRODUCT_SITE_URLS.DATATYPE,
             success:function (data) {
-                var tpl = require('/layout/cartgory/productCategory.tpl');
-                var template = Handlebars.compile(tpl);
-                var html = template(data);
-                $("#productCategory").html(html);
+                console.log(data);
+                if(data.authStatus == "200"){
+                    var tpl = require('/layout/cartgory/productCategory.tpl');
+                    var template = Handlebars.compile(tpl);
+                    var html = template(data);
+                    $("#productCategory").html(html);
+                }
             }
         });
-
-
     });
 
     // footerNav
