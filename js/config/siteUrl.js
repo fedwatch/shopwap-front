@@ -19,4 +19,11 @@ var PRODUCT_SITE_URLS = {
     PRODUCT_SEARCH: {URL:"/product/search",METHOD:"GET"}
 };
 
+var LOGISTICS_URLS = {
+    //数据接收类型
+    DATATYPE:"json",
+    //物流信息查询
+    PRODUCT_SEARCH: {URL:"/member/order/logistics",METHOD:"GET"}
+};
+
 
