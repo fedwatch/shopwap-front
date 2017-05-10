@@ -11,7 +11,7 @@
 <div class="detail-body">
     <div class="body-title">规格：</div>
     <div class="popup-page">
-        {{#each spec}}
+        {{#each product.specificationValues}}
         <span class="spec-button number-input">{{this}}</span>
         {{/each}}
     </div>

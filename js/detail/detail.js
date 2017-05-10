@@ -406,11 +406,12 @@ define(function (require, exports, module) {
 
 
     require.async('handlebars', function () {
-        var username="yaodengying";
+        var username=store.get("username");
+        var currentProductID=store.get("currentProductID");
         $.ajax({
             url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_VIEW.URL,
             type:PRODUCT_SITE_URLS.PRODUCT_VIEW.METHOD,
-            data:{username:username,id:'317'},
+            data:{username:username,id:'430'},
             dataType:PRODUCT_SITE_URLS.DATATYPE,
             success:function(results){
                 console.log(results);
