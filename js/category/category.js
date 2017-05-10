@@ -7,11 +7,10 @@ define(function (require, exports, module) {
     require('/js/utils/getCurrentPage');
     require('mockjs');
     require('store');
+    require('siteUrl');
 
 
     jQuery.support.cors = true;
-
-
     $(function () {
         getCurrentPage();
         initCategoryActive();
@@ -19,13 +18,6 @@ define(function (require, exports, module) {
         function initDataToLS(){
             store.set("username","jiangwangui");
         }
-
-
-
-
-
-
-
 
 
         Mock.mock(/\/getNavSubTitle$/, {
@@ -176,21 +168,7 @@ define(function (require, exports, module) {
         // $("#navbarSearch").html(tpl);
     });
 
-    var BASE_URL = "//swagger.cqdai.cn:9090/shopwap";
-    var PRODUCT_SITE_URLS = {
-        //数据接收类型
-        DATATYPE:"json",
-        //计算运费
-        CALCULATE_FREIGHT:{URL:"/product/calculateFreight",METHOD:"GET"},
-        //查询商品详情
-        PRODUCT_VIEW:{URL:"/product/view",METHOD:"GET"},
-        //一级菜单查询
-        FIND_ROOTS:{URL:"/product_category/findRoots",METHOD:"GET"},
-        //子级菜单查询
-        FIND_SUBS:{URL:"/product_category/findSubs",METHOD:"GET"},
-        //商品查询
-        PRODUCT_SEARCH: {URL:"/product/search",METHOD:"GET"}
-    };
+
 
 
 
@@ -238,6 +216,13 @@ define(function (require, exports, module) {
 
     // productCategory
     require.async('handlebars',function(){
+        var keyword = '';
+        var pageNumber = '';
+        var categoryIds = '';
+        var brandIds = '';
+        var startPrice = '';
+        var endPrice = '';
+        var pageSize = '';
         $.ajax({
             url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
             type:PRODUCT_SITE_URLS.PRODUCT_SEARCH.METHOD,

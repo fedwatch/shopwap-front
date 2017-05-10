@@ -14,6 +14,7 @@ define(function(require,exports,module){
     require('rng');
 
 
+
     var genData = {};
 
     jQuery.support.cors = true;
