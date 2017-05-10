@@ -4,9 +4,10 @@
 define(function (require, exports, module) {
     require('jquery');
     require('swiper');
-    require('mockjs');
+    // require('mockjs');
     require('light7');
     require('store');
+    require('siteUrl');
 
     var genData = {
         "stateCode": "200",
@@ -51,12 +52,11 @@ define(function (require, exports, module) {
         "productDetails": '<div><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1kQI3HpXXXXbSXFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1kQI3HpXXXXbSXFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1kQI3HpXXXXbSXFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1kQI3HpXXXXbSXFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>',
         "review": "10000"
     }
-    Mock.mock(/\/detail\/initGoodData$/, genData);
+    // Mock.mock(/\/detail\/initGoodData$/, genData);
 
 
 
-
-
+    jQuery.support.cors = true;
     $(function () {
         cartNums = 0;
         initCartData();
@@ -406,12 +406,30 @@ define(function (require, exports, module) {
 
 
     require.async('handlebars', function () {
-        var data = genData;
-        var tpl = require('/layout/detail/goodsDetailsPage.tpl');
-        var template = Handlebars.compile(tpl);
-        var html = template(data);
-        $("#goodsDetailsPage").html(html);
+        var username="yaodengying";
+        $.ajax({
+            url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_VIEW.URL,
+            type:PRODUCT_SITE_URLS.PRODUCT_VIEW.METHOD,
+            data:{username:username,id:'317'},
+            dataType:PRODUCT_SITE_URLS.DATATYPE,
+            success:function(results){
+                console.log(results);
+                var data = results;
+                if(data.authStatus == "200"){
+                    console.log(data.product.stock);
+                    var tpl = require('/layout/detail/goodsDetailsPage.tpl');
+                    var template = Handlebars.compile(tpl);
+                    var html = template(data);
+                    $("#goodsDetailsPage").html(html);
+                }
+            }
+        })
+
+
     });
+
+
+
 
     require.async('handlebars', function () {
 
