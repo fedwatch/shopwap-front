@@ -8,24 +8,30 @@
         <span class="detail-desc-choice" >描述：<span id="productDescription">{{this.product.brand.introduction}}</span></span>
     </div>
 </div>
+
+
 <div class="detail-body">
-    <div class="body-title">规格：</div>
+    {{#each product.specifications}}
+    <div class="body-title">{{name}}：</div>
+    {{/each}}
     <div class="popup-page">
-        {{#each product.specificationValues}}
-        <span class="spec-button number-input">{{this}}</span>
+        {{#each product.specifications.setSpecificationValues}}
+        <span class="spec-button number-input">{{name}}</span>
         {{/each}}
     </div>
 </div>
-<div class="detail-body">
-    <div class="body-title">颜色：</div>
-    <div class="popup-page">
-        {{#each color}}
-        <span class="color-button number-input">{{this}}</span>
-        {{/each}}
-    </div>
-</div>
-<div class="detail-body">
+
+
+<!--<div class="detail-body">-->
     <!--<div class="body-title">颜色：</div>-->
+    <!--<div class="popup-page">-->
+        <!--{{#each color}}-->
+        <!--<span class="color-button number-input">{{this}}</span>-->
+        <!--{{/each}}-->
+    <!--</div>-->
+<!--</div>-->
+
+<div class="detail-body">
     <div class="numbers-board popup-page">
         数量：
         <span class="number-input goods-minus-btn"> - </span>
