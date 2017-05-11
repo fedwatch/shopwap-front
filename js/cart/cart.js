@@ -4,79 +4,80 @@
  */
 define(function (require, exports, module) {
     require('jquery');
-    require('mockjs');
+    // require('mockjs');
     require('store');
     require('siteUrl');
     require('user');
 
-    Mock.mock(/\/cart\/getCartData$/, {
-        "stateCode": "200",
-        "productUrl": [
-            "http://localhost:8080/html/detail/detail.html",
-            "http://localhost:8080/html/detail/detail.html",
-            "http://localhost:8080/html/detail/detail.html",
-            "http://localhost:8080/html/detail/detail.html",
-            "http://localhost:8080/html/detail/detail.html",
-        ],
-        "thumbnail": [
-            {"url": "//img.alicdn.com/bao/uploaded/i3/1136619306/TB2g9ZQnpXXXXcbXXXXXXXXXXXX_!!1136619306.jpg_sum.jpg"},
-            {"url": "//img.alicdn.com/bao/uploaded/i4/2128581861/TB2pNB8lItnpuFjSZFvXXbcTpXa_!!2128581861.jpg_sum.jpg"},
-            {"url": "//img.alicdn.com/bao/uploaded/i1/791105148/TB2bkmfj0RopuFjSZFtXXcanpXa_!!791105148.jpg_sum.jpg"},
-            {"url": "//img.alicdn.com/bao/uploaded/i3/791105148/TB2GbwYb5C9MuFjSZFoXXbUzFXa_!!791105148.jpg_sum.jpg"},
-            {"url": "//img.alicdn.com/bao/uploaded/i3/791105148/TB2GbwYb5C9MuFjSZFoXXbUzFXa_!!791105148.jpg_sum.jpg"},
-        ],
-        "productName": [
-            "LG趣拍得 POPO相机 手机便携相片打印机",
-            "四核游戏台式机DIY网吧组装电脑主机LOL",
-            "四核游戏台式机DIY网吧组装电脑主机LOL",
-            "四核游戏台式机DIY网吧组装电脑主机LOL",
-            "i7级独显GTX750Ti2G/8G内存台式机秒守望先锋剑灵电脑主机组装机"
-        ],
-        "productId": [
-            "5217781",
-            "1217782",
-            "4217786",
-            "9217871",
-            "2217781"
-        ],
-        "storeId": [
-            "289737"
-        ],
-        "storeName": "ASUS专卖店",
-        "productPrice": [
-            "135.00",
-            "296.00",
-            "175.00",
-            "99.00",
-            "65.00",
-        ],
-        "shippingCost": ["0", "0", "0", "0", "0"],
-        "productDescription": [
-            "A productDescription",
-            "B productDescription",
-            "C productDescription",
-            "D productDescription",
-            "E productDescription",
-        ],
-        "quant": ["1", "2", "4", "1", "1"],
-        "productState": ["true", "true", "true", "true", "false"],
-    });
+    // Mock.mock(/\/cart\/getCartData$/, {
+    //     "stateCode": "200",
+    //     "productUrl": [
+    //         "http://localhost:8080/html/detail/detail.html",
+    //         "http://localhost:8080/html/detail/detail.html",
+    //         "http://localhost:8080/html/detail/detail.html",
+    //         "http://localhost:8080/html/detail/detail.html",
+    //         "http://localhost:8080/html/detail/detail.html",
+    //     ],
+    //     "thumbnail": [
+    //         {"url": "//img.alicdn.com/bao/uploaded/i3/1136619306/TB2g9ZQnpXXXXcbXXXXXXXXXXXX_!!1136619306.jpg_sum.jpg"},
+    //         {"url": "//img.alicdn.com/bao/uploaded/i4/2128581861/TB2pNB8lItnpuFjSZFvXXbcTpXa_!!2128581861.jpg_sum.jpg"},
+    //         {"url": "//img.alicdn.com/bao/uploaded/i1/791105148/TB2bkmfj0RopuFjSZFtXXcanpXa_!!791105148.jpg_sum.jpg"},
+    //         {"url": "//img.alicdn.com/bao/uploaded/i3/791105148/TB2GbwYb5C9MuFjSZFoXXbUzFXa_!!791105148.jpg_sum.jpg"},
+    //         {"url": "//img.alicdn.com/bao/uploaded/i3/791105148/TB2GbwYb5C9MuFjSZFoXXbUzFXa_!!791105148.jpg_sum.jpg"},
+    //     ],
+    //     "productName": [
+    //         "LG趣拍得 POPO相机 手机便携相片打印机",
+    //         "四核游戏台式机DIY网吧组装电脑主机LOL",
+    //         "四核游戏台式机DIY网吧组装电脑主机LOL",
+    //         "四核游戏台式机DIY网吧组装电脑主机LOL",
+    //         "i7级独显GTX750Ti2G/8G内存台式机秒守望先锋剑灵电脑主机组装机"
+    //     ],
+    //     "productId": [
+    //         "5217781",
+    //         "1217782",
+    //         "4217786",
+    //         "9217871",
+    //         "2217781"
+    //     ],
+    //     "storeId": [
+    //         "289737"
+    //     ],
+    //     "storeName": "ASUS专卖店",
+    //     "productPrice": [
+    //         "135.00",
+    //         "296.00",
+    //         "175.00",
+    //         "99.00",
+    //         "65.00",
+    //     ],
+    //     "shippingCost": ["0", "0", "0", "0", "0"],
+    //     "productDescription": [
+    //         "A productDescription",
+    //         "B productDescription",
+    //         "C productDescription",
+    //         "D productDescription",
+    //         "E productDescription",
+    //     ],
+    //     "quant": ["1", "2", "4", "1", "1"],
+    //     "productState": ["true", "true", "true", "true", "false"],
+    // });
 
     $(function () {
-        getCartFromLS();
+        // getCartFromLS();
         cartList();
-        cartAdd();
-        cartCount();
-        cartEdit();
-        cartDelete();
-        cartClear();
+        // cartAdd();
+        // cartCount();
+        // cartEdit();
+        // cartDelete();
+        // cartClear();
 
-        function getCartFromLS() {
-            var cartData = store.get("cartData");
-            if(typeof cartData == "undefined"){
-                $("#nothingBuy").show();
-            }
-        }
+        // function getCartFromLS() {
+        //     var cartData = store.get("cartData");
+        //     if(typeof cartData == "undefined"){
+        //         $("#nothingBuy").show();
+        //     }
+        // }
+
         //购物车查看
         function cartList(){
             var username = store.get("username");
@@ -86,33 +87,45 @@ define(function (require, exports, module) {
                 dataType:CART_SITE_URL.DATATYPE,
                 data:{username:username},
                 success:function (data) {
-                    console.log(data);
+                    if(data.authStatus == "200"){
+                        // cartItem
+                        require.async('handlebars', function () {
+                            require.async('transDetails', function () {
+                                var tpl = require('/layout/cart/cartItem.tpl');
+                                var template = Handlebars.compile(tpl);
+                                var html = template(data);
+                                $("#cartItem").html(html);
+                            });
+                        });
+                    }
                 }
             });
         }
+
         //购物车添加
         function cartAdd(){
-            var username = 'jiangwangui';
-            var productId = [];
-            var quantity = 18;
+            var username = store.get("username");
+            var productId = 308;
+            var quantity = 1;
 
             $.ajax({
                 url:BASE_URL+CART_SITE_URL.CART_ADD.URL,
                 type:CART_SITE_URL.CART_ADD.METHOD,
                 dataType:CART_SITE_URL.DATATYPE,
                 data:{
-                    username  :username ,//会员名称
-                    productId   :productId ,//产品id
-                    quantity   :quantity ,//商品数量
+                    username : username ,//会员名称
+                    productId : productId ,//产品id
+                    quantity : quantity ,//商品数量
                 },
                 success:function (data) {
                     console.log(data);
                 }
             });
         }
+
         //
         function cartCount(){
-            var username = 'jiangwangui';
+            var username = store.get("username");
             $.ajax({
                 url:BASE_URL+CART_SITE_URL.CART_COUNT.URL,
                 type:CART_SITE_URL.CART_COUNT.METHOD,
@@ -127,7 +140,7 @@ define(function (require, exports, module) {
         }
 
         function cartEdit(){
-            var username = 'jiangwangui';
+            var username = store.get("username");
             var itemId = [];
             var quantity = 18;
 
@@ -147,7 +160,7 @@ define(function (require, exports, module) {
         }
 
         function cartDelete(){
-            var username = 'jiangwangui';
+            var username = store.get("username");
             var productId = [];
             $.ajax({
                 url:BASE_URL+CART_SITE_URL.CART_DELETE.URL,
@@ -164,7 +177,7 @@ define(function (require, exports, module) {
         }
         //购物车清空
         function cartClear(){
-            var username = 'jiangwangui';
+            var username = store.get("username");
 
             $.ajax({
                 url:BASE_URL+CART_SITE_URL.CART_CLEAR.URL,
@@ -440,27 +453,6 @@ define(function (require, exports, module) {
     });
 
 
-    //范式
-    var genData2 = {
-        "item":[{
-            "storeId": 289737,
-            "storeName": "ASUS专卖店",
-            "cart": [
-                {
-                    "productUrl": "http://localhost:8080/html/detail/detail.html",
-                    "thumbnailUrl": "//img.alicdn.com/bao/uploaded/i3/1136619306/TB2g9ZQnpXXXXcbXXXXXXXXXXXX_!!1136619306.jpg_sum.jpg",
-                    "productName": "LG趣拍得 POPO相机 手机便携相片打印机 v1",
-                    "productId": 5217781,
-                    "productPrice": 135,
-                    "shippingCost": 0,
-                    "productDescription": "show show sho ds",
-                    "quant": 1,
-                    "productState": true,
-                }
-            ]
-        }]
-    };
-
     var genData3 = store.get("cartData");
     // console.log(genData3);
 
@@ -524,15 +516,6 @@ define(function (require, exports, module) {
         $("#nothingBuy").html(html);
     });
 
-    // cartItem
-    require.async('handlebars', function () {
-        require.async('transDetails', function () {
-            var storeData = genData3;
-            var tpl = require('/layout/cart/cartItem.tpl');
-            var template = Handlebars.compile(tpl);
-            var html = template(storeData);
-            $("#cartItem").html(html);
-        });
-    });
+
 
 });

@@ -20,11 +20,6 @@ define(function (require, exports, module) {
         var resultState = {},enPassword;
         var regex = /^1\d{10}$/;
 
-
-
-
-
-
         // $(document).on('click','#smsCodeBtn',function () {
         //    $.ajax({
         //        url:"//swagger.cqdai.cn:9090/shopwap/user/sendDynamicCode",

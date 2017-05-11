@@ -1,5 +1,5 @@
 
-{{#each item}}
+{{#each cartItem}}
 <div class="cart-item">
     <div class="cart-store-title-label">
         <div class="cart-store-title-wrapper" >
