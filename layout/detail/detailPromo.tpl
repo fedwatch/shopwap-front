@@ -2,10 +2,12 @@
 <div class="detail-content list-block" style="background: #fff;">
     <div class="detail-item-content" style="background: #fff;margin: .5rem 0;">
         <div class="promotion-title pull-left">促销</div>
+        {{#each product.promotions}}
         <div class="promotion-type pull-right">
             <i class="icon icon-promo-minus"></i>
-            满200减100
+              {{name}}
         </div>
+        {{/each}}
     </div>
 
     <div class="detail-item-content" style="background: #fff;margin: .5rem 0;">

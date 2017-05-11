@@ -1183,7 +1183,9 @@ span.panel-minus-button {
 .detail-page {
     background: #fff;
 }
-
+.goods-description img{
+    width:100%;
+}
 .goods-detail-mask {
     display: none;
 }
