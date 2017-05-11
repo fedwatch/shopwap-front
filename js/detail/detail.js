@@ -405,16 +405,6 @@ define(function (require, exports, module) {
                         var html = template(data);
                         $("#productSlider").html(html);
 
-                        var storeId = data["storeId"];
-                        var storeName = data["storeName"];
-                        var productId = data["productId"];
-                        var productName = data["productName"];
-
-                        $("#storeId").val(storeId);
-                        $("#storeName").val(storeName);
-                        $("#productId").val(productId);
-                        $("#productName").val(productName);
-
                         var productImagesSlider = new Swiper('.product-images-slider', {
                             // pagination:'.swiper-pagination',
                             // autoplay:'1000',
@@ -424,7 +414,6 @@ define(function (require, exports, module) {
 
                     //规格页
                     require.async('handlebars', function () {
-
                         var tpl = require('/layout/detail/goodsDetailsPage.tpl');
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
