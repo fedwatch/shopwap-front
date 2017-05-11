@@ -421,13 +421,6 @@ define(function (require, exports, module) {
                     });
 
 
-                    //七天无理由退换
-                    require.async('handlebars', function () {
-                        var tpl = require('/layout/common/cartIndex.tpl');
-                        var template = Handlebars.compile(tpl);
-                        var html = template(data);
-                        $("#cartIndex").html(html);
-                    });
 
 
                     require.async('handlebars', function () {
@@ -448,6 +441,25 @@ define(function (require, exports, module) {
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#detailOne").html(html);
+                        $.ajax({
+                            url:BASE_URL+PRODUCT_SITE_URLS.CALCULATE_FREIGHT.URL,
+                            type:PRODUCT_SITE_URLS.CALCULATE_FREIGHT.METHOD,
+                            data:{username:username,id:"430",areaId:"804",buyCount:"2"},
+                            dataType:PRODUCT_SITE_URLS.DATATYPE,
+                            success:function(data){
+                                console.log(data);
+                                if(data.authStatus == "200"){
+                                    $("#shippingCost").text(data.freight);
+                                }
+                            }
+                        })
+                    });
+                    //七天无理由退换
+                    require.async('handlebars', function () {
+                        var tpl = require('/layout/common/cartIndex.tpl');
+                        var template = Handlebars.compile(tpl);
+                        var html = template(data);
+                        $("#cartIndex").html(html);
                     });
 
                     //detailPromo
@@ -472,41 +484,6 @@ define(function (require, exports, module) {
             }
         })
 
-
     });
-
-
-
-
-    require.async('handlebars', function () {
-
-        var data = genData;
-        var tpl = require('/layout/detail/detailOne.tpl');
-        var template = Handlebars.compile(tpl);
-        var html = template(data);
-        $("#detailOne").html(html);
-    });
-
-    //detailPromo
-
-    var data = genData;
-    require.async('handlebars', function () {
-        require.async('transDetails',function(){
-            var tpl = require('/layout/detail/detailPromo.tpl');
-            var template = Handlebars.compile(tpl);
-            var html = template(data);
-            $("#detailPromo").html(html);
-        });
-    });
-
-    //detailWrapper
-    require.async('handlebars', function () {
-        var data = genData;
-        var tpl = require('/layout/detail/detailWrapper.tpl');
-        var template = Handlebars.compile(tpl);
-        var html = template(data);
-        $("#detailWrapper").html(html);
-    });
-
 
 })
