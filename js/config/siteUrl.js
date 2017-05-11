@@ -79,4 +79,15 @@ var ORDER_SITE_URL = {
     VIEW:{URL:"/member/order/view",METHOD:"GET"},
 };
 
+// 会员信息
+var MEMBER_SITE_URL = {
+    DATATYPE:"json",
+
+};
+// 保存收货地址
+// 收货地址删除
+// 收货地址列表查看
+// 添加新的收货地址
+// 收货地址列表更新
+
 
