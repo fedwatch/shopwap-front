@@ -60,7 +60,7 @@ define(function (require, exports, module) {
     $(function () {
         cartNums = 0;
         initCartData();
-        initGoodData();
+      //  initGoodData();
 
         //
         function initCartData() {
@@ -343,26 +343,7 @@ define(function (require, exports, module) {
                 // productSlider
                 require.async('handlebars', function () {
                     var getData = data;
-                    var tpl = require('/layout/detail/productSlider.tpl');
-                    var template = Handlebars.compile(tpl);
-                    var html = template(getData);
-                    $("#productSlider").html(html);
 
-                    var storeId = data["storeId"];
-                    var storeName = data["storeName"];
-                    var productId = data["productId"];
-                    var productName = data["productName"];
-
-                    $("#storeId").val(storeId);
-                    $("#storeName").val(storeName);
-                    $("#productId").val(productId);
-                    $("#productName").val(productName);
-
-                    var productImagesSlider = new Swiper('.product-images-slider', {
-                        // pagination:'.swiper-pagination',
-                        // autoplay:'1000',
-                        spaceBetween: '10'
-                    });
                 });
             }
         })
@@ -417,11 +398,87 @@ define(function (require, exports, module) {
                 console.log(results);
                 var data = results;
                 if(data.authStatus == "200"){
-                    console.log(data.product.stock);
-                    var tpl = require('/layout/detail/goodsDetailsPage.tpl');
-                    var template = Handlebars.compile(tpl);
-                    var html = template(data);
-                    $("#goodsDetailsPage").html(html);
+
+                    require.async('handlebars', function () {
+                        var tpl = require('/layout/detail/productSlider.tpl');
+                        var template = Handlebars.compile(tpl);
+                        var html = template(data);
+                        $("#productSlider").html(html);
+
+                        var storeId = data["storeId"];
+                        var storeName = data["storeName"];
+                        var productId = data["productId"];
+                        var productName = data["productName"];
+
+                        $("#storeId").val(storeId);
+                        $("#storeName").val(storeName);
+                        $("#productId").val(productId);
+                        $("#productName").val(productName);
+
+                        var productImagesSlider = new Swiper('.product-images-slider', {
+                            // pagination:'.swiper-pagination',
+                            // autoplay:'1000',
+                            spaceBetween: '10'
+                        });
+                    });
+
+                    //规格页
+                    require.async('handlebars', function () {
+
+                        var tpl = require('/layout/detail/goodsDetailsPage.tpl');
+                        var template = Handlebars.compile(tpl);
+                        var html = template(data);
+                        $("#goodsDetailsPage").html(html);
+                    });
+
+
+                    //七天无理由退换
+                    require.async('handlebars', function () {
+                        var tpl = require('/layout/common/cartIndex.tpl');
+                        var template = Handlebars.compile(tpl);
+                        var html = template(data);
+                        $("#cartIndex").html(html);
+                    });
+
+
+                    require.async('handlebars', function () {
+                        var tpl = require('/layout/detail/topLinkMenu.tpl');
+                        var template = Handlebars.compile(tpl);
+                        var html = template(data);
+                        $("#topLinkMenu").html(html);
+                    });
+                    require.async('handlebars', function () {
+                        var tpl = require('/layout/detail/cartDetailFooter.tpl');
+                        var template = Handlebars.compile(tpl);
+                        var html = template(data);
+                        $("#cartDetailFooter").html(html);
+                    });
+
+                    require.async('handlebars', function () {
+                        var tpl = require('/layout/detail/detailOne.tpl');
+                        var template = Handlebars.compile(tpl);
+                        var html = template(data);
+                        $("#detailOne").html(html);
+                    });
+
+                    //detailPromo
+                    require.async('handlebars', function () {
+                        require.async('transDetails',function(){
+                            var tpl = require('/layout/detail/detailPromo.tpl');
+                            var template = Handlebars.compile(tpl);
+                            var html = template(data);
+                            $("#detailPromo").html(html);
+                        });
+                    });
+
+                    //detailWrapper
+                    require.async('handlebars', function () {
+                        var tpl = require('/layout/detail/detailWrapper.tpl');
+                        var template = Handlebars.compile(tpl);
+                        var html = template(data);
+                        $("#detailWrapper").html(html);
+                    });
+
                 }
             }
         })

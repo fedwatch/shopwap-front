@@ -1,4 +1,6 @@
-if(!window.localStorage) return;
+if(!window.localStorage) {
+    return;
+}
 var storage = window.localStorage,store,_api,even_storage=function(){};
 
 function isJSON(obj){
