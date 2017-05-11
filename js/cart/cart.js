@@ -1,10 +1,13 @@
 /**
  * Created by Administrator on 2017/3/21.
+ * Ein
  */
 define(function (require, exports, module) {
     require('jquery');
     require('mockjs');
     require('store');
+    require('siteUrl');
+    require('user');
 
     Mock.mock(/\/cart\/getCartData$/, {
         "stateCode": "200",
@@ -61,12 +64,119 @@ define(function (require, exports, module) {
 
     $(function () {
         getCartFromLS();
+        cartList();
+        cartAdd();
+        cartCount();
+        cartEdit();
+        cartDelete();
+        cartClear();
 
         function getCartFromLS() {
             var cartData = store.get("cartData");
             if(typeof cartData == "undefined"){
                 $("#nothingBuy").show();
             }
+        }
+        //购物车查看
+        function cartList(){
+            var username = store.get("username");
+            $.ajax({
+                url:BASE_URL+CART_SITE_URL.CART_LIST.URL,
+                type:CART_SITE_URL.CART_LIST.METHOD,
+                dataType:CART_SITE_URL.DATATYPE,
+                data:{username:username},
+                success:function (data) {
+                    console.log(data);
+                }
+            });
+        }
+        //购物车添加
+        function cartAdd(){
+            var username = 'jiangwangui';
+            var productId = [];
+            var quantity = 18;
+
+            $.ajax({
+                url:BASE_URL+CART_SITE_URL.CART_ADD.URL,
+                type:CART_SITE_URL.CART_ADD.METHOD,
+                dataType:CART_SITE_URL.DATATYPE,
+                data:{
+                    username  :username ,//会员名称
+                    productId   :productId ,//产品id
+                    quantity   :quantity ,//商品数量
+                },
+                success:function (data) {
+                    console.log(data);
+                }
+            });
+        }
+        //
+        function cartCount(){
+            var username = 'jiangwangui';
+            $.ajax({
+                url:BASE_URL+CART_SITE_URL.CART_COUNT.URL,
+                type:CART_SITE_URL.CART_COUNT.METHOD,
+                dataType:CART_SITE_URL.DATATYPE,
+                data:{
+                    username  :username ,//会员名称
+                },
+                success:function (data) {
+                    console.log(data);
+                }
+            });
+        }
+
+        function cartEdit(){
+            var username = 'jiangwangui';
+            var itemId = [];
+            var quantity = 18;
+
+            $.ajax({
+                url:BASE_URL+CART_SITE_URL.CART_EDIT.URL,
+                type:CART_SITE_URL.CART_EDIT.METHOD,
+                dataType:CART_SITE_URL.DATATYPE,
+                data:{
+                    username :username,//会员名称
+                    itemId :itemId,//购物车项id
+                    quantity  :quantity ,//商品数量
+                },
+                success:function (data) {
+                    console.log(data);
+                }
+            });
+        }
+
+        function cartDelete(){
+            var username = 'jiangwangui';
+            var productId = [];
+            $.ajax({
+                url:BASE_URL+CART_SITE_URL.CART_DELETE.URL,
+                type:CART_SITE_URL.CART_DELETE.METHOD,
+                dataType:CART_SITE_URL.DATATYPE,
+                data:{
+                    username  :username ,//会员名称
+                    productId   :productId ,//产品id
+                },
+                success:function (data) {
+                    console.log(data);
+                }
+            });
+        }
+        //购物车清空
+        function cartClear(){
+            var username = 'jiangwangui';
+
+            $.ajax({
+                url:BASE_URL+CART_SITE_URL.CART_CLEAR.URL,
+                type:CART_SITE_URL.CART_CLEAR.METHOD,
+                dataType:CART_SITE_URL.DATATYPE,
+                data:{
+                    username  :username ,//会员名称
+                },
+                success:function (data) {
+                    console.log(data);
+                }
+            });
         }
 
 

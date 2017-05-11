@@ -13,12 +13,12 @@
 <div class="detail-body">
     {{#each product.specifications}}
     <div class="body-title">{{name}}：</div>
-    {{/each}}
     <div class="popup-page">
-        {{#each product.specifications.setSpecificationValues}}
-        <span class="spec-button number-input">{{name}}</span>
+        {{#each this.specificationValues}}
+        <span class="spec-button number-input">{{this.name}}</span>
         {{/each}}
     </div>
+    {{/each}}
 </div>
 
 

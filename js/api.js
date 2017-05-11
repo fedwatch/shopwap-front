@@ -31,6 +31,7 @@ seajs.config({
         "zepto":"https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js",
         "swipeout":"/assets/plugin/light7/dist/js/light7-swipeout.js",
         "siteUrl":"/js/config/siteUrl.js",
+        "user":"/js/config/user.js",
         "city-swiper":"/assets/plugin/light7/dist/js/light7-city-picker.js"
     }
 });

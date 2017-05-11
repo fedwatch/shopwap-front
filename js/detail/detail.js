@@ -259,7 +259,7 @@ define(function (require, exports, module) {
         });
 
         //规格
-        $(".spec-button").on('click', function (e) {
+        $(document).on('click','.spec-button', function (e) {
             e.preventDefault();
             e.stopPropagation();
             var $this = $(this);
