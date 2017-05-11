@@ -9,50 +9,7 @@ define(function (require, exports, module) {
     require('store');
     require('siteUrl');
 
-    var genData = {
-        "stateCode": "200",
-        "images": [
-            {
-                "url": "//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1n3rZHFXXXXX9XFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg",
-                "alt": "AD"
-            },
-            {
-                "url": "//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i4/TB10rkPGVXXXXXGapXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg",
-                "alt": "VC"
-            },
-            {
-                "url": "//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1kQI3HpXXXXbSXFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg",
-                "alt": "AC"
-            },
-        ],
-        "detailImage": "//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1kQI3HpXXXXbSXFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg",
-        // "productName": "基金0022",
-        "productName": "A6",
-        "productId": "624415686",
-        // "storeName": "巨欧基金",
-        "storeName": "中旗集团",
-        "storeId": "11111102",
-        "productPrice": "2.00",
-        "shippingCost": "1.00",
-        "productPlace": "广州深圳",
-        "promotion": "3",
-        "spec": ["XS", "S", "M", "L", "XL", "XXL"],
-        "color": [
-            "宝石蓝",
-            "水墨蓝",
-            "樱草色",
-            "暗蓝光紫",
-            "霓虹绿",
-            "淡麒麟",
-            "暗卡其",
-            "雨林绿",
-        ],
-        "productDescription": "老兵忍",
-        "inStock": "68",
-        "productDetails": '<div><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1kQI3HpXXXXbSXFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1kQI3HpXXXXbSXFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1kQI3HpXXXXbSXFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1kQI3HpXXXXbSXFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>',
-        "review": "10000"
-    }
-    // Mock.mock(/\/detail\/initGoodData$/, genData);
+
 
 
 
@@ -60,7 +17,6 @@ define(function (require, exports, module) {
     $(function () {
         cartNums = 0;
         initCartData();
-      //  initGoodData();
 
         //
         function initCartData() {
@@ -79,6 +35,15 @@ define(function (require, exports, module) {
                 $(".cart-badge > .badge").text("0");
             }
         }
+        //获取已有购物车物品数量
+        $.ajax(function(){
+
+
+        })
+
+
+
+
         //
         $(document).on('click', ".menuPopup", function () {
             var buttons1 = [
@@ -283,9 +248,8 @@ define(function (require, exports, module) {
         });
 
         //数量 -
-        $(".goods-minus-btn").on('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
+        $(document).on('click', ".goods-minus-btn",function (e) {
+
             if ($(".numbers-board > .goods-minus-btn").hasClass("active")) {
                 var num = parseInt($("input[name=goodsNumber]").val());
                 if (num == 1) {
@@ -302,9 +266,8 @@ define(function (require, exports, module) {
             }
         });
         //数量 +
-        $(".goods-plus-btn").on('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
+        $(document).on('click',".goods-plus-btn", function (e) {
+
             if ($(".numbers-board > .goods-plus-btn").hasClass("active")) {
                 var num = parseInt($("input[name=goodsNumber]").val());
                 num = num + 1;
@@ -469,6 +432,7 @@ define(function (require, exports, module) {
                             var template = Handlebars.compile(tpl);
                             var html = template(data);
                             $("#detailPromo").html(html);
+
                         });
                     });
 
