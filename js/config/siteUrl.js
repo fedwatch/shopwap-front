@@ -47,7 +47,6 @@ var CART_SITE_URL = {
 
 // 支付信息
 var PAYMENT_SITE_URL = {
-
     //输入银行卡号获取银行卡信息
     BANKCARD_BIND:{URL:"/member/bank/bankcardbin",METHOD:"POST"},
     //绑定银行卡并支付
@@ -82,12 +81,17 @@ var ORDER_SITE_URL = {
 // 会员信息
 var MEMBER_SITE_URL = {
     DATATYPE:"json",
-
+    // 保存收货地址
+    SAVE_RECEIVER:{URL:"/member/order/save_receiver",METHOD:"POST"},
+    // 收货地址删除
+    DELETE:{URL:"/member/receiver/delete",METHOD:"POST"},
+    // 收货地址列表查看
+    LIST:{URL:"/member/receiver/list",METHOD:"GET"},
+    // 添加新的收货地址
+    SAVE:{URL:"/member/receiver/save",METHOD:"POST"},
+    // 收货地址列表更新
+    UPDATE:{URL:"/member/receiver/update",METHOD:"POST"},
 };
-// 保存收货地址
-// 收货地址删除
-// 收货地址列表查看
-// 添加新的收货地址
-// 收货地址列表更新
+
 
 

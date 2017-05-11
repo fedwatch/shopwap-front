@@ -16,7 +16,7 @@ define(function (require, exports, module) {
         initCategoryActive();
         initDataToLS();
         function initDataToLS(){
-            store.set("username","jiangwangui");
+            store.set("username","13262265307");
         }
 
         $(document).on('click','.productCategory a',function (e) {
