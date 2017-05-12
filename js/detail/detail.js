@@ -14,8 +14,6 @@ define(function (require, exports, module) {
     jQuery.support.cors = true;
     $(function () {
 
-
-
         $(document).on('click', ".menuPopup", function () {
             var buttons1 = [
                 {
@@ -201,7 +199,7 @@ define(function (require, exports, module) {
         $.ajax({
             url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_VIEW.URL,
             type:PRODUCT_SITE_URLS.PRODUCT_VIEW.METHOD,
-            data:{username:"13167161025",id:'430'},
+            data:{username:"13167161025",id:'455'},
             dataType:PRODUCT_SITE_URLS.DATATYPE,
             success:function(results){
                 var data = results;
@@ -301,7 +299,7 @@ define(function (require, exports, module) {
         $.ajax({
             url:BASE_URL+CART_SITE_URL.CART_COUNT.URL,
             type:CART_SITE_URL.CART_COUNT.METHOD,
-            data:{username:"13167161025",id:'430'},
+            data:{username:"13167161025",id:'455'},
             dataType:CART_SITE_URL.DATATYPE,
             success:function(data){
                 if(data.authStatus=="200"){

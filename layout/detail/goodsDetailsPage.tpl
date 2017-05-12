@@ -15,21 +15,11 @@
     <div class="body-title">{{name}}：</div>
     <div class="popup-page">
         {{#each this.specificationValues}}
-        <span class="spec-button number-input">{{this.name}}</span>
+        <span class="spec-button number-input" data-specificationValues-id="{{id}}">{{this.name}}</span>
         {{/each}}
     </div>
     {{/each}}
 </div>
-
-
-<!--<div class="detail-body">-->
-    <!--<div class="body-title">颜色：</div>-->
-    <!--<div class="popup-page">-->
-        <!--{{#each color}}-->
-        <!--<span class="color-button number-input">{{this}}</span>-->
-        <!--{{/each}}-->
-    <!--</div>-->
-<!--</div>-->
 
 <div class="detail-body">
     <div class="numbers-board popup-page">
