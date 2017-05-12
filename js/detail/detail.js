@@ -13,6 +13,7 @@ define(function (require, exports, module) {
 
     jQuery.support.cors = true;
     $(function () {
+        setSpecificationId();
 
         $(document).on('click', ".menuPopup", function () {
             var buttons1 = [
@@ -212,9 +213,6 @@ define(function (require, exports, module) {
             },
             dataType:PRODUCT_SITE_URLS.DATATYPE,
             success:function(results){
-                console.log(results);
-
-
                 var data = results;
                 if(data.authStatus == "200"){
 
@@ -297,8 +295,35 @@ define(function (require, exports, module) {
             }
         })
 
+
+
     });
-   //计算运费
+
+    /**
+     *
+     */
+    function setSpecificationId(){
+        $.ajax({
+            url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_VIEW.URL,
+            type:PRODUCT_SITE_URLS.PRODUCT_VIEW.METHOD,
+            data:{
+                username:"13167161025",
+                id:'455'
+            },
+            dataType:PRODUCT_SITE_URLS.DATATYPE,
+            success:function(results){
+                var specificationValues = results["product"].specificationValues;
+                var productSpec = [];
+                specificationValues.map(function(data){
+                    productSpec.push(data.id)
+                });
+                var len = productSpec.length;
+                for(var i=0;i<len;i++){
+                    $("#specification-id-"+productSpec[i]).removeClass("active").addClass("active");
+                }
+            }
+        })
+    }
 
 
     /**

@@ -15,7 +15,7 @@
     <div class="body-title">{{name}}：</div>
     <div class="popup-page spec-{{id}}" >
         {{#each this.specificationValues}}
-        <span class="spec-button number-input" data-specification-id="{{this.id}}">{{this.name}}</span>
+        <span class="spec-button number-input" id="specification-id-{{this.id}}" data-specification-id="{{this.id}}">{{this.name}}</span>
         {{/each}}
     </div>
     {{/each}}
