@@ -46,7 +46,7 @@ define(function (require, exports, module) {
         });
         //监听 购物车
         $(document).on('click', ".cart-badge", function () {
-            getCartCount();
+            getCartCount("13167161025",'455',".cart-badge > .badge");
             var sum=$(".cart-badge > .badge").text();
             if(sum=="0"){
                 $.toast("请添加商品");
@@ -93,7 +93,7 @@ define(function (require, exports, module) {
                     dataType:CART_SITE_URL.DATATYPE,
                     success:function(data){
                         if(data.authStatus=="200"){
-                            getCartCount();
+                            getCartCount("13167161025",'455',".cart-badge > .badge");
                             $("#cartState").val(false)
                         }
 
@@ -241,7 +241,7 @@ define(function (require, exports, module) {
                         var html = template(data);
                         $("#cartDetailFooter").html(html);
                             //获取已有购物车物品数量
-                             getCartCount();
+                            getCartCount("13167161025",'455',".cart-badge > .badge");
                     });
 
                     require.async('handlebars', function () {
@@ -294,17 +294,18 @@ define(function (require, exports, module) {
         })
 
     });
+
    //获取购物车数据
-    function getCartCount(){
+    function getCartCount(username,id,DOM){
         $.ajax({
             url:BASE_URL+CART_SITE_URL.CART_COUNT.URL,
             type:CART_SITE_URL.CART_COUNT.METHOD,
-            data:{username:"13167161025",id:'455'},
+            data:{username:username,id:id},
             dataType:CART_SITE_URL.DATATYPE,
             success:function(data){
                 if(data.authStatus=="200"){
                     var sum=data.count;
-                    $(".cart-badge > .badge").text(sum);
+                    $(DOM).text(sum);
                 }
             }
         })
