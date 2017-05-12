@@ -35,7 +35,7 @@
     <div class="numbers-board popup-page">
         数量：
         <span class="number-input goods-minus-btn"> - </span>
-        <input type="text" name="goodsNumber" value="1">
+        <input type="text" name="goodsNumber" value="0">
         <span class="number-input active goods-plus-btn"> + </span>
     </div>
 </div>

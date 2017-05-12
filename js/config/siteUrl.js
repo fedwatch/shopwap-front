@@ -17,7 +17,9 @@ var PRODUCT_SITE_URLS = {
     //子级菜单查询
     FIND_SUBS:{URL:"/product_category/findSubs",METHOD:"GET"},
     //商品查询
-    PRODUCT_SEARCH: {URL:"/product/search",METHOD:"GET"}
+    PRODUCT_SEARCH: {URL:"/product/search",METHOD:"GET"},
+    //商品评价
+    PRODUCT_COMMENT:{URL:"/review/content/view",METHOD:"GET"}
 };
 
 //物流信息
