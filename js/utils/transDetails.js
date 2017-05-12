@@ -8,6 +8,7 @@ Handlebars.registerHelper("transUserReviews",function(value){
         return "999 +";
     }
 });
+
 //商品状态 下架
 Handlebars.registerHelper("transProductState",function(value){
     if(value == true){

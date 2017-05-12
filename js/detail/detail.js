@@ -89,7 +89,7 @@ define(function (require, exports, module) {
                 $.ajax({
                     url:BASE_URL+CART_SITE_URL.CART_ADD.URL,
                     type:CART_SITE_URL.CART_ADD.METHOD,
-                    data:{username:username,productId :'430',quantity:exitCount},
+                    data:{username:username,productId :'455',quantity:exitCount},
                     dataType:CART_SITE_URL.DATATYPE,
                     success:function(data){
                         if(data.authStatus=="200"){
@@ -121,30 +121,40 @@ define(function (require, exports, module) {
             e.preventDefault();
             e.stopPropagation();
             var $this = $(this);
-            $(".spec-button").removeClass("active");
+            $this.parent().find(".spec-button").removeClass("active");
             $this.addClass("active");
-            var specResult = $this.text();
-            $("#specResult").val(specResult);
+
+            var len = $(".popup-page > .spec-button.active").length;
+            var i = 0;
+            var text = [];
+            for(i = 0 ;i < len; i++){
+                text += $(".popup-page > .spec-button.active").eq(i).text()+","
+
+            }
+            $("#specResult").val(text);
+
+
+
+
             $("#cartState").val("true");
         });
 
-        //颜色
-        $(".color-button").on('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            var $this = $(this);
-            $(".color-button").removeClass("active");
-            $this.addClass("active");
-            var colorResult = $this.text();
-            $("#colorResult").val(colorResult);
-            $("#cartState").val("true");
-        });
+        // //颜色
+        // $(".color-button").on('click', function (e) {
+        //     e.preventDefault();
+        //     e.stopPropagation();
+        //     var $this = $(this);
+        //     $(".color-button").removeClass("active");
+        //     $this.addClass("active");
+        //     var colorResult = $this.text();
+        //     $("#colorResult").val(colorResult);
+        //     $("#cartState").val("true");
+        // });
 
 
 
         //数量 -
         $(document).on('click', ".goods-minus-btn",function (e) {
-
             if ($(".numbers-board > .goods-minus-btn").hasClass("active")) {
                 var num = parseInt($("input[name=goodsNumber]").val());
                 if (num == 1) {
@@ -160,6 +170,7 @@ define(function (require, exports, module) {
                 return;
             }
         });
+
         //数量 +
         $(document).on('click',".goods-plus-btn", function (e) {
 
@@ -177,7 +188,6 @@ define(function (require, exports, module) {
                 return;
             }
         });
-
     });
 
     // 设置选择规格到html
@@ -199,10 +209,12 @@ define(function (require, exports, module) {
         $.ajax({
             url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_VIEW.URL,
             type:PRODUCT_SITE_URLS.PRODUCT_VIEW.METHOD,
-            data:{username:"13167161025",id:'430'},
+            data:{username:"13167161025",id:'455'},
             dataType:PRODUCT_SITE_URLS.DATATYPE,
             success:function(results){
                 console.log(results);
+
+
                 var data = results;
                 if(data.authStatus == "200"){
 
@@ -221,10 +233,12 @@ define(function (require, exports, module) {
 
                     //规格页
                     require.async('handlebars', function () {
-                        var tpl = require('/layout/detail/goodsDetailsPage.tpl');
-                        var template = Handlebars.compile(tpl);
-                        var html = template(data);
-                        $("#goodsDetailsPage").html(html);
+                        require.async('transDetails', function () {
+                            var tpl = require('/layout/detail/goodsDetailsPage.tpl');
+                            var template = Handlebars.compile(tpl);
+                            var html = template(data);
+                            $("#goodsDetailsPage").html(html);
+                        })
                     });
 
 
@@ -250,18 +264,7 @@ define(function (require, exports, module) {
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#detailOne").html(html);
-                        $.ajax({
-                            url:BASE_URL+PRODUCT_SITE_URLS.CALCULATE_FREIGHT.URL,
-                            type:PRODUCT_SITE_URLS.CALCULATE_FREIGHT.METHOD,
-                            data:{username:username,id:"430",areaId:"804",buyCount:"2"},
-                            dataType:PRODUCT_SITE_URLS.DATATYPE,
-                            success:function(data){
-                                console.log(data);
-                                if(data.authStatus == "200"){
-                                    $("#shippingCost").text(data.freight);
-                                }
-                            }
-                        })
+                        calculateFreight(username,"455","804","2","shippingCost");
                     });
                     //七天无理由退换
                     require.async('handlebars', function () {
@@ -295,12 +298,42 @@ define(function (require, exports, module) {
         })
 
     });
+
+
+    /**
+     * 计算运费
+     * @param username
+     * @param id
+     * @param areaId
+     * @param buyCount
+     * @param DOM
+     */
+    function calculateFreight(username,id,areaId,buyCount,DOM){
+        $.ajax({
+            url:BASE_URL+PRODUCT_SITE_URLS.CALCULATE_FREIGHT.URL,
+            type:PRODUCT_SITE_URLS.CALCULATE_FREIGHT.METHOD,
+            data: {
+                username: username,
+                id: id,
+                areaId: areaId,
+                buyCount:buyCount
+            },
+            dataType:PRODUCT_SITE_URLS.DATATYPE,
+            success:function(data){
+                // console.log(data);
+                if(data.authStatus == "200"){
+                    $("#"+DOM).text(data.freight);
+                }
+            }
+        })
+    }
+
    //获取购物车数据
     function getCartCount(){
         $.ajax({
             url:BASE_URL+CART_SITE_URL.CART_COUNT.URL,
             type:CART_SITE_URL.CART_COUNT.METHOD,
-            data:{username:"13167161025",id:'430'},
+            data:{username:"13167161025",id:'455'},
             dataType:CART_SITE_URL.DATATYPE,
             success:function(data){
                 if(data.authStatus=="200"){
@@ -310,6 +343,9 @@ define(function (require, exports, module) {
             }
         })
     }
+
+
+
 
 
 });
