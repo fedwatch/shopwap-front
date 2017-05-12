@@ -21,31 +21,34 @@ define(function(require,exports,module){
                     var template=Handlebars.compile(tpl);
                     var html=template(data);
                     $("#comment").html(html);
-                    //星星评分显示
-                    function totalStar(num){
-                        var eachStarLen=$(".comment-header").find("li").outerWidth();
-                        var ceilNum=Math.ceil(num);
-                        var intNum=parseInt(num);
-                        var remainder=num-intNum;
-                        var html='<div class="eval-con"><span  class="eval-offset"></span></div>';
-                        $(".evaluate").each(function(index,item){
-                            for(var i=0;i<=intNum-1;i++){
-                                if(index==i){
-                                    $(this).html(html);
-                                }
-                            }
-                        });
-                        if(remainder!=0){
-                            $(".evaluate").eq(ceilNum-1).html(html);
-                            var realWidth=eachStarLen*remainder+"px";
-                            $(".eval-con").eq(ceilNum-1).css({width:realWidth});
-                        }
-                    }
-                    //调用
-                    totalStar(data.score);
+                    //星星评分
+                     totalStar(data.score);
                      $.init();
                 }
             }
         })
     });
+
+
+    //星星评分显示
+    function totalStar(num){
+        var eachStarLen=$(".comment-header").find("li").outerWidth();
+        var ceilNum=Math.ceil(num);
+        var intNum=parseInt(num);
+        var remainder=num-intNum;
+        var html='<div class="eval-con"><span  class="eval-offset"></span></div>';
+        $(".evaluate").each(function(index,item){
+            for(var i=0;i<=intNum-1;i++){
+                if(index==i){
+                    $(this).html(html);
+                }
+            }
+        });
+        if(remainder!=0){
+            $(".evaluate").eq(ceilNum-1).html(html);
+            var realWidth=eachStarLen*remainder+"px";
+            $(".eval-con").eq(ceilNum-1).css({width:realWidth});
+        }
+    }
+
 })
