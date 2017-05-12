@@ -36,6 +36,17 @@
     </div>
 </div>
 <script>
+    $(function(){
+           $.ajax({
+               url:BASE_URL+CART_SITE_URL.CART_ADD.URL,
+               type:CART_SITE_URL.CART_ADD.METHOD,
+               data:{username:username,productId :'430',quantity:exitCount},
+               dataType:CART_SITE_URL.DATATYPE,
+               success:function(data){
+
+               }
+           })
+    })
     var loading = false;
     var maxItems = 40;
 
