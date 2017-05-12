@@ -334,7 +334,7 @@ define(function (require, exports, module) {
         });
 
         // 点击 全选
-        $("#cartAllSelect").on('click', function () {
+        $(document).on('click',"#cartAllSelect", function () {
             var currentFlex = $(".cart-store-img-text-label > .cart-item-text");
             var len = currentFlex.length;
             if ($(".cart-shop-select").attr("checked") !== 'checked' && $(".cart-list-select").attr("checked") !== 'checked') {
