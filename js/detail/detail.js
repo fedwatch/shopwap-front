@@ -48,11 +48,13 @@ define(function (require, exports, module) {
         });
         //监听 购物车
         $(document).on('click', ".cart-badge", function () {
-            // return location.href = "/html/cart/cart.html";
-            if (typeof store.get("cartData") !== "undefined") {
-                return location.href = "/html/cart/cart.html";
-            } else {
-                $.toast("很抱歉，您的购物车并没有任何商品！")
+            getCartCount();
+            var sum=$(".cart-badge > .badge").text();
+            if(sum=="0"){
+                $.toast("请添加商品");
+                return;
+            }else{
+                window.location.href = "/html/cart/cart.html";
             }
         });
 
@@ -202,7 +204,6 @@ define(function (require, exports, module) {
             data:{username:"13167161025",id:'430'},
             dataType:PRODUCT_SITE_URLS.DATATYPE,
             success:function(results){
-                console.log(results);
                 var data = results;
                 if(data.authStatus == "200"){
 
@@ -256,7 +257,7 @@ define(function (require, exports, module) {
                             data:{username:username,id:"430",areaId:"804",buyCount:"2"},
                             dataType:PRODUCT_SITE_URLS.DATATYPE,
                             success:function(data){
-                                console.log(data);
+
                                 if(data.authStatus == "200"){
                                     $("#shippingCost").text(data.freight);
                                 }
