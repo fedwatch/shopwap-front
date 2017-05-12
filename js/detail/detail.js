@@ -206,7 +206,10 @@ define(function (require, exports, module) {
         $.ajax({
             url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_VIEW.URL,
             type:PRODUCT_SITE_URLS.PRODUCT_VIEW.METHOD,
-            data:{username:"13167161025",id:'455'},
+            data:{
+                username:"13167161025",
+                id:'455'
+            },
             dataType:PRODUCT_SITE_URLS.DATATYPE,
             success:function(results){
                 console.log(results);
@@ -331,7 +334,10 @@ define(function (require, exports, module) {
         $.ajax({
             url:BASE_URL+CART_SITE_URL.CART_COUNT.URL,
             type:CART_SITE_URL.CART_COUNT.METHOD,
-            data:{username:username,id:id},
+            data:{
+                username:username,
+                id:id
+            },
             dataType:CART_SITE_URL.DATATYPE,
             success:function(data){
                 if(data.authStatus=="200"){
