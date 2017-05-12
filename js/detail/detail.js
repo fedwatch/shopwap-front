@@ -11,40 +11,11 @@ define(function (require, exports, module) {
 
 
 
-
-
     jQuery.support.cors = true;
     $(function () {
-        cartNums = 0;
-        initCartData();
-
-        //
-        function initCartData() {
-            $(".popup-page > .spec-button").first().addClass("active");
-            $(".popup-page > .color-button").first().addClass("active");
-            if (typeof store.get("cartData") !== "undefined") {
-                var res = store.get("cartData").item;
-                var l = res.length;
-                var sum = 0;
-                for(var i = 0;i<l;i++){
-                    sum +=res[i].cart.length;
-                }
-                cartNums = sum;
-                $(".cart-badge > .badge").text(sum)
-            } else {
-                $(".cart-badge > .badge").text("0");
-            }
-        }
-        //获取已有购物车物品数量
-        $.ajax(function(){
-
-
-        })
 
 
 
-
-        //
         $(document).on('click', ".menuPopup", function () {
             var buttons1 = [
                 {
@@ -101,111 +72,33 @@ define(function (require, exports, module) {
         $(document).on('click', '.addToCartBtn', addToCart);
 
         function addToCart() {
-            var len = cartNums || 0;
-            $("#goodsDetailsPage").show();
-            $("#goodsDetailMask").show();
-            // if (typeof store.get("cartData") !== "undefined") {
-            //      len = store.get("cartData").length
-            //
-            //     var res = store.get("cartData").item;
-            //     var l = res.length;
-            //     var sum = 0;
-            //     for(var i = 0;i<l;i++){
-            //         sum +=res[i].cart.length;
-            //     }
-            //
-            // } else {
-            //      len = 0
-            // }
-            var addNum = parseInt(len);
-            if ($("#cartState").val() == "true" && $("#goodsDetailsPage").css("display") == "block") {
-                addNum = addNum + 1;
-                cartNums = addNum;
-                $(".cart-badge > .badge").text(cartNums);
-                setTextToSpecShow();
-                $("#cartState").val("false");
-                $("#goodsDetailsPage").hide();
+            var cartState = $("#cartState").val();
+            if(cartState == "false" ){
+                $("#goodsDetailMask").show();
+                $("#goodsDetailsPage").show();
+
+            }else if(cartState == "true"){
                 $("#goodsDetailMask").hide();
+                $("#goodsDetailsPage").hide();
+            }
 
-                if($("#numberResult").val() == "" || $("#numberResult").val() == null){
-                    $("#numberResult").val(1);
-                }
-                var cartData = {
-                    productUrl: location.href,
-                    thumbnailUrl: $(".swiper-slide.swiper-slide-visible.swiper-slide-active>img")[0].src,
-                    productName: $(".product-title").text(),
-                    productId: $("#productId").val(),
-                    productPrice: $("#productPrice").text(),
-                    productDescription: $("#productDescription").text(),
-                    productState: true,
-                    shippingCost:$("#shippingCost").text(),
-                    specResult: $("#specResult").val(),//规格
-                    colorResult: $("#colorResult").val(),//色彩
-                    quant: $("#numberResult").val(),//数量
-                };
-
-                item.item.push({storeId:$("#storeId").val(),storeName:$("#storeName").val(),cart:cart});
-
-                cart.push(cartData);
-
-
-                if (typeof store.get("cartData") !== "undefined") {
-                    // cartData 已经存在值
-                    var sItem = store.get("cartData").item;
-                    var sItemlen = sItem.length;
-                    var cartStoreId = [];//购物车已存在店铺ID
-                    var currentStoreId = $("#storeId").val();//当前店铺ID
-
-                    for(var i = 0; i < sItemlen;i++){
-                        cartStoreId.push(sItem[i].storeId);
-                    }
-
-                    if(cartStoreId.indexOf(currentStoreId) == "-1"){
-                        // 当前店铺ID 不在 购物车已存在店铺ID 中
-                        cartStoreId.push(currentStoreId);
-                        item = store.get("cartData");
-                        var zItem = {
-                            storeId: $("#storeId").val(),
-                            storeName: $("#storeName").val(),
-                            cart:cart
-                        };
-                        item.item.push(zItem);
-                        store.set("cartData", item);
-                    }else{
-                        // 当前店铺ID 在 购物车已存在店铺ID 中
-                        var key =0;
-                        var pkey = 0;
-                        //搜索重复项并返回下标
-                        for(var i = 0 ; i<sItemlen;i++){
-                            for(var j = i+1;j<sItemlen;j++){
-                                if(cartStoreId[i] == cartStoreId[j]){
-                                    return key = i;
-                                }
-                            }
-                        }
-                        // console.log(cartStoreId)
-                        // console.log(currentStoreId)
-                        if(cartStoreId.indexOf(currentStoreId) !== "-1"){
-                            for(var i = 0; i < cartStoreId.length ; i++){
-                                if( currentStoreId == cartStoreId[i]){
-                                    pkey = i;
-                                }
-                            }
-                            //存入对应项数据
-                            item = store.get("cartData");
-                            item.item[pkey].cart.push(cartData);
-                            store.set("cartData", item);
+             var exitCount= $("input[name=goodsNumber]").val();
+               store.set("username","13167161025");
+              var username=store.get("username");
+            if(cartState =="true"){
+                $.ajax({
+                    url:BASE_URL+CART_SITE_URL.CART_ADD.URL,
+                    type:CART_SITE_URL.CART_ADD.METHOD,
+                    data:{username:username,productId :'430',quantity:exitCount},
+                    dataType:CART_SITE_URL.DATATYPE,
+                    success:function(data){
+                        if(data.authStatus=="200"){
+                            getCartCount();
+                            $("#cartState").val(false)
                         }
 
-                        // console.log(pkey)
-
                     }
-                } else {
-                    // cartData 未存在值
-                    store.set("cartData",item);
-                }
-            } else if($("#cartState").val() == "true"){
-                $.toast("您的购物车中已经有了相同的商品！")
+                })
             }
         }
 
@@ -246,6 +139,8 @@ define(function (require, exports, module) {
             $("#colorResult").val(colorResult);
             $("#cartState").val("true");
         });
+
+
 
         //数量 -
         $(document).on('click', ".goods-minus-btn",function (e) {
@@ -295,67 +190,16 @@ define(function (require, exports, module) {
         $("#specShow").html(sm);
     }
 
-    // 初始化商品详情商品列表数据
-    function initGoodData() {
-        $.ajax({
-            url: "/detail/initGoodData",
-            dataType: "json",
-            type: "post",
-            data: {},
-            success: function (data) {
-                // productSlider
-                require.async('handlebars', function () {
-                    var getData = data;
-
-                });
-            }
-        })
-    }
-
-
-
-    // cartIndex
-    require.async('handlebars', function () {
-        var storeData = {
-            data: '7795'
-        };
-        var tpl = require('/layout/common/cartIndex.tpl');
-        var template = Handlebars.compile(tpl);
-        var html = template(storeData);
-        $("#cartIndex").html(html);
-    });
-
-    // topLinkMenu
-    require.async('handlebars', function () {
-        var data = {
-            data: '738951'
-        };
-        var tpl = require('/layout/detail/topLinkMenu.tpl');
-        var template = Handlebars.compile(tpl);
-        var html = template(data);
-        $("#topLinkMenu").html(html);
-    });
-
-
-    // cartDetailFooter
-    require.async('handlebars', function () {
-        var data = {
-            data: '738951'
-        };
-        var tpl = require('/layout/detail/cartDetailFooter.tpl');
-        var template = Handlebars.compile(tpl);
-        var html = template(data);
-        $("#cartDetailFooter").html(html);
-    });
 
 
     require.async('handlebars', function () {
         var username=store.get("username");
         var currentProductID=store.get("currentProductID");
+
         $.ajax({
             url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_VIEW.URL,
             type:PRODUCT_SITE_URLS.PRODUCT_VIEW.METHOD,
-            data:{username:username,id:'430'},
+            data:{username:"13167161025",id:'430'},
             dataType:PRODUCT_SITE_URLS.DATATYPE,
             success:function(results){
                 console.log(results);
@@ -397,6 +241,8 @@ define(function (require, exports, module) {
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#cartDetailFooter").html(html);
+                            //获取已有购物车物品数量
+                             getCartCount();
                     });
 
                     require.async('handlebars', function () {
@@ -449,5 +295,24 @@ define(function (require, exports, module) {
         })
 
     });
+   //获取购物车数据
+    function getCartCount(){
+        $.ajax({
+            url:BASE_URL+CART_SITE_URL.CART_COUNT.URL,
+            type:CART_SITE_URL.CART_COUNT.METHOD,
+            data:{username:"13167161025",id:'430'},
+            dataType:CART_SITE_URL.DATATYPE,
+            success:function(data){
+                if(data.authStatus=="200"){
+                    var sum=data.count;
+                    function initCartData() {
+                        $(".cart-badge > .badge").text(sum)
+                    }
+                    initCartData();
+                }
+            }
+        })
+    }
 
-})
+
+});

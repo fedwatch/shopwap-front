@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/3/10.
  */
 //基本URL
-var BASE_URL = "//localhost/shopwap";
+var BASE_URL = "//localhost";
 
 //商品信息
 var PRODUCT_SITE_URLS = {
