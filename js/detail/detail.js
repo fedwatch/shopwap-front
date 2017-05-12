@@ -14,8 +14,6 @@ define(function (require, exports, module) {
     jQuery.support.cors = true;
     $(function () {
 
-
-
         $(document).on('click', ".menuPopup", function () {
             var buttons1 = [
                 {
@@ -48,11 +46,13 @@ define(function (require, exports, module) {
         });
         //监听 购物车
         $(document).on('click', ".cart-badge", function () {
-            // return location.href = "/html/cart/cart.html";
-            if (typeof store.get("cartData") !== "undefined") {
-                return location.href = "/html/cart/cart.html";
-            } else {
-                $.toast("很抱歉，您的购物车并没有任何商品！")
+            getCartCount("13167161025",'455',".cart-badge > .badge");
+            var sum=$(".cart-badge > .badge").text();
+            if(sum=="0"){
+                $.toast("请添加商品");
+                return;
+            }else{
+                window.location.href = "/html/cart/cart.html";
             }
         });
 
@@ -89,11 +89,11 @@ define(function (require, exports, module) {
                 $.ajax({
                     url:BASE_URL+CART_SITE_URL.CART_ADD.URL,
                     type:CART_SITE_URL.CART_ADD.METHOD,
-                    data:{username:username,productId :'455',quantity:exitCount},
+                    data:{username:username,productId :'430',quantity:exitCount},
                     dataType:CART_SITE_URL.DATATYPE,
                     success:function(data){
                         if(data.authStatus=="200"){
-                            getCartCount();
+                            getCartCount("13167161025",'455',".cart-badge > .badge");
                             $("#cartState").val(false)
                         }
 
@@ -155,6 +155,7 @@ define(function (require, exports, module) {
 
         //数量 -
         $(document).on('click', ".goods-minus-btn",function (e) {
+
             if ($(".numbers-board > .goods-minus-btn").hasClass("active")) {
                 var num = parseInt($("input[name=goodsNumber]").val());
                 if (num == 1) {
@@ -170,7 +171,6 @@ define(function (require, exports, module) {
                 return;
             }
         });
-
         //数量 +
         $(document).on('click',".goods-plus-btn", function (e) {
 
@@ -188,6 +188,7 @@ define(function (require, exports, module) {
                 return;
             }
         });
+
     });
 
     // 设置选择规格到html
@@ -264,6 +265,18 @@ define(function (require, exports, module) {
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#detailOne").html(html);
+                        $.ajax({
+                            url:BASE_URL+PRODUCT_SITE_URLS.CALCULATE_FREIGHT.URL,
+                            type:PRODUCT_SITE_URLS.CALCULATE_FREIGHT.METHOD,
+                            data:{username:username,id:"430",areaId:"804",buyCount:"2"},
+                            dataType:PRODUCT_SITE_URLS.DATATYPE,
+                            success:function(data){
+
+                                if(data.authStatus == "200"){
+                                    $("#shippingCost").text(data.freight);
+                                }
+                            }
+                        })
                         calculateFreight(username,"455","804","2","shippingCost");
                     });
                     //七天无理由退换
@@ -329,16 +342,16 @@ define(function (require, exports, module) {
     }
 
    //获取购物车数据
-    function getCartCount(){
+    function getCartCount(username,id,DOM){
         $.ajax({
             url:BASE_URL+CART_SITE_URL.CART_COUNT.URL,
             type:CART_SITE_URL.CART_COUNT.METHOD,
-            data:{username:"13167161025",id:'455'},
+            data:{username:username,id:id},
             dataType:CART_SITE_URL.DATATYPE,
             success:function(data){
                 if(data.authStatus=="200"){
                     var sum=data.count;
-                    $(".cart-badge > .badge").text(sum);
+                    $(DOM).text(sum);
                 }
             }
         })
