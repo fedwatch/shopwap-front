@@ -253,7 +253,7 @@ define(function (require, exports, module) {
                         var html = template(data);
                         $("#cartDetailFooter").html(html);
                             //获取已有购物车物品数量
-                             getCartCount();
+                            getCartCount("13167161025",'455',".cart-badge > .badge");
                     });
 
                     require.async('handlebars', function () {
@@ -295,6 +295,7 @@ define(function (require, exports, module) {
         })
 
     });
+   //计算运费
 
 
     /**
