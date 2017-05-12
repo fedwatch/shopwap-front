@@ -132,10 +132,6 @@ define(function (require, exports, module) {
 
             }
             $("#specResult").val(text);
-
-
-
-
             $("#cartState").val("true");
         });
 
@@ -265,18 +261,6 @@ define(function (require, exports, module) {
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#detailOne").html(html);
-                        $.ajax({
-                            url:BASE_URL+PRODUCT_SITE_URLS.CALCULATE_FREIGHT.URL,
-                            type:PRODUCT_SITE_URLS.CALCULATE_FREIGHT.METHOD,
-                            data:{username:username,id:"430",areaId:"804",buyCount:"2"},
-                            dataType:PRODUCT_SITE_URLS.DATATYPE,
-                            success:function(data){
-
-                                if(data.authStatus == "200"){
-                                    $("#shippingCost").text(data.freight);
-                                }
-                            }
-                        })
                         calculateFreight(username,"455","804","2","shippingCost");
                     });
                     //七天无理由退换
