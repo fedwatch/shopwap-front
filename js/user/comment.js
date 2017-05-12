@@ -1,31 +1,51 @@
 define(function(require,exports,module){
     require('jquery');
-    require('mockjs');
     require('light7');
-    require('light7-swiper');
-    require('light7-swipeout');
-    $(function(){
+    require('store');
+    require('siteUrl');
 
-    });
+    jQuery.support.cors = true;
+  $(function(){
 
-    var data=Mock.mock("/getData",{
-        "id":"13167161025",
-        "date":new Date().toLocaleDateString(),
-        "text":"一开始担心里面的牛仔那层会有点厚，但是很薄，而且不会透，外面也不会显得很臃肿，非常喜欢。"
-    });
 
+  });
     require.async('handlebars',function(){
         $.ajax({
-            url:"/getData",
-            dataType:"json",
-            type:"get",
+            url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_COMMENT.URL,
+            type:PRODUCT_SITE_URLS.PRODUCT_COMMENT.METHOD,
+            data:{username:"13167161025",id :'308',pageNumber:"1",pageSize:"10"},
+            dataType:PRODUCT_SITE_URLS.DATATYPE,
             success:function(data){
-                var tpl=require('/layout/user/comment.tpl');
-                var template=Handlebars.compile(tpl);
-                var html=template(data);
-                $("#comment").html(html);
-                $.init();
+                if(data.authStatus=="200"){
+                    var tpl=require('/layout/user/comment.tpl');
+                    var template=Handlebars.compile(tpl);
+                    var html=template(data);
+                    $("#comment").html(html);
+                    //星星评分显示
+                    function totalStar(num){
+                        var eachStarLen=$(".comment-header").find("li").outerWidth();
+                        var ceilNum=Math.ceil(num);
+                        var intNum=parseInt(num);
+                        var remainder=num-intNum;
+                        var html='<div class="eval-con"><span  class="eval-offset"></span></div>';
+                        $(".evaluate").each(function(index,item){
+                            for(var i=0;i<=intNum-1;i++){
+                                if(index==i){
+                                    $(this).html(html);
+                                }
+                            }
+                        });
+                        if(remainder!=0){
+                            $(".evaluate").eq(ceilNum-1).html(html);
+                            var realWidth=eachStarLen*remainder+"px";
+                            $(".eval-con").eq(ceilNum-1).css({width:realWidth});
+                        }
+                    }
+                    //调用
+                    totalStar(data.score);
+                     $.init();
+                }
             }
-       })
+        })
     });
 })

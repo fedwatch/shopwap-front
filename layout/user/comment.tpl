@@ -21,7 +21,23 @@
         </div>
         <div class="c-title">评价详情</div>
         <ul class="comment-list list-container">
-
+            <ul class="comment-list list-container">
+                {{#each this.reviews}}
+                <li class="list-list">
+                    <div class="user-con clearfix">
+                        <img src="../../assets/images/user.png"/>
+                        <span class="c-user">{{member.username}}</span>
+                        <span class="c-date">{{createDate}}</span>
+                        <span class="finger pull-right">
+                           <img src="../../assets/images/finger-down.png"/>
+                       </span>
+                    </div>
+                    <div class="card-content">
+                        <div class=" c-re-con">{{content}}</div>
+                    </div>
+                </li>
+                {{/each}}
+            </ul>
 
         </ul>
     </div>
@@ -30,39 +46,40 @@
         <a href="javascript:;" class="more">无更多评价</a>
         <i class="line"></i>
     </div>
+    <input type="hidden" value="" id="dataScore">
     <!-----placeholder--->
-    <div class="infinite-scroll-preloader" >
+    <div class="infinite-scroll-preloader"  style="display:none;">
         <div class="preloader"></div>
     </div>
 </div>
 <script>
-    $(function(){
-           $.ajax({
-               url:BASE_URL+CART_SITE_URL.CART_ADD.URL,
-               type:CART_SITE_URL.CART_ADD.METHOD,
-               data:{username:username,productId :'430',quantity:exitCount},
-               dataType:CART_SITE_URL.DATATYPE,
-               success:function(data){
 
-               }
-           })
-    })
-    var loading = false;
-    var maxItems = 40;
+   /* var loading = false;
 
-    var itemsPerLoad = 20;
+    var itemsPerLoad = 10;
     function addItems(number, lastIndex) {
         var html = '';
         for (var i = lastIndex + 1; i <= lastIndex + number; i++) {
-           // html += '<li class="item-content"><div class="item-inner"><div class="item-title">Item ' + i + '</div></div></li>';
-            html+='<li class="list-list"> <div class="user-con clearfix"> <img src="../../assets/images/user.png"/> <span class="c-user">{{id}}</span> <span class="c-date">{{date}}</span> <span class="finger pull-right"><img src="../../assets/images/finger-down.png"/></span> </div> <div class="card-content"> <div class=" c-re-con">{{text}}</div> </div></li>'
+            html+='<li class="list-list">' +
+                    ' <div class="user-con clearfix"> ' +
+                    '<img src="../../assets/images/user.png"/> ' +
+                    '<span class="c-user">{{id}}</span> ' +
+                    '<span class="c-date">{{date}}</span>' +
+                    ' <span class="finger pull-right">' +
+                    '<img src="../../assets/images/finger-down.png"/>' +
+                    '</span> </div> <div class="card-content"> ' +
+                    '<div class=" c-re-con">{{text}}</div>' +
+                    ' </div>' +
+                '</li>'
         }
         $('.comment-list').append(html);
 
     }
     addItems(itemsPerLoad, 0);
 
-    var lastIndex = 20;
+
+    var maxItems = 30;
+    var lastIndex = 10;
 
     $(document).on('infinite', '.infinite-scroll',function() {
         // 如果正在加载，则退出
@@ -84,29 +101,6 @@
             lastIndex = $('.list-container li').length;
         }, 1000);
 
-    });
+    });*/
 </script>
-<script>
-    var data={length:4};
-function totalStar(num){
-    var eachStarLen=$(".comment-header").find("li").outerWidth();
-    var ceilNum=Math.ceil(num);
-    var intNum=parseInt(num);
-    var remainder=num-intNum;
-    var html='<div class="eval-con"><span  class="eval-offset"></span></div>';
-    $(".evaluate").each(function(index,item){
-        for(var i=0;i<=intNum-1;i++){
-            if(index==i){
-                $(this).html(html);
-            }
-        }
-    });
-    if(remainder!=0){
-        $(".evaluate").eq(ceilNum-1).html(html);
-        var realWidth=eachStarLen*remainder+"px";
-        $(".eval-con").eq(ceilNum-1).css({width:realWidth});
-    }
-}
-//调用
-totalStar(data.length);
-</script>
+
