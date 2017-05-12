@@ -305,10 +305,7 @@ define(function (require, exports, module) {
             success:function(data){
                 if(data.authStatus=="200"){
                     var sum=data.count;
-                    function initCartData() {
-                        $(".cart-badge > .badge").text(sum)
-                    }
-                    initCartData();
+                    $(".cart-badge > .badge").text(sum);
                 }
             }
         })
