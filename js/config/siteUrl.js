@@ -4,23 +4,7 @@
 //基本URL
 var BASE_URL = "//localhost";
 
-//商品信息
-var PRODUCT_SITE_URLS = {
-    //数据接收类型
-    DATATYPE:"json",
-    //计算运费
-    CALCULATE_FREIGHT:{URL:"/product/calculateFreight",METHOD:"GET"},
-    //查询商品详情
-    PRODUCT_VIEW:{URL:"/product/view",METHOD:"GET"},
-    //一级菜单查询
-    FIND_ROOTS:{URL:"/product_category/findRoots",METHOD:"GET"},
-    //子级菜单查询
-    FIND_SUBS:{URL:"/product_category/findSubs",METHOD:"GET"},
-    //商品查询
-    PRODUCT_SEARCH: {URL:"/product/search",METHOD:"GET"},
-    //商品评价
-    PRODUCT_COMMENT:{URL:"/review/content/view",METHOD:"GET"}
-};
+
 
 //物流信息
 var LOGISTICS_URLS = {
@@ -53,6 +37,8 @@ var PAYMENT_SITE_URL = {
     BANKCARD_BIND:{URL:"/member/bank/bankcardbin",METHOD:"POST"},
     //绑定银行卡并支付
     BOUND_CARD_PAY:{URL:"/member/payment/boundCardPay",METHOD:"GET"},
+    // 银行卡列表
+    BANK_LIST:{URL:"/member/payment/bankList",METHOD:"POST"},
     //快捷支付
     PAY_SUBMIT:{URL:"/member/payment/paySubmit",METHOD:"POST"},
 };
@@ -93,6 +79,24 @@ var MEMBER_SITE_URL = {
     SAVE:{URL:"/member/receiver/save",METHOD:"POST"},
     // 收货地址列表更新
     UPDATE:{URL:"/member/receiver/update",METHOD:"POST"},
+};
+
+// 商品信息
+var PRODUCT_SITE_URLS = {
+    //数据接收类型
+    DATATYPE:"json",
+    //计算运费
+    CALCULATE_FREIGHT:{URL:"/product/calculateFreight",METHOD:"GET"},
+    //查询商品详情
+    PRODUCT_VIEW:{URL:"/product/view",METHOD:"GET"},
+    //一级菜单查询
+    FIND_ROOTS:{URL:"/product_category/findRoots",METHOD:"GET"},
+    //子级菜单查询
+    FIND_SUBS:{URL:"/product_category/findSubs",METHOD:"GET"},
+    //商品查询
+    PRODUCT_SEARCH: {URL:"/product/search",METHOD:"GET"},
+    //商品评价
+    PRODUCT_COMMENT:{URL:"/review/content/view",METHOD:"GET"}
 };
 
 
