@@ -10,7 +10,6 @@ define(function (require, exports, module) {
     require('siteUrl');
 
 
-
     jQuery.support.cors = true;
     $(function () {
         setSpecificationId();
@@ -84,13 +83,17 @@ define(function (require, exports, module) {
             }
 
              var exitCount= $("input[name=goodsNumber]").val();
-               store.set("username","13167161025");
-              var username=store.get("username");
+                     store.set("username","13167161025");
+                var username=store.get("username");
             if(cartState =="true"){
                 $.ajax({
                     url:BASE_URL+CART_SITE_URL.CART_ADD.URL,
                     type:CART_SITE_URL.CART_ADD.METHOD,
-                    data:{username:username,productId :'430',quantity:exitCount},
+                    data:{
+                        username:username,
+                        productId :'430',
+                        quantity:exitCount
+                    },
                     dataType:CART_SITE_URL.DATATYPE,
                     success:function(data){
                         if(data.authStatus=="200"){
