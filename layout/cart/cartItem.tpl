@@ -18,7 +18,7 @@
             <!--正常商品显示-->
             <div class="cart-store-img-text-label">
                 <div class="cart-item-select-wrapper" >
-                    <input type="checkbox" class="cart-list-select"  id="cartSelect-{{id}}">
+                    <input type="checkbox" class="cart-list-select"  id="cartSelect-{{id}}" data-itemId="{{id}}">
                     <label for="cartSelect-{{id}}"></label>
                 </div>
                 <div class="cart-item-image">

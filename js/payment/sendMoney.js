@@ -45,7 +45,8 @@ define(function(require,exports,module){
                 username: username,
             },
             success:function (data) {
-                console.log(data);
+               if (data.status == "200")
+                   location.href = '/html/payment/alipay/paySuccess.html'
             }
         })
     }
