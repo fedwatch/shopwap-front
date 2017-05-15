@@ -40,7 +40,7 @@ define(function (require, exports, module) {
                 dataType:CART_SITE_URL.DATATYPE,
                 data:{username:username},
                 success:function (data) {
-                    if(data.authStatus == "200"){
+                    if(data.authStatus == "200") {
                         // cartItem
                         require.async('handlebars', function () {
                             require.async('transDetails', function () {
@@ -50,6 +50,8 @@ define(function (require, exports, module) {
                                 $("#cartItem").html(html);
                             });
                         });
+                    }else if (data.authStatus == "500"){
+                        $("#nothingBuy").show();
                     }
                 }
             });
@@ -383,7 +385,7 @@ define(function (require, exports, module) {
             number = parseInt(number) + 1;
             $this.parent().find('input.panel-text-input').val(number);
             var quantity = $this.parents(".cart-store-img-text-label").find(".cart-item-text > .cart-item-display-flex > .cart-item-quantity > .quantity-ct");
-            quantity.text(number)
+            quantity.text(number);
 
             var itemId = $this.parents(".cart-store-img-text-label").find(".cart-item-select-wrapper>.cart-list-select").data("itemid");
             var quant = $this.parents(".cart-store-img-text-label").find(".cart-item-text > .cart-item-display-flex > .cart-item-quantity > .quantity-ct").text()
