@@ -82,7 +82,7 @@ define(function (require, exports, module) {
                 $("#goodsDetailsPage").hide();
             }
 
-             var exitCount= $("input[name=goodsNumber]").val();
+             var count= $("input[name=goodsNumber]").val();
                      store.set("username","13167161025");
                 var username=store.get("username");
             if(cartState =="true"){
@@ -92,7 +92,7 @@ define(function (require, exports, module) {
                     data:{
                         username:username,
                         productId :'308',
-                        quantity:exitCount
+                        quantity:count
                     },
                     dataType:CART_SITE_URL.DATATYPE,
                     success:function(data){
@@ -370,6 +370,7 @@ define(function (require, exports, module) {
             success:function(data){
                 if(data.authStatus=="200"){
                     var sum=data.count;
+                    console.log(sum);
                     $(DOM).text(sum);
                 }
             }
