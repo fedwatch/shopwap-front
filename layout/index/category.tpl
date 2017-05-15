@@ -45,7 +45,7 @@
                      <div  style="font-size:0.667rem;">金灶 A510迷你 电磁茶炉 </div>
                      <div >
                          <span  style="font-size:0.425rem;color:#ff0000;">￥<span style="font-size:0.85rem;">88</span>.88</span>
-                         <span  style="font-size:0.425rem;color:#999999; margin-left:0.75rem;">已有2000000人购买</span>
+                         <span  style="font-size:0.425rem;color:#999999; margin-left:0.75rem;">已有<span>2000000</span>人购买</span>
                      </div>
                  </div>
 
@@ -61,7 +61,7 @@
                     <div  style="font-size:0.667rem;">金灶 A510迷你 电磁茶炉 </div>
                     <div class="clearfix">
                         <span  style="font-size:0.425rem;color:#ff0000;">￥<span style="font-size:0.85rem;">88</span>.88</span>
-                        <span  style="font-size:0.425rem;color:#999999;margin-left:0.75rem;">已有2000000人购买</span>
+                        <span  style="font-size:0.425rem;color:#999999;margin-left:0.75rem;">已有<span>2000000</span>人购买</span>
                     </div>
                 </div>
             </div>
