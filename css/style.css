@@ -310,6 +310,7 @@ padding:0.5rem 0
     -webkit-align-items: center;
     text-align: center;
     border-bottom: 1px solid #f0f0ef;
+    background-color:#fff;
 }
 
 .nav-index div {
@@ -360,8 +361,97 @@ padding:0.5rem 0
     width: 100%;
     padding: 0 .255rem;
 }
-
-/*搜索页面*/
+.shop-index .shop-cate .active-t{
+    margin:0.5rem 0;
+    height:9.1rem;
+}
+.shop-index .shop-cate .active-t .act-left{
+    position:relative;
+    width:40%;
+    height:100%;
+}
+.shop-index .shop-cate .active-t  .zero-gift{
+    position:absolute;
+    top:0.75rem;
+    left:0.75rem;
+}
+.shop-index .shop-cate .zero-gift .gift-font{
+   font-size:0.789rem;
+    color:#fff;
+}
+.shop-index .shop-cate .zero-gift .check-act{
+    font-size:0.607rem;
+    color:#fff;
+}
+.shop-index .shop-cate .zero-gift .zongzi{
+    font-size:0.789rem;
+    color:#386d09;
+}
+.shop-index .shop-cate .zero-gift .zong-price{
+    font-size:0.607rem;
+    color:#000;
+}
+.shop-index .shop-cate .zero-gift-two{
+    position:absolute;
+    top:5.25rem;
+    left:0.75rem;
+}
+.shop-index .shop-cate .zero-gift-two .seckill-area{
+     font-size:0.789rem;
+     color:#000;
+}
+.shop-index .shop-cate .zero-gift-two .ut-price-goods{
+    font-size:0.607rem;
+    color:#000;
+}
+.shop-index .shop-cate .zero-gift .check-act a{
+    color:#fff;
+}
+.shop-index .shop-cate .active-t .act-right{
+    position:relative;
+    width:60%;
+    height:100%;
+}
+.shop-index .shop-cate .active-t .act-left img,
+.shop-index .shop-cate .active-t .act-right img{
+    width:100%;
+    height:100%;
+}
+.shop-index .shop-cate .b-img{
+    width:49%;
+    background-color:#fff;
+    margin-bottom:60px;
+}
+.shop-index .shop-cate .b-img .bt-img{
+    position:relative;
+    width:100%;
+}
+.shop-index .shop-cate  .b-img .tipIm{
+    position:absolute;
+    width:2.55rem;
+    height:2.55rem;
+    top:0;
+    left:0;
+    color:#fff;
+    font-size:0.607rem;
+    background:url("../assets/images/index10.png");
+    background-size:100% 100%;
+}
+.shop-index .shop-cate  .b-img .plunge{
+    margin-left:0.2rem;
+    margin-top:0.2rem;
+    display:inline-block;
+}
+.shop-index .shop-cate .b-img .bt-img img{
+    width:100%;
+}
+.shop-index .shop-cate .act-a{
+    height:50%;
+}
+.shop-index .shop-cate .act-a img{
+    height:100%;
+}
+    /*搜索页面*/
 .search-main .title {
     color: #000000;
     padding: 0.5em 0;

@@ -119,9 +119,7 @@ define(function (require, exports, module) {
                 data:{
                     username:   username ,//会员名称
                     itemId: itemId  ,//产品id
-
                 },
-                ittraditional: true,
                 success:function (data) {
                     console.log(data);
                 }

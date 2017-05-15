@@ -91,7 +91,7 @@ define(function (require, exports, module) {
                     type:CART_SITE_URL.CART_ADD.METHOD,
                     data:{
                         username:username,
-                        productId :'430',
+                        productId :'308',
                         quantity:exitCount
                     },
                     dataType:CART_SITE_URL.DATATYPE,
