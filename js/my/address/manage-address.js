@@ -24,6 +24,7 @@ define(function(require,exports,module){
                 var template=Handlebars.compile(tpl);
                 var html=template(data);
                 $("#manage-address").html(html);
+                edit();
             }
         });
 
@@ -48,4 +49,32 @@ define(function(require,exports,module){
             }
         });
     }
+
+    function edit(){
+            var $edit=$(".edit");
+            var $addressOperate=$(".address-operate");
+            var $addressList=$(".address-list").find(".ad-list");
+            var $delete=$(".delete");
+            var flag=true;
+            $edit.click(function(){
+                if(flag==true){
+                    $edit.text("取消编辑");
+                    $addressOperate.css({display:"block"});
+                    flag=false;
+                }else{
+                    $edit.text("编辑");
+                    $addressOperate.css({display:"none"});
+                    flag=true;
+                }
+            });
+            $(".edit-op").click(function(){
+                window.location.href="./add-address.html";
+            });
+            $delete.each(function(index,item){
+                $(this).click(function(){
+                    $addressList.eq(index).remove();
+                })
+            });
+    }
+
 })
