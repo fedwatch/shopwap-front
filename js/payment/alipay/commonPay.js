@@ -119,10 +119,44 @@ define(function(require,exports,module){
                 bankName: bankName
             },
             success:function (data) {
-
+                console.log(data);
             }
         })
     }
+
+    /**
+     * 快捷支付
+     * @param isBalancePay
+     * @param type
+     * @param paymentPluginId
+     * @param mergeSn
+     * @param amount
+     * @param cardId
+     * @param app_request
+     * @param username
+     */
+    function paySubmit(isBalancePay,type ,paymentPluginId,mergeSn,amount ,cardId ,app_request ,username){
+        $.ajax({
+            url:BASE_URL+PAYMENT_SITE_URL.BOUND_CARD_PAY.URL,
+            type:PAYMENT_SITE_URL.BOUND_CARD_PAY.METHOD,
+            dataType:PAYMENT_SITE_URL.DATATYPE,
+            data:{
+                isBalancePay: isBalancePay,
+                type: type,
+                paymentPluginId: paymentPluginId,
+                mergeSn: mergeSn,
+                amount: amount,
+                cardId: cardId,
+                app_request: app_request,
+                username: username,
+            },
+            success:function (data) {
+                console.log(data);
+            }
+        })
+    }
+
+
 
 
 

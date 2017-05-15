@@ -13,6 +13,7 @@ define(function (require, exports, module) {
         // getCartFromLS();
         var username = store.get("username");
         cartList(username);
+        cartAdd(username,490,3)
         // cartAdd();
         // cartCount();
         // cartEdit();
@@ -290,7 +291,10 @@ define(function (require, exports, module) {
 
         $(document).on('click','.clearAllBtn',function () {
            // cartClear(username);
-            cartDelete(username,[421]);
+            var itemId = new Array();
+            itemId[0] =500;
+            itemId[1] =501;
+            cartDelete(username,itemId);
         });
 
         // 点击 店铺选择
