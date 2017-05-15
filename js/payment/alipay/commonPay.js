@@ -32,6 +32,8 @@ define(function(require,exports,module){
                $(this).find(".morePay").css({visibility:"visible"}).parents().siblings().find(".morePay").css({visibility:"hidden"});
             })
         })
+
+
     });
 
 
