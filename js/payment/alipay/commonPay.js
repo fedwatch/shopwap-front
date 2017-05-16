@@ -12,10 +12,23 @@ define(function (require, exports, module) {
         getBankList(username);
         var $logoThree = $("#logo3");
         var $mainContent = $(".bankMask").find(".cont").html();
+
+        setStore("type","payment");
+        setStore("paymentPluginId","lianlianpayPlugin");
+        setStore("app_request","3");
+
+
+
+        function setStore(key,val){
+            store.set(key,val);
+        }
+
+
         $logoThree.on('click', function () {
+            var $bankList = $("#bankList").find(".bankMask .cont").html();
             $.modal({
                 title: '<div class="select-bank">选择银行卡<span class="pull-right cancel-m">取消</span></div>',
-                afterText: $mainContent,
+                afterText:$bankList ,
                 buttons: [{
                     text: '<div class="bank-but"><a href="javascript:;" class="external but-a" style="border:none;"><span>+</span>添加新卡</a></div>',
                     onClick: function () {
@@ -30,14 +43,29 @@ define(function (require, exports, module) {
             });
         });
 
+        $(document).on('click','.modal-inner .bank-li a',function () {
+            var $this = $(this);
+            var cardId  = $this.data("id")
+            setStore("cardId",cardId);
+            console.log(cardId)
+        });
+        var status = false;
+        $(document).on('click','#balancePayBtn',function () {
+            if(status == false){
+                status = true;
+            }else{
+                status = false;
+            }
+            setStore("isBalancePay",status);
+            console.log(status);
+        });
+
         $(".checkPay").each(function (index, item) {
             $(this).click(function () {
                 $(this).find(".tickys").addClass("tickSelected").removeClass("tick").parents().siblings().find(".tickys").removeClass("tickSelected").addClass("tick");
                 $(this).find(".morePay").css({visibility: "visible"}).parents().siblings().find(".morePay").css({visibility: "hidden"});
             })
         })
-
-
     });
 
 
@@ -75,9 +103,15 @@ define(function (require, exports, module) {
             },
             success: function (data) {
                 console.log(data);
-
-                if(data.authStatus == '500'){
-                    
+                if( data.authStatus == '200'){
+                    require.async("handlebars", function () {
+                        require.async("transCommonPay", function () {
+                            var tpl = require('/layout/payment/bankList.tpl');
+                            var template = Handlebars.compile(tpl);
+                            var html = template(data);
+                            $("#bankList").html(html);
+                        });
+                    });
                 }
 
 

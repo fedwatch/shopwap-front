@@ -5,6 +5,32 @@
 var BASE_URL = "//localhost";
 
 
+// 用户信息
+var USER_SITE_URL = {
+    //数据接收类型
+    DATATYPE:"json",
+    // 获取公钥
+    PUBLIC_KEY: {URL:"/common/public_key",METHOD:"GET"},
+    // 用户注册
+    USER_REGISTER: {URL:"/user/userRegister",METHOD:"POST"},
+    // 用户登录系统
+    USER_LOGIN: {URL:"/user/userLogin",METHOD:"POST"},
+    // 用户登出系统
+    USER_LOGOUT: {URL:"/user/userLogout",METHOD:"POST"},
+    // 发送手机验证码
+    SEND_DYNAMIC_CODE: {URL:"/user/sendDynamicCode",METHOD:"POST"},
+    // 找回密码提交
+    FIND_PASSWORD: {URL:"/user/findPassword",METHOD:"POST"},
+    // 用户重置密码
+    RESET_PASSWORD: {URL:"/user/resetPassword",METHOD:"POST"},
+    // 会员密码更新
+    UPDATE_PASSWORD: {URL:"/user/updatePassword",METHOD:"POST"},
+};
+
+var INIT_SITE_URL = {
+    DATATYPE:"json",
+    banner: {URL:"/init/banner",METHOD:"GET"}
+};
 
 //物流信息
 var LOGISTICS_URLS = {

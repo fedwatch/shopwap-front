@@ -21,6 +21,7 @@ seajs.config({
         "store":"/js/utils/store.min.js",
         "weixin":"https://res.wx.qq.com/open/js/jweixin-1.0.0.js",
         "transDetails":"/js/utils/transDetails",
+        "transCommonPay":"/js/utils/transCommonPay",
         "varietyValidation":"/js/utils/varietyValidation.js",
         "rsa":"/js/utils/rsa/rsa.js",
         "base64":"/js/utils/rsa/base64.js",

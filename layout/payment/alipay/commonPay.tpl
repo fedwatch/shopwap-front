@@ -46,7 +46,7 @@
                 </div>
                 <div class="item-input" style="width:auto;">
                     <label class="label-switch">
-                        <input type="checkbox">
+                        <input type="checkbox" id="balancePayBtn">
                         <div class="checkbox"></div>
                     </label>
                 </div>
@@ -87,20 +87,5 @@
 
 
 <!-----弹框------>
-<div class="bankMask">
-    <div class="cont">
-
-        {{#each memberBanks}}
-        <div class="bank-li">
-            <a href="javascript:;" class="external bank-a">
-                <span class="attract">{{bankName}}</span>
-                <span>{{bankCardType}}（6479）</span>
-                <span class="pull-right arrw">&gt;</span>
-            </a>
-        </div>
-        {{/each}}
-
-
-    </div>
-</div>
+<div id="bankList"></div>
 

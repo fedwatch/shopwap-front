@@ -6,19 +6,23 @@
     <h1 class='title'>快捷支付</h1>
 </header>
 <div class="content creditCard">
+
     <div class="pay-money">
         <div class="item-media">支付金额：</div>
         <div class="item-inner">1777<span>元</span></div>
     </div>
+
     <div class="list-block ">
         <ul class="list-tab">
-            <!-- Text inputs -->
+
+
+
             <li>
                 <div class="item-content">
                     <div class="item-media">卡&nbsp;&nbsp;类&nbsp;&nbsp;型</div>
                     <div class="item-inner">
                         <div class="item-input">
-                            <input type="text" placeholder="借记卡">
+                            <input type="text" placeholder="" value="{{transBankCardType memberBank.bankCardType}}">
                         </div>
                     </div>
                 </div>
@@ -28,7 +32,7 @@
                     <div class="item-media">银行卡号</div>
                     <div class="item-inner">
                         <div class="item-input">
-                            <input type="email" placeholder="银行卡号">
+                            <input type="text" placeholder="" value="{{memberBank.bankCardNo}}" autocomplete="off">
                         </div>
                     </div>
                 </div>
@@ -38,12 +42,13 @@
                     <div class="item-media">发&nbsp;&nbsp;卡&nbsp;&nbsp;行</div>
                     <div class="item-inner">
                         <div class="item-input">
-                            <input type="password" placeholder="中国银行" class="">
+                            <input type="text" placeholder="" autocomplete="off" value="{{memberBank.bankName}}">
                         </div>
                     </div>
                 </div>
             </li>
-            <!-- Date -->
+
+            <!-- 信用卡 start -->
             <li>
                 <div class="item-content">
                     <!--<div class="item-media"><i class="icon icon-user"></i></div>-->
@@ -52,15 +57,15 @@
                         <div class="item-input">
                             <select name="creditMonth" id="creditMonth" class="creditMonth">
                                 <option value="" selected>请选择</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
+                                <option value="01">1</option>
+                                <option value="02">2</option>
+                                <option value="03">3</option>
+                                <option value="04">4</option>
+                                <option value="05">5</option>
+                                <option value="06">6</option>
+                                <option value="07">7</option>
+                                <option value="08">8</option>
+                                <option value="09">9</option>
                                 <option value="10">10</option>
                                 <option value="11">11</option>
                                 <option value="12">12</option>
@@ -81,21 +86,23 @@
             </li>
             <li>
                 <div class="item-content">
-                    <div class="item-media">卡验证码</div>
+                    <div class="item-media">卡安全码</div>
                     <div class="item-inner verification">
                         <div class="item-input">
-                            <input type="text" placeholder="">
+                            <input type="text" placeholder="" id="verificationCode">
                         </div>
                     </div>
                     <div class="item-media tab-item mat-tips">卡背面3位数字</div>
                 </div>
             </li>
+            <!-- 信用卡 end -->
+
             <li>
                 <div class="item-content">
                     <div class="item-media">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</div>
                     <div class="item-inner">
                         <div class="item-input">
-                            <input type="text" placeholder="">
+                            <input type="text" placeholder="" id="trueUsername" autocomplete="off">
                         </div>
                     </div>
                 </div>
@@ -105,7 +112,7 @@
                     <div class="item-media">身&nbsp;&nbsp;份&nbsp;&nbsp;证</div>
                     <div class="item-inner">
                         <div class="item-input">
-                            <input type="text" placeholder="">
+                            <input type="text" placeholder="" id="cardNum" autocomplete="off">
                         </div>
                     </div>
                 </div>
@@ -115,24 +122,26 @@
                     <div class="item-media">手&nbsp;&nbsp;机&nbsp;&nbsp;号</div>
                     <div class="item-inner">
                         <div class="item-input">
-                            <input type="text" placeholder="">
+                            <input type="text" placeholder="" value="{{memberBank.member.username}}" autocomplete="off">
                         </div>
                     </div>
                 </div>
             </li>
+
             <li>
                 <div class="item-content">
                     <div class="item-media">验&nbsp;&nbsp;证&nbsp;&nbsp;码</div>
                     <div class="item-inner verification">
                         <div class="item-input">
-                            <input type="text" placeholder="">
+                            <input type="text" placeholder="" autocomplete="off" id="verifyCode">
                         </div>
                     </div>
-                    <div class="item-media tab-item mat-tips vert">获取验证码</div>
+                    <div class="item-media tab-item mat-tips vert verBtn">获取验证码</div>
                 </div>
             </li>
+
         </ul>
-        <div class="credit-button"><a href="./alipay/paySuccess.html" class="external button button-big button-fill button-success">确认开通并支付</a></div>
+        <div class="credit-button"><a href="javascript:void(0)" class="firstBind external button button-big button-fill button-success">确认开通并支付</a></div>
     </div>
 
 </div>
