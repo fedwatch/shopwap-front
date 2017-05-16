@@ -5,6 +5,7 @@ define(function(require,exports,module){
     require('jquery');
     require('siteUrl');
     require('store');
+    require('light7');
 
     $(function () {
         var isBalancePay = store.get("isBalancePay");
@@ -45,8 +46,14 @@ define(function(require,exports,module){
                 username: username,
             },
             success:function (data) {
-               if (data.status == "200")
-                   location.href = '/html/payment/alipay/paySuccess.html'
+               if (data.status == "200" && data.su == true){
+                   $.toast("支付跳转中")
+                   return location.href = '/html/payment/alipay/paySuccess.html'
+               }else{
+                   $.toast("支付失败");
+                   return history.go(-1);
+               }
+
             }
         })
     }
