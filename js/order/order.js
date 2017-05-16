@@ -9,9 +9,16 @@ define(function (require, exports, module) {
     require('store');
     require('user');
 
-
+    jQuery.support.cors = true;
     $(function () {
         var username = store.get("username");
+        var itemIds = store.get("cartItemId");
+        // console.log(itemIds);
+        // itemIds = itemIds.split("[").toString().split("]").toString().split(",").slice(1);
+        // var clen= itemIds.length;
+        // itemIds = itemIds.splice(clen-1,1);
+
+        orderInfo(username,itemIds);
 
 
 
@@ -124,6 +131,7 @@ define(function (require, exports, module) {
         });
     }
 
+
     /**
      * 生成预订单
      * @param username
@@ -131,15 +139,15 @@ define(function (require, exports, module) {
      */
     function orderInfo(username,itemIds){
         $.ajax({
-            url:BASE_URL+ORDER_SITE_URL.DELETE_ORDER.URL,
-            type:ORDER_SITE_URL.DELETE_ORDER.METHOD,
+            url:BASE_URL+ORDER_SITE_URL.INFO.URL,
+            type:ORDER_SITE_URL.INFO.METHOD,
             dataType:ORDER_SITE_URL.DATATYPE,
             data:{
                 username:username,
                 itemIds :itemIds
             },
             success:function (data) {
-                console.log(data);
+                console.log(data)
             }
         });
     }
@@ -361,13 +369,6 @@ define(function (require, exports, module) {
         $("#orderAddress").html(html);
     });
 
-    //orderDetail
-    require.async('handlebars', function () {
-        var tpl = require('/layout/order/orderDetail.tpl');
-        var template = Handlebars.compile(tpl);
-        var html = template(data);
-        $("#orderDetail").html(html);
-    });
 
     //orderHeader
     require.async('handlebars', function () {
@@ -375,6 +376,14 @@ define(function (require, exports, module) {
         var template = Handlebars.compile(tpl);
         var html = template(data);
         $("#orderHeader").html(html);
+    });
+
+
+    require.async('handlebars', function () {
+        var tpl = require('/layout/order/orderDetail.tpl');
+        var template = Handlebars.compile(tpl);
+        var html = template(data);
+        $("#orderDetail").html(html);
     });
 
 

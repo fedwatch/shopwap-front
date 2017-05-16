@@ -3,7 +3,7 @@
         <i class="icon icon-store-icon"></i>
         <span class="storeName" >耐克专卖店</span>
     </div>
-    <span class="tradeStatus pull-right">交易成功</span>
+    <span class="tradeStatus pull-right"></span>
 </div>
 
 <div class="detail-content list-block">

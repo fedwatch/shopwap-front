@@ -165,7 +165,17 @@ define(function (require, exports, module) {
 
         // 购物车下单
         $(document).on("click", "#checkoutBtn", function () {
-            location.href = "/html/payment/payment.html"
+
+            var cartItemIdArray = [];
+            var len = $(".cart-list-select:checked").length;
+            for(var i = 0;i<len;i++){
+                cartItemIdArray.push($(".cart-list-select:checked").eq(i).data("itemid"));
+            }
+
+            store.set("cartItemId",cartItemIdArray);
+
+            location.href= "/html/order/order.html"
+
         });
 
         // 触发 完成 事件
