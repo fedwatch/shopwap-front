@@ -5,9 +5,9 @@
                 <i class="icon icon-address-icon"></i>
             </div>
             <div class="addressUserProfile">
-                <span class="orderUsername">刘洋</span>
-                <span class="orderUserphone pull-right">15900994676</span>
-                <div>上海 上海市 浦东新区浦建路145号2709室</div>
+                <span class="orderUsername">{{this.receiver.consignee}}</span>
+                <span class="orderUserphone pull-right">{{this.receiver.phone}}</span>
+                <div>{{this.receiver.areaName}}{{this.receiver.address}}</div>
             </div>
             <div class="rightIcon">
                 <i class="icon icon-address-right-arrow"></i>

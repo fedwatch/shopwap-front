@@ -12,15 +12,14 @@ define(function (require, exports, module) {
     jQuery.support.cors = true;
     $(function () {
         var username = store.get("username");
+        console.log(username)
         var itemIds = store.get("cartItemId");
-        // console.log(itemIds);
+        console.log(itemIds);
+       // console.log(itemIds);
         // itemIds = itemIds.split("[").toString().split("]").toString().split(",").slice(1);
         // var clen= itemIds.length;
         // itemIds = itemIds.splice(clen-1,1);
-
         orderInfo(username,itemIds);
-
-
 
     });
 
@@ -94,7 +93,7 @@ define(function (require, exports, module) {
      * @param receiverId
      * @param memo
      */
-    function create(username,cartItemId,receiverId,memo){
+    function create(username,cartItemId,receiverId ,memo){
         $.ajax({
             url:BASE_URL+ORDER_SITE_URL.CREATE.URL,
             type:ORDER_SITE_URL.CREATE.METHOD,
@@ -103,10 +102,16 @@ define(function (require, exports, module) {
                 username:username,
                 cartItemId :cartItemId ,
                 receiverId  :receiverId  ,
-                memo  :memo  ,
+                memo  :memo
             },
             success:function (data) {
-                console.log(data);
+                if(data.authStatus=="200"){
+                    //存储sn
+                    var snArr=[];
+                   store.set("snArr",data.snList);
+                   window.location.href="/html/payment/alipay/commonPay.html";
+                }
+
             }
         });
     }
@@ -138,6 +143,7 @@ define(function (require, exports, module) {
      * @param itemIds
      */
     function orderInfo(username,itemIds){
+
         $.ajax({
             url:BASE_URL+ORDER_SITE_URL.INFO.URL,
             type:ORDER_SITE_URL.INFO.METHOD,
@@ -147,7 +153,61 @@ define(function (require, exports, module) {
                 itemIds :itemIds
             },
             success:function (data) {
-                console.log(data)
+               if(data.authStatus == "200"){
+
+                   //orderHeader
+                   require.async('handlebars', function () {
+                       var tpl = require('/layout/order/orderHeader.tpl');
+                       var template = Handlebars.compile(tpl);
+                       var html = template(data);
+                       $("#orderHeader").html(html);
+                   });
+
+                   //orderAddress
+                   require.async('handlebars', function () {
+                       var tpl = require('/layout/order/orderAddress.tpl');
+                       var template = Handlebars.compile(tpl);
+                       var html = template(data);
+                       $("#orderAddress").html(html);
+                   });
+                   //orderDetail
+                   require.async('handlebars', function () {
+                        var tpl = require('/layout/order/orderDetail.tpl');
+                        var template = Handlebars.compile(tpl);
+                        var html = template(data);
+                        $("#orderDetail").html(html);
+                         var $amountPayable=data.orders;
+                        $amountPayable.map(function(item,index){
+                            var ss=item.amountPayable;
+                            var ars=ss.toString().split(".");
+                             $(".int-part").eq(index).text(ars[0]);
+                             $(".small-part").eq(index).text(ars[1]);
+                        })
+
+                    });
+
+                   //orderBottomBar
+                   require.async('handlebars', function () {
+                       var tpl = require('/layout/order/orderBottomBar.tpl');
+                       var template = Handlebars.compile(tpl);
+                       var html = template(data);
+                       $("#orderBottomBar").html(html);
+                   });
+                    //用户留言
+                   var $memo=data.orders;
+                   var $memoArr=[];
+                   $memo.map(function(item,index){
+                       var $memo=item.memo;
+                       $memoArr.push($memo);
+                   });
+                       store.set("receiverId",data.receiver.id);
+                   var receiverId=store.get("receiverId");
+                 $(document).on("click",".detailOrderBtn",function(){
+                     create(username,itemIds,receiverId ,$memoArr[0]);
+                 });
+
+               }
+
             }
         });
     }
@@ -345,46 +405,33 @@ define(function (require, exports, module) {
                 console.log(data);
             }
         });
-    }
+    };
+
+    /**
+     * 应付金额计算
+     * @param username
+     */
+  function amountPayables(username,receiverId,itemIds,DOM){
+        $.ajax({
+            url:BASE_URL+ORDER_SITE_URL.CALCULATE.URL,
+            type:ORDER_SITE_URL.CALCULATE.METHOD,
+            dataType:ORDER_SITE_URL.DATATYPE,
+            data:{
+                username :username,
+                receiverId:receiverId ,
+                itemIds:itemIds ,
+            },
+            success:function (data) {
+                console.log(data);
+                $(DOM).val();
+            }
+        });
+
+  }
 
 
 
 
-
-
-    var data = {}
-    //orderBottomBar
-    require.async('handlebars', function () {
-        var tpl = require('/layout/order/orderBottomBar.tpl');
-        var template = Handlebars.compile(tpl);
-        var html = template(data);
-        $("#orderBottomBar").html(html);
-    });
-
-    //orderAddress
-    require.async('handlebars', function () {
-        var tpl = require('/layout/order/orderAddress.tpl');
-        var template = Handlebars.compile(tpl);
-        var html = template(data);
-        $("#orderAddress").html(html);
-    });
-
-
-    //orderHeader
-    require.async('handlebars', function () {
-        var tpl = require('/layout/order/orderHeader.tpl');
-        var template = Handlebars.compile(tpl);
-        var html = template(data);
-        $("#orderHeader").html(html);
-    });
-
-
-    require.async('handlebars', function () {
-        var tpl = require('/layout/order/orderDetail.tpl');
-        var template = Handlebars.compile(tpl);
-        var html = template(data);
-        $("#orderDetail").html(html);
-    });
 
 
 });
