@@ -63,7 +63,7 @@ var PAYMENT_SITE_URL = {
     //输入银行卡号获取银行卡信息
     BANKCARD_BIND:{URL:"/member/bank/bankcardbin",METHOD:"POST"},
     //绑定银行卡并支付
-    BOUND_CARD_PAY:{URL:"/member/payment/boundCardPay",METHOD:"GET"},
+    BOUND_CARD_PAY:{URL:"/member/payment/boundCardPay",METHOD:"POST"},
     // 银行卡列表
     BANK_LIST:{URL:"/member/payment/bankList",METHOD:"POST"},
     //快捷支付

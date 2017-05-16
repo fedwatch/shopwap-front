@@ -47,7 +47,7 @@
                     </div>
                 </div>
             </li>
-
+            {{#equals memberBank.bankCardType 'blue'}}
             <!-- 信用卡 start -->
             <li>
                 <div class="item-content">
@@ -96,13 +96,18 @@
                 </div>
             </li>
             <!-- 信用卡 end -->
+            {{else}}
+
+
+
+            {{/equals}}
 
             <li>
                 <div class="item-content">
                     <div class="item-media">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</div>
                     <div class="item-inner">
                         <div class="item-input">
-                            <input type="text" placeholder="" id="trueUsername" autocomplete="off">
+                            <input type="text" placeholder="" id="trueUsername"  autocomplete="off">
                         </div>
                     </div>
                 </div>

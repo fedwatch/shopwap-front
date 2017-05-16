@@ -12,20 +12,20 @@ define(function (require, exports, module) {
         $("#bind-button").click(function () {
             var bankno = $("#bankno").val();
             var flag = bankCheck(bankno);
-            setTimeout(function () {
-                location.href = "./creditCard.html";
-            }, 3000);
+            // setTimeout(function () {
+            //     location.href = "./creditCard.html";
+            // }, 3000);
 
-            // if (flag === true) {
-            //     $.toast("银行卡正确", 2000);
-            //     store.set("bankCardNo",bankno);
-            //     setTimeout(function () {
-            //         location.href = "./creditCard.html";
-            //     }, 3000);
-            // } else {
-            //     $.toast("银行卡账号错误", 2000);
-            //     return;
-            // }
+            if (flag === true) {
+                $.toast("银行卡正确", 2000);
+                store.set("bankCardNo",bankno);
+                setTimeout(function () {
+                    location.href = "./creditCard.html";
+                }, 3000);
+            } else {
+                $.toast("银行卡账号错误", 2000);
+                return;
+            }
         });
     });
 

@@ -5,6 +5,7 @@ define(function(require,exports,module){
     require('jquery');
     require('store');
     require('siteUrl');
+    require('light7');
     require('user');
 
     jQuery.support.cors = true;
@@ -14,8 +15,8 @@ define(function(require,exports,module){
         var isBalancePay = store.get("isBalancePay") || false;
         var type = store.get("type") || "payment";
         var paymentPluginId = store.get("paymentPluginId") || "lianlianpayPlugin";
-        var mergeSn = store.get("mergeSn");
-        var amount = store.get("amount");
+        var mergeSn = store.get("mergeSn")||2017051635051;
+        var amount = store.get("amount")||0.01;
         var app_request = store.get("app_request")|| '3';
         var cardType = store.get("cardType")|| '1';
 
@@ -33,15 +34,11 @@ define(function(require,exports,module){
             var bankCardType = store.get("bankCardType");
             var bankName   = store.get("bankName");
             var phoneNum   = store.get("username");
-
             var cardNum  = $("#cardNum").val();
-            var trueUsername  = $("#trueUsername").val();
+            var trueUsername  = store.get("username");
             var verifyCode   = $("#verifyCode").val();
-            var verificationCode = $("#verificationCode").val();
-            var expiryDate   = $("#creditMonth").val()+$("#creditYear").val();
-
-
-
+            var verificationCode = $("#verificationCode").val() || null;
+            var expiryDate = $("#creditMonth").val() + $("#creditYear").val() || null;
             var bankCardNo  = store.get("bankCardNo");
 
             boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode, bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, trueUsername, bankName)
@@ -152,6 +149,7 @@ define(function(require,exports,module){
             },
             success: function (data) {
                 console.log(data);
+                $.toast(data.authMsg,1500);
             }
         })
     }

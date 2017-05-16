@@ -48,6 +48,8 @@ define(function (require, exports, module) {
             var cardId  = $this.data("id")
             setStore("cardId",cardId);
             console.log(cardId)
+
+            paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username)
         });
         var status = false;
         $(document).on('click','#balancePayBtn',function () {
