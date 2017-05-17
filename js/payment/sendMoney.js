@@ -8,15 +8,21 @@ define(function(require,exports,module){
     require('light7');
     jQuery.support.cors = true;
     $(function () {
-        var isBalancePay = store.get("isBalancePay");
-        var type = store.get("type") || "payment";
-        var paymentPluginId = store.get("paymentPluginId") || "lianlianpayPlugin";
-        var mergeSn = store.get("mergeSn");
-        var amount = store.get("amount");
-        var cardId = store.get("cardId");
-        var app_request = store.get("app_request") || '3';
-        var username = store.get("username");
-        paySubmit(isBalancePay,type,paymentPluginId,mergeSn,amount,cardId,app_request,username);
+        // var isBalancePay = store.get("isBalancePay");
+        // var type = store.get("type") || "payment";
+        // var paymentPluginId = store.get("paymentPluginId") || "lianlianpayPlugin";
+        // var mergeSn = store.get("mergeSn");
+        // var amount = store.get("amount");
+        // var cardId = store.get("cardId");
+        // var app_request = store.get("app_request") || '3';
+        // var username = store.get("username");
+        // paySubmit(isBalancePay,type,paymentPluginId,mergeSn,amount,cardId,app_request,username);
+
+        setTimeout(function(){
+            var req_data = store.get("req_data");
+            $("#req_data").val(req_data);
+            $("#sendMoneyForm").submit();
+        },2000)
     });
 
     /**

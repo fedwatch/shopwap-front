@@ -15,7 +15,7 @@ define(function (require, exports, module) {
         var isBalancePay = store.get("isBalancePay") || false;
         var type = store.get("type") || "payment";
         var paymentPluginId = store.get("paymentPluginId") || "lianlianpayPlugin";
-        var mergeSn = store.get("mergeSn") || 2017051635051;
+        var mergeSn = store.get("mergeSn") || 2017051735150;
         var amount = store.get("amount") || 0.01;
         var app_request = store.get("app_request") || '3';
         var cardType = store.get("cardType") || '1';
@@ -112,11 +112,15 @@ define(function (require, exports, module) {
                         $("#credit-card").html(html);
                     });
                 });
+                if(data.memberBank){
+                    store.set("bankCode", data.memberBank.bankCode);
+                    store.set("bankCardType", data.memberBank.bankCardType);
+                    store.set("bankCardNo", data.memberBank.bankCardNo);
+                    store.set("bankName", data.memberBank.bankName);
+                }else{
+                    $.toast(data.authMsg,1500);
+                }
 
-                store.set("bankCode", data.memberBank.bankCode)
-                store.set("bankCardType", data.memberBank.bankCardType);
-                store.set("bankCardNo", data.memberBank.bankCardNo);
-                store.set("bankName", data.memberBank.bankName);
             }
         })
     }
@@ -168,7 +172,9 @@ define(function (require, exports, module) {
             },
             success: function (data) {
                 console.log(data);
+                store.set("req_data",data.parameterMap.req_data);
                 $.toast(data.authMsg, 1500);
+
             }
         })
     }
