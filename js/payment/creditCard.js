@@ -127,7 +127,7 @@ define(function (require, exports, module) {
 
 
     /**
-     * 绑定银行卡并支付
+     * 绑定银行卡并支付 首次支付
      * @param isBalancePay
      * @param type
      * @param paymentPluginId
@@ -172,8 +172,15 @@ define(function (require, exports, module) {
             },
             success: function (data) {
                 console.log(data);
-                store.set("req_data",data.parameterMap.req_data);
+                if(data.parameterMap){
+                    store.set("req_data",data.parameterMap.req_data);
+                    if(data.authStatus == '200'){
+                        return location.href = './sendMoney.html';
+                    }
+                }
+
                 $.toast(data.authMsg, 1500);
+
 
             }
         })

@@ -9,7 +9,7 @@
                  <div class="pull-left ang8"></div>
                  <div class="pull-left sum-am">
                      <div class="sum-t">您已成功付款<span>291.00</span>元！</div>
-                     <div>商户会请尽跟您发货</div>
+                     <div>商户会尽快发货</div>
                  </div>
              </div>
              <div class="user-desc pay-content">

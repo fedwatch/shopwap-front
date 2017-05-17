@@ -67,19 +67,4 @@ define(function(require,exports,module){
 
 
 
-    function sendMoney(){
-
-        $.ajax({
-            url:BASE_URL+PAYMENT_SITE_URL.PAY_SUBMIT.URL,
-            dataType:PAYMENT_SITE_URL.DATATYPE,
-            type:PAYMENT_SITE_URL.PAY_SUBMIT.METHOD,
-            data:{
-
-            },
-            success:function (data) {
-
-            }
-        });
-
-    }
 });

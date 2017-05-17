@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server ."
+    "start": "webpack-dev-server .",
+    "http": "http-server ."
   },
-  "author": "",
+  "author": "Jiang Wangui,Yao DengYing",
   "license": "ISC"
 }

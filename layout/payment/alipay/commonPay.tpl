@@ -22,8 +22,8 @@
                 <span>订单金额：</span>
                 <span class="pay-span2">
                     <span class="pay-span3">￥</span>
-                    155.
-                    <span class="pay-span3">00</span>
+                    155
+                    <span class="pay-span3">.00</span>
                 </span>
             </div>
             <div class="order-addr ">

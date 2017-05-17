@@ -19,7 +19,6 @@ define(function (require, exports, module) {
         setStore("app_request","3");
 
 
-
         function setStore(key,val){
             store.set(key,val);
         }
@@ -50,15 +49,14 @@ define(function (require, exports, module) {
             setStore("cardId",cardId);
             console.log(cardId);
 
-            var isBalancePay = store.get("isBalancePay");
-            var type = store.get("type") || "payment";
+            var isBalancePay = store.get("isBalancePay") || false;
             var paymentPluginId = store.get("paymentPluginId") || "lianlianpayPlugin";
-            var mergeSn = store.get("mergeSn");
-            var amount = store.get("amount");
+            var type = store.get("type") || "payment";
+            var mergeSn = store.get("mergeSn")||2017051735656;
+            var amount = store.get("amount")||0.01;
             var cardId = store.get("cardId");
             var app_request = store.get("app_request") || '3';
             var username = store.get("username");
-
             paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username)
         });
         var status = false;
@@ -202,8 +200,8 @@ define(function (require, exports, module) {
      */
     function paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username) {
         $.ajax({
-            url: BASE_URL + PAYMENT_SITE_URL.BOUND_CARD_PAY.URL,
-            type: PAYMENT_SITE_URL.BOUND_CARD_PAY.METHOD,
+            url: BASE_URL + PAYMENT_SITE_URL.PAY_SUBMIT.URL,
+            type: PAYMENT_SITE_URL.PAY_SUBMIT.METHOD,
             dataType: PAYMENT_SITE_URL.DATATYPE,
             data: {
                 isBalancePay: isBalancePay,
@@ -216,7 +214,13 @@ define(function (require, exports, module) {
                 username: username,
             },
             success: function (data) {
-                console.log(data);
+                if(data.parameterMap){
+                    store.set("req_data",data.parameterMap.req_data);
+                    if(data.authStatus == '200'){
+                        return location.href = '../sendMoney.html';
+                    }
+                }
+                $.toast(data.authMsg, 1500);
             }
         })
     }
