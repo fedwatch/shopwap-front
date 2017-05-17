@@ -45,9 +45,9 @@ define(function (require, exports, module) {
 
         $(document).on('click','.modal-inner .bank-li a',function () {
             var $this = $(this);
-            var cardId  = $this.data("id")
-            setStore("cardId",cardId);
-            console.log(cardId);
+            var cardId2S  = $this.data("id")
+            setStore("cardId",cardId2S);
+            // console.log(cardId);
 
             var isBalancePay = store.get("isBalancePay") || false;
             var paymentPluginId = store.get("paymentPluginId") || "lianlianpayPlugin";
@@ -67,7 +67,7 @@ define(function (require, exports, module) {
                 status = false;
             }
             setStore("isBalancePay",status);
-            console.log(status);
+            // console.log(status);
         });
 
         $(".checkPay").each(function (index, item) {
@@ -119,7 +119,7 @@ define(function (require, exports, module) {
                 username: username,
             },
             success: function (data) {
-                console.log(data);
+                // console.log(data);
                 if( data.authStatus == '200'){
                     require.async("handlebars", function () {
                         require.async("transCommonPay", function () {
@@ -182,7 +182,7 @@ define(function (require, exports, module) {
                 bankName: bankName
             },
             success: function (data) {
-                console.log(data);
+                // console.log(data);
             }
         })
     }
