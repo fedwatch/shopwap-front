@@ -7,6 +7,7 @@ define(function (require, exports, module) {
     require('bankCheck');
     require('store');
 
+    jQuery.support.cors = true;
     //银行卡验证方法
     $(function () {
         $("#bind-button").click(function () {

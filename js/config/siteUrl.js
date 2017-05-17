@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/3/10.
  */
 //基本URL
-var BASE_URL = "//localhost";
+var BASE_URL = "//localhost/shopwap";
 
 
 // 用户信息
@@ -26,6 +26,7 @@ var USER_SITE_URL = {
     // 会员密码更新
     UPDATE_PASSWORD: {URL:"/user/updatePassword",METHOD:"POST"},
 };
+
 
 var INIT_SITE_URL = {
     DATATYPE:"json",

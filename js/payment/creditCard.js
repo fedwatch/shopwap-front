@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/3/21.
  */
-define(function(require,exports,module){
+define(function (require, exports, module) {
     require('jquery');
     require('store');
     require('siteUrl');
@@ -9,37 +9,56 @@ define(function(require,exports,module){
     require('user');
 
     jQuery.support.cors = true;
-    $(function(){
+    $(function () {
         var bankCardNo = store.get("bankCardNo");
         var username = store.get("username");
         var isBalancePay = store.get("isBalancePay") || false;
         var type = store.get("type") || "payment";
         var paymentPluginId = store.get("paymentPluginId") || "lianlianpayPlugin";
-        var mergeSn = store.get("mergeSn")||2017051635051;
-        var amount = store.get("amount")||0.01;
-        var app_request = store.get("app_request")|| '3';
-        var cardType = store.get("cardType")|| '1';
+        var mergeSn = store.get("mergeSn") || 2017051635051;
+        var amount = store.get("amount") || 0.01;
+        var app_request = store.get("app_request") || '3';
+        var cardType = store.get("cardType") || '1';
 
         var cardId = store.get("cardId");
-        bankcardBind(bankCardNo,username);
+        bankcardBind(bankCardNo, username);
 
-
-        $(document).on('click','.verBtn',function () {
+        var timer = 5;
+        var verBtnStatus = false;
+        $(document).on('click', '.verBtn', function () {
+            if (verBtnStatus == true)
+                verBtnStatus = false;
             var $this = $(this);
-            sendDynamicCode(username,'3');
-        }) ;
-        $(document).on('click','.firstBind',function () {
+            if (verBtnStatus == false) {
+                sendDynamicCode(username,'3');
+            }
+            setInterval(function () {
+                if (verBtnStatus == false) {
+                    timer = timer - 1;
+                    $this.text(timer + "秒").css("background", "#999");
+                    $this.attr("disabled", true);
+                    if (timer == 0) {
+                        $this.text("获取验证码").css("background", "#ff503e");
+                        $this.attr("disabled", false);
+                        verBtnStatus = true;
+                        return timer = 5;
+                    }
+                }
+            }, 1000);
+        });
+
+        $(document).on('click', '.firstBind', function () {
             var $this = $(this);
             var bankCode = store.get("bankCode");
             var bankCardType = store.get("bankCardType");
-            var bankName   = store.get("bankName");
-            var phoneNum   = store.get("username");
-            var cardNum  = $("#cardNum").val();
-            var trueUsername  = store.get("username");
-            var verifyCode   = $("#verifyCode").val();
+            var bankName = store.get("bankName");
+            var phoneNum = store.get("username");
+            var cardNum = $("#cardNum").val();
+            var trueUsername = store.get("username");
+            var verifyCode = $("#verifyCode").val();
             var verificationCode = $("#verificationCode").val() || null;
             var expiryDate = $("#creditMonth").val() + $("#creditYear").val() || null;
-            var bankCardNo  = store.get("bankCardNo");
+            var bankCardNo = store.get("bankCardNo");
 
             boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode, bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, trueUsername, bankName)
             // location.href = './alipay/paySuccess.html'
@@ -49,21 +68,21 @@ define(function(require,exports,module){
     });
 
 
-    function sendDynamicCode(userPhone,codeFlag){
+    function sendDynamicCode(userPhone, codeFlag) {
         $.ajax({
             url: BASE_URL + USER_SITE_URL.SEND_DYNAMIC_CODE.URL,
             type: USER_SITE_URL.SEND_DYNAMIC_CODE.METHOD,
             dataType: USER_SITE_URL.DATATYPE,
             data: {
-                userPhone : userPhone ,
-                codeFlag : codeFlag ,
+                userPhone: userPhone,
+                codeFlag: codeFlag,
             },
             success: function (data) {
                 console.log(data);
-                if(data.authStatus == '200'){
-                    $.toast(data.authMsg,1500);
-                }else{
-                    $.toast(data.authMsg,1500);
+                if (data.authStatus == '200') {
+                    $.toast(data.authMsg, 1500);
+                } else {
+                    $.toast(data.authMsg, 1500);
                 }
             }
         })
@@ -85,19 +104,19 @@ define(function(require,exports,module){
                 username: username,
             },
             success: function (data) {
-                require.async('handlebars',function(){
-                    require.async('transCommonPay',function(){
-                        var tpl=require('/layout/payment/directPay/creditCard.tpl') ;
-                        var template=Handlebars.compile(tpl);
-                        var html=template(data);
+                require.async('handlebars', function () {
+                    require.async('transCommonPay', function () {
+                        var tpl = require('/layout/payment/directPay/creditCard.tpl');
+                        var template = Handlebars.compile(tpl);
+                        var html = template(data);
                         $("#credit-card").html(html);
                     });
                 });
 
-                store.set("bankCode",data.memberBank.bankCode)
-                store.set("bankCardType",data.memberBank.bankCardType);
-                store.set("bankCardNo",data.memberBank.bankCardNo);
-                store.set("bankName",data.memberBank.bankName);
+                store.set("bankCode", data.memberBank.bankCode)
+                store.set("bankCardType", data.memberBank.bankCardType);
+                store.set("bankCardNo", data.memberBank.bankCardNo);
+                store.set("bankName", data.memberBank.bankName);
             }
         })
     }
@@ -149,7 +168,7 @@ define(function(require,exports,module){
             },
             success: function (data) {
                 console.log(data);
-                $.toast(data.authMsg,1500);
+                $.toast(data.authMsg, 1500);
             }
         })
     }
