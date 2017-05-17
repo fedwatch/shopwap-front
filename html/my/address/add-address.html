@@ -4,7 +4,8 @@
     <title>快捷支付 </title>
     <!--js 头部引入-->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
     <meta content="telephone=no" name="format-detection"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
@@ -17,29 +18,24 @@
     <link rel="stylesheet" type="text/css" href="/assets/plugin/light7/dist/css/light7-swiper.min.css"/>
     <link rel="stylesheet" type="text/css" href="/assets/plugin/light7/dist/css/light7-swipeout.css"/>
 
-    <!--<script type="text/javascript" src="/assets/plugin/sea.js"></script>-->
-    <!--<script type="text/javascript" src="/assets/plugin/seajs-text.js"></script>-->
+    <script type="text/javascript" src="/assets/plugin/sea.js"></script>
+    <script type="text/javascript" src="/assets/plugin/seajs-text.js"></script>
+
     <!--<script>-->
     <!--seajs.use(['/js/api','/js/my/address/add-address'])-->
     <!--</script>-->
 
-    <script src="http://www.light7.cn/assets/js/zepto.js"></script>
+
     <script>
-        $(function() {
-            $(document).on("pageInit", function() {
-                $("#city-picker").cityPicker({
-                    toolbarTemplate: '<header class="bar bar-nav">\
-      <button class="button button-link pull-right close-picker">完成</button>\
-      <h1 class="title"></h1>\
-      </header>'
-                });
-            });
-            $.init();
-        });
+        seajs.use(['/js/api','/js/my/address/add-address'])
+    </script>
+
+    <script>
+
     </script>
 </head>
 <body class="page">
-<div  class="address">
+<div class="address">
     <header class="bar bar-nav">
         <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)"
            data-transition='slide-out'>
@@ -77,9 +73,20 @@
                     <div class="item-content">
 
                         <div class="item-inner">
+                            <div class="item-title label">城&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;市</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="" id="city-picker" value='上海 浦东新区 '/>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+
+                        <div class="item-inner">
                             <div class="item-title label">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址</div>
                             <div class="item-input">
-                                <input type="text"  placeholder="" id="city-picker"  value='上海 浦东新区 ' />
+                                <input type="text" placeholder="" id="user-address" value=''/>
                             </div>
                         </div>
                     </div>
@@ -89,7 +96,7 @@
                         <div class="item-inner">
                             <div class="item-title label">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编</div>
                             <div class="item-input">
-                                <input type="text" placeholder="可选填" class="" id="mail"/>
+                                <input type="text" placeholder="可选填" class="" id="user-zipcode"/>
                             </div>
                         </div>
                     </div>
@@ -102,7 +109,7 @@
                             <div class="item-title label">设为默认</div>
                             <div class="item-input">
                                 <label class="label-switch pull-right">
-                                    <input type="checkbox"/>
+                                    <input type="checkbox" id="user-default"/>
                                     <div class="checkbox"></div>
                                 </label>
                             </div>
@@ -113,39 +120,19 @@
         </div>
         <div class="content-block">
             <div class=" ">
-                <a href="./manage-address.html" class="external button button-big button-fill button-success rg-col" id="button">确认</a>
+                <a href="javascript:void(0);" class="addAddressBtn external button button-big button-fill button-success rg-col"
+                   id="button">确认</a>
             </div>
         </div>
     </div>
 </div>
 
 
-<!--<script type="text/javascript" src="/assets/plugin/jquery.min.js"></script>-->
-<!--<script type="text/javascript" src="/assets/plugin/light7/dist/js/light7.min.js"></script>-->
-<!--<script type="text/javascript" src="/assets/plugin/light7/dist/js/light7-swiper.min.js"></script>-->
-<!--<script type="text/javascript" src="/assets/plugin/light7/dist/js/light7-swipeout.js"></script>-->
-<!--<script type="text/javascript" src="/assets/plugin/light7/dist/js/light7-city-picker.js"></script>-->
-<script src="http://www.light7.cn/dist/js/light7.js"></script>
-<script src="http://www.light7.cn/dist/js/light7-swiper.js"></script>
-<script src="http://www.light7.cn/dist/js/light7-swipeout.js"></script>
-<script src="http://www.light7.cn/dist/js/light7-city-picker.js"></script>
+<script type="text/javascript" src="/assets/plugin/jquery.min.js"></script>
+<script type="text/javascript" src="/assets/plugin/light7/dist/js/light7.min.js"></script>
+<script type="text/javascript" src="/assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
+<script type="text/javascript" src="/assets/plugin/light7/dist/js/light7-swipeout.js"></script>
 <script type="text/javascript" src="/js/utils/varietyValidation.js"></script>
-<script>
-    //用户名验证
-    var $userNameAddr=$("#ad-user-name");
-    var $userPhoneS=$("#user-phoneS");
 
-    $userPhoneS.on('blur',function () {
-        var userPhoneVal=$userPhoneS.val();
-        checkUserPhoneA(userPhoneVal,$userPhoneS,"li");
-    });
-
-    $userNameAddr.on('blur',function () {
-        var userPhoneVal =  $userNameAddr.val();
-        checkUserNameAddr(userPhoneVal,$userNameAddr,"li");
-    });
- $.init();
-
-</script>
 </body>
 </html>

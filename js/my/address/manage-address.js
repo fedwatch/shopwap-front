@@ -7,8 +7,11 @@ define(function(require,exports,module){
 
     });
 
-    var username = store.get("username");
-    var pageNumber = store.get("pageNumber");
+
+    var username = '18717964640';
+    var pageNumber = 0;
+    var pageSize = 0;
+
 
     require.async('handlebars',function(){
         $.ajax({
@@ -18,6 +21,7 @@ define(function(require,exports,module){
             data:{
                 username :username,
                 pageNumber  :pageNumber,
+                pageSize  :pageSize,
             },
             success:function (data) {
                 var tpl=require('/layout/my/address/manage-address.tpl');

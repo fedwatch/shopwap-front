@@ -14,6 +14,7 @@ seajs.config({
         "light7":"/assets/plugin/light7/dist/js/light7.min.js",
         "light7-swiper":"/assets/plugin/light7/dist/js/light7-swiper.min.js",
         "light7-swipeout":"/assets/plugin/light7/dist/js/light7-swipeout.js",
+        "city-picker":"/assets/plugin/light7/dist/js/light7-city-picker.js",
         "fastclick":"//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js",
         "handlebars":"/assets/plugin/handlebars-v1.3.0",
         "mockjs":"/assets/plugin/mockjs",
