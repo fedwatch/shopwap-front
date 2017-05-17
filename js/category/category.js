@@ -235,7 +235,7 @@ define(function (require, exports, module) {
             },
             dataType:PRODUCT_SITE_URLS.DATATYPE,
             success:function (data) {
-                console.log(data);
+                // console.log(data);
                 if(data.authStatus == "200"){
                     var tpl = require('/layout/cartgory/productCategory.tpl');
                     var template = Handlebars.compile(tpl);

@@ -9,6 +9,7 @@ define(function (require, exports, module) {
     require('jsbn');
     require('prng4');
     require('rng');
+    require('siteUrl');
 
 
     jQuery.support.cors = true;
@@ -42,11 +43,11 @@ define(function (require, exports, module) {
                 return $.toast("用户名或密码输入有误！")
             }
             $.ajax({
-                url: "//swagger.cqdai.cn:9090/shopwap/common/public_key",
-                type: "get",
+                url: BASE_URL+USER_SITE_URL.PUBLIC_KEY.URL,
+                type: USER_SITE_URL.PUBLIC_KEY.METHOD,
                 cache:false,
                 async:false,
-                dataType:"json",
+                dataType:USER_SITE_URL.DATATYPE,
                 success: function(data) {
                     var rsaKey = new RSAKey();
                     rsaKey.setPublic(b64tohex(data.modulus), b64tohex(data.exponent));
@@ -57,11 +58,11 @@ define(function (require, exports, module) {
 
 
             $.ajax({
-                url: "//swagger.cqdai.cn:9090/shopwap/user/userLogin",
-                type: "post",
+                url: BASE_URL+USER_SITE_URL.USER_LOGIN.URL,
+                type: USER_SITE_URL.USER_LOGIN.METHOD,
                 cache:false,
                 async:false,
-                dataType:"json",
+                dataType:USER_SITE_URL.DATATYPE,
                 data:{username:username ,enPassword:enPassword},
                 success: function(data) {
                     console.log(data);

@@ -59,6 +59,7 @@ define(function (require, exports, module) {
             var username = store.get("username");
             paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username)
         });
+
         var status = false;
         $(document).on('click','#balancePayBtn',function () {
             if(status == false){
