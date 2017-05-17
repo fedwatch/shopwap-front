@@ -4,6 +4,7 @@ define(function (require, exports, module) {
     // require("mockjs");
     require("siteUrl");
     require("store");
+    require("getUser");
 
     jQuery.support.cors = true;
     $(function () {
@@ -47,7 +48,16 @@ define(function (require, exports, module) {
             var $this = $(this);
             var cardId  = $this.data("id")
             setStore("cardId",cardId);
-            console.log(cardId)
+            console.log(cardId);
+
+            var isBalancePay = store.get("isBalancePay");
+            var type = store.get("type") || "payment";
+            var paymentPluginId = store.get("paymentPluginId") || "lianlianpayPlugin";
+            var mergeSn = store.get("mergeSn");
+            var amount = store.get("amount");
+            var cardId = store.get("cardId");
+            var app_request = store.get("app_request") || '3';
+            var username = store.get("username");
 
             paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username)
         });
