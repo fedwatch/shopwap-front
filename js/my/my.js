@@ -62,7 +62,7 @@ define(function(require,exports,module){
             data:'7795'
         };
         //未登陆
-        var tpl = require('/layout/my/common/notLogin.tpl');
+        var tpl = require('/layout/my/common/header.tpl');
         //登陆
         // var tpl = require('/layout/my/common/myHeader.tpl');
         var template = Handlebars.compile(tpl);

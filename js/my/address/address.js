@@ -10,6 +10,8 @@ define(function(require,exports,module){
 
 
     require.async('handlebars',function(){
+        var username = '18717964640';
+        var pageNumber = 0;
         $.ajax({
             url:BASE_URL+MEMBER_SITE_URL.LIST.URL,
             type:MEMBER_SITE_URL.LIST.METHOD,
@@ -19,10 +21,12 @@ define(function(require,exports,module){
                 pageNumber  :pageNumber,
             },
             success:function (data) {
-                var tpl=require('/layout/my/address/address.tpl');
-                var template=Handlebars.compile(tpl);
-                var html=template(data);
-                $("#address").html(html);
+                if(data.authStatus){
+                    var tpl=require('/layout/my/address/address.tpl');
+                    var template=Handlebars.compile(tpl);
+                    var html=template(data);
+                    $("#address").html(html);
+                }
             }
         });
 
@@ -31,28 +35,28 @@ define(function(require,exports,module){
 
 
 
-    var username = store.get("username");
-    var pageNumber = store.get("pageNumber");
+    // var username = store.get("username");
+    // var pageNumber = store.get("pageNumber");
 
-    require.async('handlebars',function(){
-        $.ajax({
-            url:BASE_URL+MEMBER_SITE_URL.LIST.URL,
-            type:MEMBER_SITE_URL.LIST.METHOD,
-            dataType:MEMBER_SITE_URL.DATATYPE,
-            data:{
-                username :username,
-                pageNumber  :pageNumber,
-            },
-            success:function (data) {
-                var tpl=require('/layout/my/address/manage-address.tpl');
-                var template=Handlebars.compile(tpl);
-                var html=template(data);
-                $("#manage-address").html(html);
-                edit();
-            }
-        });
-
-    });
+    // require.async('handlebars',function(){
+    //     $.ajax({
+    //         url:BASE_URL+MEMBER_SITE_URL.LIST.URL,
+    //         type:MEMBER_SITE_URL.LIST.METHOD,
+    //         dataType:MEMBER_SITE_URL.DATATYPE,
+    //         data:{
+    //             username :username,
+    //             pageNumber  :pageNumber,
+    //         },
+    //         success:function (data) {
+    //             var tpl=require('/layout/my/address/manage-address.tpl');
+    //             var template=Handlebars.compile(tpl);
+    //             var html=template(data);
+    //             $("#manage-address").html(html);
+    //             edit();
+    //         }
+    //     });
+    //
+    // });
 
     /**
      * 收货地址列表查看
