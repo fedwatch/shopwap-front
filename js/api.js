@@ -33,6 +33,8 @@ seajs.config({
         "swipeout":"/assets/plugin/light7/dist/js/light7-swipeout.js",
         "siteUrl":"/js/config/siteUrl.js",
         "user":"/js/config/user.js",
+        "setUser":"/js/config/setUser.js",
+        "getUser":"/js/config/getUser.js",
         "city-swiper":"/assets/plugin/light7/dist/js/light7-city-picker.js"
     }
 });
