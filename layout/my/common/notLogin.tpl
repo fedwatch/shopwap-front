@@ -15,22 +15,28 @@
 
            <div class="login_button_group">
                <div class="my-login">
+
                    <a  href="/html/my/login/login.html"  class="external register-button">登陆</a>
                    <a href="/html/my/register/register.html" class="external register-button">注册</a>
 
-                   <a href="javascript:void(0);"  class="external register-button">帐号详情</a>
-                   <a href="javascript:void(0);" class="external register-button logoutButton">退出</a>
+                   <!--<a href="javascript:void(0);"  class="external register-button">帐号详情</a>-->
+                   <!--<a href="javascript:void(0);" class="external register-button logoutButton">退出</a>-->
                </div>
            </div>
+
+            <div >
+                <div  class="user-id">{{username}}</div>
+                <div class="rest-money"><span class="reset2-img"></span><span class="reset2">2888.32</span><a class="reset-detail">余额明细</a></div>
+            </div>
 
         </div>
         <div class="content-block obligation">
             <div >
                 <ul class="clearfix">
-                    <li style="border-left:none;">待付款</li>
-                    <li>待发货</li>
-                    <li>待收货</li>
-                    <li>待评价</li>
+                    <li style="border-left:none;">待付款<span class="show-amount">14</span></li>
+                    <li>待发货<span class="show-amount">14</span></li>
+                    <li>待收货<span class="show-amount">14</span></li>
+                    <li>待评价<span class="show-amount">14</span></li>
                 </ul>
             </div>
         </div>
