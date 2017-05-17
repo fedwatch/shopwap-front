@@ -7,22 +7,26 @@ define(function(require,exports,module){
     require('swiper');
     require('light7');
     require('mockjs');
+    require('siteUrl');
 
     var genData = [
-            {storeName:'苏菲专卖店',
-                tradeStatus:'交易成功',
-                thumbnail:'/assets/images/cart-item-image-product.png',title:'耐克 AIR JORDAN 6 RETRO 复刻男子运动鞋',desc:'颜色分类：一二三四五六七八九十一二三四五六七八九十',nowPrice:1399.00,pastPrice:1399.00,quant:1,totalQuant:1,totalPrice:1399,
-                userChooseCol:[
+        {
+            storeName: '苏菲专卖店',
+            tradeStatus: '交易成功',
+            thumbnail: '/assets/images/cart-item-image-product.png',
+            title: '耐克 AIR JORDAN 6 RETRO 复刻男子运动鞋',
+            desc: '颜色分类：一二三四五六七八九十一二三四五六七八九十',
+            nowPrice: 1399.00,
+            pastPrice: 1399.00,
+            quant: 1,
+            totalQuant: 1,
+            totalPrice: 1399,
+            userChooseCol: [
                 {},
                 {},
                 {}
-                ]
-            },
-            {},
-            {},
-            {},
-            {},
-            {},
+            ]
+        },
     ];
 
     $(function () {
@@ -47,6 +51,11 @@ define(function(require,exports,module){
     });
 
     getAllOrders();
+    getUnpaidOrders();
+    getUnprocessedOrders();
+    getDeliveryWaiting();
+    getPendingReviews();
+
     function getAllOrders(){
         $.ajax({
             url:"/orders/getAllOrders",
@@ -59,7 +68,6 @@ define(function(require,exports,module){
             }
         })
     }
-    getUnpaidOrders();
     function getUnpaidOrders() {
         $.ajax({
             url:"/orders/getUnpaidOrders",
@@ -73,7 +81,6 @@ define(function(require,exports,module){
         })
     }
 
-    getUnprocessedOrders();
     function getUnprocessedOrders(){
         $.ajax({
             url:"/orders/getUnprocessedOrders",
@@ -87,7 +94,6 @@ define(function(require,exports,module){
         })
     }
 
-    getDeliveryWaiting();
     function getDeliveryWaiting() {
         $.ajax({
             url:"/orders/getDeliveryWaiting",
@@ -101,7 +107,6 @@ define(function(require,exports,module){
         })
     }
 
-    getPendingReviews();
     function getPendingReviews() {
         $.ajax({
             url:"/orders/getPendingReviews",
@@ -116,7 +121,10 @@ define(function(require,exports,module){
     }
 
 
-    // modifySuccess
+
+
+
+// modifySuccess
     require.async('handlebars',function(){
         var data = {};
         var tpl = require('/layout/my/myOrder.tpl');
@@ -127,4 +135,7 @@ define(function(require,exports,module){
 
 
 
+
 });
+
+

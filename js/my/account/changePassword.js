@@ -1,6 +1,7 @@
 define(function(require,exports,module){
     require('jquery');
     require('light7');
+    require('siteUrl');
     // require('mockjs');
 
     $(function(){
@@ -34,9 +35,9 @@ define(function(require,exports,module){
                 checkPhone($phoneNumberVal);
                 if($phoneNumberVal){
                     $.ajax({
-                        url:"//swagger.cqdai.cn:9090/shopwap/user/sendDynamicCode",
-                        type:"post",
-                        dataType:'json',
+                        url:BASE_URL+USER_SITE_URL.SEND_DYNAMIC_CODE.URL,
+                        type:USER_SITE_URL.SEND_DYNAMIC_CODE.METHOD,
+                        dataType:USER_SITE_URL.DATATYPE,
                         cache:false,
                         async:false,
                         data: {userPhone: $phoneNumberVal,codeFlag:"1"},

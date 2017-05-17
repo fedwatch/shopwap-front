@@ -24,13 +24,13 @@ define(function (require, exports, module) {
                     text: '<div style="font-size:.8rem;">微信</div>',
                     // bold: true,
                     // color: 'danger',
-                    onClick: function() {
+                    onClick: function () {
 
                     }
                 },
                 {
                     text: '<div style="font-size:.8rem;">朋友圈</div>',
-                    onClick: function() {
+                    onClick: function () {
 
                     }
                 }
@@ -46,12 +46,12 @@ define(function (require, exports, module) {
         });
         //监听 购物车
         $(document).on('click', ".cart-badge", function () {
-            getCartCount("13167161025",'455',".cart-badge > .badge");
-            var sum=$(".cart-badge > .badge").text();
-            if(sum=="0"){
+            getCartCount("13167161025", '455', ".cart-badge > .badge");
+            var sum = $(".cart-badge > .badge").text();
+            if (sum == "0") {
                 $.toast("请添加商品");
                 return;
-            }else{
+            } else {
                 window.location.href = "/html/cart/cart.html";
             }
         });
@@ -73,31 +73,32 @@ define(function (require, exports, module) {
 
         function addToCart() {
             var cartState = $("#cartState").val();
-            if(cartState == "false" ){
+            if (cartState == "false") {
                 $("#goodsDetailMask").show();
                 $("#goodsDetailsPage").show();
 
-            }else if(cartState == "true"){
+            } else if (cartState == "true") {
                 $("#goodsDetailMask").hide();
                 $("#goodsDetailsPage").hide();
             }
 
-             var count= $("input[name=goodsNumber]").val();
-                     store.set("username","13167161025");
-                var username=store.get("username");
-            if(cartState =="true"){
+            var count = $("input[name=goodsNumber]").val();
+            //USERMD
+            store.set("username", "13167161025");
+            var username = store.get("username");
+            if (cartState == "true") {
                 $.ajax({
-                    url:BASE_URL+CART_SITE_URL.CART_ADD.URL,
-                    type:CART_SITE_URL.CART_ADD.METHOD,
-                    data:{
-                        username:username,
-                        productId :'308',
-                        quantity:count
+                    url: BASE_URL + CART_SITE_URL.CART_ADD.URL,
+                    type: CART_SITE_URL.CART_ADD.METHOD,
+                    data: {
+                        username: username,
+                        productId: '308',
+                        quantity: count
                     },
-                    dataType:CART_SITE_URL.DATATYPE,
-                    success:function(data){
-                        if(data.authStatus=="200"){
-                            getCartCount("13167161025",'455',".cart-badge > .badge");
+                    dataType: CART_SITE_URL.DATATYPE,
+                    success: function (data) {
+                        if (data.authStatus == "200") {
+                            getCartCount("13167161025", '455', ".cart-badge > .badge");
                             $("#cartState").val(false)
                         }
 
@@ -107,7 +108,7 @@ define(function (require, exports, module) {
         }
 
         //立即下单
-        $(document).on('click',".buyNowBtn", function () {
+        $(document).on('click', ".buyNowBtn", function () {
             // location.href = "/html/payment/payment.html";
             window.location.href = "/html/order/order.html";
         });
@@ -121,7 +122,7 @@ define(function (require, exports, module) {
         });
 
         //规格
-        $(document).on('click','.spec-button', function (e) {
+        $(document).on('click', '.spec-button', function (e) {
             e.preventDefault();
             e.stopPropagation();
             var $this = $(this);
@@ -131,8 +132,8 @@ define(function (require, exports, module) {
             var len = $(".popup-page > .spec-button.active").length;
             var i = 0;
             var text = [];
-            for(i = 0 ;i < len; i++){
-                text += $(".popup-page > .spec-button.active").eq(i).text()+","
+            for (i = 0; i < len; i++) {
+                text += $(".popup-page > .spec-button.active").eq(i).text() + ","
 
             }
             $("#specResult").val(text);
@@ -152,9 +153,8 @@ define(function (require, exports, module) {
         // });
 
 
-
         //数量 -
-        $(document).on('click', ".goods-minus-btn",function (e) {
+        $(document).on('click', ".goods-minus-btn", function (e) {
 
             if ($(".numbers-board > .goods-minus-btn").hasClass("active")) {
                 var num = parseInt($("input[name=goodsNumber]").val());
@@ -172,7 +172,7 @@ define(function (require, exports, module) {
             }
         });
         //数量 +
-        $(document).on('click',".goods-plus-btn", function (e) {
+        $(document).on('click', ".goods-plus-btn", function (e) {
 
             if ($(".numbers-board > .goods-plus-btn").hasClass("active")) {
                 var num = parseInt($("input[name=goodsNumber]").val());
@@ -195,29 +195,28 @@ define(function (require, exports, module) {
     function setTextToSpecShow() {
         var sm = "";
         var specResult = $("#specResult").val();
-        var colorResult = $("#colorResult").val()||$(".popup-page >.color-button.number-input.active").text();
-        var numberResult = $("#numberResult").val()||1;
+        var colorResult = $("#colorResult").val() || $(".popup-page >.color-button.number-input.active").text();
+        var numberResult = $("#numberResult").val() || 1;
         sm = specResult + "," + colorResult + "," + numberResult;
         $("#specShow").html(sm);
     }
 
 
-
     require.async('handlebars', function () {
-        var username=store.get("username");
-        var currentProductID=store.get("currentProductID");
-
+        var username = store.get("username");
+        var currentProductID = store.get("currentProductID");
+        // usermd
         $.ajax({
-            url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_VIEW.URL,
-            type:PRODUCT_SITE_URLS.PRODUCT_VIEW.METHOD,
-            data:{
-                username:"13167161025",
-                id:'455'
+            url: BASE_URL + PRODUCT_SITE_URLS.PRODUCT_VIEW.URL,
+            type: PRODUCT_SITE_URLS.PRODUCT_VIEW.METHOD,
+            data: {
+                username: "13167161025",
+                id: '455'
             },
-            dataType:PRODUCT_SITE_URLS.DATATYPE,
-            success:function(results){
+            dataType: PRODUCT_SITE_URLS.DATATYPE,
+            success: function (results) {
                 var data = results;
-                if(data.authStatus == "200"){
+                if (data.authStatus == "200") {
 
                     require.async('handlebars', function () {
                         var tpl = require('/layout/detail/productSlider.tpl');
@@ -243,8 +242,6 @@ define(function (require, exports, module) {
                     });
 
 
-
-
                     require.async('handlebars', function () {
                         var tpl = require('/layout/detail/topLinkMenu.tpl');
                         var template = Handlebars.compile(tpl);
@@ -256,8 +253,8 @@ define(function (require, exports, module) {
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#cartDetailFooter").html(html);
-                            //获取已有购物车物品数量
-                            getCartCount("13167161025",'455',".cart-badge > .badge");
+                        //获取已有购物车物品数量
+                        getCartCount("13167161025", '455', ".cart-badge > .badge");
                     });
 
                     require.async('handlebars', function () {
@@ -265,7 +262,7 @@ define(function (require, exports, module) {
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#detailOne").html(html);
-                        calculateFreight(username,"455","804","2","shippingCost");
+                        calculateFreight(username, "455", "804", "2", "shippingCost");
                     });
                     //七天无理由退换
                     require.async('handlebars', function () {
@@ -277,7 +274,7 @@ define(function (require, exports, module) {
 
                     //detailPromo
                     require.async('handlebars', function () {
-                        require.async('transDetails',function(){
+                        require.async('transDetails', function () {
                             var tpl = require('/layout/detail/detailPromo.tpl');
                             var template = Handlebars.compile(tpl);
                             var html = template(data);
@@ -299,30 +296,30 @@ define(function (require, exports, module) {
         })
 
 
-
     });
 
     /**
      *
      */
-    function setSpecificationId(){
+    function setSpecificationId() {
+        // usermd
         $.ajax({
-            url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_VIEW.URL,
-            type:PRODUCT_SITE_URLS.PRODUCT_VIEW.METHOD,
-            data:{
-                username:"13167161025",
-                id:'455'
+            url: BASE_URL + PRODUCT_SITE_URLS.PRODUCT_VIEW.URL,
+            type: PRODUCT_SITE_URLS.PRODUCT_VIEW.METHOD,
+            data: {
+                username: "13167161025",
+                id: '455'
             },
-            dataType:PRODUCT_SITE_URLS.DATATYPE,
-            success:function(results){
+            dataType: PRODUCT_SITE_URLS.DATATYPE,
+            success: function (results) {
                 var specificationValues = results["product"].specificationValues;
                 var productSpec = [];
-                specificationValues.map(function(data){
+                specificationValues.map(function (data) {
                     productSpec.push(data.id)
                 });
                 var len = productSpec.length;
-                for(var i=0;i<len;i++){
-                    $("#specification-id-"+productSpec[i]).removeClass("active").addClass("active");
+                for (var i = 0; i < len; i++) {
+                    $("#specification-id-" + productSpec[i]).removeClass("active").addClass("active");
                 }
             }
         })
@@ -337,48 +334,47 @@ define(function (require, exports, module) {
      * @param buyCount
      * @param DOM
      */
-    function calculateFreight(username,id,areaId,buyCount,DOM){
+    function calculateFreight(username, id, areaId, buyCount, DOM) {
+        // usermd
         $.ajax({
-            url:BASE_URL+PRODUCT_SITE_URLS.CALCULATE_FREIGHT.URL,
-            type:PRODUCT_SITE_URLS.CALCULATE_FREIGHT.METHOD,
+            url: BASE_URL + PRODUCT_SITE_URLS.CALCULATE_FREIGHT.URL,
+            type: PRODUCT_SITE_URLS.CALCULATE_FREIGHT.METHOD,
             data: {
                 username: username,
                 id: id,
                 areaId: areaId,
-                buyCount:buyCount
+                buyCount: buyCount
             },
-            dataType:PRODUCT_SITE_URLS.DATATYPE,
-            success:function(data){
+            dataType: PRODUCT_SITE_URLS.DATATYPE,
+            success: function (data) {
                 // console.log(data);
-                if(data.authStatus == "200"){
-                    $("#"+DOM).text(data.freight);
+                if (data.authStatus == "200") {
+                    $("#" + DOM).text(data.freight);
                 }
             }
         })
     }
 
-   //获取购物车数据
-    function getCartCount(username,id,DOM){
+    //获取购物车数据
+    function getCartCount(username, id, DOM) {
+        // usermd
         $.ajax({
-            url:BASE_URL+CART_SITE_URL.CART_COUNT.URL,
-            type:CART_SITE_URL.CART_COUNT.METHOD,
-            data:{
-                username:username,
-                id:id
+            url: BASE_URL + CART_SITE_URL.CART_COUNT.URL,
+            type: CART_SITE_URL.CART_COUNT.METHOD,
+            data: {
+                username: username,
+                id: id
             },
-            dataType:CART_SITE_URL.DATATYPE,
-            success:function(data){
-                if(data.authStatus=="200"){
-                    var sum=data.count;
+            dataType: CART_SITE_URL.DATATYPE,
+            success: function (data) {
+                if (data.authStatus == "200") {
+                    var sum = data.count;
                     console.log(sum);
                     $(DOM).text(sum);
                 }
             }
         })
     }
-
-
-
 
 
 });

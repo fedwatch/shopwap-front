@@ -12,8 +12,7 @@ define(function(require,exports,module){
     require('jsbn');
     require('prng4');
     require('rng');
-
-
+    require('siteUrl');
 
     var genData = {};
 
@@ -90,11 +89,11 @@ define(function(require,exports,module){
                 var enPassword;
 
                 $.ajax({
-                    url: "//swagger.cqdai.cn:9090/shopwap/common/public_key",
-                    type: "get",
+                    url: BASE_URL+USER_SITE_URL.PUBLIC_KEY.URL,
+                    type: USER_SITE_URL.PUBLIC_KEY.METHOD,
                     cache:false,
                     async:false,
-                    dataType:"json",
+                    dataType:USER_SITE_URL.DATATYPE,
                     success: function(data) {
                         var rsaKey = new RSAKey();
                         rsaKey.setPublic(b64tohex(data.modulus), b64tohex(data.exponent));
@@ -103,9 +102,9 @@ define(function(require,exports,module){
                 });
 
                 $.ajax({
-                    url:"//swagger.cqdai.cn:9090/shopwap/user/userRegister",
-                    dataType:"json",
-                    type:"post",
+                    url:BASE_URL+USER_SITE_URL.USER_REGISTER.URL,
+                    dataType:USER_SITE_URL.DATATYPE,
+                    type:USER_SITE_URL.USER_REGISTER.METHOD,
                     cache:false,
                     async:false,
                     data:{
@@ -202,9 +201,9 @@ define(function(require,exports,module){
             if($userPhone.val() && $userPhone.val() !== ''){
                 var phoneNum = $userPhone.val();
                 $.ajax({
-                    url:"//swagger.cqdai.cn:9090/shopwap/user/sendDynamicCode",
-                    type:"post",
-                    dataType:'json',
+                    url:BASE_URL+USER_SITE_URL.SEND_DYNAMIC_CODE.URL,
+                    type:USER_SITE_URL.SEND_DYNAMIC_CODE.METHOD,
+                    dataType:USER_SITE_URL.DATATYPE,
                     cache:false,
                     async:false,
                     data: {userPhone: phoneNum,codeFlag:"1"},

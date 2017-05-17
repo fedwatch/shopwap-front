@@ -1,4 +1,4 @@
-define(function(require,exports,module){
+define(function (require, exports, module) {
     require('jquery');
     require('light7');
     require('light7-swiper');
@@ -6,23 +6,23 @@ define(function(require,exports,module){
     require('siteUrl');
 
     jQuery.support.cors = true;
-    $(function(){
+    $(function () {
 
         var sn = "213213121";
         var username = "yaodengyin";
         $.ajax({
-            url:BASE_URL+LOGISTICS_URLS.PRODUCT_SEARCH.URL,
-            dataType:"json",
-            type:LOGISTICS_URLS.PRODUCT_SEARCH.METHOD,
-            data:{username:username,sn:sn},
-            success:function(result){
-                if(result.authStatus=="200"){
+            url: BASE_URL + LOGISTICS_URLS.PRODUCT_SEARCH.URL,
+            dataType: LOGISTICS_URLS.DATATYPE,
+            type: LOGISTICS_URLS.PRODUCT_SEARCH.METHOD,
+            data: {username: username, sn: sn},
+            success: function (result) {
+                if (result.authStatus == "200") {
                     console.log(result);
-                    require.async('handlebars',function(){
-                        var getData=result;
-                        var tpl=require('/layout/user/logistics.tpl');
-                        var template=Handlebars.compile(tpl);
-                        var html=template(getData);
+                    require.async('handlebars', function () {
+                        var getData = result;
+                        var tpl = require('/layout/user/logistics.tpl');
+                        var template = Handlebars.compile(tpl);
+                        var html = template(getData);
                         $("#logistics").html(html);
                         $.init();
                     });
@@ -30,7 +30,6 @@ define(function(require,exports,module){
             }
         })
     });
-
 
 
 })

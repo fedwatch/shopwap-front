@@ -5,6 +5,7 @@ define(function(require,exports,module){
     require('jquery');
     require("swiper");
     require("store");
+    require("siteUrl");
 
     $(function () {
         //底部菜单切换
@@ -34,9 +35,9 @@ define(function(require,exports,module){
 
         $(document).on('click','.logoutButton',function () {
             $.ajax({
-                url:"//swagger.cqdai.cn:9090/shopwap/user/userLogout",
-                type:"post",
-                dataType:"json",
+                url:BASE_URL+USER_SITE_URL.USER_LOGOUT.URL,
+                type:USER_SITE_URL.USER_LOGOUT.METHOD,
+                dataType:USER_SITE_URL.DATATYPE,
                 cache:false,
                 async:false,
                 data: {

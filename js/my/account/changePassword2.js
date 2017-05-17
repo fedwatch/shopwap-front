@@ -77,14 +77,15 @@ define(function (require, exports, module) {
             var $newPasswordVal = $newPassword.val();
             checkPassword($newPasswordVal);
         });
+
         $(".change-mar").find(".button-big").click(function () {
             var $newPasswordTwoVal = $newPasswordTwo.val();
             var flg = surePassword($newPasswordTwoVal);
             if (flg == true) {
                 $.ajax({
-                    url:"//swagger.cqdai.cn:9090/shopwap/user/updatePassword",
-                    type:"post",
-                    dataType:"json",
+                    url:BASE_URL+USER_SITE_URL.UPDATE_PASSWORD.URL,
+                    type:USER_SITE_URL.UPDATE_PASSWORD.METHOD,
+                    dataType:USER_SITE_URL.DATATYPE,
                     cache:false,
                     async:false,
                     data: {
@@ -103,6 +104,7 @@ define(function (require, exports, module) {
                 return;
             }
         });
+
         //显示明文
         $comIcon.each(function (index, item) {
             $(this).click(function () {

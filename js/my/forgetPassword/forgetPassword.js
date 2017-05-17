@@ -8,6 +8,7 @@ define(function(require,exports,module){
     require('swiper');
     require('light7');
     // require('mockjs');
+    require('siteUrl');
 
 
 
@@ -148,9 +149,9 @@ define(function(require,exports,module){
             if($userPhone.val() && $userPhone.val() !== ''){
                 var phoneNum = $userPhone.val();
                 $.ajax({
-                    url:'//swagger.cqdai.cn:9090/shopwap/user/sendDynamicCode',
-                    type:'post',
-                    dataType:'json',
+                    url:BASE_URL+USER_SITE_URL.SEND_DYNAMIC_CODE.URL,
+                    type:USER_SITE_URL.SEND_DYNAMIC_CODE.METHOD,
+                    dataType:USER_SITE_URL.DATATYPE,
                     cache:false,
                     async:false,
                     data: {
