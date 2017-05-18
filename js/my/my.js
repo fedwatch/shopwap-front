@@ -6,32 +6,34 @@ define(function(require,exports,module){
     // require("swiper");
     require("store");
     require("siteUrl");
+    require("/js/utils/getCurrentPage");
 
     $(function () {
-        //底部菜单切换
-        $(".foot-con a").on("click", function () {
-            $(".foot-con a").each(function () {
-                var $this = $(this);
-                var cla = $this.find('i').attr('class');
-                cla = cla.replace(/2/, '');
-                $this.find('i').attr('class', cla);
-            });
-            var $this = $(this);
-            var cname = $this.find('i').attr('class');
-            cname = cname.replace(/2/, '');
-            $this.find('i').attr('class', cname + 2);
-            $this.addClass('active').siblings().removeClass('active');
-        });
+        getCurrentPage();
+        // //底部菜单切换
+        // $(".foot-con a").on("click", function () {
+        //     $(".foot-con a").each(function () {
+        //         var $this = $(this);
+        //         var cla = $this.find('i').attr('class');
+        //         cla = cla.replace(/2/, '');
+        //         $this.find('i').attr('class', cla);
+        //     });
+        //     var $this = $(this);
+        //     var cname = $this.find('i').attr('class');
+        //     cname = cname.replace(/2/, '');
+        //     $this.find('i').attr('class', cname + 2);
+        //     $this.addClass('active').siblings().removeClass('active');
+        // });
 
-        var bannerSwiper = new Swiper('.swiper-banner', {
-            pagination: '.pagination',
-            loop: true,
-            grabCursor: true,
-            paginationClickable: true,
-            autoplay: 3000,
-            autoplayDisableOnInteraction: false,
-            speed: 600
-        });
+        // var bannerSwiper = new Swiper('.swiper-banner', {
+        //     pagination: '.pagination',
+        //     loop: true,
+        //     grabCursor: true,
+        //     paginationClickable: true,
+        //     autoplay: 3000,
+        //     autoplayDisableOnInteraction: false,
+        //     speed: 600
+        // });
 
         $(document).on('click','.logoutButton',function () {
             $.ajax({
