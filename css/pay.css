@@ -52,29 +52,14 @@
     margin:0;
     box-shadow: none;
 }
-#commonPay .pay-logo1{
+#commonPay .pay-logo{
     font-size:0.789rem;
-    padding-left:1.4rem;
-    background:url(../assets/images/zhifubao.png) left center no-repeat;
-    -webkit-background-size:1.09rem 1.09rem;
-    -moz-background-size:1.09rem 1.09rem;
-    background-size:1.09rem 1.09rem;
 }
-#commonPay .pay-logo2{
-    font-size:0.789rem;
-    padding-left:1.4rem;
-    background:url(../assets/images/weixin.png) left center no-repeat;
-    -webkit-background-size:1.09rem 1.09rem;
-    -moz-background-size:1.09rem 1.09rem;
-    background-size:1.09rem 1.09rem;
-}
-#commonPay .pay-logo3{
-    font-size:0.789rem;
-    padding-left:1.4rem;
-    background:url(../assets/images/quickbank.png) left center no-repeat;
-    -webkit-background-size:1.09rem 1.09rem;
-    -moz-background-size:1.09rem 1.09rem;
-    background-size:1.09rem 1.09rem;
+#commonPay .pay-logo img{
+    width:3.673rem;
+    height: 0.91rem;
+    vertical-align:middle;
+    padding-right:0.4rem;
 }
 #commonPay .tick{
     display:inline-block;

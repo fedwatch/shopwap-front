@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/3/10.
  */
 //基本URL
-var BASE_URL = "//localhost";
+var BASE_URL = "//localhost/";
 
 
 // 用户信息
@@ -92,6 +92,14 @@ var ORDER_SITE_URL = {
     LOGISTICS: {URL: "/member/order/logistics", METHOD: "GET"},
     // 查看订单
     VIEW: {URL: "/member/order/view", METHOD: "GET"},
+    //创建并合并支付
+    CREATE_PAYMENT:{URL:"/member/order/createPayment",METHOD:"POST"},
+    //支付界面，合并支付
+    PAY_MENT:{URL:"/member/order/payment",METHOD:"GET"},
+    //计算订单支付金额
+    CALCULATE_AMOUNT:{URL:"/member/order/calculateAmount",METHOD:"POST"},
+
+
 };
 
 // 会员信息

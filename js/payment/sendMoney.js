@@ -22,7 +22,7 @@ define(function(require,exports,module){
             var req_data = store.get("req_data");
             $("#req_data").val(req_data);
             $("#sendMoneyForm").submit();
-        },2000)
+        },0)
     });
 
     /**

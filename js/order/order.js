@@ -14,12 +14,19 @@ define(function (require, exports, module) {
         var username = store.get("username");
         console.log(username)
         var itemIds = store.get("cartItemId");
+        var snArr=store.get("snArr");
         console.log(itemIds);
        // console.log(itemIds);
         // itemIds = itemIds.split("[").toString().split("]").toString().split(",").slice(1);
         // var clen= itemIds.length;
         // itemIds = itemIds.splice(clen-1,1);
         orderInfo(username,itemIds);
+
+         $(document).on("click",".detailOrderBtn",function(){
+             createPayment(username,snArr);
+             return window.location.href="/html/payment/alipay/commonPay.html";
+         });
+
 
     });
 
@@ -109,7 +116,32 @@ define(function (require, exports, module) {
                     //存储sn
                     var snArr=[];
                    store.set("snArr",data.snList);
-                   window.location.href="/html/payment/alipay/commonPay.html";
+                   /* createPayment(username,snArr);
+                   window.location.href="/html/payment/alipay/commonPay.html";*/
+                }
+
+            }
+        });
+    }
+
+    /**
+     * 创建支付合并
+     * @param username
+     * @param snArr
+     */
+    function createPayment(username,snArr){
+        $.ajax({
+            url:BASE_URL+ORDER_SITE_URL.CREATE_PAYMENT.URL,
+            type:ORDER_SITE_URL.CREATE_PAYMENT.METHOD,
+            dataType:ORDER_SITE_URL.DATATYPE,
+            data:{
+                username:username,
+                sn :snArr
+            },
+            success:function (data) {
+                if(data.authStatus=="200"){
+                   var mergeSn=data.mergeSn;
+                   store.set("mergeSn",mergeSn);
                 }
 
             }
@@ -195,16 +227,16 @@ define(function (require, exports, module) {
                    });
                     //用户留言
                    var $memo=data.orders;
-                   var $memoArr=[];
+                   var memoArr=[];
                    $memo.map(function(item,index){
                        var $memo=item.memo;
-                       $memoArr.push($memo);
+                       memoArr.push($memo);
                    });
+                      create(username,itemIds,data.receiver.id ,memoArr[0]);
+
                        store.set("receiverId",data.receiver.id);
-                   var receiverId=store.get("receiverId");
-                 $(document).on("click",".detailOrderBtn",function(){
-                     create(username,itemIds,receiverId ,$memoArr[0]);
-                 });
+                       store.set("memoArr",memoArr);
+
 
                }
 

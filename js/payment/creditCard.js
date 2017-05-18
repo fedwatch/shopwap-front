@@ -15,8 +15,8 @@ define(function (require, exports, module) {
         var isBalancePay = store.get("isBalancePay") || false;
         var type = store.get("type") || "payment";
         var paymentPluginId = store.get("paymentPluginId") || "lianlianpayPlugin";
-        var mergeSn = store.get("mergeSn") || 2017051735150;
-        var amount = store.get("amount") || 0.01;
+        var mergeSn = store.get("mergeSn");
+        var amount = store.get("amount");
         var app_request = store.get("app_request") || '3';
         var cardType = store.get("cardType") || '1';
 
@@ -59,7 +59,7 @@ define(function (require, exports, module) {
             var verificationCode = $("#verificationCode").val() || null;
             var expiryDate = $("#creditMonth").val() + $("#creditYear").val() || null;
             var bankCardNo = store.get("bankCardNo");
-
+            console.log(amount);
             boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode, bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, trueUsername, bankName)
             // location.href = './alipay/paySuccess.html'
 
