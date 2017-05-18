@@ -1,19 +1,22 @@
-define(function(require,exports,module){
+define(function (require, exports, module) {
     require('jquery');
     require('store');
     require('siteUrl');
     require('user');
+    require('light7');
+    require('city-picker');
 
-    $(function(){
+    jQuery.support.cors = true;
+    $(function () {
 
     });
 
     var username = '18717964640';
-    var pageNumber = 0;
-    var pageSize = 0;
+    var pageNumber = 1;
+    var pageSize = 10;
 
-    require.async('handlebars',function(){
-        receiverList(username,pageNumber,pageSize)
+    require.async('handlebars', function () {
+        receiverList(username, pageNumber, pageSize)
     });
 
 
@@ -23,21 +26,21 @@ define(function(require,exports,module){
      * @param pageNumber
      * @param pageSize
      */
-    function receiverList(username,pageNumber,pageSize){
+    function receiverList(username, pageNumber, pageSize) {
         $.ajax({
-            url:BASE_URL+MEMBER_SITE_URL.LIST.URL,
-            type:MEMBER_SITE_URL.LIST.METHOD,
-            dataType:MEMBER_SITE_URL.DATATYPE,
-            data:{
-                username :username,
-                pageNumber  :pageNumber,
-                pageSize  :pageSize,
+            url: BASE_URL + MEMBER_SITE_URL.LIST.URL,
+            type: MEMBER_SITE_URL.LIST.METHOD,
+            dataType: MEMBER_SITE_URL.DATATYPE,
+            data: {
+                username: username,
+                pageNumber: pageNumber,
+                pageSize: pageSize,
             },
-            success:function (data) {
-                if(data.authStatus){
-                    var tpl=require('/layout/my/address/address.tpl');
-                    var template=Handlebars.compile(tpl);
-                    var html=template(data);
+            success: function (data) {
+                if (data.authStatus) {
+                    var tpl = require('/layout/my/address/address.tpl');
+                    var template = Handlebars.compile(tpl);
+                    var html = template(data);
                     $("#address").html(html);
                     edit();
                 }
@@ -78,31 +81,54 @@ define(function(require,exports,module){
     // }
 
 
-    function edit(){
-        var $edit=$(".edit");
-        var $addressOperate=$(".address-operate");
-        var $addressList=$(".address-list").find(".ad-list");
-        var $delete=$(".delete");
-        var flag=true;
-        $edit.click(function(){
-            if(flag==true){
+    function edit() {
+        var $edit = $(".edit");
+        var $addressOperate = $(".address-operate");
+        var $addressList = $(".address-list").find(".ad-list");
+        var $delete = $(".delete");
+        var flag = true;
+        $edit.click(function () {
+            if (flag == true) {
                 $edit.text("取消编辑");
-                $addressOperate.css({display:"block"});
-                flag=false;
-            }else{
+                $addressOperate.css({display: "block"});
+                flag = false;
+            } else {
                 $edit.text("编辑");
-                $addressOperate.css({display:"none"});
-                flag=true;
+                $addressOperate.css({display: "none"});
+                flag = true;
             }
         });
-        $(".edit-op").click(function(){
-            window.location.href="./add-address.html";
+        $(".edit-op").click(function () {
+            var $this = $(this);
+            var id = $this.data("id");
+            store.set("addressId",id);
+            store.set("editStatus",true);
+            window.location.href = "./add-address.html";
         });
-        $delete.each(function(index,item){
-            $(this).click(function(){
+        $delete.each(function (index, item) {
+            var $this = $(this);
+            $(this).click(function () {
+                var id = $this.data("id")
+                receiverDelete(username,id);
                 $addressList.eq(index).remove();
+                location.reload();
             })
         });
     }
 
+
+    function receiverDelete(username, id) {
+        $.ajax({
+            url: BASE_URL + MEMBER_SITE_URL.DELETE.URL,
+            type: MEMBER_SITE_URL.DELETE.METHOD,
+            dataType: MEMBER_SITE_URL.DATATYPE,
+            data: {
+                username: username,
+                id: id
+            },
+            success: function (data) {
+                $.toast(data.authMsg);
+            }
+        });
+    }
 })

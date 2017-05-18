@@ -5,15 +5,22 @@ define(function(require,exports,module){
     require('jquery');
     require('swiper');
     require('light7');
-    require('mockjs');
+    require('store');
+    require('siteUrl');
 
+
+    jQuery.support.cors = true;
     $(function () {
+
         var $userPassword1 = $("#userPassword1");//登录密码1
         var $userPassword2 = $("#userPassword2");//登录密码2
         var userPassword1Error = $("#userPassword1Error");//登录密码错误提示信息
         var userPassword2Error = $("#userPassword2Error");//手机号错误提示信息
         var $registerBtn = $('#registerBtn');//立即注册按钮
         var registerResult = {};//内部数据的状态集
+
+        var confirmPass;
+        var username = store.get("username");
 
         /**
          * 注册按钮 失败
@@ -35,9 +42,6 @@ define(function(require,exports,module){
         };
 
 
-        $userPassword2.on('blur',function () {
-            checkRegisterBtn();
-        })
 
         function checkPassword() {
             // debugger;
@@ -63,19 +67,48 @@ define(function(require,exports,module){
                 registerResult.passable = false;
                 console.log('passable false')
             }
+            if(registerResult.passable && up1 == up2){
+                confirmPass = up1;
+            }
             return registerResult;
         }
 
         function checkRegisterBtn() {
+
+        }
+        $(document).on('click','#registerBtn',function () {
+
             checkPassword();
             if( registerResult.passable == true){
                 $registerBtn.addClass('button-success').css($registerBtn_SUCCESS);
                 console.log('http:// register success result')
 
+                resetPassword(username ,confirmPass )
             }else{
                 $registerBtn.removeClass('button-success').css($registerBtn_FAILED);
                 console.log('http:// register failed result')
             }
+        })
+
+
+        function resetPassword(username ,newPwd ) {
+            $.ajax({
+                url:BASE_URL+USER_SITE_URL.RESET_PASSWORD.URL,
+                type:USER_SITE_URL.RESET_PASSWORD.METHOD,
+                dataType:USER_SITE_URL.DATATYPE,
+                data: {
+                    username : username,
+                    newPwd : newPwd
+                },
+                success:function (data) {
+                    if(data.authStatus == '200'){
+                        $.toast(data.authMsg);
+                        return location.href="/html/my/forgetPassword/modifySuccess.html"
+                    }else{
+                        $.toast(data.authMsg);
+                    }
+                }
+            });
         }
 
 

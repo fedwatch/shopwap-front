@@ -13,20 +13,22 @@
 {{#if receivers}}
 <div class="content manage-address">
     {{#each receivers}}
-    <div class="address-list" id="{{id}}">
+    <div class="address-list" >
         <div class="ad-list">
             <div class="ad-title clearfix">
                 <span class="manage">{{consignee}}</span>
                 <span class="phone">{{phone}}</span>
+                {{#if isDefault}}
                 <span class="default-address pull-right">默认地址</span>
+                {{/if}}
             </div>
             <div class="address-text">
                 {{address}}
             </div>
             <div class="address-operate">
                 <div class="operate clearfix">
-                    <div class="delete pull-right">删除</div>
-                    <div class="edit-op pull-right">编辑</div>
+                    <div class="delete  pull-right" data-id="{{id}}">删除</div>
+                    <div class="edit-op pull-right" data-id="{{id}}">编辑</div>
                 </div>
             </div>
         </div>

@@ -5,8 +5,31 @@ define(function(require,exports,module){
     require('user');
     require('light7');
     require('city-picker');
+
     jQuery.support.cors = true;
     $(function(){
+        var editStatus = store.get("editStatus");
+        var addressId = store.get("addressId");
+        var username = store.get("username");
+
+        getDataFromLS();
+        function getDataFromLS(){
+            if (editStatus){
+                $.ajax({
+                    url: BASE_URL + MEMBER_SITE_URL.AT.URL,
+                    type: MEMBER_SITE_URL.AT.METHOD,
+                    dataType: MEMBER_SITE_URL.DATATYPE,
+                    data: {
+                        username: username,
+                        id: addressId
+                    },
+                    success: function (data) {
+                        $.toast(data.authMsg);
+                    }
+                });
+            }
+        }
+
         $(document).on("pageInit", function () {
             $("#city-picker").cityPicker({
                 toolbarTemplate: '<header class="bar bar-nav">\
@@ -54,8 +77,12 @@ define(function(require,exports,module){
             var zipCode = $userZipCode.val();
             var phone = $userPhoneS.val();
             var isDefault = userDefault;
+            if(editStatus == null || editStatus == false){
+                receiverSave(username,consignee,areaId,address,zipCode,phone,isDefault)
+            }else if (editStatus){
+                receiverUpdate(username,addressId,consignee,areaId,address,zipCode,phone,isDefault)
+            }
 
-            receiverSave(username,consignee,areaId,address,zipCode,phone,isDefault)
         });
     });
 
@@ -99,6 +126,30 @@ define(function(require,exports,module){
             data:{
                 username :username,
                 consignee   :consignee ,
+                areaId   :areaId ,
+                address    :address  ,
+                zipCode     :zipCode   ,
+                phone      :phone    ,
+                isDefault       :isDefault     ,
+            },
+            success:function (data) {
+                console.log(data);
+                $.toast(data.authMsg,1500);
+            }
+        });
+    }
+
+
+
+    function receiverUpdate(username,id,consignee,areaId,address,zipCode,phone,isDefault){
+        $.ajax({
+            url:BASE_URL+MEMBER_SITE_URL.UPDATE.URL,
+            type:MEMBER_SITE_URL.UPDATE.METHOD,
+            dataType:MEMBER_SITE_URL.DATATYPE,
+            data:{
+                username :username,
+                consignee   :consignee ,
+                id   :id ,
                 areaId   :areaId ,
                 address    :address  ,
                 zipCode     :zipCode   ,

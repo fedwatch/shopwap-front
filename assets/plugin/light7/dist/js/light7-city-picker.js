@@ -13341,10 +13341,8 @@ $.smConfig.rawCitiesData = [
       var currentDistrict = initDistricts[0];
 
       var defaults = {
-
         cssClass: "city-picker",
         rotateEffect: false,  //为了性能
-
         onChange: function (picker, values, displayValues) {
           var newProvince = values[0];
           var newCity;

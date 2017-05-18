@@ -7,11 +7,11 @@ define(function(require,exports,module){
     require('jquery');
     require('swiper');
     require('light7');
-    // require('mockjs');
+    require('store');
     require('siteUrl');
 
 
-
+    jQuery.support.cors = true;
     $(function () {
         var $userPhone = $("#userPhone");//手机号
         // var $userPass = $("#userPass");//登录密码
@@ -74,7 +74,7 @@ define(function(require,exports,module){
         $userPhone.on('blur',function () {
             var userPhoneVal =  $userPhone.val();
             checkMobile(userPhoneVal);
-            checkRegisterBtn()
+            // checkRegisterBtn()
         });
 
 
@@ -86,16 +86,14 @@ define(function(require,exports,module){
                 $getSMSCodeBtn.css($getSMSCodeBtn_SUCCESS).attr("disabled",false);
                 registerResult.userPhone = true;
                 $userPhone.closest('li.register_input').removeClass("error");
-                console.log(registerResult);
-                // checkRegisterBtn();
+                store.set("username",$userPhone.val())
             } else {
-                console.log("手机号码不正确");
+                $.toast("手机号码不正确");
                 $userPhoneError.show();
                 $getSMSCodeBtn.css($getSMSCodeBtn_FAILED).attr("disabled",true);
                 registerResult.userPhone = false;
                 $userPhone.closest('li.register_input').addClass("error");
-                console.log(registerResult);
-                // checkRegisterBtn();
+
             }
         }
 
@@ -117,35 +115,31 @@ define(function(require,exports,module){
 
 
         function checkSMSCode(str) {
-            if(str.length <6 || str == ''){
+            if(str.length <4 || str == ''){
                 $userSMSCodeError.show();
-                console.log("验证码不正确");
+                $.toast("验证码不正确");
                 registerResult.smsCode = false;
                 $smsCode.closest('li.register_input').addClass("error");
-                console.log(registerResult);
             }else{
                 $userSMSCodeError.hide();
                 registerResult.smsCode = true;
                 $smsCode.closest('li.register_input').removeClass("error");
                 console.log("验证码正确");
-                console.log(registerResult);
+                store.set("smsCode",$smsCode.val());
+
             }
         }
 
-        // $userPass.on('blur',function () {
-        //     var userPassVal = $userPass.val();
-        //     checkPassword(userPassVal)
-        //     checkRegisterBtn()
-        // })
+
 
         $smsCode.on('blur',function () {
             var smsCodeVal = $smsCode.val();
             checkSMSCode(smsCodeVal);
-            // checkRegisterBtn()
         })
 
 
-        $getSMSCodeBtn.on('click',function () {
+        $(document).on('click','#getSMSCodeBtn',function () {
+            console.log("getSMSCodeBtn clicked")
             if($userPhone.val() && $userPhone.val() !== ''){
                 var phoneNum = $userPhone.val();
                 $.ajax({
@@ -156,12 +150,11 @@ define(function(require,exports,module){
                     async:false,
                     data: {
                         userPhone: phoneNum,
-                        codeFlag: "0"
+                        codeFlag: "2"
                     },
                     success:function (data) {
-                        var spData = data;
-                        if (spData.authStatus == "200" && spData.setAuthMsg == true){
-                            $.toast(spData.authMsg,2000);
+                        if (data.authStatus == "200" && data.setAuthMsg == true){
+                            $.toast(data.authMsg,2000);
                         }
                         getSMSTimer();
                     }
@@ -195,16 +188,17 @@ define(function(require,exports,module){
             }, 1000); //一秒执行一次
         }
 
-        function checkRegisterBtn() {
-            if( registerResult.userPhone == true && registerResult.smsCode == true){
-                $registerBtn.addClass('button-success').css($registerBtn_SUCCESS);
-                console.log('http:// register success result')
-                location.href="/html/my/forgetPassword/modifyPassword.html"
-            }else if (registerResult.userPhone == false || registerResult.smsCode == false){
-                $registerBtn.removeClass('button-success').css($registerBtn_FAILED);
-                console.log('http:// register failed result')
-            }
-        }
+       $(document).on('click','#registerBtn',function () {
+           if( registerResult.userPhone == true && registerResult.smsCode == true){
+               $registerBtn.addClass('button-success').css($registerBtn_SUCCESS);
+               var username = store.get("username");
+               var smsCode = store.get("smsCode");
+               findPassword(username,smsCode)
+           }else if (registerResult.userPhone == false || registerResult.smsCode == false){
+               $registerBtn.removeClass('button-success').css($registerBtn_FAILED);
+               console.log('http:// register failed result')
+           }
+       })
     });
 
     // forgetPassword
@@ -215,6 +209,26 @@ define(function(require,exports,module){
         var html = template(data);
         $("#forgetPasswordPage").html(html);
     });
+
+    function findPassword(username,smsCode) {
+        $.ajax({
+            url:BASE_URL+USER_SITE_URL.FIND_PASSWORD.URL,
+            type:USER_SITE_URL.FIND_PASSWORD.METHOD,
+            dataType:USER_SITE_URL.DATATYPE,
+            data: {
+                username : username,
+                smsCode: smsCode
+            },
+            success:function (data) {
+                if(data.authStatus == '200'){
+                    $.toast(data.authMsg);
+                    return location.href="/html/my/forgetPassword/modifyPassword.html"
+                }else{
+                    $.toast(data.authMsg);
+                }
+            }
+        });
+    }
 
 
 

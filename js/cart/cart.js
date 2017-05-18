@@ -74,7 +74,7 @@ define(function (require, exports, module) {
                     quantity : quantity ,//商品数量
                 },
                 success:function (data) {
-
+                    console.log(data.authMsg)
                 }
             });
         }
