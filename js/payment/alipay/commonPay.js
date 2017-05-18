@@ -14,25 +14,18 @@ define(function (require, exports, module) {
 
         payment(username,mergeSn);
 
-
-
        store.set("type","payment");
-        store.set("paymentPluginId","lianlianpayPlugin");
         store.set("app_request","3");
 
         $(document).on('click','.modal-inner .bank-li a',function () {
             var $this = $(this);
-            var cardId2S  = $this.data("id")
-            store.set("cardId",cardId2S);
-            // console.log(cardId);
-
-            var isBalancePay = store.get("isBalancePay") || false;
-            //var isBalancePay = false;
-            var paymentPluginId = store.get("paymentPluginId") || "lianlianpayPlugin";
+            var cardId  = $this.data("id")
+            store.set("cardId",cardId);
+            console.log(cardId);
+            var isBalancePay = store.get("isBalancePay");
+            var paymentPluginId = store.get("paymentPluginId");
             var type = store.get("type") || "payment";
-
             var amount = store.get("amount");
-            var cardId = store.get("cardId");
             var app_request = store.get("app_request") || '3';
             var username = store.get("username");
             paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username);
@@ -61,6 +54,11 @@ define(function (require, exports, module) {
                 if(data.authStatus=="200"){
                     var paymentPluginId=data.paymentPlugins[0].id;
                         store.set("paymentPluginId",paymentPluginId);
+                    var allAmount= data.allAmount;
+                         store.set("allAmount",allAmount);
+                    var balance= data.balance;
+                        store.set("balance",balance);
+
                     console.log(data);
                     console.log(mergeSn);
                     require.async("handlebars", function () {
@@ -68,6 +66,7 @@ define(function (require, exports, module) {
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#commonPay").html(html);
+
                         //选择或添加银行卡
                         checkBank();
                         //选择支付方式
@@ -110,20 +109,30 @@ define(function (require, exports, module) {
             },
             success:function(data){
                 if(data.authStatus=="200"){
+
                         var amount=data.amount;
                             store.set("amount",amount);
+                        var allAmount=store.get("allAmount");
+                        var balance=store.get("balance");
                       if(isBalancePay==true){
-                          $("#balance-yue").css({visibility:"visible"}).text(data.balancePay);
-                          $("#payWay").find("#aliPay").text(data.amount);
+                          if(balance>= allAmount){
+                              $("#balance-yue").css({visibility:"visible"}).text(data.balancePay);
+                              $("#paychoice").css({display:"none"});
+                              $("#surePays").click(function(){
+                                  window.location.href="../alipay/paySuccess.html";
+                              })
+                          }else{
+                              $("#balance-yue").css({visibility:"visible"}).text(data.balancePay);
+                              $("#payWay").find("#aliPay").text(data.amount);
+                          }
                       }else{
+                          $("#paychoice").css({display:"block"});
                           $("#balance-yue").css({visibility:"hidden"});
                           $("#payWay").find("#aliPay").text(data.amount);
                       }
                 }
-
             }
         })
-
     }
 
 

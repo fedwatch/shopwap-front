@@ -53,8 +53,7 @@
             </div>
         </div>
     </div>
-
-
+    <div id="paychoice">
         <div class="pay-way">剩余金额支付方式:</div>
         <div class="list-block cards-list" style="margin-top:0;">
             <ul id="payWay">
@@ -63,7 +62,7 @@
                     <div class="card-header checkPay" id="{{id}}">
                         <div class="pay-logo"><img src="{{logo}}"/></div>
                         <div class="remainPay">
-                            <span class="morePay">支付<span style="color:#ff503e;" id="aliPay">455.00</span></span>
+                            <span class="morePay">支付<span style="color:#ff503e;" id="aliPay"></span></span>
                             <span class="tick tickys"></span>
                         </div>
                     </div>
@@ -71,6 +70,15 @@
                 </li>
             </ul>
         </div>
+    </div>
+
+    <div class="content-block" id="surePays">
+        <div class="row">
+            <div class="col-100">
+                <a href="javascript:;" class="external button button-big button-password rg-col" >确定</a>
+            </div>
+        </div>
+    </div>
 
 </div>
 
