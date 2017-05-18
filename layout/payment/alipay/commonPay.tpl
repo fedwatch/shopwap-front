@@ -59,11 +59,11 @@
             <ul id="payWay">
                 <li class="card">
                     {{#each this.paymentPlugins}}
-                    <div class="card-header checkPay" id="{{id}}">
+                    <div class="card-header checkPay" >
                         <div class="pay-logo"><img src="{{logo}}"/></div>
                         <div class="remainPay">
                             <span class="morePay">支付<span style="color:#ff503e;" id="aliPay">{{this.allAmount}}</span></span>
-                            <span class="tick tickys"></span>
+                            <span class="tick tickys" data-value="{{id}}"></span>
                         </div>
                     </div>
                     {{/each}}
@@ -75,7 +75,7 @@
     <div class="content-block" >
         <div class="row"  id="surePays">
             <div class="col-100">
-                <a href="javascript:;" class="external button button-big button-password rg-col" >确定</a>
+                <a href="javascript:;" class="external button button-big button-password rg-col" >确认</a>
             </div>
         </div>
     </div>

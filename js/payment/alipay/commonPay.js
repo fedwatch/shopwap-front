@@ -6,11 +6,15 @@ define(function (require, exports, module) {
     require("store");
     require("getUser");
 
+    var username = store.get("username");
+    var mergeSn = store.get("mergeSn");
+    var paymentPluginId=store.get("paymentPluginId");
+    var allAmount=store.get("allAmount");
+    var balance=store.get("balance");
+    var isBalancePay = false;
     jQuery.support.cors = true;
     $(function () {
-        var username = store.get("username");
-        var mergeSn = store.get("mergeSn");
-        var paymentPluginId=store.get("paymentPluginId");
+
 
         payment(username,mergeSn);
 
@@ -22,7 +26,7 @@ define(function (require, exports, module) {
             var cardId  = $this.data("id")
             store.set("cardId",cardId);
             console.log(cardId);
-            var isBalancePay = store.get("isBalancePay");
+
             var paymentPluginId = store.get("paymentPluginId");
             var type = store.get("type") || "payment";
             var amount = store.get("amount");
@@ -56,7 +60,7 @@ define(function (require, exports, module) {
                         store.set("paymentPluginId",paymentPluginId);
                     var allAmount= data.allAmount;
                          store.set("allAmount",allAmount);
-                    var balance= data.balance;
+                    balance= data.balance;
                         store.set("balance",balance);
 
                     console.log(data);
@@ -74,10 +78,9 @@ define(function (require, exports, module) {
                         choicePay();
                         //获取银行卡列表
                         getBankList(username);
-                        sureSubmit();
+                        initSureSubmit();
 
-                        //是否使用余额
-                        var isBalancePay =true;
+
                         $("#balancePayBtn").click(function(){
                            if(isBalancePay  == false){
                                calculate_amount(username,mergeSn,paymentPluginId,isBalancePay );
@@ -114,8 +117,7 @@ define(function (require, exports, module) {
 
                         var amount=data.amount;
                             store.set("amount",amount);
-                        var allAmount=store.get("allAmount");
-                        var balance=store.get("balance");
+
                       if(isBalancePay==true){
                           if(balance>= allAmount){
                               $("#balance-yue").css({visibility:"visible"}).find("span").text(data.balancePay);
@@ -132,6 +134,8 @@ define(function (require, exports, module) {
                           $("#balance-yue").css({visibility:"hidden"});
                           $("#payWay").find("#aliPay").text(data.amount);
                       }
+
+
                 }
             }
         })
@@ -280,42 +284,55 @@ define(function (require, exports, module) {
     }
 
    //确认支付
-    function sureSubmit(){
-        var $checkPayList=$("#payWay").find(".card").find(".checkPay");
-        $checkPayList.each(function(index,item){
-            $(this).click(function(){
-                var $idName=$(this).attr("id");
-                if($idName=="lianlianpayPlugin"){
-                    $("#surePays").click(function(){
-                        var $bankList = $("#bankList").find(".bankMask .cont").html();
-                        $.modal({
-                            title: '<div class="select-bank">选择银行卡<span class="pull-right cancel-m">取消</span></div>',
-                            afterText:$bankList ,
-                            buttons: [{
-                                text: '<div class="bank-but"><a href="javascript:;" class="external but-a" style="border:none;"><span>+</span>添加新卡</a></div>',
-                                onClick: function () {
-                                    window.location.href = "../payment.html";
-                                }
-                            }]
-                        });
-                        $(".modal-buttons").addClass("bank-but-radius");
-                        $(".cancel-m").click(function () {
-                            $(".modal").css({display: "none"});
-                            $.closeModal();
-                        });
+    function initSureSubmit(){
 
-                    })
-                }else{
-                    $("#surePays").click(function(){
+        $("#surePays").click(function(){
+
+            var $ticks = $("#payWay").find(".card").find(".tick");
+            var $selectedTick = $ticks.filter(".tickSelected");
+            if(isBalancePay==true){
+                if(balance<allAmount && $selectedTick.length == 0){
+                     $.toast("余额不足，请选择支付方式");
+                 }
+            }else{
+                if($selectedTick.length > 0){
+                    var value = $selectedTick.attr("data-value");
+                    if(value == "lianlianpayPlugin"){
+                        tankuang();
+                    }else{
                         $.toast("暂不支持该支付方式");
-                    })
+                    }
+
+                }else{
+                    $.toast("请选择一种支付方式");
                 }
-            })
+            }
         });
 
     }
+
+    //弹框
+    function tankuang(){
+        var $bankList = $("#bankList").find(".bankMask .cont").html();
+        $.modal({
+            title: '<div class="select-bank">选择银行卡<span class="pull-right cancel-m">取消</span></div>',
+            afterText:$bankList ,
+            buttons: [{
+                text: '<div class="bank-but"><a href="javascript:;" class="external but-a" style="border:none;"><span>+</span>添加新卡</a></div>',
+                onClick: function () {
+                    window.location.href = "../payment.html";
+                }
+            }]
+        });
+        $(".modal-buttons").addClass("bank-but-radius");
+        $(".cancel-m").click(function () {
+            $(".modal").css({display: "none"});
+            $.closeModal();
+        });
+    }
    //选择或添加银行卡
     function checkBank(){
+
         var $checkPayList=$("#payWay").find(".card").find(".checkPay");
             $checkPayList.each(function(index,item){
                     $(this).click(function(){
@@ -357,8 +374,6 @@ define(function (require, exports, module) {
                     $(this).find(".tickys").removeClass("tickSelected");
                     $(this).find(".morePay").css({visibility: "hidden"});
                 }
-                /*  $(this).find(".tickys").addClass("tickSelected").removeClass("tick").parents().siblings().find(".tickys").removeClass("tickSelected").addClass("tick");
-                 $(this).find(".morePay").css({visibility: "visible"}).parents().siblings().find(".morePay").css({visibility: "hidden"});*/
             })
         })
     }
