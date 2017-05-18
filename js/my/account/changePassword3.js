@@ -11,8 +11,8 @@ define(function(require,exports,module){
         });
 
         $("#next").click(function(){
-            var $sureUserPasswordVal=$sureUserPassword.val();
-            var flg=surePassword($userPassword,$sureUserPassword);
+            var $sureUserPasswordVal = $sureUserPassword.val();
+            var flg = surePassword($userPassword, $sureUserPassword);
             if(flg==true){
                 window.location.href="./changePasswordSuccess.html";
             }else{

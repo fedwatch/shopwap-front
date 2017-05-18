@@ -10,7 +10,6 @@ define(function(require,exports,module){
          var $getVertCode=$(".vert-code");
          var $next=$("#next");
          function checkPhone(str){
-
                if(!(/^1[3|4|5|7|8]\d{9}$/.test(str))){
                    $.toast("请输入正确的手机号");
                    $securityCode.attr("disabled","disabled");

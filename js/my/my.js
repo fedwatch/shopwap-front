@@ -3,7 +3,7 @@
  */
 define(function(require,exports,module){
     require('jquery');
-    require("swiper");
+    // require("swiper");
     require("store");
     require("siteUrl");
 

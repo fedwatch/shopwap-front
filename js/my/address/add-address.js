@@ -11,20 +11,43 @@ define(function(require,exports,module){
         var editStatus = store.get("editStatus");
         var addressId = store.get("addressId");
         var username = store.get("username");
+        //用户名验证
+        var $userNameAddr = $("#ad-user-name");
+        var $userPhoneS = $("#user-phoneS");
+        var $userAddress = $("#user-address");
+        var $userZipCode = $("#user-zipcode");
+        var $userDefault = $("#user-default");
+        var $cityPicker = $("#city-picker");
+        var $areaId = $("#areaId");
+        var userDefault = false;
+
 
         getDataFromLS();
         function getDataFromLS(){
             if (editStatus){
                 $.ajax({
-                    url: BASE_URL + MEMBER_SITE_URL.AT.URL,
-                    type: MEMBER_SITE_URL.AT.METHOD,
+                    url: BASE_URL + MEMBER_SITE_URL.VIEW.URL,
+                    type: MEMBER_SITE_URL.VIEW.METHOD,
                     dataType: MEMBER_SITE_URL.DATATYPE,
                     data: {
                         username: username,
                         id: addressId
                     },
                     success: function (data) {
-                        $.toast(data.authMsg);
+                        console.log(data.authMsg);
+                        if(data.authStatus == '200'){
+                            $userNameAddr.val(data.receiver.consignee);
+                            $userPhoneS.val(data.receiver.phone);
+                            $userAddress.val(data.receiver.address);
+                            $userZipCode.val(data.receiver.zipCode);
+                            $cityPicker.val(data.receiver.area.fullName);
+                            $areaId.val(data.receiver.area.id);
+                            if(data.receiver.isDefault == true){
+                                $("#user-default").click();
+                            }
+                        }
+
+
                     }
                 });
             }
@@ -41,13 +64,7 @@ define(function(require,exports,module){
         $.init();
 
 
-        //用户名验证
-        var $userNameAddr = $("#ad-user-name");
-        var $userPhoneS = $("#user-phoneS");
-        var $userAddress = $("#user-address");
-        var $userZipCode = $("#user-zipcode");
-        var $userDefault = $("#user-default");
-        var userDefault = false;
+
         $userPhoneS.on('blur', function () {
             var userPhoneVal = $userPhoneS.val();
             checkUserPhoneA(userPhoneVal, $userPhoneS, "li");
@@ -72,7 +89,7 @@ define(function(require,exports,module){
             var $this = $(this);
             var username =  store.get("username");
             var consignee =  $userNameAddr.val();
-            var areaId;
+            var areaId = $areaId.val()||310;
             var address = $userAddress.val();
             var zipCode = $userZipCode.val();
             var phone = $userPhoneS.val();

@@ -86,8 +86,6 @@ define(function (require, exports, module) {
                     url:BASE_URL+USER_SITE_URL.UPDATE_PASSWORD.URL,
                     type:USER_SITE_URL.UPDATE_PASSWORD.METHOD,
                     dataType:USER_SITE_URL.DATATYPE,
-                    cache:false,
-                    async:false,
                     data: {
                         username: store.get('userId'),
                         newPwd: newPwd,

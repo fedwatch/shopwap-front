@@ -61,19 +61,18 @@ define(function(require,exports,module){
             url:"/orders/getAllOrders",
             type:"post",
             dataType:"json",
-            cache:false,
             data:{},
             success:function (data) {
 
             }
         })
     }
+
     function getUnpaidOrders() {
         $.ajax({
             url:"/orders/getUnpaidOrders",
             type:"post",
             dataType:"json",
-            cache:false,
             data:{},
             success:function (data) {
 
@@ -120,11 +119,7 @@ define(function(require,exports,module){
         })
     }
 
-
-
-
-
-// modifySuccess
+    // modifySuccess
     require.async('handlebars',function(){
         var data = {};
         var tpl = require('/layout/my/myOrder.tpl');
@@ -132,9 +127,6 @@ define(function(require,exports,module){
         var html = template(data);
         $("#myOrderPage").html(html);
     });
-
-
-
 
 });
 

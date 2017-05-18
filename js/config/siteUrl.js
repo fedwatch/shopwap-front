@@ -98,7 +98,8 @@ var ORDER_SITE_URL = {
     PAY_MENT:{URL:"/member/order/payment",METHOD:"GET"},
     //计算订单支付金额
     CALCULATE_AMOUNT:{URL:"/member/order/calculateAmount",METHOD:"POST"},
-
+    // 支付手动解锁订单
+    UNLOCK:{URL:"/member/order/unlock",METHOD:"POST"},
 
 };
 
@@ -115,6 +116,8 @@ var MEMBER_SITE_URL = {
     SAVE: {URL: "/member/receiver/save", METHOD: "POST"},
     // 收货地址列表更新
     UPDATE: {URL: "/member/receiver/update", METHOD: "POST"},
+    // 收货地址查看
+    VIEW: {URL: "/member/receiver/view", METHOD: "POST"},
 };
 
 // 商品信息
