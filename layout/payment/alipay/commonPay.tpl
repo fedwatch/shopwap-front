@@ -42,7 +42,7 @@
             <div class="item-media">余额</div>
             <div class="item-inner" style="border-bottom:none;">
                 <div class="item-title label" style="width:auto;">
-                    <span style="font-size:0.789rem;">共￥<span>{{this.balance}}</span>,使用￥<span id="balance-yue"></span></span>
+                    <span style="font-size:0.789rem;">共￥<span>{{this.balance}}</span><span id="balance-yue" style="visibility:hidden;">,使用￥<span></span></span></span>
                 </div>
                 <div class="item-input" style="width:auto;">
                     <label class="label-switch">
@@ -62,7 +62,7 @@
                     <div class="card-header checkPay" id="{{id}}">
                         <div class="pay-logo"><img src="{{logo}}"/></div>
                         <div class="remainPay">
-                            <span class="morePay">支付<span style="color:#ff503e;" id="aliPay"></span></span>
+                            <span class="morePay">支付<span style="color:#ff503e;" id="aliPay">{{this.allAmount}}</span></span>
                             <span class="tick tickys"></span>
                         </div>
                     </div>
@@ -72,8 +72,8 @@
         </div>
     </div>
 
-    <div class="content-block" id="surePays">
-        <div class="row">
+    <div class="content-block" >
+        <div class="row"  id="surePays">
             <div class="col-100">
                 <a href="javascript:;" class="external button button-big button-password rg-col" >确定</a>
             </div>

@@ -67,12 +67,14 @@ define(function (require, exports, module) {
                         var html = template(data);
                         $("#commonPay").html(html);
 
+                        $("#payWay").find("#aliPay").text(data.allAmount);
                         //选择或添加银行卡
-                        checkBank();
+                       // checkBank();
                         //选择支付方式
                         choicePay();
                         //获取银行卡列表
                         getBankList(username);
+                        sureSubmit();
 
                         //是否使用余额
                         var isBalancePay =true;
@@ -116,13 +118,13 @@ define(function (require, exports, module) {
                         var balance=store.get("balance");
                       if(isBalancePay==true){
                           if(balance>= allAmount){
-                              $("#balance-yue").css({visibility:"visible"}).text(data.balancePay);
-                              $("#paychoice").css({display:"none"});
-                              $("#surePays").click(function(){
-                                  window.location.href="../alipay/paySuccess.html";
+                              $("#balance-yue").css({visibility:"visible"}).find("span").text(data.balancePay);
+                                  $("#paychoice").css({display:"none"});
+                                  $("#surePays").click(function(){
+                                      window.location.href="../alipay/paySuccess.html";
                               })
                           }else{
-                              $("#balance-yue").css({visibility:"visible"}).text(data.balancePay);
+                              $("#balance-yue").css({visibility:"visible"}).find("span").text(data.balancePay);
                               $("#payWay").find("#aliPay").text(data.amount);
                           }
                       }else{
@@ -277,7 +279,41 @@ define(function (require, exports, module) {
         })
     }
 
+   //确认支付
+    function sureSubmit(){
+        var $checkPayList=$("#payWay").find(".card").find(".checkPay");
+        $checkPayList.each(function(index,item){
+            $(this).click(function(){
+                var $idName=$(this).attr("id");
+                if($idName=="lianlianpayPlugin"){
+                    $("#surePays").click(function(){
+                        var $bankList = $("#bankList").find(".bankMask .cont").html();
+                        $.modal({
+                            title: '<div class="select-bank">选择银行卡<span class="pull-right cancel-m">取消</span></div>',
+                            afterText:$bankList ,
+                            buttons: [{
+                                text: '<div class="bank-but"><a href="javascript:;" class="external but-a" style="border:none;"><span>+</span>添加新卡</a></div>',
+                                onClick: function () {
+                                    window.location.href = "../payment.html";
+                                }
+                            }]
+                        });
+                        $(".modal-buttons").addClass("bank-but-radius");
+                        $(".cancel-m").click(function () {
+                            $(".modal").css({display: "none"});
+                            $.closeModal();
+                        });
 
+                    })
+                }else{
+                    $("#surePays").click(function(){
+                        $.toast("暂不支持该支付方式");
+                    })
+                }
+            })
+        });
+
+    }
    //选择或添加银行卡
     function checkBank(){
         var $checkPayList=$("#payWay").find(".card").find(".checkPay");
