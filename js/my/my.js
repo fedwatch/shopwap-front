@@ -10,50 +10,31 @@ define(function(require,exports,module){
 
     $(function () {
         getCurrentPage();
-        // //底部菜单切换
-        // $(".foot-con a").on("click", function () {
-        //     $(".foot-con a").each(function () {
-        //         var $this = $(this);
-        //         var cla = $this.find('i').attr('class');
-        //         cla = cla.replace(/2/, '');
-        //         $this.find('i').attr('class', cla);
-        //     });
-        //     var $this = $(this);
-        //     var cname = $this.find('i').attr('class');
-        //     cname = cname.replace(/2/, '');
-        //     $this.find('i').attr('class', cname + 2);
-        //     $this.addClass('active').siblings().removeClass('active');
-        // });
-
-        // var bannerSwiper = new Swiper('.swiper-banner', {
-        //     pagination: '.pagination',
-        //     loop: true,
-        //     grabCursor: true,
-        //     paginationClickable: true,
-        //     autoplay: 3000,
-        //     autoplayDisableOnInteraction: false,
-        //     speed: 600
-        // });
 
         $(document).on('click','.logoutButton',function () {
-            $.ajax({
-                url:BASE_URL+USER_SITE_URL.USER_LOGOUT.URL,
-                type:USER_SITE_URL.USER_LOGOUT.METHOD,
-                dataType:USER_SITE_URL.DATATYPE,
-                cache:false,
-                async:false,
-                data: {
-                    userId: store.get('userId')
-                },
-                success:function (data) {
-                    if(data.authStatus == '200'){
-                        $.toast(data.authMsg,2000)
-                    }
-                }
-            });
+            var userId = store.get('userId');
+            userLogout(userId);
         })
 
     });
+
+    function userLogout(userId){
+        $.ajax({
+            url:BASE_URL+USER_SITE_URL.USER_LOGOUT.URL,
+            type:USER_SITE_URL.USER_LOGOUT.METHOD,
+            dataType:USER_SITE_URL.DATATYPE,
+            cache:false,
+            async:false,
+            data: {
+                userId: userId
+            },
+            success:function (data) {
+                if(data.authStatus == '200'){
+                    $.toast(data.authMsg,2000)
+                }
+            }
+        });
+    }
 
 
 
