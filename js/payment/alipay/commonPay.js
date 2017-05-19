@@ -8,24 +8,24 @@ define(function (require, exports, module) {
 
     var username = store.get("username");
     var mergeSn = store.get("mergeSn");
-    var paymentPluginId=store.get("paymentPluginId");
-    var allAmount=store.get("allAmount");
-    var balance=store.get("balance");
+    var paymentPluginId = store.get("paymentPluginId");
+    var allAmount = store.get("allAmount");
+    var balance = store.get("balance");
     var isBalancePay = true;
 
     jQuery.support.cors = true;
     $(function () {
 
 
-        payment(username,mergeSn);
+        payment(username, mergeSn);
 
-       store.set("type","payment");
-        store.set("app_request","3");
+        store.set("type", "payment");
+        store.set("app_request", "3");
 
-        $(document).on('click','.modal-inner .bank-li a',function () {
+        $(document).on('click', '.modal-inner .bank-li a', function () {
             var $this = $(this);
-            var cardId  = $this.data("id")
-            store.set("cardId",cardId);
+            var cardId = $this.data("id")
+            store.set("cardId", cardId);
             console.log(cardId);
 
             var paymentPluginId = store.get("paymentPluginId");
@@ -37,32 +37,29 @@ define(function (require, exports, module) {
         });
 
 
-
-
-
     });
 
     /***支付界面，合并支付
      * @param username
      * @param mergeSn
      * */
-    function payment(username,mergeSn){
+    function payment(username, mergeSn) {
         $.ajax({
             url: BASE_URL + ORDER_SITE_URL.PAY_MENT.URL,
             type: ORDER_SITE_URL.PAY_MENT.METHOD,
             dataType: ORDER_SITE_URL.DATATYPE,
-            data:{
-                username:username,
-                mergeSn:mergeSn
+            data: {
+                username: username,
+                mergeSn: mergeSn
             },
-            success:function(data){
-                if(data.authStatus=="200"){
-                    var paymentPluginId=data.paymentPlugins[0].id;
-                        store.set("paymentPluginId",paymentPluginId);
-                    var allAmount= data.allAmount;
-                         store.set("allAmount",allAmount);
-                    balance= data.balance;
-                        store.set("balance",balance);
+            success: function (data) {
+                if (data.authStatus == "200") {
+                    var paymentPluginId = data.paymentPlugins[0].id;
+                    store.set("paymentPluginId", paymentPluginId);
+                    var allAmount = data.allAmount;
+                    store.set("allAmount", allAmount);
+                    balance = data.balance;
+                    store.set("balance", balance);
 
                     console.log(data);
                     console.log(mergeSn);
@@ -74,7 +71,7 @@ define(function (require, exports, module) {
 
                         $("#payWay").find("#aliPay").text(data.allAmount);
                         //选择或添加银行卡
-                       // checkBank();
+                        // checkBank();
                         //选择支付方式
                         choicePay();
                         //获取银行卡列表
@@ -82,13 +79,13 @@ define(function (require, exports, module) {
                         initSureSubmit();
 
 
-                        $("#balancePayBtn").click(function(){
-                           if(isBalancePay  == false){
-                               calculate_amount(username,mergeSn,paymentPluginId,isBalancePay );
-                               isBalancePay  = true;
-                            }else{
-                               calculate_amount(username,mergeSn,paymentPluginId,isBalancePay );
-                               isBalancePay  = false;
+                        $("#balancePayBtn").click(function () {
+                            if (isBalancePay == false) {
+                                calculate_amount(username, mergeSn, paymentPluginId, isBalancePay);
+                                isBalancePay = true;
+                            } else {
+                                calculate_amount(username, mergeSn, paymentPluginId, isBalancePay);
+                                isBalancePay = false;
                             }
                         });
 
@@ -102,46 +99,45 @@ define(function (require, exports, module) {
 
 
     //计算订单支付金额
-    function calculate_amount(username,mergeSn,paymentPluginId,isBalancePay  ){
+    function calculate_amount(username, mergeSn, paymentPluginId, isBalancePay) {
         $.ajax({
             url: BASE_URL + ORDER_SITE_URL.CALCULATE_AMOUNT.URL,
             type: ORDER_SITE_URL.CALCULATE_AMOUNT.METHOD,
             dataType: ORDER_SITE_URL.DATATYPE,
-            data:{
-                username:username,
-                mergeSn:mergeSn,
-                paymentPluginId:paymentPluginId,
-                isUseBalance:isBalancePay
+            data: {
+                username: username,
+                mergeSn: mergeSn,
+                paymentPluginId: paymentPluginId,
+                isUseBalance: isBalancePay
             },
-            success:function(data){
-                if(data.authStatus=="200"){
+            success: function (data) {
+                if (data.authStatus == "200") {
 
-                        var amount=data.amount;
-                            store.set("amount",amount);
+                    var amount = data.amount;
+                    store.set("amount", amount);
 
-                      if(isBalancePay==true){
-                          if(balance>= allAmount){
-                              $("#balance-yue").css({visibility:"visible"}).find("span").text(data.balancePay);
-                                  $("#paychoice").css({display:"none"});
-                                  $("#surePays").click(function(){
-                                      window.location.href="../alipay/paySuccess.html";
-                              })
-                          }else{
-                              $("#balance-yue").css({visibility:"visible"}).find("span").text(data.balancePay);
-                              $("#payWay").find("#aliPay").text(data.amount);
-                          }
-                      }else{
-                          $("#paychoice").css({display:"block"});
-                          $("#balance-yue").css({visibility:"hidden"});
-                          $("#payWay").find("#aliPay").text(data.amount);
-                      }
+                    if (isBalancePay == true) {
+                        if (balance >= allAmount) {
+                            $("#balance-yue").css({visibility: "visible"}).find("span").text(data.balancePay);
+                            $("#paychoice").css({display: "none"});
+                            $("#surePays").click(function () {
+                                window.location.href = "../alipay/paySuccess.html";
+                            })
+                        } else {
+                            $("#balance-yue").css({visibility: "visible"}).find("span").text(data.balancePay);
+                            $("#payWay").find("#aliPay").text(data.amount);
+                        }
+                    } else {
+                        $("#paychoice").css({display: "block"});
+                        $("#balance-yue").css({visibility: "hidden"});
+                        $("#payWay").find("#aliPay").text(data.amount);
+                    }
 
 
                 }
             }
         })
     }
-
 
 
     /**
@@ -178,7 +174,7 @@ define(function (require, exports, module) {
             },
             success: function (data) {
                 // console.log(data);
-                if( data.authStatus == '200'){
+                if (data.authStatus == '200') {
                     require.async("handlebars", function () {
                         require.async("transCommonPay", function () {
                             var tpl = require('/layout/payment/bankList.tpl');
@@ -273,41 +269,41 @@ define(function (require, exports, module) {
                 username: username,
             },
             success: function (data) {
-                if(data.parameterMap){
-                    store.set("req_data",data.parameterMap.req_data);
-                    if(data.authStatus == '200'){
-                       return location.href = '../sendMoney.html';
+                if (data.parameterMap) {
+                    store.set("req_data", data.parameterMap.req_data);
+                    if (data.authStatus == '200') {
+                        return location.href = '../sendMoney.html';
                     }
                 }
-                $.toast(data.authMsg, 1500);
+                $.toast(data.authMsg);
             }
         })
     }
 
-   //确认支付
-    function initSureSubmit(){
+    //确认支付
+    function initSureSubmit() {
 
-        $("#surePays").click(function(){
+        $("#surePays").click(function () {
             var $ticks = $("#payWay").find(".card").find(".tick");
             var $selectedTick = $ticks.filter(".tickSelected");
             var value = $selectedTick.attr("data-value");
-            if(isBalancePay==false){
-                if(balance<allAmount && $selectedTick.length == 0){
-                     $.toast("余额不足，请选择支付方式");
-                 }else if(balance<allAmount&&$selectedTick.length >0 && value == "lianlianpayPlugin"){
+            if (isBalancePay == false) {
+                if (balance < allAmount && $selectedTick.length == 0) {
+                    $.toast("余额不足，请选择支付方式");
+                } else if (balance < allAmount && $selectedTick.length > 0 && value == "lianlianpayPlugin") {
                     tankuang();
-                }else{
+                } else {
                     $.toast("暂不支持该支付方式");
                 }
-            }else{
-                if($selectedTick.length > 0){
-                    if(value == "lianlianpayPlugin"){
+            } else {
+                if ($selectedTick.length > 0) {
+                    if (value == "lianlianpayPlugin") {
                         tankuang();
-                    }else{
+                    } else {
                         $.toast("暂不支持该支付方式");
                     }
 
-                }else{
+                } else {
                     $.toast("请选择一种支付方式");
                 }
             }
@@ -316,11 +312,11 @@ define(function (require, exports, module) {
     }
 
     //弹框
-    function tankuang(){
+    function tankuang() {
         var $bankList = $("#bankList").find(".bankMask .cont").html();
         $.modal({
             title: '<div class="select-bank">选择银行卡<span class="pull-right cancel-m">取消</span></div>',
-            afterText:$bankList ,
+            afterText: $bankList,
             buttons: [{
                 text: '<div class="bank-but"><a href="javascript:;" class="external but-a" style="border:none;"><span>+</span>添加新卡</a></div>',
                 onClick: function () {
@@ -334,47 +330,48 @@ define(function (require, exports, module) {
             $.closeModal();
         });
     }
-   //选择或添加银行卡
-    function checkBank(){
 
-        var $checkPayList=$("#payWay").find(".card").find(".checkPay");
-            $checkPayList.each(function(index,item){
-                    $(this).click(function(){
-                        var $idName=$(this).attr("id");
-                            if($idName=="lianlianpayPlugin"){
-                                var $bankList = $("#bankList").find(".bankMask .cont").html();
-                                $.modal({
-                                    title: '<div class="select-bank">选择银行卡<span class="pull-right cancel-m">取消</span></div>',
-                                    afterText:$bankList ,
-                                    buttons: [{
-                                        text: '<div class="bank-but"><a href="javascript:;" class="external but-a" style="border:none;"><span>+</span>添加新卡</a></div>',
-                                        onClick: function () {
-                                            window.location.href = "../payment.html";
-                                        }
-                                    }]
-                                });
-                                $(".modal-buttons").addClass("bank-but-radius");
-                                $(".cancel-m").click(function () {
-                                    $(".modal").css({display: "none"});
-                                    $.closeModal();
-                                });
+    //选择或添加银行卡
+    function checkBank() {
 
-                            }else{
-                                $.toast("暂不支持该支付方式");
+        var $checkPayList = $("#payWay").find(".card").find(".checkPay");
+        $checkPayList.each(function (index, item) {
+            $(this).click(function () {
+                var $idName = $(this).attr("id");
+                if ($idName == "lianlianpayPlugin") {
+                    var $bankList = $("#bankList").find(".bankMask .cont").html();
+                    $.modal({
+                        title: '<div class="select-bank">选择银行卡<span class="pull-right cancel-m">取消</span></div>',
+                        afterText: $bankList,
+                        buttons: [{
+                            text: '<div class="bank-but"><a href="javascript:;" class="external but-a" style="border:none;"><span>+</span>添加新卡</a></div>',
+                            onClick: function () {
+                                window.location.href = "../payment.html";
                             }
+                        }]
+                    });
+                    $(".modal-buttons").addClass("bank-but-radius");
+                    $(".cancel-m").click(function () {
+                        $(".modal").css({display: "none"});
+                        $.closeModal();
+                    });
 
-                    })
-            });
+                } else {
+                    $.toast("暂不支持该支付方式");
+                }
+
+            })
+        });
     }
 
     //选择支付方式
-    function choicePay(){
+    function choicePay() {
         $(".checkPay").each(function (index, item) {
             $(this).click(function () {
-                if(!$(this).find(".tickys").hasClass("tickSelected")){
+                if (!$(this).find(".tickys").hasClass("tickSelected")) {
                     $(this).find(".tickys").addClass("tickSelected").parents().siblings().find(".tickys").removeClass("tickSelected").addClass("tick");
                     $(this).find(".morePay").css({visibility: "visible"}).parents().siblings().find(".morePay").css({visibility: "hidden"});
-                }else{
+                } else {
                     $(this).find(".tickys").removeClass("tickSelected");
                     $(this).find(".morePay").css({visibility: "hidden"});
                 }

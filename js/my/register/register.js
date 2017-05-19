@@ -5,7 +5,7 @@ define(function(require,exports,module){
     require('jquery');
     require('swiper');
     require('light7');
-    // require('mockjs');
+    require('store');
 
     require('rsa');
     require('base64');
@@ -114,10 +114,10 @@ define(function(require,exports,module){
                     },
                     success:function (data) {
                         if(data.authStatus == "200"){
-                            $.toast(data.authMsg,2000);
+                            $.toast(data.authMsg);
                             return location.href="/html/my/my.html"
                         }else{
-                            $.toast(data.authMsg,2000);
+                            $.toast(data.authMsg);
                         }
                     }
                 });

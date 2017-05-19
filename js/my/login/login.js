@@ -67,10 +67,10 @@ define(function (require, exports, module) {
                 success: function(data) {
                     console.log(data);
                     if (data.authStatus == "200" && data.setAuthMsg == true){
-                        $.toast(data.authMsg,2000);
+                        $.toast(data.authMsg);
                         // return location.href = "/html/my/my.html"
                     }else{
-                        $.toast(data.authMsg,2000);
+                        $.toast(data.authMsg);
                         $userPhone.val("");
                         $userPass.val("")
                     }

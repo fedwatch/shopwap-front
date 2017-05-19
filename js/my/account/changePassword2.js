@@ -93,7 +93,7 @@ define(function (require, exports, module) {
                     },
                     success: function (data) {
                         if (data.authStatus == '200') {
-                            $.toast(data.authMsg, 2000);
+                            $.toast(data.authMsg);
                             return window.location.href = "./changePasswordSuccess.html";
                         }
                     }

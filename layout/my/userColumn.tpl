@@ -9,14 +9,14 @@
                 </a>
             </div>
         </li>
-        <li class="item-content item-link">
-            <!--<div class="item-media"><i class="icon icon-me"></i></div>-->
-            <div class="item-inner">
-                <a href="/html/my/coupon/coupon.html" class="external" style="width:100%;display:block;">
-                    <div class="item-title">优惠券</div>
-                </a>
-            </div>
-        </li>
+        <!--<li class="item-content item-link">-->
+            <!--&lt;!&ndash;<div class="item-media"><i class="icon icon-me"></i></div>&ndash;&gt;-->
+            <!--<div class="item-inner">-->
+                <!--<a href="/html/my/coupon/coupon.html" class="external" style="width:100%;display:block;">-->
+                    <!--<div class="item-title">优惠券</div>-->
+                <!--</a>-->
+            <!--</div>-->
+        <!--</li>-->
         <li class="item-content item-link">
             <!--<div class="item-media"><i class="icon icon-message"></i></div>-->
             <div class="item-inner">

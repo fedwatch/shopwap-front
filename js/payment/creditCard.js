@@ -80,9 +80,9 @@ define(function (require, exports, module) {
             success: function (data) {
                 console.log(data);
                 if (data.authStatus == '200') {
-                    $.toast(data.authMsg, 1500);
+                    $.toast(data.authMsg);
                 } else {
-                    $.toast(data.authMsg, 1500);
+                    $.toast(data.authMsg);
                 }
             }
         })
@@ -118,7 +118,7 @@ define(function (require, exports, module) {
                     store.set("bankCardNo", data.memberBank.bankCardNo);
                     store.set("bankName", data.memberBank.bankName);
                 }else{
-                    $.toast(data.authMsg,1500);
+                    $.toast(data.authMsg);
                 }
 
             }
@@ -179,7 +179,7 @@ define(function (require, exports, module) {
                     }
                 }
 
-                $.toast(data.authMsg, 1500);
+                $.toast(data.authMsg);
 
 
             }
