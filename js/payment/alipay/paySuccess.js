@@ -7,6 +7,11 @@ define(function(require,exports,module){
 
     });
 
+    /**
+     * 检查支付是否完成,根据支付订单检查
+     * @param username
+     * @param mergeSn
+     */
     function checkPayment(username, mergeSn){
         $.ajax({
             url:BASE_URL+ORDER_SITE_URL.CHECK_PAYMENT.URL,
@@ -17,6 +22,7 @@ define(function(require,exports,module){
                 mergeSn:mergeSn,
             },
             success:function (data) {
+                console.log(data);
 
             }
         });
