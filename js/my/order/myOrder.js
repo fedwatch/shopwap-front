@@ -93,10 +93,12 @@ define(function(require,exports,module){
             },
             success:function (data) {
                 require.async('handlebars',function(){
-                    var tpl = require('/layout/my/myOrder.tpl');
-                    var template = Handlebars.compile(tpl);
-                    var html = template(data);
-                    $("#myOrderPage").html(html);
+                    require.async('transMyOrder',function(){
+                        var tpl = require('/layout/my/myOrder.tpl');
+                        var template = Handlebars.compile(tpl);
+                        var html = template(data);
+                        $("#myOrderPage").html(html);
+                    });
                 });
             }
         })
