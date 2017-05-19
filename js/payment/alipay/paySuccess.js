@@ -19,11 +19,10 @@ define(function(require,exports,module){
             type:ORDER_SITE_URL.CHECK_PAYMENT.METHOD,
             data:{
                 username:username,
-                mergeSn:mergeSn,
+                mergeSn:mergeSn
             },
             success:function (data) {
                 console.log(data);
-
             }
         });
     }

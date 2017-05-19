@@ -119,7 +119,6 @@ define(function (require, exports, module) {
                             $("#balance-yue").css({visibility: "visible"}).find("span").text(data.balancePay);
                             $("#paychoice").css({display: "none"});
                             $("#surePays").click(function () {
-
                                 // window.location.href = "../alipay/paySuccess.html";
                             })
                         } else {
