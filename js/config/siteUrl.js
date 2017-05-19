@@ -100,7 +100,8 @@ var ORDER_SITE_URL = {
     CALCULATE_AMOUNT:{URL:"/member/order/calculateAmount",METHOD:"POST"},
     // 支付手动解锁订单
     UNLOCK:{URL:"/member/order/unlock",METHOD:"POST"},
-
+    // 检查支付是否完成,根据支付订单检查
+    CHECK_PAYMENT:{URL:"/member/order/checkPayment",METHOD:"POST"},
 };
 
 // 会员信息
