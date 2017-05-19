@@ -9,12 +9,14 @@ define(function (require, exports, module) {
     require('store');
     require('user');
 
+
+
     jQuery.support.cors = true;
     $(function () {
         var username = store.get("username");
+        var snArrs=store.get("snArrs");
         console.log(username)
         var itemIds = store.get("cartItemId");
-        var snArr=store.get("snArr");
         console.log(itemIds);
        // console.log(itemIds);
         // itemIds = itemIds.split("[").toString().split("]").toString().split(",").slice(1);
@@ -23,7 +25,7 @@ define(function (require, exports, module) {
         orderInfo(username,itemIds);
 
          $(document).on("click",".detailOrderBtn",function(){
-             createPayment(username,snArr);
+             createPayment(username,snArrs);
              return window.location.href="/html/payment/alipay/commonPay.html";
          });
 
@@ -114,8 +116,8 @@ define(function (require, exports, module) {
             success:function (data) {
                 if(data.authStatus=="200"){
                     //存储sn
-                    var snArr=[];
-                   store.set("snArr",data.snList);
+                    var snArrs=[];
+                   store.set("snArrs",data.snList);
                    /* createPayment(username,snArr);
                    window.location.href="/html/payment/alipay/commonPay.html";*/
                 }
@@ -127,20 +129,21 @@ define(function (require, exports, module) {
     /**
      * 创建支付合并
      * @param username
-     * @param snArr
+     * @param snArrs
      */
-    function createPayment(username,snArr){
+    function createPayment(username,snArrs){
         $.ajax({
             url:BASE_URL+ORDER_SITE_URL.CREATE_PAYMENT.URL,
             type:ORDER_SITE_URL.CREATE_PAYMENT.METHOD,
             dataType:ORDER_SITE_URL.DATATYPE,
             data:{
                 username:username,
-                sn :snArr
+                sn :snArrs
             },
             success:function (data) {
                 if(data.authStatus=="200"){
                    var mergeSn=data.mergeSn;
+                      console.log(mergeSn);
                    store.set("mergeSn",mergeSn);
                 }
 
