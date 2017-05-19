@@ -10,7 +10,7 @@
 <div class="content">
     <div class="orderColumn">
         <div class="row text-center ">
-            <div class="col-20 ocItem all active"  >
+            <div class="col-20 ocItem active all"  >
                 全部
             </div>
             <div class="col-20 ocItem unconfirmed" >
@@ -28,37 +28,38 @@
         </div>
     </div>
 
-    <div class="myOrderList list-block">
 
+    <div class="myOrderList list-block">
+        {{#each orders}}
         <div class="cart-item">
             <div class="cart-store-title-label">
-                <span class="pull-left storeName"><i class="icon icon-store-icon"></i> 苏菲专卖店</span>
-                <span class="pull-right tradeStatus"> 交易成功 </span>
+                <span class="pull-left storeName"><i class="icon icon-store-icon"></i> {{this.bizSupplierInfo.shopName}}</span>
+                <span class="pull-right tradeStatus"> {{#transUserReviews this.orderStatus}} </span>
             </div>
             <div class="cart-store-img-text-label">
                 <div class="cart-item-image">
                     <img src="/assets/images/cart-item-image-product.png" alt="" style="">
                 </div>
                 <div class="cart-item-text">
-                   <div class="row">
-                       <div class="col-66">
-                           <h2 class="cart-item-buying-title">耐克 AIR JORDAN 6 RETRO 复刻男子运动鞋</h2>
-                           <span class="cart-item-buying-desc">颜色分类：一二三四五六七八九十一二三四五六七八九十</span>
-                       </div>
+                    <div class="row">
+                        <div class="col-66">
+                            <h2 class="cart-item-buying-title">耐克 AIR JORDAN 6 RETRO 复刻男子运动鞋</h2>
+                            <span class="cart-item-buying-desc">颜色分类：一二三四五六七八九十一二三四五六七八九十</span>
+                        </div>
 
-                       <div class="priceWrapper col-33" >
-                           <span class="nowPrice">￥ 1399.00</span><br>
-                           <del class="pastPrice">￥ 1399.00</del>
-                           <br>
-                           <span>x <span class="quant">1</span></span>
-                       </div>
-                   </div>
+                        <div class="priceWrapper col-33" >
+                            <span class="nowPrice">￥ 1399.00</span><br>
+                            <del class="pastPrice">￥ 1399.00</del>
+                            <br>
+                            <span>x <span class="quant">1</span></span>
+                        </div>
+                    </div>
 
                 </div>
 
             </div>
             <div class="totalBox">
-                共 <span class="totalQuant">1</span> 件商品 合计：￥<span class="totalPrice">1399</span>.<span>00</span> (含运费 ￥<span class="logPrice">25.00</span>)
+                共 <span class="totalQuant">1</span> 件商品 合计：￥<span class="totalPrice">1399</span>.<span>00</span> (含运费 ￥<span class="logPrice">{{this.freight}}</span>)
             </div>
             <div class="userChooseCol" >
                 <a href="/html/user/logistics.html" class="external checkLogBtn uccButton"> 查看物流 </a>
@@ -198,6 +199,6 @@
                 共 <span class="totalQuant">1</span> 件商品 合计：￥<span class="totalPrice">1399</span>.<span>00</span> (含运费 ￥<span>25.00</span>)
             </div>
         </div>
-
+        {{/each}}
     </div>
 </div>
