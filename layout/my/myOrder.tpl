@@ -10,19 +10,19 @@
 <div class="content">
     <div class="orderColumn">
         <div class="row text-center ">
-            <div class="col-20 ocItem active"  >
+            <div class="col-20 ocItem all active"  >
                 全部
             </div>
-            <div class="col-20 ocItem" >
+            <div class="col-20 ocItem unconfirmed" >
                 待付款
             </div>
-            <div class="col-20 ocItem" >
+            <div class="col-20 ocItem confirmed" >
                 待发货
             </div>
-            <div class="col-20 ocItem" >
+            <div class="col-20 ocItem shipped" >
                 待收货
             </div>
-            <div class="col-20 ocItem" >
+            <div class="col-20 ocItem completed" >
                 待评价
             </div>
         </div>
