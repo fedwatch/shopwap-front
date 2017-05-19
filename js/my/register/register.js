@@ -5,7 +5,7 @@ define(function(require,exports,module){
     require('jquery');
     require('swiper');
     require('light7');
-    // require('mockjs');
+    require('store');
 
     require('rsa');
     require('base64');

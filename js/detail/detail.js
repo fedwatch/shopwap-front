@@ -9,7 +9,9 @@ define(function (require, exports, module) {
     require('store');
     require('siteUrl');
 
-
+    //USERMD
+    store.set("username", "13167161025");
+    var username = store.get("username");
     jQuery.support.cors = true;
     $(function () {
         setSpecificationId();
@@ -46,7 +48,7 @@ define(function (require, exports, module) {
         });
         //监听 购物车
         $(document).on('click', ".cart-badge", function () {
-            getCartCount("13167161025", '455', ".cart-badge > .badge");
+            getCartCount(username, '455', ".cart-badge > .badge");
             var sum = $(".cart-badge > .badge").text();
             if (sum == "0") {
                 $.toast("请添加商品");
@@ -83,9 +85,8 @@ define(function (require, exports, module) {
             }
 
             var count = $("input[name=goodsNumber]").val();
-            //USERMD
-            store.set("username", "13167161025");
-            var username = store.get("username");
+
+
             if (cartState == "true") {
                 $.ajax({
                     url: BASE_URL + CART_SITE_URL.CART_ADD.URL,
@@ -203,7 +204,7 @@ define(function (require, exports, module) {
 
 
     require.async('handlebars', function () {
-        var username = store.get("username");
+
         var currentProductID = store.get("currentProductID");
         // usermd
         $.ajax({
@@ -254,7 +255,7 @@ define(function (require, exports, module) {
                         var html = template(data);
                         $("#cartDetailFooter").html(html);
                         //获取已有购物车物品数量
-                        getCartCount("13167161025", '455', ".cart-badge > .badge");
+                        getCartCount(username, '455', ".cart-badge > .badge");
                     });
 
                     require.async('handlebars', function () {
@@ -369,7 +370,7 @@ define(function (require, exports, module) {
             success: function (data) {
                 if (data.authStatus == "200") {
                     var sum = data.count;
-                    console.log(sum);
+                    // console.log(sum);
                     $(DOM).text(sum);
                 }
             }

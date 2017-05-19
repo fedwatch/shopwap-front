@@ -3707,26 +3707,41 @@
     "use strict";
 
     $.fn.cityPicker = function (params) {
-        console.log(params);
+        // console.log(params);
         return this.each(function () {
             if (!this) return;
             var format = function (data) {
                 var result = [];
+                var resultId = [];
                 for (var i = 0; i < data.length; i++) {
                     var d = data[i];
                     if (d.name === "请选择") continue;
                     result.push(d.name);
+                    resultId.push(d.id);
                 }
-                console.log(d);
+
+                // console.log("=== d start ===");
+                // console.log(d);
+                // console.log("=== d end ===");
                 if (result.length) {
-                    console.log(result);
+                    // console.log("=== result start ===");
+                    // console.log(result);
+                    // console.log("=== result end ===");
+                    // console.log("=== resultId start ===");
+                    // console.log(resultId);
+                    // console.log("=== resultId end ===");
+                    resultId;
                     return result;
                 }
                 return [""];
             };
 
+
+
             var sub = function (data) {
-                if (!data.sub) return [""];
+                if (!data.sub)
+                    return [""];
+                console.log(format(data.sub));
                 return format(data.sub);
             };
 
@@ -3807,6 +3822,7 @@
             };
 
             var p = $.extend(defaults, params);
+
             //计算value
             var val = $(this).val();
             if (val) {
