@@ -28,8 +28,8 @@ define(function (require, exports, module) {
              var receiverId = store.get("receiverId");
              var memoArr = store.get("memoArr");
              create(username,itemIds,receiverId ,memoArr);
-             createPayment(username,snArrs);
-             return window.location.href="/html/payment/alipay/commonPay.html";
+           //  createPayment(username,snArrs);
+
          });
 
 
@@ -120,9 +120,10 @@ define(function (require, exports, module) {
                 console.log(data);
                 if(data.authStatus=="200"){
                     //存储sn
-                    var snArrs = [];
-                   store.set("snArrs",data.snList);
-                   store.set("snArrs",data.snList);
+                    var snArrs =data.snList;
+                    createPayment(username,snArrs);
+                  store.set("snArrs",data.snList);
+
                    /* createPayment(username,snArr);
                    window.location.href="/html/payment/alipay/commonPay.html";*/
                 }
@@ -151,6 +152,7 @@ define(function (require, exports, module) {
                    console.log(mergeSn);
                    if(data.mergeSn){
                        store.set("mergeSn",data.mergeSn);
+                       return window.location.href="/html/payment/alipay/commonPay.html";
 
                    }else{
                        console.log("data.mergeSn is null")

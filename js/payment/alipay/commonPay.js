@@ -112,14 +112,16 @@ define(function (require, exports, module) {
             },
             success: function (data) {
                 if (data.authStatus == "200") {
+
                     var amount = data.amount;
                     store.set("amount", amount);
+
                     if (isBalancePay == true) {
                         if (balance >= allAmount) {
                             $("#balance-yue").css({visibility: "visible"}).find("span").text(data.balancePay);
                             $("#paychoice").css({display: "none"});
                             $("#surePays").click(function () {
-                                // window.location.href = "../alipay/paySuccess.html";
+
                             })
                         } else {
                             $("#balance-yue").css({visibility: "visible"}).find("span").text(data.balancePay);
@@ -290,7 +292,9 @@ define(function (require, exports, module) {
                     $.toast("余额不足，请选择支付方式");
                 } else if (balance < allAmount && $selectedTick.length > 0 && value == "lianlianpayPlugin") {
                     tankuang();
-                } else {
+                } else if(balance > allAmount){
+                    window.location.href = "../alipay/paySuccess.html";
+                }else{
                     $.toast("暂不支持该支付方式");
                 }
             } else {
