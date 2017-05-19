@@ -8,6 +8,7 @@ define(function (require, exports, module) {
     require('light7');
     require('store');
     require('user');
+    require('divideAmount');
 
 
 
@@ -17,18 +18,14 @@ define(function (require, exports, module) {
         var snArrs=store.get("snArrs");
         console.log(username)
         var itemIds = store.get("cartItemId");
+        var receiverId = store.get("receiverId");
+        var memoArr = store.get("memoArr");
         console.log(itemIds);
-       // console.log(itemIds);
-        // itemIds = itemIds.split("[").toString().split("]").toString().split(",").slice(1);
-        // var clen= itemIds.length;
-        // itemIds = itemIds.splice(clen-1,1);
         orderInfo(username,itemIds);
 
          $(document).on("click",".detailOrderBtn",function(){
-             var receiverId = store.get("receiverId");
-             var memoArr = store.get("memoArr");
              create(username,itemIds,receiverId ,memoArr);
-           //  createPayment(username,snArrs);
+
 
          });
 
@@ -122,10 +119,7 @@ define(function (require, exports, module) {
                     //存储sn
                     var snArrs =data.snList;
                     createPayment(username,snArrs);
-                  store.set("snArrs",data.snList);
-
-                   /* createPayment(username,snArr);
-                   window.location.href="/html/payment/alipay/commonPay.html";*/
+                    store.set("snArrs",data.snList);
                 }
 
             }
@@ -222,9 +216,12 @@ define(function (require, exports, module) {
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#orderDetail").html(html);
+
                          var $amountPayable=data.orders;
+                             console.log(data);
                         $amountPayable.map(function(item,index){
                             var ss=item.amountPayable;
+                            console.log(ss);
                             var ars=ss.toString().split(".");
                              $(".int-part").eq(index).text(ars[0]);
                              $(".small-part").eq(index).text(ars[1]);

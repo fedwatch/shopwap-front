@@ -12,6 +12,8 @@ define(function (require, exports, module) {
     //USERMD
     store.set("username", "13167161025");
     var username = store.get("username");
+
+    var currentProductID = store.get("currentProductID");
     jQuery.support.cors = true;
     $(function () {
         setSpecificationId();
@@ -48,7 +50,7 @@ define(function (require, exports, module) {
         });
         //监听 购物车
         $(document).on('click', ".cart-badge", function () {
-            getCartCount(username, '455', ".cart-badge > .badge");
+            getCartCount(username,  ".cart-badge > .badge");
             var sum = $(".cart-badge > .badge").text();
             if (sum == "0") {
                 $.toast("请添加商品");
@@ -93,13 +95,13 @@ define(function (require, exports, module) {
                     type: CART_SITE_URL.CART_ADD.METHOD,
                     data: {
                         username: username,
-                        productId: '308',
+                        productId:currentProductID,
                         quantity: count
                     },
                     dataType: CART_SITE_URL.DATATYPE,
                     success: function (data) {
                         if (data.authStatus == "200") {
-                            getCartCount("13167161025", '455', ".cart-badge > .badge");
+                            getCartCount(username,  ".cart-badge > .badge");
                             $("#cartState").val(false)
                         }
 
@@ -140,19 +142,6 @@ define(function (require, exports, module) {
             $("#specResult").val(text);
             $("#cartState").val("true");
         });
-
-        // //颜色
-        // $(".color-button").on('click', function (e) {
-        //     e.preventDefault();
-        //     e.stopPropagation();
-        //     var $this = $(this);
-        //     $(".color-button").removeClass("active");
-        //     $this.addClass("active");
-        //     var colorResult = $this.text();
-        //     $("#colorResult").val(colorResult);
-        //     $("#cartState").val("true");
-        // });
-
 
         //数量 -
         $(document).on('click', ".goods-minus-btn", function (e) {
@@ -205,14 +194,13 @@ define(function (require, exports, module) {
 
     require.async('handlebars', function () {
 
-        var currentProductID = store.get("currentProductID");
         // usermd
         $.ajax({
             url: BASE_URL + PRODUCT_SITE_URLS.PRODUCT_VIEW.URL,
             type: PRODUCT_SITE_URLS.PRODUCT_VIEW.METHOD,
             data: {
-                username: "13167161025",
-                id: '455'
+                username:username,
+                id: currentProductID
             },
             dataType: PRODUCT_SITE_URLS.DATATYPE,
             success: function (results) {
@@ -255,7 +243,7 @@ define(function (require, exports, module) {
                         var html = template(data);
                         $("#cartDetailFooter").html(html);
                         //获取已有购物车物品数量
-                        getCartCount(username, '455', ".cart-badge > .badge");
+                        getCartCount(username, ".cart-badge > .badge");
                     });
 
                     require.async('handlebars', function () {
@@ -263,7 +251,8 @@ define(function (require, exports, module) {
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#detailOne").html(html);
-                        calculateFreight(username, "455", "804", "2", "shippingCost");
+                        var amount=store.get("amount");
+                        calculateFreight(username,currentProductID, "804", amount, "shippingCost");
                     });
                     //七天无理由退换
                     require.async('handlebars', function () {
@@ -308,8 +297,8 @@ define(function (require, exports, module) {
             url: BASE_URL + PRODUCT_SITE_URLS.PRODUCT_VIEW.URL,
             type: PRODUCT_SITE_URLS.PRODUCT_VIEW.METHOD,
             data: {
-                username: "13167161025",
-                id: '455'
+                username:username,
+                id: currentProductID
             },
             dataType: PRODUCT_SITE_URLS.DATATYPE,
             success: function (results) {
@@ -335,14 +324,14 @@ define(function (require, exports, module) {
      * @param buyCount
      * @param DOM
      */
-    function calculateFreight(username, id, areaId, buyCount, DOM) {
+    function calculateFreight(username, currentProductID, areaId, buyCount, DOM) {
         // usermd
         $.ajax({
             url: BASE_URL + PRODUCT_SITE_URLS.CALCULATE_FREIGHT.URL,
             type: PRODUCT_SITE_URLS.CALCULATE_FREIGHT.METHOD,
             data: {
                 username: username,
-                id: id,
+                id: currentProductID,
                 areaId: areaId,
                 buyCount: buyCount
             },
@@ -357,20 +346,19 @@ define(function (require, exports, module) {
     }
 
     //获取购物车数据
-    function getCartCount(username, id, DOM) {
+    function getCartCount(username, DOM) {
         // usermd
         $.ajax({
             url: BASE_URL + CART_SITE_URL.CART_COUNT.URL,
             type: CART_SITE_URL.CART_COUNT.METHOD,
             data: {
                 username: username,
-                id: id
             },
             dataType: CART_SITE_URL.DATATYPE,
             success: function (data) {
                 if (data.authStatus == "200") {
                     var sum = data.count;
-                    // console.log(sum);
+                    store.set("amount",sum);
                     $(DOM).text(sum);
                 }
             }

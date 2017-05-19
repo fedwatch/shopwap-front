@@ -9,6 +9,7 @@ seajs.config({
     alias:{
         "jquery":"/assets/plugin/jquery.min.js",
         "bankCheck":"/js/utils/bankCheck.js",
+        "divideAmount":"/js/utils/divideAmount.js",
         "startScore":"/js/utils/startScore.js",
         "swiper":"/assets/plugin/idangerous.swiper.min.js",
         "light7":"/assets/plugin/light7/dist/js/light7.min.js",
