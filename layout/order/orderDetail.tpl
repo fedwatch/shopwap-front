@@ -18,7 +18,7 @@
             </div>
             <div class="order-item-price">
                 <span class="nowPrice">￥{{price}}</span><br>
-                <del class="pastPrice">￥{{product.price}}</del><br>
+                <del class="pastPrice" style="color:#999999;">￥{{product.price}}</del><br>
                 x <span class="quant">{{quantity}}</span>
             </div>
         </div>
