@@ -11,7 +11,8 @@ define(function (require, exports, module) {
     var paymentPluginId=store.get("paymentPluginId");
     var allAmount=store.get("allAmount");
     var balance=store.get("balance");
-    var isBalancePay = false;
+    var isBalancePay = true;
+
     jQuery.support.cors = true;
     $(function () {
 
@@ -287,16 +288,19 @@ define(function (require, exports, module) {
     function initSureSubmit(){
 
         $("#surePays").click(function(){
-
             var $ticks = $("#payWay").find(".card").find(".tick");
             var $selectedTick = $ticks.filter(".tickSelected");
-            if(isBalancePay==true){
+            var value = $selectedTick.attr("data-value");
+            if(isBalancePay==false){
                 if(balance<allAmount && $selectedTick.length == 0){
                      $.toast("余额不足，请选择支付方式");
-                 }
+                 }else if(balance<allAmount&&$selectedTick.length >0 && value == "lianlianpayPlugin"){
+                    tankuang();
+                }else{
+                    $.toast("暂不支持该支付方式");
+                }
             }else{
                 if($selectedTick.length > 0){
-                    var value = $selectedTick.attr("data-value");
                     if(value == "lianlianpayPlugin"){
                         tankuang();
                     }else{
