@@ -9,8 +9,8 @@ define(function (require, exports, module) {
     jQuery.support.cors = true;
     $(function () {
 
-        $(document).on('click','.address-button',function () {
-            store.set("editStatus",false);
+        $(document).on('click', '.address-button', function () {
+            store.set("editStatus", false);
         })
 
     });
@@ -105,15 +105,15 @@ define(function (require, exports, module) {
         $(".edit-op").click(function () {
             var $this = $(this);
             var id = $this.data("id");
-            store.set("addressId",id);
-            store.set("editStatus",true);
+            store.set("addressId", id);
+            store.set("editStatus", true);
             window.location.href = "./add-address.html";
         });
         $delete.each(function (index, item) {
             var $this = $(this);
             $(this).click(function () {
                 var id = $this.data("id")
-                receiverDelete(username,id);
+                receiverDelete(username, id);
                 $addressList.eq(index).remove();
                 location.reload();
             })

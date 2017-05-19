@@ -83,17 +83,17 @@ define(function (require, exports, module) {
             var flg = surePassword($newPasswordTwoVal);
             if (flg == true) {
                 $.ajax({
-                    url:BASE_URL+USER_SITE_URL.UPDATE_PASSWORD.URL,
-                    type:USER_SITE_URL.UPDATE_PASSWORD.METHOD,
-                    dataType:USER_SITE_URL.DATATYPE,
+                    url: BASE_URL + USER_SITE_URL.UPDATE_PASSWORD.URL,
+                    type: USER_SITE_URL.UPDATE_PASSWORD.METHOD,
+                    dataType: USER_SITE_URL.DATATYPE,
                     data: {
                         username: store.get('userId'),
                         newPwd: newPwd,
                         pwd: pwd
                     },
-                    success:function (data) {
-                        if(data.authStatus == '200'){
-                            $.toast(data.authMsg ,2000);
+                    success: function (data) {
+                        if (data.authStatus == '200') {
+                            $.toast(data.authMsg, 2000);
                             return window.location.href = "./changePasswordSuccess.html";
                         }
                     }

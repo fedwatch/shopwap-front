@@ -1,4 +1,4 @@
-define(function(require,exports,module){
+define(function (require, exports, module) {
     require('jquery');
     require('store');
     require('siteUrl');
@@ -7,7 +7,7 @@ define(function(require,exports,module){
     require('city-picker');
 
     jQuery.support.cors = true;
-    $(function(){
+    $(function () {
         var editStatus = store.get("editStatus");
         var addressId = store.get("addressId");
         var username = store.get("username");
@@ -23,8 +23,8 @@ define(function(require,exports,module){
 
 
         getDataFromLS();
-        function getDataFromLS(){
-            if (editStatus){
+        function getDataFromLS() {
+            if (editStatus) {
                 $.ajax({
                     url: BASE_URL + MEMBER_SITE_URL.VIEW.URL,
                     type: MEMBER_SITE_URL.VIEW.METHOD,
@@ -34,15 +34,15 @@ define(function(require,exports,module){
                         id: addressId
                     },
                     success: function (data) {
-                        console.log(data.authMsg);
-                        if(data.authStatus == '200'){
+                        // console.log(data.authMsg);
+                        if (data.authStatus == '200') {
                             $userNameAddr.val(data.receiver.consignee);
                             $userPhoneS.val(data.receiver.phone);
                             $userAddress.val(data.receiver.address);
                             $userZipCode.val(data.receiver.zipCode);
                             $cityPicker.val(data.receiver.area.fullName);
                             $areaId.val(data.receiver.area.id);
-                            if(data.receiver.isDefault == true){
+                            if (data.receiver.isDefault == true) {
                                 $("#user-default").click();
                             }
                         }
@@ -64,7 +64,6 @@ define(function(require,exports,module){
         $.init();
 
 
-
         $userPhoneS.on('blur', function () {
             var userPhoneVal = $userPhoneS.val();
             checkUserPhoneA(userPhoneVal, $userPhoneS, "li");
@@ -76,34 +75,32 @@ define(function(require,exports,module){
         });
         $.init();
 
-        $(document).on('click','#user-default',function () {
-           if(userDefault == false){
-               userDefault = true;
-           }else{
-               userDefault = false;
-           }
-           console.log(userDefault)
+        $(document).on('click', '#user-default', function () {
+            if (userDefault == false) {
+                userDefault = true;
+            } else {
+                userDefault = false;
+            }
+            // console.log(userDefault)
         });
 
-        $(document).on('click','.addAddressBtn',function () {
+        $(document).on('click', '.addAddressBtn', function () {
             var $this = $(this);
-            var username =  store.get("username");
-            var consignee =  $userNameAddr.val();
-            var areaId = $areaId.val()||310;
+            var username = store.get("username");
+            var consignee = $userNameAddr.val();
+            var areaId = $areaId.val() || 310;
             var address = $userAddress.val();
             var zipCode = $userZipCode.val();
             var phone = $userPhoneS.val();
             var isDefault = userDefault;
-            if(editStatus == null || editStatus == false){
-                receiverSave(username,consignee,areaId,address,zipCode,phone,isDefault)
-            }else if (editStatus){
-                receiverUpdate(username,addressId,consignee,areaId,address,zipCode,phone,isDefault)
+            if (editStatus == null || editStatus == false) {
+                receiverSave(username, consignee, areaId, address, zipCode, phone, isDefault)
+            } else if (editStatus) {
+                receiverUpdate(username, addressId, consignee, areaId, address, zipCode, phone, isDefault)
             }
 
         });
     });
-
-
 
 
     /**
@@ -112,21 +109,21 @@ define(function(require,exports,module){
      * @param pageNumber
      * @param pageSize
      */
-    function receiverList(username,pageNumber,pageSize){
+    function receiverList(username, pageNumber, pageSize) {
         $.ajax({
-            url:BASE_URL+MEMBER_SITE_URL.LIST.URL,
-            type:MEMBER_SITE_URL.LIST.METHOD,
-            dataType:MEMBER_SITE_URL.DATATYPE,
-            data:{
-                username :username,
-                pageNumber  :pageNumber,
-                pageSize  :pageSize,
+            url: BASE_URL + MEMBER_SITE_URL.LIST.URL,
+            type: MEMBER_SITE_URL.LIST.METHOD,
+            dataType: MEMBER_SITE_URL.DATATYPE,
+            data: {
+                username: username,
+                pageNumber: pageNumber,
+                pageSize: pageSize,
             },
-            success:function (data) {
-                if(data.authStatus){
-                    var tpl=require('/layout/my/address/address.tpl');
-                    var template=Handlebars.compile(tpl);
-                    var html=template(data);
+            success: function (data) {
+                if (data.authStatus) {
+                    var tpl = require('/layout/my/address/address.tpl');
+                    var template = Handlebars.compile(tpl);
+                    var html = template(data);
                     $("#address").html(html);
                     edit();
                 }
@@ -135,47 +132,46 @@ define(function(require,exports,module){
     }
 
 
-    function receiverSave(username,consignee,areaId,address,zipCode,phone,isDefault){
+    function receiverSave(username, consignee, areaId, address, zipCode, phone, isDefault) {
         $.ajax({
-            url:BASE_URL+MEMBER_SITE_URL.SAVE.URL,
-            type:MEMBER_SITE_URL.SAVE.METHOD,
-            dataType:MEMBER_SITE_URL.DATATYPE,
-            data:{
-                username :username,
-                consignee   :consignee ,
-                areaId   :areaId ,
-                address    :address  ,
-                zipCode     :zipCode   ,
-                phone      :phone    ,
-                isDefault       :isDefault     ,
+            url: BASE_URL + MEMBER_SITE_URL.SAVE.URL,
+            type: MEMBER_SITE_URL.SAVE.METHOD,
+            dataType: MEMBER_SITE_URL.DATATYPE,
+            data: {
+                username: username,
+                consignee: consignee,
+                areaId: areaId,
+                address: address,
+                zipCode: zipCode,
+                phone: phone,
+                isDefault: isDefault,
             },
-            success:function (data) {
+            success: function (data) {
                 console.log(data);
-                $.toast(data.authMsg,1500);
+                $.toast(data.authMsg, 1500);
             }
         });
     }
 
 
-
-    function receiverUpdate(username,id,consignee,areaId,address,zipCode,phone,isDefault){
+    function receiverUpdate(username, id, consignee, areaId, address, zipCode, phone, isDefault) {
         $.ajax({
-            url:BASE_URL+MEMBER_SITE_URL.UPDATE.URL,
-            type:MEMBER_SITE_URL.UPDATE.METHOD,
-            dataType:MEMBER_SITE_URL.DATATYPE,
-            data:{
-                username :username,
-                consignee   :consignee ,
-                id   :id ,
-                areaId   :areaId ,
-                address    :address  ,
-                zipCode     :zipCode   ,
-                phone      :phone    ,
-                isDefault       :isDefault     ,
+            url: BASE_URL + MEMBER_SITE_URL.UPDATE.URL,
+            type: MEMBER_SITE_URL.UPDATE.METHOD,
+            dataType: MEMBER_SITE_URL.DATATYPE,
+            data: {
+                username: username,
+                consignee: consignee,
+                id: id,
+                areaId: areaId,
+                address: address,
+                zipCode: zipCode,
+                phone: phone,
+                isDefault: isDefault,
             },
-            success:function (data) {
+            success: function (data) {
                 console.log(data);
-                $.toast(data.authMsg,1500);
+                $.toast(data.authMsg, 1500);
             }
         });
     }
