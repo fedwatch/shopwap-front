@@ -21,9 +21,7 @@
             <div class="pay-amount">
                 <span>订单金额：</span>
                 <span class="pay-span2">
-                    <span class="pay-span3">￥</span>
-                    {{this.allAmount}}
-                    <span class="pay-span3">.00</span>
+                    <span class="pay-span3">￥</span><span class="aInt"></span>.<span class="pay-span3 sCeil">00</span>
                 </span>
             </div>
             <div class="order-addr ">

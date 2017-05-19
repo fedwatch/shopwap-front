@@ -69,14 +69,18 @@ define(function (require, exports, module) {
                         var html = template(data);
                         $("#commonPay").html(html);
 
+                        //分割金额显示在页面
+                        var allAomuntArr= allAmount.toString().split(".");
+                        $(".aInt").text(allAomuntArr[0]);
+                        $(".sCeil").text(allAomuntArr[1]);
+
                         $("#payWay").find("#aliPay").text(data.allAmount);
-                        //选择或添加银行卡
-                        // checkBank();
-                        //选择支付方式
-                        choicePay();
+
+                          initSureSubmit();
                         //获取银行卡列表
                         getBankList(username);
-                        initSureSubmit();
+                        //选择支付方式
+                        choicePay();
 
 
                         $("#balancePayBtn").click(function () {
@@ -262,7 +266,7 @@ define(function (require, exports, module) {
                 isBalancePay: isBalancePay,
                 type: type,
                 paymentPluginId: paymentPluginId,
-                mergeSn: 2017051735685,
+                mergeSn: mergeSn,
                 amount: amount,
                 cardId: cardId,
                 app_request: app_request,
