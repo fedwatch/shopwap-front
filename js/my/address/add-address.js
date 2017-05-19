@@ -148,7 +148,7 @@ define(function (require, exports, module) {
             },
             success: function (data) {
                 console.log(data);
-                $.toast(data.authMsg, 1500);
+                $.toast(data.authMsg);
             }
         });
     }
@@ -171,7 +171,7 @@ define(function (require, exports, module) {
             },
             success: function (data) {
                 console.log(data);
-                $.toast(data.authMsg, 1500);
+                $.toast(data.authMsg);
             }
         });
     }

@@ -25,6 +25,9 @@ define(function (require, exports, module) {
         orderInfo(username,itemIds);
 
          $(document).on("click",".detailOrderBtn",function(){
+             var receiverId = store.get("receiverId");
+             var memoArr = store.get("memoArr");
+             create(username,itemIds,receiverId ,memoArr);
              createPayment(username,snArrs);
              return window.location.href="/html/payment/alipay/commonPay.html";
          });
@@ -114,9 +117,11 @@ define(function (require, exports, module) {
                 memo  :memo
             },
             success:function (data) {
+                console.log(data);
                 if(data.authStatus=="200"){
                     //存储sn
-                    var snArrs=[];
+                    var snArrs = [];
+                   store.set("snArrs",data.snList);
                    store.set("snArrs",data.snList);
                    /* createPayment(username,snArr);
                    window.location.href="/html/payment/alipay/commonPay.html";*/
@@ -142,9 +147,15 @@ define(function (require, exports, module) {
             },
             success:function (data) {
                 if(data.authStatus=="200"){
-                   var mergeSn=data.mergeSn;
-                      console.log(mergeSn);
-                   store.set("mergeSn",mergeSn);
+                   var mergeSn = data.mergeSn;
+                   console.log(mergeSn);
+                   if(data.mergeSn){
+                       store.set("mergeSn",data.mergeSn);
+
+                   }else{
+                       console.log("data.mergeSn is null")
+                   }
+
                 }
 
             }
@@ -178,7 +189,6 @@ define(function (require, exports, module) {
      * @param itemIds
      */
     function orderInfo(username,itemIds){
-
         $.ajax({
             url:BASE_URL+ORDER_SITE_URL.INFO.URL,
             type:ORDER_SITE_URL.INFO.METHOD,
@@ -189,7 +199,6 @@ define(function (require, exports, module) {
             },
             success:function (data) {
                if(data.authStatus == "200"){
-
                    //orderHeader
                    require.async('handlebars', function () {
                        var tpl = require('/layout/order/orderHeader.tpl');
@@ -229,18 +238,18 @@ define(function (require, exports, module) {
                        $("#orderBottomBar").html(html);
                    });
                     //用户留言
-                   var $memo=data.orders;
-                   var memoArr=[];
-                   $memo.map(function(item,index){
-                       var $memo=item.memo;
+                   var $memo = data.orders;
+                   var memoArr = [];
+                   $memo.map(function (item, index) {
+                       var $memo = item.memo;
                        memoArr.push($memo);
                    });
-                      create(username,itemIds,data.receiver.id ,memoArr[0]);
-
-                       store.set("receiverId",data.receiver.id);
-                       store.set("memoArr",memoArr);
-
-
+                   store.set("receiverId",data.receiver.id);
+                   store.set("memoArr",memoArr);
+               }
+               else{
+                  $.toast(data.authMsg,1500);
+                  return history.go(-1);
                }
 
             }
