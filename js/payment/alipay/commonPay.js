@@ -33,7 +33,8 @@ define(function (require, exports, module) {
             var amount = store.get("amount");
             var app_request = store.get("app_request") || '3';
             var username = store.get("username");
-            paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username);
+            var host = location.host+'/html';
+            paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username,host);
         });
 
 
@@ -211,8 +212,9 @@ define(function (require, exports, module) {
      * @param verifyCode
      * @param username
      * @param bankName
+     * @param app_request_url
      */
-    function boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode, bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, username, bankName) {
+    function boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode, bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, username, bankName, app_request_url) {
         $.ajax({
             url: BASE_URL + PAYMENT_SITE_URL.BOUND_CARD_PAY.URL,
             type: PAYMENT_SITE_URL.BOUND_CARD_PAY.METHOD,
@@ -234,10 +236,11 @@ define(function (require, exports, module) {
                 expiryDate: expiryDate,
                 verifyCode: verifyCode,
                 username: username,
+                app_request_url: app_request_url,
                 bankName: bankName
             },
             success: function (data) {
-                // console.log(data);
+                console.log(data);
             }
         })
     }
@@ -253,8 +256,9 @@ define(function (require, exports, module) {
      * @param cardId
      * @param app_request
      * @param username
+     * @param app_request_url
      */
-    function paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username) {
+    function paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username,app_request_url) {
         $.ajax({
             url: BASE_URL + PAYMENT_SITE_URL.PAY_SUBMIT.URL,
             type: PAYMENT_SITE_URL.PAY_SUBMIT.METHOD,
@@ -268,6 +272,7 @@ define(function (require, exports, module) {
                 cardId: cardId,
                 app_request: app_request,
                 username: username,
+                app_request_url: app_request_url,
             },
             success: function (data) {
                 if (data.parameterMap) {

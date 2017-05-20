@@ -19,8 +19,8 @@ define(function (require, exports, module) {
         var amount = store.get("amount");
         var app_request = store.get("app_request") || '3';
         var cardType = store.get("cardType") || '1';
-
         var cardId = store.get("cardId");
+
         bankcardBind(bankCardNo, username);
 
         var timer = 5;
@@ -59,8 +59,10 @@ define(function (require, exports, module) {
             var verificationCode = $("#verificationCode").val() || null;
             var expiryDate = $("#creditMonth").val() + $("#creditYear").val() || null;
             var bankCardNo = store.get("bankCardNo");
+            var host = location.host+"/html";
             console.log(amount);
-            boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode, bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, trueUsername, bankName)
+            boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode,
+                bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, trueUsername, bankName,host);
             // location.href = './alipay/paySuccess.html'
 
         })
@@ -145,8 +147,9 @@ define(function (require, exports, module) {
      * @param verifyCode
      * @param username
      * @param bankName
+     * @param app_request_url
      */
-    function boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode, bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, username, bankName) {
+    function boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode, bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, username, bankName,app_request_url) {
         $.ajax({
             url: BASE_URL + PAYMENT_SITE_URL.BOUND_CARD_PAY.URL,
             type: PAYMENT_SITE_URL.BOUND_CARD_PAY.METHOD,
@@ -168,6 +171,7 @@ define(function (require, exports, module) {
                 expiryDate: expiryDate,
                 verifyCode: verifyCode,
                 username: username,
+                app_request_url: app_request_url,
                 bankName: bankName
             },
             success: function (data) {
