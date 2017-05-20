@@ -25,6 +25,8 @@ define(function (require, exports, module) {
                         var html = template(getData);
                         $("#logistics").html(html);
                         $.init();
+
+                        $("#J_listtext2 li").eq(0).addClass("latest");
                     });
                 }
             }

@@ -37,9 +37,9 @@
 
 
         <div class="userChooseCol" >
-            <a href="javascript:void(0);" class="external checkLogBtn uccButton" data-sn="{{sn}}"> 查看物流 </a>
-            {{#compare this.orderStatus 'shipped'}}
 
+            {{#compare this.orderStatus 'shipped'}}
+            <a href="javascript:void(0);" class="external checkLogBtn uccButton" data-sn="{{sn}}"> 查看物流 </a>
             <span class="confirmReceiptBtn uccButton"> 确认收货 </span>
             {{/compare}}
 

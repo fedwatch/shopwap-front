@@ -1,8 +1,11 @@
 .logistics  .logistics-log{
     width:1.214rem;
     height:1.214rem;
-    background:url(../assets/images/logistics1.png) center center no-repeat;
+
     background-size:100% 100%;
+}
+.logistics .logistics-log.sf{
+    background:url(../assets/images/logistics1.png) center center no-repeat;
 }
 .logistics   .logistics-desc{
     line-height:1.2rem;

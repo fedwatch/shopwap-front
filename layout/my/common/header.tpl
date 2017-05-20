@@ -27,8 +27,11 @@
 
             <div>
                 <div class="user-id">{{username}}</div>
-                <div class="rest-money"><span class="reset2-img"></span><span class="reset2">2888.32</span><a
-                        class="reset-detail">余额明细</a></div>
+                <div class="rest-money">
+                    <span class="reset2-img"></span>
+                    <span class="reset2">2888.32</span>
+                    <!--<a class="reset-detail">余额明细</a>-->
+                </div>
             </div>
 
         </div>

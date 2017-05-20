@@ -44,26 +44,14 @@ define(function(require,exports,module){
         var data = {
             data:'7795'
         };
-        //未登陆
+
         var tpl = require('/layout/my/common/header.tpl');
-        //登陆
-        // var tpl = require('/layout/my/common/myHeader.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);
         $("#my_header").html(html);
     });
 
-    //
-    // // category
-    // require.async('handlebars',function(){
-    //     var data = {
-    //         data:'7795'
-    //     };
-    //     var tpl = require('/layout/index/category.tpl');
-    //     var template = Handlebars.compile(tpl);
-    //     var html = template(data);
-    //     $("#category").html(html);
-    // });
+
 
     // userColumn
     require.async('handlebars',function(){
@@ -78,13 +66,13 @@ define(function(require,exports,module){
 
 
     // footer
-    require.async('handlebars',function(){
-        var data = {};
-        var tpl = require('/layout/index/footer.tpl');
-        var template = Handlebars.compile(tpl);
-        var html = template(data);
-        $("#footer").html(html);
-    });
+    // require.async('handlebars',function(){
+    //     var data = {};
+    //     var tpl = require('/layout/index/footer.tpl');
+    //     var template = Handlebars.compile(tpl);
+    //     var html = template(data);
+    //     $("#footer").html(html);
+    // });
 
     require.async('handlebars',function(){
         var data = {};
