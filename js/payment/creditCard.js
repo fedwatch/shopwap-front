@@ -106,23 +106,27 @@ define(function (require, exports, module) {
                 username: username,
             },
             success: function (data) {
-                require.async('handlebars', function () {
-                    require.async('transCommonPay', function () {
-                        var tpl = require('/layout/payment/directPay/creditCard.tpl');
-                        var template = Handlebars.compile(tpl);
-                        var html = template(data);
-                        $("#credit-card").html(html);
-                    });
-                });
-                if(data.memberBank){
-                    store.set("bankCode", data.memberBank.bankCode);
-                    store.set("bankCardType", data.memberBank.bankCardType);
-                    store.set("bankCardNo", data.memberBank.bankCardNo);
-                    store.set("bankName", data.memberBank.bankName);
-                }else{
-                    $.toast(data.authMsg);
-                }
 
+                if(data.authStatus=="212"){
+                    window.location.href="";
+                } else if(data.authStatus=="200"){
+                    require.async('handlebars', function () {
+                        require.async('transCommonPay', function () {
+                            var tpl = require('/layout/payment/directPay/creditCard.tpl');
+                            var template = Handlebars.compile(tpl);
+                            var html = template(data);
+                            $("#credit-card").html(html);
+                        });
+                    });
+                    if(data.memberBank){
+                        store.set("bankCode", data.memberBank.bankCode);
+                        store.set("bankCardType", data.memberBank.bankCardType);
+                        store.set("bankCardNo", data.memberBank.bankCardNo);
+                        store.set("bankName", data.memberBank.bankName);
+                    }else{
+                        $.toast(data.authMsg);
+                    }
+                }
             }
         })
     }
@@ -182,7 +186,6 @@ define(function (require, exports, module) {
                         return location.href = './sendMoney.html';
                     }
                 }
-
                 $.toast(data.authMsg);
 
 
