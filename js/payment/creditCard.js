@@ -108,7 +108,7 @@ define(function (require, exports, module) {
             success: function (data) {
 
                 if(data.authStatus=="212"){
-                    window.location.href="";
+                    window.location.href="../payment/alipay/commonPay.html";
                 } else if(data.authStatus=="200"){
                     require.async('handlebars', function () {
                         require.async('transCommonPay', function () {
