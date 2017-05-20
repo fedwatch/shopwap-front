@@ -11,6 +11,12 @@ define(function (require, exports, module) {
     var paymentPluginId = store.get("paymentPluginId");
     var allAmount = store.get("allAmount");
     var balance = store.get("balance");
+    var paymentPluginId = store.get("paymentPluginId");
+    var type = store.get("type") || "payment";
+    var amount = store.get("amount");
+    var app_request = store.get("app_request") || '3';
+    var cardId=store.get("cardId");
+
     var isBalancePay = false;
     jQuery.support.cors = true;
     $(function () {
@@ -27,11 +33,6 @@ define(function (require, exports, module) {
             store.set("cardId", cardId);
             console.log(cardId);
 
-            var paymentPluginId = store.get("paymentPluginId");
-            var type = store.get("type") || "payment";
-            var amount = store.get("amount");
-            var app_request = store.get("app_request") || '3';
-            var username = store.get("username");
             paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username);
         });
 
@@ -121,7 +122,7 @@ define(function (require, exports, module) {
                     store.set("amount", amount);
 
                     if (isBalancePay == true) {
-
+                       // debugger;
                         $("#balance-yue").css({visibility: "visible"}).find("span").text(data.balancePay);
                      if (balance >= allAmount) {
 
@@ -132,6 +133,7 @@ define(function (require, exports, module) {
                             })*/
                         } else {
                             $("#balance-yue").css({visibility: "visible"}).find("span").text(data.balancePay);
+                            $("#paychoice").css({display: "block"});
                             $("#payWay").find("#aliPay").text(data.amount);
                         }
                     } else {
@@ -276,11 +278,15 @@ define(function (require, exports, module) {
                 username: username,
             },
             success: function (data) {
+
                 if (data.parameterMap) {
                     store.set("req_data", data.parameterMap.req_data);
                     if (data.authStatus == '200') {
                         return location.href = '../sendMoney.html';
                     }
+                }
+                if(data.authStatus == '211'){
+                    window.location.href = "../alipay/paySuccess.html?paymentSn="+data.paymentSn;
                 }
                 $.toast(data.authMsg);
             }
@@ -300,7 +306,7 @@ define(function (require, exports, module) {
                 } else if (balance < allAmount && $selectedTick.length > 0 && value == "lianlianpayPlugin") {
                     tankuang();
                 } else if(balance > allAmount){
-                    window.location.href = "../alipay/paySuccess.html";
+                    paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username);
                 }else{
                     $.toast("暂不支持该支付方式");
                 }
