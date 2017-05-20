@@ -1,9 +1,11 @@
 define(function (require, exports, module) {
     require('jquery');
     require('light7');
-    require('mockjs');
+    require('siteUrl');
+    require('store');
 
 
+    jQuery.support.cors = true;
     $(function () {
         var $oldPassword = $("#old-userPassword");
         var $newPassword = $("#new-password");

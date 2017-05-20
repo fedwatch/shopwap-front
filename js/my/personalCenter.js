@@ -31,6 +31,7 @@ define(function(require,exports,module){
             },
             success:function (data) {
                 if (data.authStatus == "200" && data.setAuthMsg == true){
+                    store.clear();
                     $.toast(data.authMsg);
                     return location.href = '/html/index.html';
                 }else{

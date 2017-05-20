@@ -8,6 +8,7 @@ define(function(require,exports,module){
     require("siteUrl");
     require("/js/utils/getCurrentPage");
 
+    jQuery.support.cors = true;
     $(function () {
         getCurrentPage();
 

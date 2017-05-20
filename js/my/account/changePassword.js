@@ -2,8 +2,10 @@ define(function (require, exports, module) {
     require('jquery');
     require('light7');
     require('siteUrl');
+    require('store');
     // require('mockjs');
 
+    jQuery.support.cors = true;
     $(function () {
         var $phoneNumber = $("#phone-num");//获取手机号
         var $securityCode = $("#security-code");//获取验证码
@@ -30,28 +32,33 @@ define(function (require, exports, module) {
             var res = checkPhone($phoneNumberVal);
         });
 
-        $getVertCode.click(function () {
+        $(document).on('click','.vert-code',function () {
             var $phoneNumberVal = $phoneNumber.val();
+            var currentUsername = store.get("username");
             checkPhone($phoneNumberVal);
-            if ($phoneNumberVal) {
-                $.ajax({
-                    url: BASE_URL + USER_SITE_URL.SEND_DYNAMIC_CODE.URL,
-                    type: USER_SITE_URL.SEND_DYNAMIC_CODE.METHOD,
-                    dataType: USER_SITE_URL.DATATYPE,
-                    cache: false,
-                    async: false,
-                    data: {userPhone: $phoneNumberVal, codeFlag: "1"},
-                    success: function (data) {
-                        console.log(data);
-                        var spData = data;
-                        if (spData.authStatus == "200" && spData.setAuthMsg == true) {
-                            $.toast(spData.authMsg, 2000);
+            if($phoneNumberVal == currentUsername){
+                if ($phoneNumberVal) {
+                    $.ajax({
+                        url: BASE_URL + USER_SITE_URL.SEND_DYNAMIC_CODE.URL,
+                        type: USER_SITE_URL.SEND_DYNAMIC_CODE.METHOD,
+                        dataType: USER_SITE_URL.DATATYPE,
+                        cache: false,
+                        async: false,
+                        data: {userPhone: $phoneNumberVal, codeFlag: "2"},
+                        success: function (data) {
+                            console.log(data);
+                            if (data.authStatus == "200" && data.setAuthMsg == true) {
+                                $.toast(data.authMsg, 2000);
+                            }
                         }
-                    }
-                })
-            } else {
-                $.toast("请输入正确的手机号");
+                    })
+                } else {
+                    $.toast("请输入正确的手机号");
+                }
+            }else{
+                $.toast("您的请求非法后台已记录数据！")
             }
+
             $("#next").click(function () {
                 window.location.href = "./changePassword3.html";
             })
