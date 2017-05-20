@@ -4,9 +4,11 @@
 define(function(require,exports,module){
        require('jquery');
        require('startScore');
+
        $(function(){
            scoreFun($("#score"))
        });
+
       require.async('handlebars',function(){
            var data=[];
            var tpl=require('/layout/user/review.tpl');

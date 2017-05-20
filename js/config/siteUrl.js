@@ -121,6 +121,8 @@ var MEMBER_SITE_URL = {
     UPDATE: {URL: "/member/receiver/update", METHOD: "POST"},
     // 收货地址查看
     VIEW: {URL: "/member/receiver/view", METHOD: "POST"},
+    // 会员首页
+    INDEX: {URL: "/member/index", METHOD: "GET"},
 };
 
 // 商品信息

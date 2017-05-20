@@ -9,6 +9,7 @@ define(function (require, exports, module) {
 
 
     });
+
     require.async('handlebars', function () {
         $.ajax({
             url: BASE_URL + PRODUCT_SITE_URLS.PRODUCT_COMMENT.URL,

@@ -4,12 +4,14 @@ define(function (require, exports, module) {
     require('jquery');
     require('light7');
     require('swiper');
-    require('rsa');
-    require('base64');
+    require('siteUrl');
+
     require('jsbn');
     require('prng4');
     require('rng');
-    require('siteUrl');
+    require('rsa');
+    require('base64');
+
 
 
     jQuery.support.cors = true;
@@ -21,33 +23,17 @@ define(function (require, exports, module) {
         var resultState = {},enPassword;
         var regex = /^1\d{10}$/;
 
-        // $(document).on('click','#smsCodeBtn',function () {
-        //    $.ajax({
-        //        url:"//swagger.cqdai.cn:9090/shopwap/user/sendDynamicCode",
-        //        type:"post",
-        //        dataType:"json",
-        //        cache:false,
-        //        async:false,
-        //        data:{userPhone:$userPhone.val(),codeFlag:"0"},
-        //        success:function (data) {
-        //            console.log(data);
-        //
-        //        }
-        //    })
-        // });
-
         $(document).on('click','#loginBtn',function () {
             var username = $.trim($userPhone.val());
-            console.log(username);
             if( !regex.test(username  || username == '' || username == '')){
                 return $.toast("用户名或密码输入有误！")
             }
             $.ajax({
                 url: BASE_URL+USER_SITE_URL.PUBLIC_KEY.URL,
                 type: USER_SITE_URL.PUBLIC_KEY.METHOD,
+                dataType:USER_SITE_URL.DATATYPE,
                 cache:false,
                 async:false,
-                dataType:USER_SITE_URL.DATATYPE,
                 success: function(data) {
                     var rsaKey = new RSAKey();
                     rsaKey.setPublic(b64tohex(data.modulus), b64tohex(data.exponent));

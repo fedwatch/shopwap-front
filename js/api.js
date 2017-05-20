@@ -27,11 +27,13 @@ seajs.config({
         "transCommonPay":"/js/utils/transCommonPay",
         "transMyOrder":"/js/utils/transMyOrder",
         "varietyValidation":"/js/utils/varietyValidation.js",
+
         "rsa":"/js/utils/rsa/rsa.js",
         "base64":"/js/utils/rsa/base64.js",
         "rng":"/js/utils/rsa/rng.js",
         "jsbn":"/js/utils/rsa/jsbn.js",
         "prng4":"/js/utils/rsa/prng4.js",
+
         "jsonp":"/js/utils/jquery.jsonp.js",
         "zepto":"https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js",
         "swipeout":"/assets/plugin/light7/dist/js/light7-swipeout.js",
