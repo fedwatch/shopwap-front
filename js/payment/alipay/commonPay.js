@@ -12,7 +12,6 @@ define(function (require, exports, module) {
     var allAmount = store.get("allAmount");
     var balance = store.get("balance");
     var isBalancePay = false;
-
     jQuery.support.cors = true;
     $(function () {
 
@@ -33,8 +32,7 @@ define(function (require, exports, module) {
             var amount = store.get("amount");
             var app_request = store.get("app_request") || '3';
             var username = store.get("username");
-            var host = location.host+'/html';
-            paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username,host);
+            paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username);
         });
 
 
@@ -71,7 +69,7 @@ define(function (require, exports, module) {
                         $("#commonPay").html(html);
 
                         //分割金额显示在页面
-                        var allAomuntArr = allAmount.toString().split(".");
+                        var allAomuntArr= allAmount.toString().split(".");
                         $(".aInt").text(allAomuntArr[0]);
                         $(".sCeil").text(allAomuntArr[1]);
 
@@ -84,14 +82,16 @@ define(function (require, exports, module) {
                         choicePay();
 
 
+
                         $("#balancePayBtn").click(function () {
                             if (isBalancePay == false) {
-                                calculate_amount(username, mergeSn, paymentPluginId, isBalancePay);
                                 isBalancePay = true;
-                            } else {
                                 calculate_amount(username, mergeSn, paymentPluginId, isBalancePay);
+                            } else {
                                 isBalancePay = false;
+                                calculate_amount(username, mergeSn, paymentPluginId, isBalancePay);
                             }
+
                         });
 
                     })
@@ -117,14 +117,19 @@ define(function (require, exports, module) {
             },
             success: function (data) {
                 if (data.authStatus == "200") {
-
                     var amount = data.amount;
                     store.set("amount", amount);
 
                     if (isBalancePay == true) {
-                        if (balance >= allAmount) {
+
+                        $("#balance-yue").css({visibility: "visible"}).find("span").text(data.balancePay);
+                     if (balance >= allAmount) {
+
                             $("#balance-yue").css({visibility: "visible"}).find("span").text(data.balancePay);
                             $("#paychoice").css({display: "none"});
+                            /*$("#surePays").click(function () {
+
+                            })*/
                         } else {
                             $("#balance-yue").css({visibility: "visible"}).find("span").text(data.balancePay);
                             $("#payWay").find("#aliPay").text(data.amount);
@@ -212,9 +217,8 @@ define(function (require, exports, module) {
      * @param verifyCode
      * @param username
      * @param bankName
-     * @param app_request_url
      */
-    function boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode, bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, username, bankName, app_request_url) {
+    function boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode, bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, username, bankName) {
         $.ajax({
             url: BASE_URL + PAYMENT_SITE_URL.BOUND_CARD_PAY.URL,
             type: PAYMENT_SITE_URL.BOUND_CARD_PAY.METHOD,
@@ -236,11 +240,10 @@ define(function (require, exports, module) {
                 expiryDate: expiryDate,
                 verifyCode: verifyCode,
                 username: username,
-                app_request_url: app_request_url,
                 bankName: bankName
             },
             success: function (data) {
-                console.log(data);
+                // console.log(data);
             }
         })
     }
@@ -256,9 +259,8 @@ define(function (require, exports, module) {
      * @param cardId
      * @param app_request
      * @param username
-     * @param app_request_url
      */
-    function paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username,app_request_url) {
+    function paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username) {
         $.ajax({
             url: BASE_URL + PAYMENT_SITE_URL.PAY_SUBMIT.URL,
             type: PAYMENT_SITE_URL.PAY_SUBMIT.METHOD,
@@ -272,7 +274,6 @@ define(function (require, exports, module) {
                 cardId: cardId,
                 app_request: app_request,
                 username: username,
-                app_request_url: app_request_url,
             },
             success: function (data) {
                 if (data.parameterMap) {
@@ -288,6 +289,7 @@ define(function (require, exports, module) {
 
     //确认支付
     function initSureSubmit() {
+
         $("#surePays").click(function () {
             var $ticks = $("#payWay").find(".card").find(".tick");
             var $selectedTick = $ticks.filter(".tickSelected");
@@ -297,9 +299,9 @@ define(function (require, exports, module) {
                     $.toast("余额不足，请选择支付方式");
                 } else if (balance < allAmount && $selectedTick.length > 0 && value == "lianlianpayPlugin") {
                     tankuang();
-                } else if (balance > allAmount) {
+                } else if(balance > allAmount){
                     window.location.href = "../alipay/paySuccess.html";
-                } else {
+                }else{
                     $.toast("暂不支持该支付方式");
                 }
             } else {
