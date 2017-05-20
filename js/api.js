@@ -23,6 +23,7 @@ seajs.config({
         "store":"/js/utils/store.min.js",
         "weixin":"https://res.wx.qq.com/open/js/jweixin-1.0.0.js",
         "transDetails":"/js/utils/transDetails",
+        "parseUrl":"/js/utils/parseUrl",
         "transCommonPay":"/js/utils/transCommonPay",
         "transMyOrder":"/js/utils/transMyOrder",
         "varietyValidation":"/js/utils/varietyValidation.js",

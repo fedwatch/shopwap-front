@@ -18,13 +18,13 @@ define(function (require, exports, module) {
             // }, 3000);
 
             if (flag === true) {
-                $.toast("银行卡正确", 2000);
+                $.toast("银行卡正确");
                 store.set("bankCardNo",bankno);
                 setTimeout(function () {
                     location.href = "./creditCard.html";
-                }, 3000);
+                }, 2000);
             } else {
-                $.toast("银行卡账号错误", 2000);
+                $.toast("银行卡账号错误");
                 return;
             }
         });
