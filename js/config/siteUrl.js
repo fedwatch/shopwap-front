@@ -102,6 +102,8 @@ var ORDER_SITE_URL = {
     UNLOCK:{URL:"/member/order/unlock",METHOD:"POST"},
     // 检查支付是否完成,根据支付订单检查
     CHECK_PAYMENT:{URL:"/member/order/checkPayment",METHOD:"POST"},
+    // 支付结果订单信息
+    PAYMENT_VIEW:{URL:"/member/order/paymentView",METHOD:"GET"},
 };
 
 // 会员信息
@@ -141,6 +143,12 @@ var PRODUCT_SITE_URLS = {
     PRODUCT_COMMENT: {URL: "/review/content/view", METHOD: "GET"},
     // 查询地区
     FIND_AREA_LIST: {URL: "/product/findAreaList", METHOD: "GET"}
+};
+
+
+var COMMON_SITE_URL = {
+    // 查询所有区域
+    FIND_AREA_LIST: {URL: "/common/jsonPort", METHOD: "GET"}
 };
 
 

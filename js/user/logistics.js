@@ -4,12 +4,12 @@ define(function (require, exports, module) {
     require('light7-swiper');
     require('light7-swipeout');
     require('siteUrl');
+    require('store');
 
     jQuery.support.cors = true;
     $(function () {
-
-        var sn = "213213121";
-        var username = "yaodengyin";
+        var sn = store.get("sn");
+        var username = store.get("username");
         $.ajax({
             url: BASE_URL + LOGISTICS_URLS.PRODUCT_SEARCH.URL,
             dataType: LOGISTICS_URLS.DATATYPE,

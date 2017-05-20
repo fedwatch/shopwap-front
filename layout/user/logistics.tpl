@@ -5,6 +5,8 @@
     </a>
     <h1 class='title'>物流信息</h1>
 </header>
+
+{{#each resultList}}
 <div class="content review logistics">
     <div class="list-block media-list">
         <ul>
@@ -13,9 +15,9 @@
                     <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" style='width: 4rem;'></div>
                     <div class="logic-detail">
                         <div><span class="status-title">物流状态</span><span class="status">运输中</span></div>
-                        <div><span>承运来源</span><span> 韵达快递</span></div>
-                        <div><span>运单编号 </span><span>33256544879541</span></div>
-                        <div><span>官方电话 </span><span>95533</span></div>
+                        <div><span>承运来源</span><span> {{this.shipping.deliveryCorp}}</span></div>
+                        <div><span>运单编号 </span><span>{{this.shipping.trackingNo}}</span></div>
+                        <div><span>官方电话 </span><span>{{this.shipping.phone}}</span></div>
                     </div>
                 </a>
             </li>
@@ -91,3 +93,4 @@
         </ul>
     </div>
 </div>
+{{/each}}

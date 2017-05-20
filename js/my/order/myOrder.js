@@ -10,51 +10,48 @@ define(function(require,exports,module){
     require('siteUrl');
     require('store');
 
-    var genData = [
-        {
-            storeName: '苏菲专卖店',
-            tradeStatus: '交易成功',
-            thumbnail: '/assets/images/cart-item-image-product.png',
-            title: '耐克 AIR JORDAN 6 RETRO 复刻男子运动鞋',
-            desc: '颜色分类：一二三四五六七八九十一二三四五六七八九十',
-            nowPrice: 1399.00,
-            pastPrice: 1399.00,
-            quant: 1,
-            totalQuant: 1,
-            totalPrice: 1399,
-            userChooseCol: [
-                {},
-                {},
-                {}
-            ]
-        },
-    ];
-
     jQuery.support.cors = true;
+    var username = store.get("username");
     $(function () {
-        var username = store.get("username");
-        getListOrders(username,'all','1');
-        $($(".ocItem")[0]).addClass("active");
-
+        // 我的订单 全部 待付款 待发货 待收货 待评价
         $(document).on("click",".ocItem",function (e) {
             var $this = $(this);
             $(".ocItem").removeClass("active");
-            $this.addClass("active");
+
+            var all = $this.hasClass('all');
+            var unconfirmed = $this.hasClass('unconfirmed');
+            var confirmed = $this.hasClass('confirmed');
+            var shipped = $this.hasClass('shipped');
+            var completed = $this.hasClass('completed');
+
+
             if($this.hasClass('all')){
                 getListOrders(username,'all','1');
             }else if($this.hasClass('unconfirmed')){
                 getListOrders(username,'unconfirmed','1');
             }else if($this.hasClass('confirmed')){
                 getListOrders(username,'confirmed','1');
-            }
-            else if($this.hasClass('shipped')){
+            } else if($this.hasClass('shipped')){
                 getListOrders(username,'shipped','1');
-            }
-            else if($this.hasClass('completed')){
+            } else if($this.hasClass('completed')){
                 getListOrders(username,'completed','1');
             }
 
+            if(all){
+                $(".ocItem.all").addClass("active");
+            }else if (unconfirmed){
+                $(".ocItem.unconfirmed").addClass("active");
+            }else if (confirmed){
+                $(".ocItem.confirmed").addClass("active");
+            }else if (shipped){
+                $(".ocItem.shipped").addClass("active");
+            }else if (completed){
+                $(".ocItem.completed").addClass("active");
+            }
+
+
         });
+
 
         $(".confirmReceiptBtn").click(function(){
             var text=$(".confirmReceiptBtn").text();
@@ -69,17 +66,32 @@ define(function(require,exports,module){
             }
         });
 
+        $(document).on("click",".checkLogBtn",function (e) {
+            var $this = $(this);
+            store.set("sn",$this.data("sn"));
+            return location.href = '/html/user/logistics.html';
+
+        });
+
     });
 
 
 
     /*
-     订单状态:
-     全部:all
-     待付款:unconfirmed
-     待发货:confirmed
-     待收货:shipped
-     待评价:completed
+
+     */
+
+    /**
+     * 获取对应状态的订单
+     * @param username
+     * @param orderStatus   订单状态
+     *
+         全部:all
+         待付款:unconfirmed
+         待发货:confirmed
+         待收货:shipped
+         待评价:completed
+     * @param pageNumber
      */
     function getListOrders(username,orderStatus,pageNumber){
         $.ajax({
@@ -94,10 +106,10 @@ define(function(require,exports,module){
             success:function (data) {
                 require.async('handlebars',function(){
                     require.async('transMyOrder',function(){
-                        var tpl = require('/layout/my/myOrder.tpl');
+                        var tpl = require('/layout/my/orderData.tpl');
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
-                        $("#myOrderPage").html(html);
+                        $("#getListOrders").html(html);
                     });
                 });
             }
@@ -107,6 +119,29 @@ define(function(require,exports,module){
 
 
     // modifySuccess
+    require.async('handlebars',function(){
+        $.ajax({
+            url:BASE_URL+ORDER_SITE_URL.LIST.URL,
+            type:ORDER_SITE_URL.LIST.METHOD,
+            dataType:ORDER_SITE_URL.DATATYPE,
+            data:{
+                username:username,
+                orderStatus :'all',
+                pageNumber :'1'
+            },
+            success:function (data) {
+                require.async('handlebars',function(){
+                    require.async('transMyOrder',function(){
+                        var tpl = require('/layout/my/myOrder.tpl');
+                        var template = Handlebars.compile(tpl);
+                        var html = template(data);
+                        $("#myOrderPage").html(html);
+                        $($(".ocItem")[0]).addClass("active");
+                    });
+                });
+            }
+        })
+    })
 
 
 });

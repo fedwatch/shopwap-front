@@ -7,6 +7,23 @@ define(function(require,exports,module){
 
     });
 
+
+
+    function paymentView(){
+        $.ajax({
+            url:BASE_URL+ORDER_SITE_URL.PAYMENT_VIEW.URL,
+            dataType:ORDER_SITE_URL.DATATYPE,
+            type:ORDER_SITE_URL.PAYMENT_VIEW.METHOD,
+            data:{
+                username:username,
+                mergeSn:mergeSn
+            },
+            success:function (data) {
+                console.log(data);
+            }
+        });
+    }
+
     /**
      * 检查支付是否完成,根据支付订单检查
      * @param username

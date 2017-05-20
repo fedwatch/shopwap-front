@@ -11,7 +11,7 @@ define(function (require, exports, module) {
     var paymentPluginId = store.get("paymentPluginId");
     var allAmount = store.get("allAmount");
     var balance = store.get("balance");
-    var isBalancePay = true;
+    var isBalancePay = false;
 
     jQuery.support.cors = true;
     $(function () {
@@ -70,13 +70,13 @@ define(function (require, exports, module) {
                         $("#commonPay").html(html);
 
                         //分割金额显示在页面
-                        var allAomuntArr= allAmount.toString().split(".");
+                        var allAomuntArr = allAmount.toString().split(".");
                         $(".aInt").text(allAomuntArr[0]);
                         $(".sCeil").text(allAomuntArr[1]);
 
                         $("#payWay").find("#aliPay").text(data.allAmount);
 
-                          initSureSubmit();
+                        initSureSubmit();
                         //获取银行卡列表
                         getBankList(username);
                         //选择支付方式
@@ -124,9 +124,6 @@ define(function (require, exports, module) {
                         if (balance >= allAmount) {
                             $("#balance-yue").css({visibility: "visible"}).find("span").text(data.balancePay);
                             $("#paychoice").css({display: "none"});
-                            $("#surePays").click(function () {
-
-                            })
                         } else {
                             $("#balance-yue").css({visibility: "visible"}).find("span").text(data.balancePay);
                             $("#payWay").find("#aliPay").text(data.amount);
@@ -286,19 +283,18 @@ define(function (require, exports, module) {
 
     //确认支付
     function initSureSubmit() {
-
         $("#surePays").click(function () {
             var $ticks = $("#payWay").find(".card").find(".tick");
             var $selectedTick = $ticks.filter(".tickSelected");
             var value = $selectedTick.attr("data-value");
-            if (isBalancePay == false) {
+            if (isBalancePay == true) {
                 if (balance < allAmount && $selectedTick.length == 0) {
                     $.toast("余额不足，请选择支付方式");
                 } else if (balance < allAmount && $selectedTick.length > 0 && value == "lianlianpayPlugin") {
                     tankuang();
-                } else if(balance > allAmount){
+                } else if (balance > allAmount) {
                     window.location.href = "../alipay/paySuccess.html";
-                }else{
+                } else {
                     $.toast("暂不支持该支付方式");
                 }
             } else {

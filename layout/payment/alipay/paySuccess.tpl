@@ -6,7 +6,6 @@
     <h1 class="title">支付成功</h1>
 </header>
 <div class="content">
-
      <div class="paySuccess-bg">
          <div class="pay-succ-con">
              <div class="clearfix title5">
