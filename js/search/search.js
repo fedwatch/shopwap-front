@@ -170,35 +170,6 @@ define(function(require,exports,module){
 
     });
 
-    // // shopListShowIndex
-    // require.async('handlebars',function(){
-    //     var data = {
-    //         name:'KAMJOVE/金灶 K7智能电茶壶自动上水 304不锈钢烧水壶 电热水壶',
-    //         brandName:'KAMJOVE',
-    //         productName:'金灶',
-    //         productCategory:'K7',
-    //         feature:'智能电茶壶自动上水',
-    //         keyword1:'304不锈钢烧水壶',
-    //         keyword2:'电热水壶',
-    //         keyword3:'不锈钢烧水壶',
-    //         price:'200',
-    //         decimalPrice:'30',
-    //         purchasePeoples:'35837'
-    //     };
-    //     var tpl = require('/layout/shopList/shopListShowIndex.tpl');
-    //     var template = Handlebars.compile(tpl);
-    //     var html = template(data);
-    //     $("#shopListShowIndex").html(html);
-    //     // $("#navbarSearch").html(tpl);
-    // });
-
-
-
-
-
-
-
-
     function GetSlideDirection(startX, startY, endX, endY) {
         var dy = startY - endY;
         var result = 0;
