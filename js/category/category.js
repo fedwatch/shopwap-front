@@ -102,7 +102,7 @@ define(function (require, exports, module) {
         var categorySubId = $("#categorySubId").val();
         var keyword = '';
         var pageNumber = '';
-        var categoryIds = [categoryIdsHidden,categorySubId];
+        var categoryIds = categoryIdsHidden+","+categorySubId;
         var brandIds = '';
         var startPrice = '';
         var endPrice = '';
@@ -170,7 +170,7 @@ define(function (require, exports, module) {
         $.ajax({
             url:BASE_URL+PRODUCT_SITE_URLS.FIND_SUBS.URL,
             type:PRODUCT_SITE_URLS.FIND_SUBS.METHOD,
-            data:{username:username,id:'105'},
+            data:{username:username,id:categoryId},
             dataType:PRODUCT_SITE_URLS.DATATYPE,
             success:function (data) {
                 var tpl = require('/layout/cartgory/navSubPosition.tpl');
@@ -186,7 +186,7 @@ define(function (require, exports, module) {
     require.async('handlebars',function(){
         var keyword = '';
         var pageNumber = '';
-        var categoryIds = [CONFIG_CATEGORY_MAIN_ID,CONFIG_CATEGORY_SECOND_ID];
+        var categoryIds = CONFIG_CATEGORY_MAIN_ID+","+CONFIG_CATEGORY_SECOND_ID;
         var brandIds = '';
         var startPrice = '';
         var endPrice = '';

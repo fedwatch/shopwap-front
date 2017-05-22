@@ -69,7 +69,11 @@
     </div>
     {{/each}}
 {{else}}
-a
+<div class="cart-item text-center" style="padding:2.35rem 0">
+    <img src="/assets/images/noOrder.png" alt="">
+    <p>还没有任何订单呢</p>
+</div>
+
 {{/if}}
 
 

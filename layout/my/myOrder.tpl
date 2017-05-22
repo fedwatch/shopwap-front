@@ -60,13 +60,10 @@
                     </div>
 
                 </div>
-
                 <div class="totalBox">
                     共 <span class="totalQuant">{{this.quantity}}</span> 件商品 合计：￥<span class="totalPrice">{{this.subtotal}}</span> (含运费 ￥<span class="logPrice">{{this.freight}}</span>)
                 </div>
                 {{/each}}
-
-
                 <div class="userChooseCol" >
 
                     {{#compare this.orderStatus 'shipped'}}
@@ -93,10 +90,6 @@
                     {{#compare this.orderStatus 'expired'}}
                     {{/compare}}
                 </div>
-
-
-
-
             </div>
             {{/each}}
         {{else}}
