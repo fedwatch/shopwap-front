@@ -52,9 +52,10 @@ define(function (require, exports, module) {
                 data:{username:username ,enPassword:enPassword},
                 success: function(data) {
                     console.log(data);
-                    if (data.authStatus == "200" && data.setAuthMsg == true){
+                    if (data.authStatus == "200" ){
                         $.toast(data.authMsg);
-                        // return location.href = "/html/my/my.html"
+                        store.set("username",username)
+                        return location.href = "/html/index.html"
                     }else{
                         $.toast(data.authMsg);
                         $userPhone.val("");

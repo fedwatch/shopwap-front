@@ -14,10 +14,6 @@ define(function (require, exports, module) {
     $(function () {
         getCurrentPage();
         initCategoryActive();
-        initDataToLS();
-        function initDataToLS(){
-            store.set("username","13167161025");
-        }
 
         $(document).on('click','.productCategory a',function (e) {
             e.preventDefault();

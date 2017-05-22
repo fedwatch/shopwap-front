@@ -27,18 +27,18 @@ define(function (require, exports, module) {
                 username: username
             },
             success: function (data) {
-                if (data.authStatus == '200') {
+                // if (data.authStatus == '200') {
                     require.async('handlebars', function () {
                         var tpl = require('/layout/my/common/header.tpl');
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#my_header").html(html);
                     });
-                }
-                else if (data.authStatus == '403') {
-                    store.clear();
-                    return location.href = '../my/login/login.html';
-                }
+                // }
+                // else if (data.authStatus == '403') {
+                    // store.clear();
+                    // return location.href = '../my/login/login.html';
+                // }
             }
         });
     }
