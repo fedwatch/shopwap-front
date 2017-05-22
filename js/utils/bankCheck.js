@@ -61,3 +61,4 @@ function bankCheck(bankno) {
         return false;
     }
 }
+

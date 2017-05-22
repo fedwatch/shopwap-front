@@ -1,9 +1,23 @@
 <!--搜索外包含-->
 <div class="history">
-    <p class="title">历史搜索<a href="javascript:;" class="icon-recycle" id="clearHistoryBtn"></a></p>
-    <div id="historySearch" class="hot_content"></div>
+    <p class="title-s clearfix">
+        <span class="history-search pull-left">历史搜索</span>
+        <a href="javascript:;" class="icon-recycle pull-right" id="clearHistoryBtn"></a>
+    </p>
+
+    <div id="historySearch" class="hot_content">
+
+
+    </div>
 </div>
-<div class="hot_search">
-    <p class="title">大家都在搜索</p>
-    <div id="hotSearch" class="hot_content"></div>
+<div class="history">
+    <p class="title-s clearfix">
+        <span class="history-search pull-left">热门搜索</span>
+       <!-- <a href="javascript:;" class="icon-recycle pull-right" id="clearHistoryBtn"></a>-->
+    </p>
+
+    <div id="hotSearch" class="hot_content">
+
+
+    </div>
 </div>

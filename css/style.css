@@ -452,46 +452,49 @@ padding:0.5rem 0
     height:100%;
 }
     /*搜索页面*/
-.search-main .title {
-    color: #000000;
-    padding: 0.5em 0;
-    margin: 1em 1em 0em;
-    font-size: 1em;
-    border-bottom: 1px solid #dddddd;
-    line-height: 1.7;
+.search-main .history{
+    width:90%;
+    margin-left:5%;
 }
+.search-main .title-s{
+    width:100%;
+    margin:0.5rem 0;
+    line-height:0.9rem !important;
+    padding-top:0.75rem;
+    padding-bottom:0.5rem;
 
-.search-main .title a {
-    float: right;
-    width: 1.5em;
-    height: 1.5em;
-    line-height: 1.5em;
-    margin-top: 0.2em;
-    text-align: center;
-    color: #aaaaaa;
+    border-bottom:solid 1px #e8e8e8;
+}
+.search-main .item-s{
+    display:inline-block;
+    padding:2px 0.75rem;
+    margin:0.3rem  0.2rem;
+    border:solid 1px #e8e8e8;
+    background-color:#eeeeee;
+    color:#666;
+    border-radius:1rem;
+}
+.search-main a{
+    color:#666 !important;
+}
+.history .history-search{
+    display:inline-block;
+    font-size:0.689rem;
+}
+.search-main .title .icon-recycle {
+    display:inline-block;
 }
 
 .search-main .hot_content {
-    overflow: hidden;
-    margin: 1em 1em 1em;
+
 }
 
 .search-main .hot_content a {
-    display: block;
-    float: left;
-    border-radius: 1em;
-    line-height: 1;
-    padding: 0.7em;
-    margin: 0 0.5em 0.5em 0;
-    color: #666666;
-    background: #eeeeee;
+
 }
 
 #searchPrompt li {
-    color: #444444;
-    padding: 1em;
-    border-bottom: 1px solid #e8e8e8;
-    font-size: 1em;
+
 }
 
 /* 搜索页面头部搜索 */
@@ -522,7 +525,7 @@ padding:0.5rem 0
 .header-search .navbar-search .form-control {
     font-size: 1em;
     color: #000000;
-    width: 100%;
+    width: 80%;
     height: 30px;
     line-height: 30px;
     margin: 10px 0 10px;
@@ -530,32 +533,33 @@ padding:0.5rem 0
     border-radius: 1em;
     border: 0;
     display: inline-block;
-    background: #ffffff url(../assets/images/search2.png) no-repeat 0.5em center;
-    background-size: 1.6em;
 }
-
+.searchImgss{
+    position: absolute;
+    width: 1.2rem;
+    height: 1.2rem;
+    left: 15%;
+    top: 14px;
+}
 .header-search .navbar-search .cancelText {
     font-size: 1em;
-    /*color: #000000;*/
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
+    margin-top:10px;
     padding-left: 2.5em;
     border-radius: 1em;
     border: 0;
     display: inline-block;
     background: #eb4c1e url(../assets/images/close.png) no-repeat center center;
-    background-size: 2em;
+    background-size: 1.7em;
 }
 
 .header-search .navbar-search .cancelSearch {
-    background: #fff;
-    color: #eb4c1e;
-    margin: 0 .5rem;
-    padding: .3rem .7rem;
-    border-radius: .8rem;
-    border: 0;
-    width: 5rem;
-    text-align: center;
+    display:inline-block;
+   position:absolute;
+    top:12px;
+    right:0.75rem;
+    color:#fff;
 }
 
 .header-search .navbar-search ::-webkit-input-placeholder {
@@ -2138,4 +2142,41 @@ span.nav-sub-text.active {
 }
 .fs8 {
     border-bottom:solid 1px #e6e6e6;
+}
+/********分页*********/
+.pagination-div{
+    position:absolute;
+    width:90%;
+    bottom:1.75rem;
+}
+.pagination-div .page{
+    list-style: none;
+}
+.pagination-div .page>li{
+    float: left;
+    padding:3px 6px;
+    cursor: pointer;
+}
+.pagination-div .page .pageItem{
+    font-size:0.5rem;
+    border: solid thin #DDDDDD;
+    margin: 3px;
+}
+.pagination-div .page .pageItemActive{
+    font-size:0.5rem;
+    border: solid thin #eb4c1e;
+    margin: 3px;
+    background-color: #eb4c1e;
+    color:white;
+}
+.pagination-div .page .pageItem:hover{
+    border: solid thin #0099FF;
+    background-color: #0099FF;
+    color:white;
+}
+.pagination-div .page .pageItemDisable{
+    font-size:0.5rem;
+    border: solid thin #DDDDDD;
+    margin: 3px;
+    background-color: #DDDDDD;
 }

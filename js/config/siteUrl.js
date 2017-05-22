@@ -152,7 +152,7 @@ var COMMON_SITE_URL = {
     // 查询所有区域
     FIND_AREA_LIST: {URL: "/common/jsonPort", METHOD: "GET"},
     //商品查询
-    SEARCH: {URL: "/product/search ", METHOD: "GET"}
+    SEARCH: {URL: "/product/search", METHOD: "GET"}
 };
 
 
