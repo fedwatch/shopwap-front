@@ -1,4 +1,4 @@
-<div  class="cart-footer">
+<div class="cart-footer">
     <div class="cart-bottom-all-select">
         <input type="checkbox"  class="cart-all-select" style="display: none;" id="cartAllSelect">
         <label for="cartAllSelect"></label>

@@ -5,6 +5,8 @@ define(function (require, exports, module) {
     require('light7');
     require('swiper');
     require('siteUrl');
+    require('store');
+    require('cookie');
 
     require('jsbn');
     require('prng4');
@@ -49,12 +51,18 @@ define(function (require, exports, module) {
                 cache:false,
                 async:false,
                 dataType:USER_SITE_URL.DATATYPE,
-                data:{username:username ,enPassword:enPassword},
-                success: function(data) {
+                data:{
+                    username:username ,
+                    enPassword:enPassword
+                },
+                success: function(data,textStatus, jqXHR) {
                     console.log(data);
                     if (data.authStatus == "200" ){
-                        $.toast(data.authMsg);
-                        store.set("username",username)
+                        store.set("username",username);
+                        store.set("userStatus",true);
+                        store.set("userStatusTimeStamp",new Date());
+                        // $.cookie("xms",data.JSESSIONID,{path:"/"});
+                        // $.cookie("hhh",data.JSESSIONID);
                         return location.href = "/html/index.html"
                     }else{
                         $.toast(data.authMsg);

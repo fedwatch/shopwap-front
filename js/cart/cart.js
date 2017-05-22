@@ -7,11 +7,11 @@ define(function (require, exports, module) {
     require('store');
     require('siteUrl');
     require('user');
-    // require('light7');
 
     $(function () {
         // getCartFromLS();
         var username = store.get("username");
+        var userStatus = store.get("userStatus");
         // cartAdd(username,318,10);
         cartList(username);
 
@@ -165,16 +165,18 @@ define(function (require, exports, module) {
 
         // 购物车下单
         $(document).on("click", "#checkoutBtn", function () {
-
-            var cartItemIdArray = [];
-            var len = $(".cart-list-select:checked").length;
-            for(var i = 0;i<len;i++){
-                cartItemIdArray.push($(".cart-list-select:checked").eq(i).data("itemid"));
+            if(userStatus){
+                var cartItemIdArray = [];
+                var len = $(".cart-list-select:checked").length;
+                for(var i = 0;i<len;i++){
+                    cartItemIdArray.push($(".cart-list-select:checked").eq(i).data("itemid"));
+                }
+                store.set("cartItemId",cartItemIdArray);
+                location.href= "/html/order/order.html";
+            } else{
+                return location.href = '/html/my/login/login.html';
             }
 
-            store.set("cartItemId",cartItemIdArray);
-
-            location.href= "/html/order/order.html"
 
         });
 

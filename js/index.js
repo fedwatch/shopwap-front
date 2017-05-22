@@ -4,32 +4,21 @@
 define(function(require,exports,module){
     require('jquery');
     require("swiper");
-    require("mockjs");
+    require("light7");
+    // require("mockjs");
     require("/js/utils/getCurrentPage");
+    require("store");
+    require("siteUrl");
+
+
+
+
     // var fastclick = require("fastclick");
     // fastclick.attach(document)
-
+    jQuery.support.cors = true;
     $(function () {
-        Mock.mock(/\/initShopData$/, {
-            'images': [
-                {"url": "../assets/images/shop1-index.png","alt":"AD"},
-                {"url": "../assets/images/shop2-index.png","alt":"AD"},
-                {"url": "../assets/images/shop3-index.png","alt":"AD"},
-                {"url": "../assets/images/shop4-index.png","alt":"AD"},
-                {"url": "../assets/images/shop1-index.png","alt":"AD"},
-                {"url": "../assets/images/shop2-index.png","alt":"AD"},
-                {"url": "../assets/images/shop3-index.png","alt":"AD"},
-                {"url": "../assets/images/shop4-index.png","alt":"AD"},
-                {"url": "../assets/images/shop1-index.png","alt":"AD"},
-                {"url": "../assets/images/shop2-index.png","alt":"AD"},
-                {"url": "../assets/images/shop3-index.png","alt":"AD"},
-                {"url": "../assets/images/shop4-index.png","alt":"AD"},
-            ]
-        });
-
-        initShopData();
         getCurrentPage();
-
+        findAreaByIp();
         var bannerSwiper = new Swiper('.swiper-banner', {
             pagination: '.pagination',
             loop: true,
@@ -41,24 +30,32 @@ define(function(require,exports,module){
         });
     });
 
-    function initShopData(){
+
+
+    function findAreaByIp(){
+        // /product/findAreaByIp
         $.ajax({
-            url:"/initShopData",
-            dataType:"json",
-            type:"post",
-            data:{},
+            url:BASE_URL+PRODUCT_SITE_URLS.FIND_AREA_BY_IP.URL,
+            dataType:PRODUCT_SITE_URLS.DATATYPE,
+            type:PRODUCT_SITE_URLS.FIND_AREA_BY_IP.METHOD,
             success:function (data) {
-                // productSlider
-                require.async('handlebars',function(){
-                    var getData = data;
-                    var tpl =  require('/layout/index/category.tpl');
-                    var template = Handlebars.compile(tpl);
-                    var html = template(getData);
-                    $("#category").html(html);
-                });
+                if(data.authStatus == '200'){
+                    store.set("areaId",data.area.id);
+                }else{
+                    $.toast(data.authMsg)
+                }
             }
-        })
+        });
     }
+
+
+    require.async('handlebars',function(){
+        var getData = {};
+        var tpl =  require('/layout/index/category.tpl');
+        var template = Handlebars.compile(tpl);
+        var html = template(getData);
+        $("#category").html(html);
+    });
 
     // banner
     require.async('handlebars',function(){

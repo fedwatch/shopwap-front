@@ -20,8 +20,11 @@ seajs.config({
         "fastclick":"//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js",
         "handlebars":"/assets/plugin/handlebars-v1.3.0",
         "mockjs":"/assets/plugin/mockjs",
+        "extJquery":"/assets/plugin/extJquery",
+
         "touchSwipe":"/assets/plugin/jquery.touchSwipe.min.js",
         "store":"/js/utils/store.min.js",
+        "session":"/js/utils/session.js/dist/session.js",
         "weixin":"https://res.wx.qq.com/open/js/jweixin-1.0.0.js",
         "transDetails":"/js/utils/transDetails",
         "parseUrl":"/js/utils/parseUrl",

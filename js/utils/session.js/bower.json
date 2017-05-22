@@ -1,0 +1,27 @@
+{
+  "name": "session.js",
+  "main": "dist/session.js",
+  "authors": [
+    "Fed Jiang (Fedjs.com)"
+  ],
+  "description": "\"会话存储sessionStorage的封装完整API\"",
+  "moduleType": [
+    "amd",
+    "node"
+  ],
+  "keywords": [
+    "sessionjs",
+    "store",
+    "storage",
+    "local",
+    "sessionstorage"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -2,15 +2,15 @@
  * Created by Administrator on 2017/3/28.
  */
 define(function (require, exports, module) {
-
     require('jquery');
     require('/js/utils/getCurrentPage');
-    // require('mockjs');
     require('store');
     require('siteUrl');
 
 
     jQuery.support.cors = true;
+    var username = store.get("username");
+
     $(function () {
         getCurrentPage();
         initCategoryActive();
@@ -19,7 +19,6 @@ define(function (require, exports, module) {
             e.preventDefault();
             // console.log(this);
             getProductDetail($(this).data("product-id"));
-
         });
 
 
@@ -42,6 +41,8 @@ define(function (require, exports, module) {
         //         });
         //     }
         // });
+
+
 
         //主分类
         $(document).on('click','.nav-tabbar-item .nav-text',function(e){
@@ -70,11 +71,11 @@ define(function (require, exports, module) {
                         $("#categorySubId").val($this.data("category-sub-id"));
                         $(".nav-sub-text").first().addClass("active");
                     });
-
                     getProductInfo();
                 }
             });
         });
+
         //二级分类
         $(document).on('click','.nav-sub-tabbar-item .nav-sub-text',function (e) {
             var $this = $(this);
@@ -83,7 +84,6 @@ define(function (require, exports, module) {
             $("#categorySubId").val($this.data("category-sub-id"));
             getProductInfo();
         });
-
 
         // getNavSubText();
     });
@@ -135,7 +135,7 @@ define(function (require, exports, module) {
         });
     }
 
-    var username = store.get("username");
+
 
 
 
@@ -186,7 +186,7 @@ define(function (require, exports, module) {
     require.async('handlebars',function(){
         var keyword = '';
         var pageNumber = '';
-        var categoryIds = [105,112];
+        var categoryIds = [CONFIG_CATEGORY_MAIN_ID,CONFIG_CATEGORY_SECOND_ID];
         var brandIds = '';
         var startPrice = '';
         var endPrice = '';

@@ -12,25 +12,25 @@ define(function(require,exports,module){
     jQuery.support.cors = true;
     $(function () {
         $(document).on('click','.logout',function () {
-            var userId = store.get("userId");
-            userLogout(userId);
+            var username = store.get("username");
+            userLogout(username);
         })
     });
 
     /**
      * 用户登出
-     * @param userId
+     * @param username
      */
-    function userLogout(userId){
+    function userLogout(username){
         $.ajax({
             url:BASE_URL+USER_SITE_URL.USER_LOGOUT.URL,
             type:USER_SITE_URL.USER_LOGOUT.METHOD,
             dataType:USER_SITE_URL.DATATYPE,
             data: {
-                userId : userId
+                username : username
             },
             success:function (data) {
-                if (data.authStatus == "200" && data.setAuthMsg == true){
+                if (data.authStatus == "200"){
                     store.clear();
                     $.toast(data.authMsg);
                     return location.href = '/html/index.html';
@@ -42,23 +42,7 @@ define(function(require,exports,module){
     }
 
 
-    // footer
-    require.async('handlebars',function(){
-        var data = {};
-        var tpl = require('/layout/index/footer.tpl');
-        var template = Handlebars.compile(tpl);
-        var html = template(data);
-        $("#footer").html(html);
-    });
 
-
-    require.async('handlebars',function(){
-        var data = {};
-        var tpl = require('/layout/common/footerBar.tpl');
-        var template = Handlebars.compile(tpl);
-        var html = template(data);
-        $("#footer").html(html);
-    });
 
 
 

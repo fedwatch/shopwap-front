@@ -11,7 +11,15 @@
     <div class="shopping-cost detail-item-content" >
         <!--运费-->
         <div class="shipping-cost-box pull-left" >
-            <span>运费：<span id="shippingCost">{{this.freight}}</span>元</span>
+            <span>
+                运费：
+                <span id="shippingCost">
+                    {{#if this.freight}}
+                    {{this.freight}}
+                    {{/if}}
+                </span>
+                元
+            </span>
         </div>
         <!--发货地-->
         <div class="seller-location pull-right" id="productPlace">广东福山</div>

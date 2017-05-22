@@ -4,7 +4,8 @@
 //基本URL
 var BASE_URL = "//localhost/";
 
-
+var CONFIG_CATEGORY_MAIN_ID = 105;
+var CONFIG_CATEGORY_SECOND_ID = 112;
 // 用户信息
 var USER_SITE_URL = {
     //数据接收类型
@@ -16,7 +17,7 @@ var USER_SITE_URL = {
     // 用户登录系统
     USER_LOGIN: {URL: "/user/userLogin", METHOD: "POST"},
     // 用户登出系统
-    USER_LOGOUT: {URL: "/user/userLogout", METHOD: "POST"},
+    USER_LOGOUT: {URL: "/user/logout", METHOD: "POST"},
     // 发送手机验证码
     SEND_DYNAMIC_CODE: {URL: "/user/sendDynamicCode", METHOD: "POST"},
     // 找回密码提交

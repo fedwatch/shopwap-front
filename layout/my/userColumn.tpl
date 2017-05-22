@@ -33,16 +33,16 @@
                 <!--</a>-->
             <!--</div>-->
         <!--</li>-->
-        <li class="item-content item-link">
-            <!--<div class="item-media"><i class="icon icon-friends"></i></div>-->
-            <div class="item-inner">
-                <a href="/html/my/feedback/feedback.html" style="width:100%;display: block;" class="external">
-                    <div class="item-title">
-                            意见反馈
-                    </div>
-                </a>
-            </div>
-        </li>
+        <!--<li class="item-content item-link">-->
+            <!--&lt;!&ndash;<div class="item-media"><i class="icon icon-friends"></i></div>&ndash;&gt;-->
+            <!--<div class="item-inner">-->
+                <!--<a href="/html/my/feedback/feedback.html" style="width:100%;display: block;" class="external">-->
+                    <!--<div class="item-title">-->
+                            <!--意见反馈-->
+                    <!--</div>-->
+                <!--</a>-->
+            <!--</div>-->
+        <!--</li>-->
         <li class="item-content item-link">
             <!--<div class="item-media"><i class="icon icon-friends"></i></div>-->
             <div class="item-inner">

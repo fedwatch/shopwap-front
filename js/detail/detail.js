@@ -10,54 +10,61 @@ define(function (require, exports, module) {
     require('siteUrl');
 
     //USERMD
-    store.set("username", "13167161025");
     var username = store.get("username");
-
     var currentProductID = store.get("currentProductID");
+    var userStatus = store.get("userStatus");
+
     jQuery.support.cors = true;
     $(function () {
         setSpecificationId();
 
-        $(document).on('click', ".menuPopup", function () {
-            var buttons1 = [
-                {
-                    text: '请选择',
-                    label: true
-                },
-                {
-                    text: '<div style="font-size:.8rem;">微信</div>',
-                    // bold: true,
-                    // color: 'danger',
-                    onClick: function () {
+        // $(document).on('click', ".menuPopup", function () {
+        //     var buttons1 = [
+        //         {
+        //             text: '请选择',
+        //             label: true
+        //         },
+        //         {
+        //             text: '<div style="font-size:.8rem;">微信</div>',
+        //             // bold: true,
+        //             // color: 'danger',
+        //             onClick: function () {
+        //
+        //             }
+        //         },
+        //         {
+        //             text: '<div style="font-size:.8rem;">朋友圈</div>',
+        //             onClick: function () {
+        //
+        //             }
+        //         }
+        //     ];
+        //     var buttons2 = [
+        //         {
+        //             text: '<div style="font-size:.8rem;">取消</div>',
+        //             bg: 'danger'
+        //         }
+        //     ];
+        //     var groups = [buttons1, buttons2];
+        //     $.actions(groups);
+        // });
 
-                    }
-                },
-                {
-                    text: '<div style="font-size:.8rem;">朋友圈</div>',
-                    onClick: function () {
-
-                    }
-                }
-            ];
-            var buttons2 = [
-                {
-                    text: '<div style="font-size:.8rem;">取消</div>',
-                    bg: 'danger'
-                }
-            ];
-            var groups = [buttons1, buttons2];
-            $.actions(groups);
-        });
         //监听 购物车
         $(document).on('click', ".cart-badge", function () {
-            getCartCount(username,  ".cart-badge > .badge");
-            var sum = $(".cart-badge > .badge").text();
-            if (sum == "0") {
-                $.toast("请添加商品");
-                return;
-            } else {
-                window.location.href = "/html/cart/cart.html";
+            if(userStatus){
+                getCartCount(username, ".cart-badge > .badge");
+                var sum = $(".cart-badge > .badge").text();
+                if (sum == "0") {
+                    $.toast("请添加商品");
+                    return;
+                } else {
+                    window.location.href = "/html/cart/cart.html";
+                }
+            }else{
+                $.toast("请登录才可以进行后续操作");
+                return location.href = '/html/my/login/login.html';
             }
+
         });
 
         //监听 请选择规格
@@ -75,45 +82,19 @@ define(function (require, exports, module) {
         //监听 加入购物车
         $(document).on('click', '.addToCartBtn', addToCart);
 
-        function addToCart() {
-            var cartState = $("#cartState").val();
-            if (cartState == "false") {
-                $("#goodsDetailMask").show();
-                $("#goodsDetailsPage").show();
-
-            } else if (cartState == "true") {
-                $("#goodsDetailMask").hide();
-                $("#goodsDetailsPage").hide();
-            }
-
-            var count = $("input[name=goodsNumber]").val();
 
 
-            if (cartState == "true") {
-                $.ajax({
-                    url: BASE_URL + CART_SITE_URL.CART_ADD.URL,
-                    type: CART_SITE_URL.CART_ADD.METHOD,
-                    data: {
-                        username: username,
-                        productId:currentProductID,
-                        quantity: count
-                    },
-                    dataType: CART_SITE_URL.DATATYPE,
-                    success: function (data) {
-                        if (data.authStatus == "200") {
-                            getCartCount(username,  ".cart-badge > .badge");
-                            $("#cartState").val(false)
-                        }
-
-                    }
-                })
-            }
-        }
 
         //立即下单
         $(document).on('click', ".buyNowBtn", function () {
             // location.href = "/html/payment/payment.html";
-            window.location.href = "/html/order/order.html";
+            if(userStatus){
+                window.location.href = "/html/order/order.html";
+            }else{
+                $.toast("请登录才可以进行后续操作");
+                return location.href = '/html/my/login/login.html';
+            }
+
         });
 
         //边缘遮罩层 *
@@ -181,6 +162,54 @@ define(function (require, exports, module) {
 
     });
 
+
+
+    function addToCart() {
+        if (userStatus){
+            var amount = store.get("amount");
+            calculateFreight(username, currentProductID, amount, "shippingCost");
+
+
+            var cartState = $("#cartState").val();
+            if (cartState == "false") {
+                $("#goodsDetailMask").show();
+                $("#goodsDetailsPage").show();
+
+            } else if (cartState == "true") {
+                $("#goodsDetailMask").hide();
+                $("#goodsDetailsPage").hide();
+            }
+
+            var count = $("input[name=goodsNumber]").val();
+
+
+            if (cartState == "true") {
+                $.ajax({
+                    url: BASE_URL + CART_SITE_URL.CART_ADD.URL,
+                    type: CART_SITE_URL.CART_ADD.METHOD,
+                    data: {
+                        username: username,
+                        productId: currentProductID,
+                        quantity: count
+                    },
+                    dataType: CART_SITE_URL.DATATYPE,
+                    success: function (data) {
+                        if (data.authStatus == "200") {
+                            getCartCount(username, ".cart-badge > .badge");
+                            $("#cartState").val(false)
+                        }
+
+                    }
+                })
+            }
+        }else{
+            $.toast("请登录才可以进行后续操作");
+            location.href = '/html/my/login/login.html';
+        }
+
+    }
+
+
     // 设置选择规格到html
     function setTextToSpecShow() {
         var sm = "";
@@ -199,14 +228,13 @@ define(function (require, exports, module) {
             url: BASE_URL + PRODUCT_SITE_URLS.PRODUCT_VIEW.URL,
             type: PRODUCT_SITE_URLS.PRODUCT_VIEW.METHOD,
             data: {
-                username:username,
+                username: username,
                 id: currentProductID
             },
             dataType: PRODUCT_SITE_URLS.DATATYPE,
             success: function (results) {
                 var data = results;
                 if (data.authStatus == "200") {
-
                     require.async('handlebars', function () {
                         var tpl = require('/layout/detail/productSlider.tpl');
                         var template = Handlebars.compile(tpl);
@@ -251,8 +279,7 @@ define(function (require, exports, module) {
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#detailOne").html(html);
-                        var amount=store.get("amount");
-                        calculateFreight(username,currentProductID, amount, "shippingCost");
+
                     });
                     //七天无理由退换
                     require.async('handlebars', function () {
@@ -297,7 +324,7 @@ define(function (require, exports, module) {
             url: BASE_URL + PRODUCT_SITE_URLS.PRODUCT_VIEW.URL,
             type: PRODUCT_SITE_URLS.PRODUCT_VIEW.METHOD,
             data: {
-                username:username,
+                username: username,
                 id: currentProductID
             },
             dataType: PRODUCT_SITE_URLS.DATATYPE,
@@ -323,7 +350,7 @@ define(function (require, exports, module) {
      * @param buyCount
      * @param DOM
      */
-    function calculateFreight(username, id , buyCount, DOM) {
+    function calculateFreight(username, id, buyCount, DOM) {
         // usermd
         $.ajax({
             url: BASE_URL + PRODUCT_SITE_URLS.CALCULATE_FREIGHT.URL,
@@ -356,7 +383,7 @@ define(function (require, exports, module) {
             success: function (data) {
                 if (data.authStatus == "200") {
                     var sum = data.count;
-                    store.set("amount",sum);
+                    store.set("amount", sum);
                     $(DOM).text(sum);
                 }
             }
