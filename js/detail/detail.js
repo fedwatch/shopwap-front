@@ -252,7 +252,7 @@ define(function (require, exports, module) {
                         var html = template(data);
                         $("#detailOne").html(html);
                         var amount=store.get("amount");
-                        calculateFreight(username,currentProductID, "804", amount, "shippingCost");
+                        calculateFreight(username,currentProductID, amount, "shippingCost");
                     });
                     //七天无理由退换
                     require.async('handlebars', function () {
@@ -320,19 +320,17 @@ define(function (require, exports, module) {
      * 计算运费
      * @param username
      * @param id
-     * @param areaId
      * @param buyCount
      * @param DOM
      */
-    function calculateFreight(username, currentProductID, areaId, buyCount, DOM) {
+    function calculateFreight(username, id , buyCount, DOM) {
         // usermd
         $.ajax({
             url: BASE_URL + PRODUCT_SITE_URLS.CALCULATE_FREIGHT.URL,
             type: PRODUCT_SITE_URLS.CALCULATE_FREIGHT.METHOD,
             data: {
                 username: username,
-                id: currentProductID,
-                areaId: areaId,
+                id: id,
                 buyCount: buyCount
             },
             dataType: PRODUCT_SITE_URLS.DATATYPE,
