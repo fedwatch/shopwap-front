@@ -20,21 +20,20 @@ define(function(require,exports,module){
         var $rightSearchNav = $('#rightSearchNav');
         var $cancelTextIcon = $('#cancelTextIcon');
 
+       // var historyList=store.set("historySearch",$searchHint.val());
+
+
         $searchVague.css({display:"none"})
         $searchHint.one("focus",function () {
 
             $cancelTextIcon.show().css({display:"inline-block"});
            $searchVague.css({display:"block"})
         });
-
-       $("#leftFixNav").click(function(){
-           self.location.href="../index.html";
-       });
         $searchHint.on('keyup',function (e) {
-            // var insertSearch = store.get("historySearch").historySearch || [];
-
             var $this = $(this);
             var searchHint = $this.val();
+            var historyList=store.set("historySearch",searchHint);
+
             if(searchHint==""){
                 $cancelTextIcon.show().css({display:"inline-block"});
                 $searchVague.css({display:"block"});
@@ -52,19 +51,13 @@ define(function(require,exports,module){
             $("#shopListShowIndex").css({display:"none"})
         });
 
-      /*$cancelTextIcon.on('click',function () {
 
-         $leftFixNav.show();
-         $cancelTextIcon.hide();
-         $searchHint.val("");
-
-         });
 
          $clearHistoryBtn.on("click",function () {
          store.set('historySearch','');
          $historySearch.empty();
          $(".history").hide();
-         });*/
+         });
 
     });
 
@@ -158,7 +151,6 @@ define(function(require,exports,module){
             },
             dataType: COMMON_SITE_URL.DATATYPE,
             success:function(data){
-                console.log(data);
                 if(data.authStatus=="200"){
                     $("#searchPrompt").hide();
                     $("#searchVague").css({display:"none"});
@@ -175,7 +167,6 @@ define(function(require,exports,module){
                         }
                     }
                     var productLength=data.products.length;
-                    console.log(productLength);
                     initPage("#page-list",productLength,1,GG.kk);
                 }else{
 
