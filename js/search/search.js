@@ -29,20 +29,30 @@ define(function(require,exports,module){
 
        $("#leftFixNav").click(function(){
            self.location.href="../index.html";
-       })
+       });
         $searchHint.on('keyup',function (e) {
             // var insertSearch = store.get("historySearch").historySearch || [];
 
             var $this = $(this);
             var searchHint = $this.val();
-            if(searchHint!=""){
-                search(searchHint,"10","1","","","","")
+            if(searchHint==""){
+                $cancelTextIcon.show().css({display:"inline-block"});
+                $searchVague.css({display:"block"});
+                $("#shopListShowIndex").css({display:"none"})
+            }else{
+                $("#shopListShowIndex").css({display:"block"})
+                search(searchHint,"1","10","","","","")
             }
-
-            //  store.set("historySearch",{historySearch:insertSearch});
         });
 
-        /*   $cancelTextIcon.on('click',function () {
+        $("#cancelTextIcon").click(function(){
+            $searchHint.val("");
+            $cancelTextIcon.show().css({display:"inline-block"});
+            $searchVague.css({display:"block"});
+            $("#shopListShowIndex").css({display:"none"})
+        });
+
+      /*$cancelTextIcon.on('click',function () {
 
          $leftFixNav.show();
          $cancelTextIcon.hide();
