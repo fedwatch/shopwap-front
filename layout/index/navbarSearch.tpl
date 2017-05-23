@@ -3,7 +3,7 @@
     <div class="fix_nav">
         <div class="nav-left"><img src="../assets/images/jie-logo.png"/></div>
         <div class="navbar-search right-search">
-            <a href="/html/search/search.html" class="form-control external">
+            <a href="/m/html/search/search.html" class="form-control external">
                 {{data}}
             </a>
         </div>
