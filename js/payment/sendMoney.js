@@ -54,7 +54,7 @@ define(function(require,exports,module){
             success:function (data) {
                if (data.status == "200" && data.su == true){
                    $.toast("支付跳转中")
-                   return location.href = '/html/payment/alipay/paySuccess.html'
+                   return location.href = '/m/html/payment/alipay/paySuccess.html'
                }
                // else{
                //     $.toast("支付失败");

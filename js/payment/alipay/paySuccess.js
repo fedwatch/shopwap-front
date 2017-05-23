@@ -13,7 +13,7 @@ define(function(require,exports,module){
 
 
         $(document).on("click",".checkMyOrderBtn",function () {
-            return location.href = '/html/my/myOrder/myOrder.html';
+            return location.href = '/m/html/my/myOrder/myOrder.html';
         })
     });
 
@@ -31,7 +31,7 @@ define(function(require,exports,module){
             success:function (data) {
                 if(data.authStatus == '200'){
                     require.async("handlebars",function(){
-                        var tpl=require('/layout/payment/alipay/paySuccess.tpl');
+                        var tpl=require('/m/layout/payment/alipay/paySuccess.tpl');
                         var template=Handlebars.compile(tpl);
                         var html=template(data);
                         $("#paySuccess").html(html);

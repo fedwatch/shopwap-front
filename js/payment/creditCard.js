@@ -112,7 +112,7 @@ define(function (require, exports, module) {
                 } else if(data.authStatus=="200"){
                     require.async('handlebars', function () {
                         require.async('transCommonPay', function () {
-                            var tpl = require('/layout/payment/directPay/creditCard.tpl');
+                            var tpl = require('/m/layout/payment/directPay/creditCard.tpl');
                             var template = Handlebars.compile(tpl);
                             var html = template(data);
                             $("#credit-card").html(html);

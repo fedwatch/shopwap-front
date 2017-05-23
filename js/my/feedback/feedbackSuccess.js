@@ -16,7 +16,7 @@ define(function(require,exports,module){
         var data = {
 
         };
-        var tpl = require('/layout/my/feedback.tpl');
+        var tpl = require('/m/layout/my/feedback.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);
         $("#feedbackPageSuccess").html(html);

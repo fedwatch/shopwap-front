@@ -33,7 +33,7 @@ define(function (require, exports, module) {
 
     require.async('handlebars', function () {
         var data = {};
-        var tpl = require('/layout/payment/directPay/bindCard.tpl');
+        var tpl = require('/m/layout/payment/directPay/bindCard.tpl');
         //var tpl=require('/layout/payment/directPay/creditCard.tpl');
         // var tpl=require('/layout/payment/directPay/depositCard.tpl');
         //var tpl=require('/layout/payment/directPay/bindCardDetail.tpl');

@@ -115,7 +115,7 @@ define(function(require,exports,module){
                     success:function (data) {
                         if(data.authStatus == "200"){
                             $.toast(data.authMsg);
-                            return location.href="/html/my/my.html"
+                            return location.href="/m/html/my/my.html"
                         }else{
                             $.toast(data.authMsg);
                         }
@@ -253,7 +253,7 @@ define(function(require,exports,module){
     // registerPage
     require.async('handlebars',function(){
         var data = genData;
-        var tpl = require('/layout/my/register.tpl');
+        var tpl = require('/m/layout/my/register.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);
         $("#registerPage").html(html);

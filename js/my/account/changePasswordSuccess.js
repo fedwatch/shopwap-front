@@ -16,7 +16,7 @@ define(function (require, exports, module) {
 
     require.async('handlebars', function () {
         var data = {};
-        var tpl = require('/layout/my/account/changePasswordSuccess.tpl');
+        var tpl = require('/m/layout/my/account/changePasswordSuccess.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);
         $("#changePasswordSuccess").html(html);

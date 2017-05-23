@@ -26,7 +26,7 @@ define(function(require,exports,module){
     // modifySuccess
     require.async('handlebars',function(){
         var data = {};
-        var tpl = require('/layout/my/forgetPassword/modifySuccess.tpl');
+        var tpl = require('/m/layout/my/forgetPassword/modifySuccess.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);
         $("#modifySuccessPage").html(html);

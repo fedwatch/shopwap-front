@@ -133,7 +133,7 @@ define(function (require, exports, module) {
             },
             success: function (data) {
                 if (data.authStatus) {
-                    var tpl = require('/layout/my/address/address.tpl');
+                    var tpl = require('/m/layout/my/address/address.tpl');
                     var template = Handlebars.compile(tpl);
                     var html = template(data);
                     $("#address").html(html);

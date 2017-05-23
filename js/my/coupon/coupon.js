@@ -29,7 +29,7 @@ define(function (require, exports, module) {
             dataType: "json",
             type: "get",
             success: function (data) {
-                var tpl = require('/layout/my/coupon.tpl');
+                var tpl = require('/m/layout/my/coupon.tpl');
                 var template = Handlebars.compile(tpl);
                 var html = template(data);
                 $("#couponPage").html(html);

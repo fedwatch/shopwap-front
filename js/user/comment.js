@@ -18,7 +18,7 @@ define(function (require, exports, module) {
             dataType: PRODUCT_SITE_URLS.DATATYPE,
             success: function (data) {
                 if (data.authStatus == "200") {
-                    var tpl = require('/layout/user/comment.tpl');
+                    var tpl = require('/m/layout/user/comment.tpl');
                     var template = Handlebars.compile(tpl);
                     var html = template(data);
                     $("#comment").html(html);

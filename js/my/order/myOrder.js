@@ -84,7 +84,7 @@ define(function(require,exports,module){
         $(document).on("click",".checkLogBtn",function (e) {
             var $this = $(this);
             store.set("sn",$this.data("sn"));
-            return location.href = '/html/user/logistics.html';
+            return location.href = '/m/html/user/logistics.html';
 
         });
 
@@ -94,7 +94,7 @@ define(function(require,exports,module){
 
             createPayment(username,[$this.data("sn")]);
 
-            return location.href = '/html/payment/alipay/commonPay.html';
+            return location.href = '/m/html/payment/alipay/commonPay.html';
         });
 
         // 立即评价
@@ -166,7 +166,7 @@ define(function(require,exports,module){
             success:function (data) {
                 require.async('handlebars',function(){
                     require.async('transMyOrder',function(){
-                        var tpl = require('/layout/my/orderData.tpl');
+                        var tpl = require('/m/layout/my/orderData.tpl');
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#getListOrders").html(html);
@@ -219,7 +219,7 @@ define(function(require,exports,module){
             success:function (data) {
                 require.async('handlebars',function(){
                     require.async('transMyOrder',function(){
-                        var tpl = require('/layout/my/myOrder.tpl');
+                        var tpl = require('/m/layout/my/myOrder.tpl');
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#myOrderPage").html(html);

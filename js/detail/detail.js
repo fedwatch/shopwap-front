@@ -58,11 +58,11 @@ define(function (require, exports, module) {
                     $.toast("请添加商品");
                     return;
                 } else {
-                    window.location.href = "/html/cart/cart.html";
+                    window.location.href = "/m/html/cart/cart.html";
                 }
             }else{
                 $.toast("请登录才可以进行后续操作");
-                return location.href = '/html/my/login/login.html';
+                return location.href = '/m/html/my/login/login.html';
             }
 
         });
@@ -89,10 +89,10 @@ define(function (require, exports, module) {
         $(document).on('click', ".buyNowBtn", function () {
             // location.href = "/html/payment/payment.html";
             if(userStatus){
-                window.location.href = "/html/order/order.html";
+                window.location.href = "/m/html/order/order.html";
             }else{
                 $.toast("请登录才可以进行后续操作");
-                return location.href = '/html/my/login/login.html';
+                return location.href = '/m/html/my/login/login.html';
             }
 
         });
@@ -204,7 +204,7 @@ define(function (require, exports, module) {
             }
         }else{
             $.toast("请登录才可以进行后续操作");
-            location.href = '/html/my/login/login.html';
+            location.href = '/m/html/my/login/login.html';
         }
 
     }
@@ -236,7 +236,7 @@ define(function (require, exports, module) {
                 var data = results;
                 if (data.authStatus == "200") {
                     require.async('handlebars', function () {
-                        var tpl = require('/layout/detail/productSlider.tpl');
+                        var tpl = require('/m/layout/detail/productSlider.tpl');
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#productSlider").html(html);
@@ -251,7 +251,7 @@ define(function (require, exports, module) {
                     //规格页
                     require.async('handlebars', function () {
                         require.async('transDetails', function () {
-                            var tpl = require('/layout/detail/goodsDetailsPage.tpl');
+                            var tpl = require('/m/layout/detail/goodsDetailsPage.tpl');
                             var template = Handlebars.compile(tpl);
                             var html = template(data);
                             $("#goodsDetailsPage").html(html);
@@ -260,13 +260,13 @@ define(function (require, exports, module) {
 
 
                     require.async('handlebars', function () {
-                        var tpl = require('/layout/detail/topLinkMenu.tpl');
+                        var tpl = require('/m/layout/detail/topLinkMenu.tpl');
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#topLinkMenu").html(html);
                     });
                     require.async('handlebars', function () {
-                        var tpl = require('/layout/detail/cartDetailFooter.tpl');
+                        var tpl = require('/m/layout/detail/cartDetailFooter.tpl');
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#cartDetailFooter").html(html);
@@ -275,7 +275,7 @@ define(function (require, exports, module) {
                     });
 
                     require.async('handlebars', function () {
-                        var tpl = require('/layout/detail/detailOne.tpl');
+                        var tpl = require('/m/layout/detail/detailOne.tpl');
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#detailOne").html(html);
@@ -283,7 +283,7 @@ define(function (require, exports, module) {
                     });
                     //七天无理由退换
                     require.async('handlebars', function () {
-                        var tpl = require('/layout/common/cartIndex.tpl');
+                        var tpl = require('/m/layout/common/cartIndex.tpl');
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#cartIndex").html(html);
@@ -292,7 +292,7 @@ define(function (require, exports, module) {
                     //detailPromo
                     require.async('handlebars', function () {
                         require.async('transDetails', function () {
-                            var tpl = require('/layout/detail/detailPromo.tpl');
+                            var tpl = require('/m/layout/detail/detailPromo.tpl');
                             var template = Handlebars.compile(tpl);
                             var html = template(data);
                             $("#detailPromo").html(html);
@@ -302,7 +302,7 @@ define(function (require, exports, module) {
 
                     //detailWrapper
                     require.async('handlebars', function () {
-                        var tpl = require('/layout/detail/detailWrapper.tpl');
+                        var tpl = require('/m/layout/detail/detailWrapper.tpl');
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#detailWrapper").html(html);

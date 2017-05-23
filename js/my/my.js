@@ -6,7 +6,7 @@ define(function (require, exports, module) {
     require("light7");
     require("store");
     require("siteUrl");
-    require("/js/utils/getCurrentPage");
+    require("getCurrentPage");
     require('cookie');
     // var session = require("session");
 
@@ -36,7 +36,7 @@ define(function (require, exports, module) {
                 if (data.authStatus == '200') {
                     require.async('handlebars', function () {
                         require.async('hbCompare', function () {
-                            var tpl = require('/layout/my/common/header.tpl');
+                            var tpl = require('/m/layout/my/common/header.tpl');
                             var template = Handlebars.compile(tpl);
                             var html = template(data);
                             $("#my_header").html(html);
@@ -44,7 +44,7 @@ define(function (require, exports, module) {
 
                             // userColumn
                             require.async('handlebars', function () {
-                                var tpl = require('/layout/my/userColumn.tpl');
+                                var tpl = require('/m/layout/my/userColumn.tpl');
                                 var template = Handlebars.compile(tpl);
                                 var html = template(data);
                                 $("#userColumn").html(html);
@@ -73,7 +73,7 @@ define(function (require, exports, module) {
 
     require.async('handlebars', function () {
         var data = {};
-        var tpl = require('/layout/common/footerBar.tpl');
+        var tpl = require('/m/layout/common/footerBar.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);
         $("#footer").html(html);

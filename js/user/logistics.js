@@ -20,7 +20,7 @@ define(function (require, exports, module) {
                     console.log(result);
                     require.async('handlebars', function () {
                         var getData = result;
-                        var tpl = require('/layout/user/logistics.tpl');
+                        var tpl = require('/m/layout/user/logistics.tpl');
                         var template = Handlebars.compile(tpl);
                         var html = template(getData);
                         $("#logistics").html(html);

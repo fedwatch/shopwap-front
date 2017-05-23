@@ -33,7 +33,7 @@ define(function(require,exports,module){
                 if (data.authStatus == "200"){
                     store.clear();
                     $.toast(data.authMsg);
-                    return location.href = '/html/index.html';
+                    return location.href = '/m/html/index.html';
                 }else{
                     $.toast(data.authMsg)
                 }

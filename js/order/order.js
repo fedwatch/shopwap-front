@@ -142,7 +142,7 @@ define(function (require, exports, module) {
                    console.log(mergeSn);
                    if(data.mergeSn){
                        store.set("mergeSn",data.mergeSn);
-                       return window.location.href="/html/payment/alipay/commonPay.html";
+                       return window.location.href="/m/html/payment/alipay/commonPay.html";
 
                    }else{
                        console.log("data.mergeSn is null")
@@ -193,7 +193,7 @@ define(function (require, exports, module) {
                if(data.authStatus == "200"){
                    //orderHeader
                    require.async('handlebars', function () {
-                       var tpl = require('/layout/order/orderHeader.tpl');
+                       var tpl = require('/m/layout/order/orderHeader.tpl');
                        var template = Handlebars.compile(tpl);
                        var html = template(data);
                        $("#orderHeader").html(html);
@@ -201,14 +201,14 @@ define(function (require, exports, module) {
 
                    //orderAddress
                    require.async('handlebars', function () {
-                       var tpl = require('/layout/order/orderAddress.tpl');
+                       var tpl = require('/m/layout/order/orderAddress.tpl');
                        var template = Handlebars.compile(tpl);
                        var html = template(data);
                        $("#orderAddress").html(html);
                    });
                    //orderDetail
                    require.async('handlebars', function () {
-                        var tpl = require('/layout/order/orderDetail.tpl');
+                        var tpl = require('/m/layout/order/orderDetail.tpl');
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#orderDetail").html(html);
@@ -227,7 +227,7 @@ define(function (require, exports, module) {
 
                    //orderBottomBar
                    require.async('handlebars', function () {
-                       var tpl = require('/layout/order/orderBottomBar.tpl');
+                       var tpl = require('/m/layout/order/orderBottomBar.tpl');
                        var template = Handlebars.compile(tpl);
                        var html = template(data);
                        $("#orderBottomBar").html(html);

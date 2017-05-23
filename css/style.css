@@ -1153,7 +1153,7 @@ span.panel-minus-button {
 }
 
 .cart-footer .cart-all-select + label {
-    background: url(/assets/images/cart-unselect-icon.png) no-repeat;
+    background: url(../assets/images/cart-unselect-icon.png) no-repeat;
     width: 1rem;
     height: 1rem;
     cursor: pointer;
@@ -1162,7 +1162,7 @@ span.panel-minus-button {
 }
 
 .cart-footer .cart-all-select:checked + label {
-    background: url(/assets/images/cart-selected-icon.png) no-repeat;
+    background: url(../assets/images/cart-selected-icon.png) no-repeat;
     width: 1rem;
     height: 1rem;
     cursor: pointer;
@@ -1171,7 +1171,7 @@ span.panel-minus-button {
 }
 
 .cart-select + label, .cart-shop-select + label, .cart-list-select + label {
-    background: url(/assets/images/cart-unselect-icon.png) no-repeat;
+    background: url(../assets/images/cart-unselect-icon.png) no-repeat;
     width: 1rem;
     height: 1rem;
     cursor: pointer;
@@ -1180,7 +1180,7 @@ span.panel-minus-button {
 }
 
 .cart-select:checked + label, .cart-shop-select:checked + label, .cart-list-select:checked + label {
-    background: url(/assets/images/cart-selected-icon.png) no-repeat;
+    background: url(../assets/images/cart-selected-icon.png) no-repeat;
     width: 1rem;
     height: 1rem;
     cursor: pointer;

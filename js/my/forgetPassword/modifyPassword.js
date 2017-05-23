@@ -103,7 +103,7 @@ define(function(require,exports,module){
                 success:function (data) {
                     if(data.authStatus == '200'){
                         $.toast(data.authMsg);
-                        return location.href="/html/my/forgetPassword/modifySuccess.html"
+                        return location.href="/m/html/my/forgetPassword/modifySuccess.html"
                     }else{
                         $.toast(data.authMsg);
                     }
@@ -120,7 +120,7 @@ define(function(require,exports,module){
     // registerPage
     require.async('handlebars',function(){
         var data = {};
-        var tpl = require('/layout/my/forgetPassword/modifyPassword.tpl');
+        var tpl = require('/m/layout/my/forgetPassword/modifyPassword.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);
         $("#modifyPasswordPage").html(html);

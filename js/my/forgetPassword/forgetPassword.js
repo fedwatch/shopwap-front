@@ -204,7 +204,7 @@ define(function(require,exports,module){
     // forgetPassword
     require.async('handlebars',function(){
         var data = {};
-        var tpl = require('/layout/my/forgetPassword/forgetPassword.tpl');
+        var tpl = require('/m/layout/my/forgetPassword/forgetPassword.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);
         $("#forgetPasswordPage").html(html);
@@ -222,7 +222,7 @@ define(function(require,exports,module){
             success:function (data) {
                 if(data.authStatus == '200'){
                     $.toast(data.authMsg);
-                    return location.href="/html/my/forgetPassword/modifyPassword.html"
+                    return location.href="/m/html/my/forgetPassword/modifyPassword.html"
                 }else{
                     $.toast(data.authMsg);
                 }

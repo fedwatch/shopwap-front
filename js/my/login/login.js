@@ -63,7 +63,7 @@ define(function (require, exports, module) {
                         store.set("userStatusTimeStamp",new Date());
                         // $.cookie("xms",data.JSESSIONID,{path:"/"});
                         // $.cookie("hhh",data.JSESSIONID);
-                        return location.href = "/html/index.html"
+                        return location.href = "/m/html/index.html"
                     }else{
                         $.toast(data.authMsg);
                         $userPhone.val("");
@@ -79,7 +79,7 @@ define(function (require, exports, module) {
     // loginPage
     require.async('handlebars', function () {
         var data = {};
-        var tpl = require('/layout/my/login.tpl');
+        var tpl = require('/m/layout/my/login.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);
         $("#loginPage").html(html);

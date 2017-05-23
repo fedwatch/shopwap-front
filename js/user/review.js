@@ -11,7 +11,7 @@ define(function(require,exports,module){
 
       require.async('handlebars',function(){
            var data=[];
-           var tpl=require('/layout/user/review.tpl');
+           var tpl=require('/m/layout/user/review.tpl');
            var template=Handlebars.compile(tpl);
            var html=template(tpl);
            $("#review").html(html);

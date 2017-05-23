@@ -83,7 +83,7 @@ define(function(require,exports,module){
     // searchHeader
     require.async('handlebars',function(){
         var data = genData;
-        var tpl = require('/layout/search/searchHeader.tpl');
+        var tpl = require('/m/layout/search/searchHeader.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);
         $("#searchHeader").html(html);
@@ -95,7 +95,7 @@ define(function(require,exports,module){
     // searchVague
     require.async('handlebars',function(){
         var data = genData;
-        var tpl = require('/layout/search/searchVague.tpl');
+        var tpl = require('/m/layout/search/searchVague.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);
         $("#searchVague").html(html);
@@ -109,7 +109,7 @@ define(function(require,exports,module){
             $(".history").hide();
         }else if(historySearch !== ''){
             var data = historySearch;
-            var tpl = require('/layout/search/historySearch.tpl');
+            var tpl = require('/m/layout/search/historySearch.tpl');
             var template = Handlebars.compile(tpl);
             var html = template(data);
             $("#historySearch").html(html);
@@ -157,7 +157,7 @@ define(function(require,exports,module){
                     $("#searchVague").css({display:"none"});
                     $("#shopListSort").css({display:"none"});
                     require.async('handlebars',function(){
-                        var tpl = require('/layout/cartgory/productCategory.tpl');
+                        var tpl = require('/m/layout/cartgory/productCategory.tpl');
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#shopListShowIndex").html(html);

@@ -64,7 +64,7 @@ define(function (require, exports, module) {
                     store.set("balance", balance);
 
                     require.async("handlebars", function () {
-                        var tpl = require('/layout/payment/alipay/commonPay.tpl');
+                        var tpl = require('/m/layout/payment/alipay/commonPay.tpl');
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#commonPay").html(html);
@@ -184,7 +184,7 @@ define(function (require, exports, module) {
                 if (data.authStatus == '200') {
                     require.async("handlebars", function () {
                         require.async("transCommonPay", function () {
-                            var tpl = require('/layout/payment/bankList.tpl');
+                            var tpl = require('/m/layout/payment/bankList.tpl');
                             var template = Handlebars.compile(tpl);
                             var html = template(data);
                             $("#bankList").html(html);

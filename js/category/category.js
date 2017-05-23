@@ -3,7 +3,7 @@
  */
 define(function (require, exports, module) {
     require('jquery');
-    require('/js/utils/getCurrentPage');
+    require('getCurrentPage');
     require('store');
     require('siteUrl');
 
@@ -64,7 +64,7 @@ define(function (require, exports, module) {
                     // navSubPosition
                     require.async('handlebars',function(){
                         var getData = data;
-                        var tpl = require('/layout/cartgory/navSubPosition.tpl');
+                        var tpl = require('/m/layout/cartgory/navSubPosition.tpl');
                         var template = Handlebars.compile(tpl);
                         var html = template(getData);
                         $("#navSubPosition").html(html);
@@ -91,7 +91,7 @@ define(function (require, exports, module) {
     function getProductDetail(id){
         var productId = id;
         store.set("currentProductID",productId);
-        location.href = '/html/detail/detail.html';
+        location.href = '/m/html/detail/detail.html';
     }
 
     function getProductInfo(){
@@ -122,7 +122,7 @@ define(function (require, exports, module) {
                 // productCategory
                 require.async('handlebars',function(){
                     if(data.authStatus == "200"){
-                        var tpl = require('/layout/cartgory/productCategory.tpl');
+                        var tpl = require('/m/layout/cartgory/productCategory.tpl');
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
                         $("#productCategory").html(html);
@@ -152,7 +152,7 @@ define(function (require, exports, module) {
             data:{username:username},
             success:function (data) {
                 if(data.authStatus == "200"){
-                    var tpl = require('/layout/cartgory/mainNav.tpl');
+                    var tpl = require('/m/layout/cartgory/mainNav.tpl');
                     var template = Handlebars.compile(tpl);
                     var html = template(data);
                     $("#mainNav").html(html);
@@ -170,7 +170,7 @@ define(function (require, exports, module) {
             data:{username:username,id:categoryId},
             dataType:PRODUCT_SITE_URLS.DATATYPE,
             success:function (data) {
-                var tpl = require('/layout/cartgory/navSubPosition.tpl');
+                var tpl = require('/m/layout/cartgory/navSubPosition.tpl');
                 var template = Handlebars.compile(tpl);
                 var html = template(data);
                 $("#navSubPosition").html(html);
@@ -204,7 +204,7 @@ define(function (require, exports, module) {
             success:function (data) {
                 // console.log(data);
                 if(data.authStatus == "200"){
-                    var tpl = require('/layout/cartgory/productCategory.tpl');
+                    var tpl = require('/m/layout/cartgory/productCategory.tpl');
                     var template = Handlebars.compile(tpl);
                     var html = template(data);
                     $("#productCategory").html(html);
@@ -216,7 +216,7 @@ define(function (require, exports, module) {
     // footerNav
     require.async('handlebars',function(){
         var data = {};
-        var tpl = require('/layout/common/footerBar.tpl');
+        var tpl = require('/m/layout/common/footerBar.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);
         $("#footerNavPage").html(html);

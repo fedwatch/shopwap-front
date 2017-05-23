@@ -6,15 +6,10 @@ define(function(require,exports,module){
     require("swiper");
     require("light7");
     // require("mockjs");
-    require("/js/utils/getCurrentPage");
+    require("getCurrentPage");
     require("store");
     require("siteUrl");
 
-
-
-
-    // var fastclick = require("fastclick");
-    // fastclick.attach(document)
     jQuery.support.cors = true;
     $(function () {
         getCurrentPage();
@@ -51,7 +46,7 @@ define(function(require,exports,module){
 
     require.async('handlebars',function(){
         var getData = {};
-        var tpl =  require('/layout/index/category.tpl');
+        var tpl =  require('/m/layout/index/category.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(getData);
         $("#category").html(html);
@@ -64,7 +59,7 @@ define(function(require,exports,module){
                 {url:"",image:"../assets/images/banner-1.jpg"},
             ],
         };
-        var tpl = require('/layout/index/banner.tpl');
+        var tpl = require('/m/layout/index/banner.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);
         $("#banner").html(html);
@@ -75,7 +70,7 @@ define(function(require,exports,module){
         var data = {
             data:'搜索'
         };
-        var tpl = require('/layout/index/navbarSearch.tpl');
+        var tpl = require('/m/layout/index/navbarSearch.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);
         $("#navbarSearch").html(html);
@@ -85,7 +80,7 @@ define(function(require,exports,module){
     // footerNav
     require.async('handlebars',function(){
         var data = {};
-        var tpl = require('/layout/common/footerBar.tpl');
+        var tpl = require('/m/layout/common/footerBar.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);
         $("#footerNavPage").html(html);

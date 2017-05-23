@@ -24,7 +24,7 @@ define(function (require, exports, module) {
                 pageSize: pageSize,
             },
             success: function (data) {
-                var tpl = require('/layout/my/address/manage-address.tpl');
+                var tpl = require('/m/layout/my/address/manage-address.tpl');
                 var template = Handlebars.compile(tpl);
                 var html = template(data);
                 $("#manage-address").html(html);
