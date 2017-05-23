@@ -4,7 +4,7 @@
 define(function(require,exports,module){
     require('jquery');
     require('light7');
-    require("page");
+    // require("page");
     require('store');
     require("siteUrl");
 
@@ -37,9 +37,9 @@ define(function(require,exports,module){
             if(searchHint==""){
                 $cancelTextIcon.show().css({display:"inline-block"});
                 $searchVague.css({display:"block"});
-                $("#shopListShowIndex").css({display:"none"})
+                $("#shopListShowIndex2").css({display:"none"})
             }else{
-                $("#shopListShowIndex").css({display:"block"})
+                $("#shopListShowIndex2").css({display:"block"})
                 search(searchHint,"1","10","","","","")
             }
         });
@@ -48,7 +48,7 @@ define(function(require,exports,module){
             $searchHint.val("");
             $cancelTextIcon.show().css({display:"inline-block"});
             $searchVague.css({display:"block"});
-            $("#shopListShowIndex").css({display:"none"})
+            $("#shopListShowIndex2").css({display:"none"})
         });
 
 
@@ -140,6 +140,7 @@ define(function(require,exports,module){
         $.ajax({
             url: BASE_URL + COMMON_SITE_URL.SEARCH.URL,
             type: COMMON_SITE_URL.SEARCH.METHOD,
+            dataType: COMMON_SITE_URL.DATATYPE,
             data: {
                 keyword:keyword,
                 pageNumber: pageNumber,
@@ -149,26 +150,22 @@ define(function(require,exports,module){
                 startPrice:startPrice,
                 endPrice:endPrice
             },
-            dataType: COMMON_SITE_URL.DATATYPE,
+
             success:function(data){
-                console.log(data.products);
-                if(data.authStatus=="200"){
-                    $("#searchPrompt").hide();
-                    $("#searchVague").css({display:"none"});
-                    $("#shopListSort").css({display:"none"});
-                    require.async('handlebars',function(){
-                        var tpl = require('/m/layout/cartgory/productCategory.tpl');
-                        var template = Handlebars.compile(tpl);
-                        var html = template(data);
-                        $("#shopListShowIndex").html(html);
-                    });
+                console.log(data);
+                $("#searchPrompt").hide();
+                $("#searchVague").css({display:"none"});
+                $("#shopListSort").css({display:"none"});
+                require.async('handlebars',function(){
+                    var tpl = require('/m/layout/cartgory/productCategory.tpl');
+                    var template = Handlebars.compile(tpl);
+                    var html = template(data);
+                    $("#shopListShowIndex2").html(html);
+                });
 
-
-                }else{
-
-                }
             }
-        })
+        });
+
     }
 
 
