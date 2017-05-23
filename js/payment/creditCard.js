@@ -15,6 +15,7 @@ define(function (require, exports, module) {
     var paymentPluginId = store.get("paymentPluginId") || "lianlianpayPlugin";
     var mergeSn = store.get("mergeSn");
     var amount = store.get("amount");
+    var allAmount = store.get("allAmount");
     var app_request = store.get("app_request") || '3';
     var cardType = store.get("cardType") || '1';
     var cardId = store.get("cardId");
@@ -121,7 +122,7 @@ define(function (require, exports, module) {
                             var template = Handlebars.compile(tpl);
                             var html = template(data);
                             $("#credit-card").html(html);
-                            $("#allAmount").text(amount);
+                            $("#allAmount").text(allAmount);
                         });
 
                     });
