@@ -11,18 +11,16 @@ define(function (require, exports, module) {
     require('divideAmount');
 
     jQuery.support.cors = true;
+
+    var username = store.get("username");
+    var snArrs = store.get("snArrs");
+
+    var itemIds = store.get("cartItemId");
+    var receiverId = store.get("receiverId");
+    var memoArr = store.get("memoArr");
+
+
     $(function () {
-        var username = store.get("username");
-        var snArrs = store.get("snArrs");
-
-        // console.log(username);
-
-        var itemIds = store.get("cartItemId");
-        var receiverId = store.get("receiverId");
-        var memoArr = store.get("memoArr");
-
-        console.log(itemIds);
-
         orderInfo(username,itemIds);
 
          $(document).on("click",".detailOrderBtn",function(){
@@ -115,7 +113,7 @@ define(function (require, exports, module) {
                 console.log(data);
                 if(data.authStatus=="200"){
                     //存储sn
-                    var snArrs =data.snList;
+                    var snArrs = data.snList;
                     createPayment(username,snArrs);
                     store.set("snArrs",data.snList);
                 }

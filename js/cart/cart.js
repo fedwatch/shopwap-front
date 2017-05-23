@@ -51,6 +51,7 @@ define(function (require, exports, module) {
                                 $("#cartItem").html(html);
                             });
                         });
+
                     }else if (data.authStatus == "500"){
                         $("#nothingBuy").show();
                     }
@@ -351,8 +352,8 @@ define(function (require, exports, module) {
                     quantArr.splice(quantArr.length - 1, 1);
                 }
             }
-            // console.log(pricesArr);
-            // console.log(quantArr);
+            console.log(pricesArr);
+            console.log(quantArr);
             $(".text-all-select").hide();
             $(".text-selected").show();
             checkedText();
@@ -402,8 +403,9 @@ define(function (require, exports, module) {
         function calcCart() {
             var totalPrice = 0;
             for (var i = 0, j = 0; i < pricesArr.length, j < quantArr.length; i++, j++) {
-                totalPrice += pricesArr[i] * quantArr[j];
+                totalPrice += parseFloat(pricesArr[i]) * parseFloat(quantArr[j]);
             }
+            totalPrice = totalPrice.toFixed(2);
             // console.log(totalPrice);
             return totalPrice;
         }
