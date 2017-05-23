@@ -18,37 +18,6 @@ define(function (require, exports, module) {
     $(function () {
         setSpecificationId();
 
-        // $(document).on('click', ".menuPopup", function () {
-        //     var buttons1 = [
-        //         {
-        //             text: '请选择',
-        //             label: true
-        //         },
-        //         {
-        //             text: '<div style="font-size:.8rem;">微信</div>',
-        //             // bold: true,
-        //             // color: 'danger',
-        //             onClick: function () {
-        //
-        //             }
-        //         },
-        //         {
-        //             text: '<div style="font-size:.8rem;">朋友圈</div>',
-        //             onClick: function () {
-        //
-        //             }
-        //         }
-        //     ];
-        //     var buttons2 = [
-        //         {
-        //             text: '<div style="font-size:.8rem;">取消</div>',
-        //             bg: 'danger'
-        //         }
-        //     ];
-        //     var groups = [buttons1, buttons2];
-        //     $.actions(groups);
-        // });
-
         //监听 购物车
         $(document).on('click', ".cart-badge", function () {
             if(userStatus){

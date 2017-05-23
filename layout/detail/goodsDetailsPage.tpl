@@ -1,6 +1,6 @@
 <div class="detail-header" >
     <div class="detail-image" >
-        <img src="//{{this.product.image}}" alt="" class="img-round" >
+        <img src="{{this.product.image}}" alt="" class="img-round" >
     </div>
     <div class="detail-desc" >
         <span class="detail-desc-price" >￥ <span class="product-price">{{this.product.price}}</span></span><br>
