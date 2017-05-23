@@ -31,11 +31,11 @@ define(function (require, exports, module) {
 
         $(document).on('click', '.modal-inner .bank-li a', function () {
             var $this = $(this);
-            var cardId = $this.data("id")
+            var cardId = $this.data("id");
             store.set("cardId", cardId);
             console.log(cardId);
-
-            paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username);
+            var app_request_url = location.host + '/m/url';
+            paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username,app_request_url);
         });
 
 
@@ -260,8 +260,9 @@ define(function (require, exports, module) {
      * @param cardId
      * @param app_request
      * @param username
+     * @param app_request_url
      */
-    function paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username) {
+    function paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username,app_request_url) {
         $.ajax({
             url: BASE_URL + PAYMENT_SITE_URL.PAY_SUBMIT.URL,
             type: PAYMENT_SITE_URL.PAY_SUBMIT.METHOD,
@@ -275,6 +276,7 @@ define(function (require, exports, module) {
                 cardId: cardId,
                 app_request: app_request,
                 username: username,
+                app_request_url: app_request_url,
             },
             success: function (data) {
                 if (data.authStatus == '200') {
