@@ -173,12 +173,12 @@ define(function (require, exports, module) {
                                     var categoryIdsHidden = categoryId;
                                     var categorySubId = categorySubIs;
                                     var keyword = '';
-                                    var pageNumber = '';
+                                    var pageNumber = '1';
                                     var categoryIds = categoryIdsHidden+","+categorySubId;
                                     var brandIds = '';
                                     var startPrice = '';
                                     var endPrice = '';
-                                    var pageSize = '';
+                                    var pageSize = '20';
 
                                     $.ajax({
                                         url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
