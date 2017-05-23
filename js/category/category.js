@@ -168,6 +168,44 @@ define(function (require, exports, module) {
                                     var template = Handlebars.compile(tpl);
                                     var html = template(data);
                                     $("#navSubPosition").html(html);
+
+                                    var categorySubIs = data.productCategories[0].id;
+                                    var categoryIdsHidden = categoryId;
+                                    var categorySubId = categorySubIs;
+                                    var keyword = '';
+                                    var pageNumber = '';
+                                    var categoryIds = categoryIdsHidden+","+categorySubId;
+                                    var brandIds = '';
+                                    var startPrice = '';
+                                    var endPrice = '';
+                                    var pageSize = '';
+
+                                    $.ajax({
+                                        url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
+                                        dataType:PRODUCT_SITE_URLS.DATATYPE,
+                                        type:PRODUCT_SITE_URLS.PRODUCT_SEARCH.METHOD,
+                                        data: {
+                                            keyword: keyword,
+                                            pageNumber: pageNumber,
+                                            categoryIds: categoryIds,
+                                            brandIds: brandIds,
+                                            startPrice: startPrice,
+                                            endPrice: endPrice,
+                                            pageSize: pageSize
+                                        },
+                                        success:function (data) {
+                                            // productCategory
+                                            require.async('handlebars',function(){
+                                                if(data.authStatus == "200"){
+                                                    var tpl = require('/m/layout/cartgory/productCategory.tpl');
+                                                    var template = Handlebars.compile(tpl);
+                                                    var html = template(data);
+                                                    $("#productCategory").html(html);
+                                                }
+                                            });
+                                            $($(".nav-sub-render .nav-sub-text")[0]).addClass("active");
+                                        }
+                                    });
                                 }
                             }
                         });
