@@ -134,13 +134,10 @@ define(function (require, exports, module) {
 
 
 
-
-
     function initCategoryActive(){
         $(".nav-tabbar-item").first().find(".nav-render > .nav-text").addClass("active");
         $(".nav-sub-text").first().addClass("active");
     }
-
 
 
     // mainNav
@@ -163,7 +160,7 @@ define(function (require, exports, module) {
 
     // navSubPosition
     require.async('handlebars',function(){
-        var categoryId = $("#categoryId").val();
+        var categoryId = '105' ;
         $.ajax({
             url:BASE_URL+PRODUCT_SITE_URLS.FIND_SUBS.URL,
             type:PRODUCT_SITE_URLS.FIND_SUBS.METHOD,

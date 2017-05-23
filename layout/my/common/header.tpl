@@ -11,11 +11,11 @@
     <div class="list-block reset-con">
         <div class="content-block con-b2">
             <div class="user_profile_icon u-p-i2">
-                <a href="/html/my/personalCenter.html" class="clearfix external">
+                <a href="/m/html/my/personalCenter.html" class="clearfix external">
                     {{#if logo}}
                     <img src="{{logo}}" alt="" class="user_profile_avatar">
                     {{else}}
-                    <img src="/assets/images/cool-girl.jpg" alt="" class="user_profile_avatar">
+                    <img src="../../assets/images/cool-girl.jpg" alt="" class="user_profile_avatar">
                     {{/if}}
                 </a>
             </div>

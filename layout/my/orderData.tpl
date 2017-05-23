@@ -44,7 +44,7 @@
             {{/compare}}
 
             {{#compare this.orderStatus 'completed'}}
-            <a href="/html/user/logistics.html" class="external checkLogBtn uccButton" data-sn="{{sn}}"> 查看物流 </a>
+            <a href="/m/html/user/logistics.html" class="external checkLogBtn uccButton" data-sn="{{sn}}"> 查看物流 </a>
             <!--<a href="/html/user/review.html" class="external commentBtn uccButton" data-sn="{{sn}}"> 评价 </a>-->
             {{/compare}}
 
@@ -71,7 +71,7 @@
     {{/each}}
 {{else}}
 <div class="cart-item text-center" style="padding:2.35rem 0">
-    <img src="/assets/images/noOrder.png" alt="">
+    <img src="../../../assets/images/noOrder.png" alt="">
     <p>还没有任何订单呢</p>
 </div>
 

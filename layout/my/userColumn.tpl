@@ -4,7 +4,7 @@
         <li class="item-content item-link">
             <!--<div class="item-media"><i class="icon icon-settings"></i></div>-->
             <div class="item-inner">
-                <a href="/html/my/myOrder/myOrder.html" class="external" style="width:100%;display:block;">
+                <a href="/m/html/my/myOrder/myOrder.html" class="external" style="width:100%;display:block;">
                     <div class="item-title">我的订单</div>
                 </a>
             </div>
@@ -20,7 +20,7 @@
         <li class="item-content item-link">
             <!--<div class="item-media"><i class="icon icon-message"></i></div>-->
             <div class="item-inner">
-                <a href="/html/my/address/address.html" style="width:100%;display: block;" class="external">
+                <a href="/m/html/my/address/address.html" style="width:100%;display: block;" class="external">
                     <div class="item-title">地址管理</div>
                 </a>
             </div>
