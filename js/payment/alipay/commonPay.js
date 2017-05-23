@@ -34,7 +34,7 @@ define(function (require, exports, module) {
             var cardId = $this.data("id");
             store.set("cardId", cardId);
             console.log(cardId);
-            var app_request_url = location.host + '/m/url';
+            var app_request_url = location.host + '/m/html';
             paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username,app_request_url);
         });
 
