@@ -140,6 +140,12 @@ define(function (require, exports, module) {
                 },
                 success:function (data) {
                     console.log(data);
+                    if(data.authStatus == '200'){
+                        location.reload();
+                    }else{
+                        $.toast(data.authMsg);
+                    }
+
                 }
             });
         }
@@ -489,13 +495,13 @@ define(function (require, exports, module) {
     });
 
     // nothingBuy
-    require.async('handlebars', function () {
+   /* require.async('handlebars', function () {
         var storeData = {};
         var tpl = require('/layout/cart/nothingBuy.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(storeData);
         $("#nothingBuy").html(html);
-    });
+    });*/
 
 
 
