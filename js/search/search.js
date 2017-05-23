@@ -9,6 +9,7 @@ define(function (require, exports, module) {
     require("siteUrl");
 
     jQuery.support.cors = true;
+    var MD_URL = '//'+location.host+'/m'
     $(function () {
         var $searchHint = $('#searchHint');
         var $searchPrompt = $('#searchPrompt');
@@ -57,6 +58,13 @@ define(function (require, exports, module) {
             $historySearch.empty();
             $(".history").hide();
         });
+
+        $(document).on("click",".productCategory a",function () {
+            var $this = $(this);
+            var id = $this.data("id");
+            localStorage.setItem("currentProductID",id);
+            location.href = MD_URL+"/html/detail/detail.html";
+        })
 
     });
 
@@ -156,7 +164,7 @@ define(function (require, exports, module) {
                 var  html='';
                 products.map(function(data){
                     html +='<div class="col-50 productCategory" >'+
-                        '<a href="javascript:;"  data-product-id="'+data.id+'" class="external">'+
+                        '<a href="javascript:;"  data-id="'+data.id+'" class="external">'+
                         '<div style="background: #fff;padding:0 0;margin: .25rem 0;width:100%;height:12rem;overflow: hidden;">'+
                         '<img src="'+data.image+'" alt="" style="width:100%;height:7rem;overflow: hidden;">'+
                         '<h4 class="product-title" style="padding:0 .25rem;font-size:.7rem;color:#000;">'+data.name+'</h4>'+

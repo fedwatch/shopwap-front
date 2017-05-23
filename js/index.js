@@ -11,7 +11,7 @@ define(function(require,exports,module){
     require("siteUrl");
 
     jQuery.support.cors = true;
-    var MD_URL = '//jie.net/m'
+    var MD_URL = '//'+location.host+'/m'
     $(function () {
         getCurrentPage();
         findAreaByIp();
