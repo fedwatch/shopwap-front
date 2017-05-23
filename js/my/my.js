@@ -17,7 +17,7 @@ define(function (require, exports, module) {
 
     $(function () {
         var username = store.get("username");
-        console.log(username);
+        // console.log(username);
         getIndex(username);
         getCurrentPage();
 
