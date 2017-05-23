@@ -1,6 +1,4 @@
-
 var QRCode;
-
 (function () {
 
 	function QR8bitByte(data) {

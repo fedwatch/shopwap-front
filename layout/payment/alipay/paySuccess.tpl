@@ -30,11 +30,11 @@
          </div>
      </div>
     {{/order}}
-    <!--<div class="content-block">-->
-        <!--<p>-->
-            <!--<a class="button button-big button-fill external rg-col" href="javascript:;" >-->
-                <!--查看订单-->
-            <!--</a>-->
-        <!--</p>-->
-    <!--</div>-->
+    <div class="content-block">
+        <p>
+            <a class="checkMyOrderBtn button button-big button-fill external rg-col" href="javascript:;" >
+                查看订单
+            </a>
+        </p>
+    </div>
 </div>

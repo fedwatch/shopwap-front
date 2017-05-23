@@ -17,6 +17,8 @@ define(function (require, exports, module) {
     var app_request = store.get("app_request") || '3';
     var cardId=store.get("cardId");
 
+    var isLock = store.get("isLock")||false;
+
     var isBalancePay = false;
     jQuery.support.cors = true;
     $(function () {
@@ -61,8 +63,6 @@ define(function (require, exports, module) {
                     balance = data.balance;
                     store.set("balance", balance);
 
-                    console.log(data);
-                    console.log(mergeSn);
                     require.async("handlebars", function () {
                         var tpl = require('/layout/payment/alipay/commonPay.tpl');
                         var template = Handlebars.compile(tpl);
@@ -81,8 +81,6 @@ define(function (require, exports, module) {
                         getBankList(username);
                         //选择支付方式
                         choicePay();
-
-
 
                         $("#balancePayBtn").click(function () {
                             if (isBalancePay == false) {
@@ -279,17 +277,87 @@ define(function (require, exports, module) {
                 username: username,
             },
             success: function (data) {
-
-                if (data.parameterMap) {
-                    store.set("req_data", data.parameterMap.req_data);
-                    if (data.authStatus == '200') {
+                if (data.authStatus == '200') {
+                    if (data.parameterMap) {
+                        store.set("req_data", data.parameterMap.req_data);
                         return location.href = '../sendMoney.html';
                     }
-                }
-                if(data.authStatus == '211'){
+                }else if(data.authStatus == '211'){
                     window.location.href = "../alipay/paySuccess.html?paymentSn="+data.paymentSn;
                 }
-                $.toast(data.authMsg);
+                else if(data.authStatus == '500'){
+                    // 部分订单已被锁定，不能进行支付操作 需要 执行 解锁
+                    store.set("isLock",true);
+
+                    checkLock(username,mergeSn);
+
+                    console.log("====== paySubmit ====== start")
+                    console.log(store.get("isLock"));
+                    console.log("====== paySubmit ====== start")
+                    if(store.get("isLock") == false){
+                        paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username)
+                    }
+                }
+
+                else{
+                    $.toast(data.authMsg);
+                }
+
+            }
+        })
+    }
+
+    /**
+     *
+     * @param username
+     * @param mergeSn
+     */
+    function checkLock(username,mergeSn){
+        $.ajax({
+            url: BASE_URL + ORDER_SITE_URL.CHECK_LOCK.URL,
+            type: ORDER_SITE_URL.CHECK_LOCK.METHOD,
+            dataType: ORDER_SITE_URL.DATATYPE,
+            data: {
+                username: username,
+                mergeSn : mergeSn ,
+
+            },
+            success: function (data) {
+                if (data.authStatus){
+                    if(data.isLock == true){
+                    //    检查一旦锁定就执行解锁操作 从而实现自动解锁
+                        unlock(username,mergeSn);
+                    }
+                }else{
+                    $.toast(data.authMsg)
+                }
+
+            }
+        })
+    }
+
+    /**
+     * 支付手动解锁订单
+     * @param username
+     * @param mergeSn
+     */
+    function unlock(username,mergeSn){
+        $.ajax({
+            url: BASE_URL + ORDER_SITE_URL.UNLOCK.URL,
+            type: ORDER_SITE_URL.UNLOCK.METHOD,
+            dataType: ORDER_SITE_URL.DATATYPE,
+            data: {
+                username: username,
+                mergeSn : mergeSn  ,
+
+            },
+            success: function (data) {
+                if(data.authStatus == '200'){
+                    store.set("isLock",false);
+                    console.log("====== unlock ====== start")
+                    console.log(store.get("isLock"))
+                    console.log("====== unlock ====== end")
+                }
             }
         })
     }

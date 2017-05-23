@@ -31,6 +31,7 @@ seajs.config({
         "parseUrl":"/js/utils/parseUrl",
         "transCommonPay":"/js/utils/transCommonPay",
         "transMyOrder":"/js/utils/transMyOrder",
+        "hbCompare":"/js/utils/hbCompare",
         "varietyValidation":"/js/utils/varietyValidation.js",
 
         "rsa":"/js/utils/rsa/rsa.js",

@@ -1,6 +1,6 @@
 <!--用户登录-->
 <header class="bar bar-nav">
-    <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)"
+    <a class="button button-link button-nav pull-left external" href="/html/index.html"
        data-transition='slide-out'>
         <span class="icon icon-left"></span>
     </a>

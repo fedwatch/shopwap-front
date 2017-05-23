@@ -10,6 +10,11 @@ define(function(require,exports,module){
         var n = parseURL(href);
         var paymentSn = n.params.paymentSn;
         paymentView(username,paymentSn);
+
+
+        $(document).on("click",".checkMyOrderBtn",function () {
+            return location.href = '/html/my/myOrder/myOrder.html';
+        })
     });
 
 
@@ -30,6 +35,8 @@ define(function(require,exports,module){
                         var template=Handlebars.compile(tpl);
                         var html=template(data);
                         $("#paySuccess").html(html);
+
+
                     })
                 }
 

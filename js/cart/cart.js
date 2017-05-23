@@ -8,6 +8,7 @@ define(function (require, exports, module) {
     require('siteUrl');
     require('user');
 
+    jQuery.support.cors = true;
     $(function () {
         // getCartFromLS();
         var username = store.get("username");

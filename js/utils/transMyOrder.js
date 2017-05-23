@@ -1,15 +1,15 @@
 //订单状态
 Handlebars.registerHelper("transOrderStatus",function(value){
     if(value == 'unconfirmed'){
-        return "待付款";
+        return "未支付";
     } else if(value == 'confirmed'){
-        return "待发货";
+        return "买家已付款";
     } else if(value == 'completed'){
         return "已完成";
     } else if(value == 'cancelled'){
-        return "已取消";
+        return "已关闭";
     } else if(value == 'expired'){
-        return "已过期";
+        return "已失效";
     }else if(value == 'shipped'){
         return "已发货";
     }else if(value == 'partialReturns'){

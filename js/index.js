@@ -60,12 +60,9 @@ define(function(require,exports,module){
     // banner
     require.async('handlebars',function(){
         var data = {
-            data:'499',
-            img: [
-                "../assets/images/banner1.png",
-                "../assets/images/banner2.png",
-                "../assets/images/banner3.png"
-            ]
+            banner: [
+                {url:"",image:"../assets/images/banner-1.jpg"},
+            ],
         };
         var tpl = require('/layout/index/banner.tpl');
         var template = Handlebars.compile(tpl);
@@ -76,7 +73,7 @@ define(function(require,exports,module){
     // navbarSearch
     require.async('handlebars',function(){
         var data = {
-            data:'男装春上新'
+            data:'搜索'
         };
         var tpl = require('/layout/index/navbarSearch.tpl');
         var template = Handlebars.compile(tpl);

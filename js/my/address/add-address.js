@@ -46,8 +46,6 @@ define(function (require, exports, module) {
                                 $("#user-default").click();
                             }
                         }
-
-
                     }
                 });
             }
@@ -88,15 +86,29 @@ define(function (require, exports, module) {
             var $this = $(this);
             var username = store.get("username");
             var consignee = $userNameAddr.val();
-            var areaId = $areaId.val() || 310;
+            if(consignee == '' || typeof consignee == "undefined"){
+                $.toast("联系人不可为空")
+                return;
+            }
+            var areaId = $areaId.val() || store.get("areaId");
             var address = $userAddress.val();
             var zipCode = $userZipCode.val();
             var phone = $userPhoneS.val();
+            if (phone == '' || typeof phone == "undefined"){
+                $.toast("手机号不可为空");
+                return;
+            }
+            if( address == '' || typeof address == "undefined"){
+                $.toast("地址不可为空");
+                return;
+            }
             var isDefault = userDefault;
             if (editStatus == null || editStatus == false) {
                 receiverSave(username, consignee, areaId, address, zipCode, phone, isDefault)
+                return history.go(-1);
             } else if (editStatus) {
                 receiverUpdate(username, addressId, consignee, areaId, address, zipCode, phone, isDefault)
+                return history.go(-1)
             }
 
         });

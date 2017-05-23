@@ -94,9 +94,6 @@ define(function (require, exports, module) {
         location.href = '/html/detail/detail.html';
     }
 
-
-
-
     function getProductInfo(){
         var categoryIdsHidden = $("#categoryId").val();
         var categorySubId = $("#categorySubId").val();

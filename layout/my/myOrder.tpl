@@ -67,17 +67,17 @@
                 <div class="userChooseCol" >
 
                     {{#compare this.orderStatus 'shipped'}}
-                    <a href="/html/user/logistics.html" class="external checkLogBtn uccButton"> 查看物流 </a>
-                    <span class="confirmReceiptBtn uccButton"> 确认收货 </span>
+                    <a href="javascript:void(0);" class="external checkLogBtn uccButton" data-sn="{{sn}}"> 查看物流 </a>
+                    <span class="confirmReceiptBtn uccButton" data-sn="{{sn}}"> 确认收货 </span>
                     {{/compare}}
 
                     {{#compare this.orderStatus 'completed'}}
-                    <a href="/html/user/logistics.html" class="external checkLogBtn uccButton"> 查看物流 </a>
-                    <a href="/html/user/review.html" class="external commentBtn uccButton"> 评价 </a>
+                    <a href="/html/user/logistics.html" class="external checkLogBtn uccButton" data-sn="{{sn}}"> 查看物流 </a>
+                    <a href="/html/user/review.html" class="external commentBtn uccButton" data-sn="{{sn}}"> 评价 </a>
                     {{/compare}}
 
                     {{#compare this.orderStatus 'unconfirmed'}}
-                    <a href="../../payment/alipay/commonPay.html" class="external paymentBtn uccButton" > 立即付款 </a>
+                    <a href="javascript:void(0)" class="external paymentBtn uccButton" data-sn="{{sn}}"> 立即付款 </a>
                     {{/compare}}
 
                     {{#compare this.orderStatus 'confirmed'}}
@@ -87,6 +87,7 @@
                     {{#compare this.orderStatus 'closed'}}
                     <a href="javascript:void(0);" class="waitSendBtn uccButton"> 交易关闭 </a>
                     {{/compare}}
+
                     {{#compare this.orderStatus 'expired'}}
                     {{/compare}}
                 </div>

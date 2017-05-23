@@ -11,10 +11,12 @@ define(function(require,exports,module){
     require('store');
 
     jQuery.support.cors = true;
+
+    var reieverStatus;
     var username = store.get("username");
     $(function () {
         // 我的订单 全部 待付款 待发货 待收货 待评价
-        $(document).on("click",".ocItem",function (e) {
+        $(document).on("click",".ocItem",function () {
             var $this = $(this);
             $(".ocItem").removeClass("active");
 
@@ -52,20 +54,33 @@ define(function(require,exports,module){
 
         });
 
+        // 确认收货
+        $(document).on('click','.confirmReceiptBtn ',function(){
+            var $this = $(this);
+            console.log($this)
+            var sn = $this.data('sn');
 
-        $(".confirmReceiptBtn").click(function(){
-            var text=$(".confirmReceiptBtn").text();
-            if(text!="已收货"){
-                $.alert("确认收货","",function(){
-                    $(".confirmReceiptBtn").text("已收货");
-                });
+            orderComplete(username,[sn]);
+
+            if(store.get("reieverStatus") == true){
+                $this.text("已收货")
             }else{
-                $.alert("已收货","",function(){
-                    console.log("收获成功");
-                });
+                $this.text("确认收货")
             }
+
+
+            // var text=$(".confirmReceiptBtn").text();
+            // if(text!="已收货"){
+            //     $.alert("确认收货","",function(){
+            //         $(".confirmReceiptBtn").text("已收货");
+            //     });
+            // }else{
+            //     $.alert("已收货","",function(){
+            //     });
+            // }
         });
 
+        // 查看物流
         $(document).on("click",".checkLogBtn",function (e) {
             var $this = $(this);
             store.set("sn",$this.data("sn"));
@@ -73,13 +88,58 @@ define(function(require,exports,module){
 
         });
 
+        // 立即付款
+        $(document).on("click",".paymentBtn",function () {
+            var $this = $(this);
+
+            createPayment(username,[$this.data("sn")]);
+
+            return location.href = '/html/payment/alipay/commonPay.html';
+        });
+
+        // 立即评价
+        $(document).on('click',".commentBtn",function () {
+
+        });
+
     });
 
 
 
-    /*
+    function createPayment(username,sn){
+        $.ajax({
+            url:BASE_URL+ORDER_SITE_URL.CREATE_PAYMENT.URL,
+            type:ORDER_SITE_URL.CREATE_PAYMENT.METHOD,
+            dataType:ORDER_SITE_URL.DATATYPE,
+            data:{
+                username:username,
+                sn :sn,
+            },
+            success:function (data) {
+                store.set("mergeSn",data.mergeSn);
+            }
+        })
+    }
 
-     */
+    // /**
+    //  * 支付界面合并支付
+    //  * @param username
+    //  * @param mergeSn
+    //  */
+    // function payment(username,mergeSn){
+    //     $.ajax({
+    //         url:BASE_URL+ORDER_SITE_URL.PAY_MENT.URL,
+    //         type:ORDER_SITE_URL.PAY_MENT.METHOD,
+    //         dataType:ORDER_SITE_URL.DATATYPE,
+    //         data:{
+    //             username:username,
+    //             mergeSn  :mergeSn ,
+    //         },
+    //         success:function (data) {
+    //
+    //         }
+    //     })
+    // }
 
     /**
      * 获取对应状态的订单
@@ -112,6 +172,33 @@ define(function(require,exports,module){
                         $("#getListOrders").html(html);
                     });
                 });
+            }
+        })
+    }
+
+    /**
+     *
+     * @param username
+     * @param sn
+     */
+    function orderComplete(username,sn){
+        $.ajax({
+            url:BASE_URL+ORDER_SITE_URL.COMPLETE.URL,
+            type:ORDER_SITE_URL.COMPLETE.METHOD,
+            dataType:ORDER_SITE_URL.DATATYPE,
+            data:{
+                username:username,
+                sn :sn
+            },
+            success:function (data) {
+                if(data.authStatus == '200'){
+                    store.set("reieverStatus",true);
+                    $.toast(data.authMsg);
+                }else{
+                    store.set("reieverStatus",false);
+                    $.toast(data.authMsg)
+                }
+
             }
         })
     }

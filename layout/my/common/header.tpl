@@ -19,17 +19,7 @@
                     {{/if}}
                 </a>
             </div>
-            {{#if balance}}
-            <div class="login_button_group">
-                <div class="my-login">
-                    <a href="/html/my/login/login.html" class="external register-button">登陆</a>
-                    <a href="/html/my/register/register.html" class="external register-button">注册</a>
-
-                    <!--<a href="javascript:void(0);"  class="external register-button">帐号详情</a>-->
-                    <!--<a href="javascript:void(0);" class="external register-button logoutButton">退出</a>-->
-                </div>
-            </div>
-            {{else}}
+            {{#compare this.authStatus '200'}}
             <div>
                 <div class="user-id">{{this.username}}</div>
                 <div class="rest-money">
@@ -38,7 +28,17 @@
                     <!--<a class="reset-detail">余额明细</a>-->
                 </div>
             </div>
-            {{/if}}
+            {{/compare}}
+
+            <!--<div class="login_button_group">-->
+                <!--<div class="my-login">-->
+                    <!--<a href="/html/my/login/login.html" class="external register-button">登陆</a>-->
+                    <!--<a href="/html/my/register/register.html" class="external register-button">注册</a>-->
+                    <!--&lt;!&ndash;<a href="javascript:void(0);"  class="external register-button">帐号详情</a>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<a href="javascript:void(0);" class="external register-button logoutButton">退出</a>&ndash;&gt;-->
+                <!--</div>-->
+            <!--</div>-->
+
         </div>
 
         <div class="content-block obligation">

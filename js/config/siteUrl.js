@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/3/10.
  */
 //基本URL
-var BASE_URL = "//192.168.88.65/";
+var BASE_URL = "//localhost/";
 
 var CONFIG_CATEGORY_MAIN_ID = "105";
 var CONFIG_CATEGORY_SECOND_ID = "112";
@@ -98,6 +98,8 @@ var ORDER_SITE_URL = {
     CREATE_PAYMENT:{URL:"/member/order/createPayment",METHOD:"POST"},
     //支付界面，合并支付
     PAY_MENT:{URL:"/member/order/payment",METHOD:"GET"},
+    //订单锁定检查
+    CHECK_LOCK:{URL:"/member/order/checkLock",METHOD:"POST"},
     //计算订单支付金额
     CALCULATE_AMOUNT:{URL:"/member/order/calculateAmount",METHOD:"POST"},
     // 支付手动解锁订单
