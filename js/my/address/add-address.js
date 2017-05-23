@@ -182,8 +182,14 @@ define(function (require, exports, module) {
                 isDefault: isDefault,
             },
             success: function (data) {
-                console.log(data);
-                $.toast(data.authMsg);
+                if(data.authStatus == '200'){
+                    $.toast(data.authMsg);
+                }else if(data.authStatus == '500'){
+                    $.toast(data.authMsg);
+                    return;
+                }
+
+
             }
         });
     }
