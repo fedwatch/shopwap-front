@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/3/10.
  */
 //基本URL
-var BASE_URL = "//localhost/wap";
+var BASE_URL = "//jie.net/m";
 
 var CONFIG_CATEGORY_MAIN_ID = "105";
 var CONFIG_CATEGORY_SECOND_ID = "112";
