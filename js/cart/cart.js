@@ -226,48 +226,10 @@ define(function (require, exports, module) {
             var stackVideo  = "";
 
             cartDelete(username,removeItems);
-
-
-            // var sItem = store.get("cartData").item;//店铺
-            // var sItemLen = sItem.length;
-            //
-            // for(var i = 0; i < sItemLen;i++){
-            //         cartStoreId.push(sItem[i].storeId);//购物车店铺ID
-            // }
-            //
-            // var skey = 0;
-            // var pkey = 0;
-            // for(var i = 0 ; i<sItemLen;i++){
-            //     if (currentStoreId == sItem[i].storeId){
-            //          skey = i
-            //     }
-            // }
-            // // console.log(skey);
-            //
-            // var sCartLen = sItem[skey].cart.length;
-            // for(var i = 0 ; i < sCartLen;i++){
-            //     if(currentProductId == sItem[skey].cart[i].productId){
-            //         pkey = i
-            //     }
-            // }
-            // // console.log(pkey);
-            //
-            // // //存入对应项数据
-            // var  getStore = store.get("cartData");
-            // delete getStore.item[skey].cart[pkey]
-            // getStore.item[skey].cart.length-1;
-            //
-            // if(sItemLen == sCartLen == 0){
-            //     delete getStore.item
-            // }
-            // store.set("cartData", getStore);
-            // console.log(getStore);
-
-
             if (selectedLength == 1) {
                 $this.parent().parent().parent().remove();
                 cartItem = cartItem - 1;
-                if (cartItem == 0) {
+                if (cartItem == -1) {
                     $("#nothingBuy").show();
                 }
             } else {
@@ -447,11 +409,6 @@ define(function (require, exports, module) {
         }
 
     });
-
-
-
-
-
 
     // my_header
     require.async('handlebars', function () {
