@@ -153,28 +153,33 @@ define(function (require, exports, module) {
                     var template = Handlebars.compile(tpl);
                     var html = template(data);
                     $("#mainNav").html(html);
+
+                    // navSubPosition
+                    require.async('handlebars',function(){
+                        var categoryId = data.productCategories[0].id ;
+                        $.ajax({
+                            url:BASE_URL+PRODUCT_SITE_URLS.FIND_SUBS.URL,
+                            type:PRODUCT_SITE_URLS.FIND_SUBS.METHOD,
+                            data:{username:username,id:categoryId},
+                            dataType:PRODUCT_SITE_URLS.DATATYPE,
+                            success:function (data) {
+                                if(data.authStatus == '200'){
+                                    var tpl = require('/m/layout/cartgory/navSubPosition.tpl');
+                                    var template = Handlebars.compile(tpl);
+                                    var html = template(data);
+                                    $("#navSubPosition").html(html);
+                                }
+                            }
+                        });
+
+                    });
+
                 }
             }
         })
     });
 
-    // navSubPosition
-    require.async('handlebars',function(){
-        var categoryId = '105' ;
-        $.ajax({
-            url:BASE_URL+PRODUCT_SITE_URLS.FIND_SUBS.URL,
-            type:PRODUCT_SITE_URLS.FIND_SUBS.METHOD,
-            data:{username:username,id:categoryId},
-            dataType:PRODUCT_SITE_URLS.DATATYPE,
-            success:function (data) {
-                var tpl = require('/m/layout/cartgory/navSubPosition.tpl');
-                var template = Handlebars.compile(tpl);
-                var html = template(data);
-                $("#navSubPosition").html(html);
-            }
-        });
 
-    });
 
     // productCategory
     require.async('handlebars',function(){

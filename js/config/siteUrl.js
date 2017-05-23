@@ -153,6 +153,8 @@ var PRODUCT_SITE_URLS = {
 
 
 var COMMON_SITE_URL = {
+    //数据接收类型
+    DATATYPE: "json",
     // 查询所有区域
     FIND_AREA_LIST: {URL: "/common/jsonPort", METHOD: "GET"},
     //商品查询
