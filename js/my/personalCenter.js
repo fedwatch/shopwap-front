@@ -3,9 +3,8 @@
  */
 define(function(require,exports,module){
     require('jquery');
-    // require("swiper");
-    require("store");
     require("siteUrl");
+    require("store");
     require("light7");
 
 
