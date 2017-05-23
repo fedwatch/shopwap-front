@@ -4,7 +4,7 @@
         {{#each banner}}
         <div class="swiper-slide">
             <div class="slide-item">
-                <a href="{{this.url}}" target="_self">
+                <a href="{{this.url}}" target="_self" class="external">
                     <img src="{{this.image}}">
                 </a>
             </div>
