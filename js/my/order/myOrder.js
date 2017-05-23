@@ -5,10 +5,11 @@
 define(function(require,exports,module){
     require('jquery');
     require('swiper');
+    require('store');
     require('light7');
     // require('mockjs');
     require('siteUrl');
-    require('store');
+
 
     jQuery.support.cors = true;
 
@@ -91,8 +92,11 @@ define(function(require,exports,module){
         // 立即付款
         $(document).on("click",".paymentBtn",function () {
             var $this = $(this);
-
-            createPayment(username,[$this.data("sn")]);
+            var sn = $this.data("sn");
+            console.log(username);
+            console.log(sn);
+            createPayment(username,[sn]);
+            store.set("mergeSn",mergeSn);
 
             return location.href = '/m/html/payment/alipay/commonPay.html';
         });
@@ -104,19 +108,21 @@ define(function(require,exports,module){
 
     });
 
-
+    var mergeSn;
 
     function createPayment(username,sn){
         $.ajax({
             url:BASE_URL+ORDER_SITE_URL.CREATE_PAYMENT.URL,
             type:ORDER_SITE_URL.CREATE_PAYMENT.METHOD,
             dataType:ORDER_SITE_URL.DATATYPE,
+            async:false,
             data:{
                 username:username,
                 sn :sn,
             },
             success:function (data) {
-                store.set("mergeSn",data.mergeSn);
+                mergeSn = data.mergeSn
+                console.log(mergeSn)
             }
         })
     }

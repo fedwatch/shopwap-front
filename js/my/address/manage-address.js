@@ -2,6 +2,7 @@ define(function (require, exports, module) {
     require('jquery');
     require('store');
     require('siteUrl');
+    require('city-picker');
 
     $(function () {
 
