@@ -218,40 +218,40 @@ define(function (require, exports, module) {
     });
 
 
-
-    // productCategory
-    require.async('handlebars',function(){
-        var keyword = '';
-        var pageNumber = '';
-        var categoryIds = CONFIG_CATEGORY_MAIN_ID+","+CONFIG_CATEGORY_SECOND_ID;
-        var brandIds = '';
-        var startPrice = '';
-        var endPrice = '';
-        var pageSize = '';
-        $.ajax({
-            url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
-            type:PRODUCT_SITE_URLS.PRODUCT_SEARCH.METHOD,
-            data: {
-                keyword: keyword,
-                pageNumber: pageNumber,
-                categoryIds: categoryIds,
-                brandIds: brandIds,
-                startPrice: startPrice,
-                endPrice: endPrice,
-                pageSize: pageSize
-            },
-            dataType:PRODUCT_SITE_URLS.DATATYPE,
-            success:function (data) {
-                // console.log(data);
-                if(data.authStatus == "200"){
-                    var tpl = require('/m/layout/cartgory/productCategory.tpl');
-                    var template = Handlebars.compile(tpl);
-                    var html = template(data);
-                    $("#productCategory").html(html);
-                }
-            }
-        });
-    });
+    //
+    // // productCategory
+    // require.async('handlebars',function(){
+    //     var keyword = '';
+    //     var pageNumber = '';
+    //     var categoryIds = CONFIG_CATEGORY_MAIN_ID+","+CONFIG_CATEGORY_SECOND_ID;
+    //     var brandIds = '';
+    //     var startPrice = '';
+    //     var endPrice = '';
+    //     var pageSize = '';
+    //     $.ajax({
+    //         url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
+    //         type:PRODUCT_SITE_URLS.PRODUCT_SEARCH.METHOD,
+    //         data: {
+    //             keyword: keyword,
+    //             pageNumber: pageNumber,
+    //             categoryIds: categoryIds,
+    //             brandIds: brandIds,
+    //             startPrice: startPrice,
+    //             endPrice: endPrice,
+    //             pageSize: pageSize
+    //         },
+    //         dataType:PRODUCT_SITE_URLS.DATATYPE,
+    //         success:function (data) {
+    //             // console.log(data);
+    //             if(data.authStatus == "200"){
+    //                 var tpl = require('/m/layout/cartgory/productCategory.tpl');
+    //                 var template = Handlebars.compile(tpl);
+    //                 var html = template(data);
+    //                 $("#productCategory").html(html);
+    //             }
+    //         }
+    //     });
+    // });
 
     // footerNav
     require.async('handlebars',function(){
