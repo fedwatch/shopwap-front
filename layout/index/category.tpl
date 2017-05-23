@@ -34,7 +34,7 @@
     <div class="active-b clearfix">
         <div class="pull-left b-img">
             <div class="bt-img">
-                <a href="javascript:void(0);" class="external" data-id="2499">
+                <a href="javascript:void(0);" class="external" data-id="852">
                     <div>
                         <img src="https://static.jie.net/group1/M00/55/A7/rBAB4FjQxuiId5brAHBwUGfwRzwAAAADgB7-P4AcHBo027.jpg" style="height:203px;"/>
                         <!--<div class="tipIm"><span class="plunge">直降</span></div>-->
