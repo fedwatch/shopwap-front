@@ -162,16 +162,8 @@ define(function(require,exports,module){
                         var html = template(data);
                         $("#shopListShowIndex").html(html);
                     });
-                    refreshPage(data);
-                    $.init();
 
-                 /*   var GG = {
-                        "kk":function(mm){
-                            // alert(mm);
-                        }
-                    }
-                    var productLength=data.products.length;
-                    initPage("#page-list",productLength,1,GG.kk);*/
+
                 }else{
 
                 }
@@ -184,14 +176,3 @@ define(function(require,exports,module){
 
 });
 
-//
-// require.async('handlebars',function(){
-//     var data = {
-//         data:'738951'
-//     };
-//     var tpl = require('/layout/shopList/shopListSort.tpl');
-//     var template = Handlebars.compile(tpl);
-//     var html = template(data);
-//     $("#shopListSort").html(html);
-//     // $("#navbarSearch").html(tpl);
-// });

@@ -8,6 +8,7 @@
 seajs.config({
     alias:{
         "jquery":"/assets/plugin/jquery.min.js",
+        "iscroll":"/js/utils/iscroll.js",
         "page":"/js/utils/page.js",
         "bankCheck":"/js/utils/bankCheck.js",
         "divideAmount":"/js/utils/divideAmount.js",
