@@ -1536,7 +1536,9 @@ span.nav-text.active {
 .shopList .productCategory{
     float:left;
 }
-
+.shopList .goList{
+    width:100%;
+}
 /**
     商品次级导航条
  */
@@ -2153,32 +2155,32 @@ span.nav-sub-text.active {
     width:90%;
     bottom:1.75rem;
 }
-.pagination-div .page{
+.pagination-div .pages{
     list-style: none;
 }
-.pagination-div .page>li{
+.pagination-div .pages>li{
     float: left;
     padding:3px 6px;
     cursor: pointer;
 }
-.pagination-div .page .pageItem{
+.pagination-div .pages .pageItem{
     font-size:0.5rem;
     border: solid thin #DDDDDD;
     margin: 3px;
 }
-.pagination-div .page .pageItemActive{
+.pagination-div .pages .pageItemActive{
     font-size:0.5rem;
     border: solid thin #eb4c1e;
     margin: 3px;
     background-color: #eb4c1e;
     color:white;
 }
-.pagination-div .page .pageItem:hover{
+.pagination-div .pages .pageItem:hover{
     border: solid thin #0099FF;
     background-color: #0099FF;
     color:white;
 }
-.pagination-div .page .pageItemDisable{
+.pagination-div .pages .pageItemDisable{
     font-size:0.5rem;
     border: solid thin #DDDDDD;
     margin: 3px;

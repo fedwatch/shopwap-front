@@ -151,6 +151,7 @@ define(function(require,exports,module){
             },
             dataType: COMMON_SITE_URL.DATATYPE,
             success:function(data){
+                console.log(data.products);
                 if(data.authStatus=="200"){
                     $("#searchPrompt").hide();
                     $("#searchVague").css({display:"none"});
@@ -161,19 +162,26 @@ define(function(require,exports,module){
                         var html = template(data);
                         $("#shopListShowIndex").html(html);
                     });
-                    var GG = {
+                    refreshPage(data);
+                    $.init();
+
+                 /*   var GG = {
                         "kk":function(mm){
                             // alert(mm);
                         }
                     }
                     var productLength=data.products.length;
-                    initPage("#page-list",productLength,1,GG.kk);
+                    initPage("#page-list",productLength,1,GG.kk);*/
                 }else{
 
                 }
             }
         })
     }
+
+
+
+
 });
 
 //
