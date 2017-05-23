@@ -152,13 +152,28 @@ define(function (require, exports, module) {
                 $("#searchPrompt").hide();
                 $("#searchVague").css({display: "none"});
                 $("#shopListSort").css({display: "none"});
-                require.async('handlebars', function () {
+                var products = data["products"]
+                var  html='';
+                products.map(function(data){
+                    html +='<div class="col-50 productCategory" >'+
+                        '<a href="javascript:;"  data-product-id="'+data.id+'" class="external">'+
+                        '<div style="background: #fff;padding:0 0;margin: .25rem 0;width:100%;height:12rem;overflow: hidden;">'+
+                        '<img src="'+data.image+'" alt="" style="width:100%;height:7rem;overflow: hidden;">'+
+                        '<h4 class="product-title" style="padding:0 .25rem;font-size:.7rem;color:#000;">'+data.name+'</h4>'+
+                        '<span class="product-price-box" style="padding:0 .25rem;font-size:.5rem;color:#ff0000;">￥<span style="font-size:.65rem;">'+data.price+'</span>'+'</span>'+'<span class="product-buyer-number-box" style="font-size:.5rem;color:#999;">已有 <span>'+data.sales+'</span>人购买</span>'+ '</div>'+
+                        '</a>'+ '</div>';
+                });
+
+
+
+               /* require.async('handlebars', function () {
                     var tpl = require('/m/layout/cartgory/productCategory.tpl');
                     var template = Handlebars.compile(tpl);
                     MAK = template(data);
                     console.log(MAK);
                 });
-                $("#shopListShowIndex2").html(MAK);
+                $("#shopListShowIndex2").html(MAK);*/
+                $("#shopListShowIndex2").html(html);
             }
         });
 
