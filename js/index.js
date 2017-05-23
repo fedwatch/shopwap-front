@@ -56,7 +56,7 @@ define(function(require,exports,module){
     require.async('handlebars',function(){
         var data = {
             banner: [
-                {url:"",image:"../assets/images/banner-1.jpg"},
+                {url:"//jie.net/static/dragonboat0522/wap/dragonboat.html",image:"../assets/images/banner-1.jpg"},
             ],
         };
         var tpl = require('/m/layout/index/banner.tpl');
