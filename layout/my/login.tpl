@@ -1,6 +1,6 @@
 <!--用户登录-->
 <header class="bar bar-nav">
-    <a class="button button-link button-nav pull-left external" href="/html/index.html"
+    <a class="button button-link button-nav pull-left external" href="/m/html/index.html"
        data-transition='slide-out'>
         <span class="icon icon-left"></span>
     </a>

@@ -48,6 +48,7 @@ define(function (require, exports, module) {
         });
 
         $(document).on('click', '.firstBind', function () {
+            debugger;
             var $this = $(this);
             var bankCode = store.get("bankCode");
             var bankCardType = store.get("bankCardType");
@@ -61,6 +62,7 @@ define(function (require, exports, module) {
             var bankCardNo = store.get("bankCardNo");
             var host = location.host+"/m/html";
             console.log(amount);
+            console.log(host);
             boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode,
                 bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, trueUsername, bankName,host);
             // location.href = './alipay/paySuccess.html'

@@ -8,14 +8,13 @@
 </header>
 <div class="content">
     <div class="list-block text-center">
-        <img src="/assets/images/logo.png" alt="" class="logo_block" style="width: 8rem;margin: 3rem 0 .2rem 0;">
+        <img src="../../../assets/images/logo.png" alt="" class="logo_block" style="width: 8rem;margin: 3rem 0 .2rem 0;">
     </div>
     <div class="list-block" style="padding:0 .7rem">
         <ul style="background: transparent!important;border-top:0;border-bottom:0;">
 
             <!-- Text inputs -->
             <li class="register_input ">
-
                 <div class="item-content">
                     <div class="item-media"><i class="icon icon-register-userphone"></i></div>
                     <div class="item-inner" style="border-bottom: 0; ">
@@ -29,7 +28,6 @@
             <p  id="userPhoneError">您输入的手机号码有误，请重新输入！</p>
 
             <li class="register_input ">
-
                 <div class="item-content">
                     <div class="item-media"><i class="icon icon-register-password"></i></div>
                     <div class="item-inner" style=" ">

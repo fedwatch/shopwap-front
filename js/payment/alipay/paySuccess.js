@@ -35,8 +35,6 @@ define(function(require,exports,module){
                         var template=Handlebars.compile(tpl);
                         var html=template(data);
                         $("#paySuccess").html(html);
-
-
                     })
                 }
 

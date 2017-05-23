@@ -8,7 +8,7 @@
 </header>
 <div class="content">
     <div class="list-block text-center">
-        <img src="/assets/images/logo.png" alt="" class="logo_block" style="width: 8rem;margin: 3rem 0 .2rem 0;">
+        <img src="../../../assets/images/logo.png" alt="" class="logo_block" style="width: 8rem;margin: 3rem 0 .2rem 0;">
     </div>
     <div class="list-block" style="padding:0 .7rem">
         <ul style="background: transparent!important;border-top:0;border-bottom:0;">

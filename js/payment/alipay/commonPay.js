@@ -354,6 +354,7 @@ define(function (require, exports, module) {
             success: function (data) {
                 if(data.authStatus == '200'){
                     store.set("isLock",false);
+                    location.reload();
                     console.log("====== unlock ====== start")
                     console.log(store.get("isLock"))
                     console.log("====== unlock ====== end")
