@@ -59,7 +59,7 @@ define(function (require, exports, module) {
             var verificationCode = $("#verificationCode").val() || null;
             var expiryDate = $("#creditMonth").val() + $("#creditYear").val() || null;
             var bankCardNo = store.get("bankCardNo");
-            var host = location.host+"/html";
+            var host = location.host+"/m/html";
             console.log(amount);
             boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode,
                 bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, trueUsername, bankName,host);

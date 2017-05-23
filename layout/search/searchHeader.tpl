@@ -5,7 +5,6 @@
         <div id="rightSearchNav" class="navbar-search right-search">
             <img  src="../../assets/images/search2.png" class="searchImgss"/>
             <input id="searchHint" type="text" value=""  class="pull-left form-control">
-
             <i id="cancelTextIcon" class="cancelText" style="display:none;"></i>
          <!--   <a href="javascript:history.back();" id="cancelSearchBtn" class="cancelSearch"  style="display:none;">取消</a>-->
         </div>
