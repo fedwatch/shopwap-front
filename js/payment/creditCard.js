@@ -8,18 +8,22 @@ define(function (require, exports, module) {
     require('light7');
     require('user');
 
+    var bankCardNo = store.get("bankCardNo");
+    var username = store.get("username");
+    var isBalancePay = store.get("isBalancePay") || false;
+    var type = store.get("type") || "payment";
+    var paymentPluginId = store.get("paymentPluginId") || "lianlianpayPlugin";
+    var mergeSn = store.get("mergeSn");
+    var amount = store.get("amount");
+    var app_request = store.get("app_request") || '3';
+    var cardType = store.get("cardType") || '1';
+    var cardId = store.get("cardId");
+
     jQuery.support.cors = true;
     $(function () {
-        var bankCardNo = store.get("bankCardNo");
-        var username = store.get("username");
-        var isBalancePay = store.get("isBalancePay") || false;
-        var type = store.get("type") || "payment";
-        var paymentPluginId = store.get("paymentPluginId") || "lianlianpayPlugin";
-        var mergeSn = store.get("mergeSn");
-        var amount = store.get("amount");
-        var app_request = store.get("app_request") || '3';
-        var cardType = store.get("cardType") || '1';
-        var cardId = store.get("cardId");
+
+        console.log(typeof amount);
+
 
         bankcardBind(bankCardNo, username);
 
@@ -48,7 +52,7 @@ define(function (require, exports, module) {
         });
 
         $(document).on('click', '.firstBind', function () {
-            debugger;
+            // debugger;
             var $this = $(this);
             var bankCode = store.get("bankCode");
             var bankCardType = store.get("bankCardType");
@@ -108,7 +112,6 @@ define(function (require, exports, module) {
                 username: username,
             },
             success: function (data) {
-
                 if(data.authStatus=="212"){
                     window.location.href="../payment/alipay/commonPay.html";
                 } else if(data.authStatus=="200"){
@@ -118,7 +121,9 @@ define(function (require, exports, module) {
                             var template = Handlebars.compile(tpl);
                             var html = template(data);
                             $("#credit-card").html(html);
+                            $("#allAmount").text(amount);
                         });
+
                     });
                     if(data.memberBank){
                         store.set("bankCode", data.memberBank.bankCode);

@@ -9,7 +9,7 @@
 
     <div class="pay-money">
         <div class="item-media">支付金额：</div>
-        <div class="item-inner"> <span>1777</span> 元</div>
+        <div class="item-inner"> <span id="allAmount"></span> 元</div>
     </div>
 
     <div class="list-block ">

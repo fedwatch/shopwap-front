@@ -56,15 +56,15 @@
         <div class="list-block cards-list" style="margin-top:0;">
             <ul id="payWay">
                 <li class="card">
-                    {{#each this.paymentPlugins}}
+                    {{#if this.paymentPlugin}}
                     <div class="card-header checkPay" >
-                        <div class="pay-logo"><img src="{{logo}}"/></div>
+                        <div class="pay-logo"><img src="{{this.paymentPlugin.logo}}"/></div>
                         <div class="remainPay">
                             <span class="morePay">支付<span style="color:#ff503e;" id="aliPay">{{this.allAmount}}</span></span>
-                            <span class="tick tickys" data-value="{{id}}"></span>
+                            <span class="tick tickys" data-value="{{this.paymentPlugin.id}}"></span>
                         </div>
                     </div>
-                    {{/each}}
+                    {{/if}}
                 </li>
             </ul>
         </div>
