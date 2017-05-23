@@ -15,7 +15,7 @@ define(function (require, exports, module) {
 
     });
 
-    var username = '18717964640';
+    var username = store.get("username");
     var pageNumber = 1;
     var pageSize = 10;
 
