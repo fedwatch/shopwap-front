@@ -36,7 +36,7 @@
             <div class="bt-img">
                 <a href="javascript:void(0);" class="external" data-id="2499">
                     <div>
-                        <img src="https://static.jie.net/group1/M00/55/A7/rBAB4FjQxuiId5brAHBwUGfwRzwAAAADgB7-P4AcHBo027.jpg"/>
+                        <img src="https://static.jie.net/group1/M00/55/A7/rBAB4FjQxuiId5brAHBwUGfwRzwAAAADgB7-P4AcHBo027.jpg" style="height:203px;"/>
                         <!--<div class="tipIm"><span class="plunge">直降</span></div>-->
                     </div>
                     <div style="padding:0 0.75rem;">
@@ -55,7 +55,7 @@
             <div class="bt-img">
                 <a href="javascript:void(0);" class="external" data-id="2499">
                     <div class="clearfix" style="line-height:1.2rem;">
-                        <img src="https://static.jie.net/group1/M00/55/F7/rBAB31kdXLqIZnNFAAKInQsl6coAAAAHwKQKu0AAoi1245.jpg"/>
+                        <img src="https://static.jie.net/group1/M00/55/F7/rBAB31kdXLqIZnNFAAKInQsl6coAAAAHwKQKu0AAoi1245.jpg" style="height:203px;"/>
                         <!--<div class="tipIm"><span class="plunge">0元购</span></div>-->
                     </div>
                     <div style="padding:0 0.75rem;">
