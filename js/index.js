@@ -11,6 +11,7 @@ define(function(require,exports,module){
     require("siteUrl");
 
     jQuery.support.cors = true;
+    var MD_URL = '//jie.net/m'
     $(function () {
         getCurrentPage();
         findAreaByIp();
@@ -23,6 +24,15 @@ define(function(require,exports,module){
             autoplayDisableOnInteraction: false,
             speed: 600
         });
+
+
+        $(document).on("click",".bt-img a",function () {
+            var $this = $(this);
+            var id = $this.data("id");
+            localStorage.setItem("currentProductID",id);
+            location.href = MD_URL+"/html/detail/detail.html";
+        })
+
     });
 
 
