@@ -40,6 +40,8 @@ define(function (require, exports, module) {
                 pageNumber: pageNumber,
                 pageSize: pageSize,
             },
+            cache:false,
+            async:false,
             success: function (data) {
                 if (data.authStatus) {
                     var tpl = require('/m/layout/my/address/address.tpl');
@@ -130,6 +132,8 @@ define(function (require, exports, module) {
                 username: username,
                 id: id
             },
+            cache:false,
+            async:false,
             success: function (data) {
                 $.toast(data.authMsg);
             }

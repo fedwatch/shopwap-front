@@ -24,6 +24,8 @@ define(function (require, exports, module) {
                 pageNumber: pageNumber,
                 pageSize: pageSize,
             },
+            cache:false,
+            async:false,
             success: function (data) {
                 var tpl = require('/m/layout/my/address/manage-address.tpl');
                 var template = Handlebars.compile(tpl);
@@ -49,6 +51,8 @@ define(function (require, exports, module) {
                 username: username,
                 pageNumber: pageNumber,
             },
+            cache:false,
+            async:false,
             success: function (data) {
                 console.log(data);
             }

@@ -201,6 +201,8 @@ define(function (require, exports, module) {
                 username: username,
                 id: currentProductID
             },
+            cache:false,
+            async:false,
             dataType: PRODUCT_SITE_URLS.DATATYPE,
             success: function (results) {
                 var data = results;
@@ -332,6 +334,8 @@ define(function (require, exports, module) {
                 id: id,
                 buyCount: buyCount
             },
+            cache:false,
+            async:false,
             dataType: PRODUCT_SITE_URLS.DATATYPE,
             success: function (data) {
                 // console.log(data);
@@ -351,6 +355,8 @@ define(function (require, exports, module) {
             data: {
                 username: username,
             },
+            cache:false,
+            async:false,
             dataType: CART_SITE_URL.DATATYPE,
             success: function (data) {
                 if (data.authStatus == "200") {
@@ -361,6 +367,4 @@ define(function (require, exports, module) {
             }
         })
     }
-
-
 });

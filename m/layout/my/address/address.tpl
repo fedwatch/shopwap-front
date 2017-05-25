@@ -23,7 +23,7 @@
                 {{/if}}
             </div>
             <div class="address-text">
-                {{address}}
+                {{areaName}} {{address}}
             </div>
             <div class="address-operate">
                 <div class="operate clearfix">

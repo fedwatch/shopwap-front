@@ -7,6 +7,7 @@ define(function (require, exports, module) {
     require('store');
     require('siteUrl');
     require('user');
+    require('light7');
 
     jQuery.support.cors = true;
     $(function () {
@@ -192,7 +193,12 @@ define(function (require, exports, module) {
                     cartItemIdArray.push($(".cart-list-select:checked").eq(i).data("itemid"));
                 }
                 store.set("cartItemId",cartItemIdArray);
-                location.href= "/m/html/order/order.html";
+                if(cartItemIdArray.length !== 0){
+                    location.href= "/m/html/order/order.html";
+                }else{
+                    $.toast("购物车没有商品！")
+                }
+
             } else{
                 return location.href = '/m/html/my/login/login.html';
             }

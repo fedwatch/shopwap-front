@@ -219,6 +219,8 @@ define(function(require,exports,module){
                 username : username,
                 smsCode: smsCode
             },
+            cache:false,
+            async:false,
             success:function (data) {
                 if(data.authStatus == '200'){
                     $.toast(data.authMsg);

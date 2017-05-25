@@ -55,6 +55,7 @@ define(function (require, exports, module) {
                     username:username ,
                     enPassword:enPassword
                 },
+                timeout:3000,
                 success: function(data,textStatus, jqXHR) {
                     console.log(data);
                     if (data.authStatus == "200" ){

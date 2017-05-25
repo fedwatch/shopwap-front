@@ -13,8 +13,6 @@ define(function (require, exports, module) {
 
     jQuery.support.cors = true;
 
-    // console.log(JSESSIONID)
-
     $(function () {
         var username = store.get("username");
         // console.log(username);
@@ -32,6 +30,8 @@ define(function (require, exports, module) {
             data: {
                 username: username
             },
+            cache:false,
+            async:false,
             success: function (data) {
                 if (data.authStatus == '200') {
                     require.async('handlebars', function () {

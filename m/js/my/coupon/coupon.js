@@ -28,6 +28,8 @@ define(function (require, exports, module) {
             url: "/getData",
             dataType: "json",
             type: "get",
+            cache:false,
+            async:false,
             success: function (data) {
                 var tpl = require('/m/layout/my/coupon.tpl');
                 var template = Handlebars.compile(tpl);

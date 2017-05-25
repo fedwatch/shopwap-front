@@ -23,9 +23,6 @@ define(function (require, exports, module) {
     jQuery.support.cors = true;
     $(function () {
 
-        console.log(typeof amount);
-
-
         bankcardBind(bankCardNo, username);
 
         var timer = 5;
@@ -86,6 +83,8 @@ define(function (require, exports, module) {
                 userPhone: userPhone,
                 codeFlag: codeFlag,
             },
+            cache:false,
+            async:false,
             success: function (data) {
                 console.log(data);
                 if (data.authStatus == '200') {
@@ -112,6 +111,8 @@ define(function (require, exports, module) {
                 bankCardNo: bankCardNo,
                 username: username,
             },
+            cache:false,
+            async:false,
             success: function (data) {
                 if(data.authStatus=="212"){
                     window.location.href="../payment/alipay/commonPay.html";
@@ -186,6 +187,8 @@ define(function (require, exports, module) {
                 app_request_url: app_request_url,
                 bankName: bankName
             },
+            cache:false,
+            async:false,
             success: function (data) {
                 console.log(data);
                 if(data.parameterMap){
@@ -201,12 +204,4 @@ define(function (require, exports, module) {
         })
     }
 
-
-    // require.async('handlebars',function(){
-    //     var data={};
-    //     var tpl=require('/layout/payment/directPay/creditCard.tpl');
-    //     var template=Handlebars.compile(tpl);
-    //     var html=template(data);
-    //     $("#credit-card").html(html);
-    // });
 });

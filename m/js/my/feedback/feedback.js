@@ -43,6 +43,8 @@ define(function(require,exports,module){
                 type:'post',
                 dataType:'json',
                 data:formData,
+                cache:false,
+                async:false,
                 success:function (data) {
                     var data = data['result'];
                     console.log(data.status);

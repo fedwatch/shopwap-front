@@ -33,6 +33,8 @@ define(function (require, exports, module) {
                         username: username,
                         id: addressId
                     },
+                    cache:false,
+                    async:false,
                     success: function (data) {
                         // console.log(data.authMsg);
                         if (data.authStatus == '200') {
@@ -131,6 +133,8 @@ define(function (require, exports, module) {
                 pageNumber: pageNumber,
                 pageSize: pageSize,
             },
+            cache:false,
+            async:false,
             success: function (data) {
                 if (data.authStatus) {
                     var tpl = require('/m/layout/my/address/address.tpl');
@@ -158,6 +162,8 @@ define(function (require, exports, module) {
                 phone: phone,
                 isDefault: isDefault,
             },
+            cache:false,
+            async:false,
             success: function (data) {
                 console.log(data);
                 $.toast(data.authMsg);
@@ -181,6 +187,8 @@ define(function (require, exports, module) {
                 phone: phone,
                 isDefault: isDefault,
             },
+            cache:false,
+            async:false,
             success: function (data) {
                 if(data.authStatus == '200'){
                     $.toast(data.authMsg);

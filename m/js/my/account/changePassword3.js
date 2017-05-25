@@ -42,6 +42,8 @@ define(function (require, exports, module) {
                 username : username,
                 newPwd : newPwd
             },
+            cache:false,
+            async:false,
             success: function (data) {
                 if (data.authStatus == "200") {
                     store.clear();
@@ -71,6 +73,8 @@ define(function (require, exports, module) {
                 newPwd: newPwd,
                 pwd: pwd
             },
+            cache:false,
+            async:false,
             success: function (data) {
                 if (data.authStatus == '200') {
                     store.clear();

@@ -28,6 +28,8 @@ define(function(require,exports,module){
             data: {
                 username : username
             },
+            cache:false,
+            async:false,
             success:function (data) {
                 if (data.authStatus == "200"){
                     store.clear();

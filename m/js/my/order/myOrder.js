@@ -115,6 +115,7 @@ define(function(require,exports,module){
             url:BASE_URL+ORDER_SITE_URL.CREATE_PAYMENT.URL,
             type:ORDER_SITE_URL.CREATE_PAYMENT.METHOD,
             dataType:ORDER_SITE_URL.DATATYPE,
+            cache:false,
             async:false,
             data:{
                 username:username,
@@ -169,6 +170,8 @@ define(function(require,exports,module){
                 orderStatus :orderStatus,
                 pageNumber :pageNumber
             },
+            cache:false,
+            async:false,
             success:function (data) {
                 require.async('handlebars',function(){
                     require.async('transMyOrder',function(){
@@ -196,6 +199,8 @@ define(function(require,exports,module){
                 username:username,
                 sn :sn
             },
+            cache:false,
+            async:false,
             success:function (data) {
                 if(data.authStatus == '200'){
                     store.set("reieverStatus",true);
@@ -222,6 +227,8 @@ define(function(require,exports,module){
                 orderStatus :'all',
                 pageNumber :'1'
             },
+            cache:false,
+            async:false,
             success:function (data) {
                 require.async('handlebars',function(){
                     require.async('transMyOrder',function(){

@@ -28,6 +28,8 @@ define(function(require,exports,module){
                 username:username,
                 paymentSn:paymentSn
             },
+            cache:false,
+            async:false,
             success:function (data) {
                 if(data.authStatus == '200'){
                     require.async("handlebars",function(){
@@ -56,11 +58,12 @@ define(function(require,exports,module){
                 username:username,
                 mergeSn:mergeSn
             },
+            cache:false,
+            async:false,
             success:function (data) {
                 console.log(data);
             }
         });
     }
 
-
-})
+});

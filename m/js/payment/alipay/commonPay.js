@@ -161,6 +161,8 @@ define(function (require, exports, module) {
                 bankCardNo: bankCardNo,
                 username: username,
             },
+            cache:false,
+            async:false,
             success: function (data) {
 
             }
@@ -179,6 +181,8 @@ define(function (require, exports, module) {
             data: {
                 username: username,
             },
+            cache:false,
+            async:false,
             success: function (data) {
                 // console.log(data);
                 if (data.authStatus == '200') {
@@ -242,6 +246,8 @@ define(function (require, exports, module) {
                 username: username,
                 bankName: bankName
             },
+            cache:false,
+            async:false,
             success: function (data) {
                 // console.log(data);
 
@@ -278,6 +284,8 @@ define(function (require, exports, module) {
                 username: username,
                 app_request_url: app_request_url,
             },
+            cache:false,
+            async:false,
             success: function (data) {
                 if (data.authStatus == '200') {
                     if (data.parameterMap) {
@@ -324,6 +332,8 @@ define(function (require, exports, module) {
                 mergeSn : mergeSn ,
 
             },
+            cache:false,
+            async:false,
             success: function (data) {
                 if (data.authStatus){
                     if(data.isLock == true){
@@ -351,8 +361,9 @@ define(function (require, exports, module) {
             data: {
                 username: username,
                 mergeSn : mergeSn  ,
-
             },
+            cache:false,
+            async:false,
             success: function (data) {
                 if(data.authStatus == '200'){
                     store.set("isLock",false);

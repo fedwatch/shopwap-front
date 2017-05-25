@@ -93,6 +93,8 @@ define(function (require, exports, module) {
                         newPwd: newPwd,
                         pwd: pwd
                     },
+                    cache:false,
+                    async:false,
                     success: function (data) {
                         if (data.authStatus == '200') {
                             $.toast(data.authMsg);

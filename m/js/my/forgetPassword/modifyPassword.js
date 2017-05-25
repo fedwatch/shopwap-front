@@ -73,9 +73,7 @@ define(function(require,exports,module){
             return registerResult;
         }
 
-        function checkRegisterBtn() {
 
-        }
         $(document).on('click','#registerBtn',function () {
 
             checkPassword();
@@ -100,6 +98,8 @@ define(function(require,exports,module){
                     username : username,
                     newPwd : newPwd
                 },
+                cache:false,
+                async:false,
                 success:function (data) {
                     if(data.authStatus == '200'){
                         $.toast(data.authMsg);
@@ -110,11 +110,6 @@ define(function(require,exports,module){
                 }
             });
         }
-
-
-
-
-
     });
 
     // registerPage

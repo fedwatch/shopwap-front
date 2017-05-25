@@ -20,7 +20,6 @@ define(function(require,exports,module){
         var registerResult = {};//内部数据的状态集
 
 
-
     });
 
     // modifySuccess
