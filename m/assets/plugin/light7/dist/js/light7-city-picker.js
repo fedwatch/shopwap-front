@@ -3720,9 +3720,6 @@
                     resultId.push(d.id);
                 }
 
-                // console.log("=== d start ===");
-                // console.log(d);
-                // console.log("=== d end ===");
                 if (result.length) {
                     // console.log("=== result start ===");
                     // console.log(result);
@@ -3760,7 +3757,10 @@
                     if (raw[i].name === p) {
                         for (var j = 0; j < raw[i].sub.length; j++) {
                             if (raw[i].sub[j].name === c) {
+                                console.log("raw[i].sub[j]");
                                 console.log(raw[i].sub[j]);
+                                console.log("raw[i].sub[j].id");
+                                console.log(raw[i].sub[j].id);
                                 return sub(raw[i].sub[j]);
                             }
                         }
@@ -3825,6 +3825,7 @@
 
             //计算value
             var val = $(this).val();
+            console.log(val)
             if (val) {
                 p.value = val.split(" ");
                 if (p.value[0]) {
@@ -3839,6 +3840,7 @@
                     p.cols[2].values = getDistricts(p.value[0], p.cols[1].values[0]);
                 }
             }
+
             $(this).picker(p);
         });
     };
