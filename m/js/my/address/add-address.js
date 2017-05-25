@@ -107,10 +107,10 @@ define(function (require, exports, module) {
             var isDefault = userDefault;
             if (editStatus == null || editStatus == false) {
                 receiverSave(username, consignee, areaId, address, zipCode, phone, isDefault)
-                return history.go(-1);
+
             } else if (editStatus) {
                 receiverUpdate(username, addressId, consignee, areaId, address, zipCode, phone, isDefault)
-                return history.go(-1)
+                // return history.go(-1)
             }
 
         });
@@ -165,8 +165,16 @@ define(function (require, exports, module) {
             cache:false,
             async:false,
             success: function (data) {
-                console.log(data);
-                $.toast(data.authMsg);
+                if(data.authStatus == '200'){
+                    $.toast(data.authMsg);
+                    return history.go(-1);
+                }else if (data.authStatus == '403'){
+                    $.toast(data.authMsg,3000);
+                    return location.href = '/m/html/my/login/login.html';
+                }else if(data.authStatus == '500'){
+                    $.toast(data.authMsg);
+                    return;
+                }
             }
         });
     }
@@ -192,11 +200,14 @@ define(function (require, exports, module) {
             success: function (data) {
                 if(data.authStatus == '200'){
                     $.toast(data.authMsg);
+                    return history.go(-1);
+                }else if (data.authStatus == '403'){
+                    $.toast(data.authMsg,3000);
+                    return location.href = '/m/html/my/login/login.html';
                 }else if(data.authStatus == '500'){
                     $.toast(data.authMsg);
                     return;
                 }
-
 
             }
         });

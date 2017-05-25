@@ -3721,12 +3721,6 @@
                 }
 
                 if (result.length) {
-                    // console.log("=== result start ===");
-                    // console.log(result);
-                    // console.log("=== result end ===");
-                    // console.log("=== resultId start ===");
-                    // console.log(resultId);
-                    // console.log("=== resultId end ===");
                     resultId;
                     return result;
                 }
@@ -3734,18 +3728,17 @@
             };
 
 
-
             var sub = function (data) {
                 if (!data.sub)
                     return [""];
-                console.log(format(data.sub));
+                // console.log(format(data.sub));
                 return format(data.sub);
             };
 
             var getCities = function (d) {
                 for (var i = 0; i < raw.length; i++) {
                     if (raw[i].name === d){
-                        console.log(raw[i]);
+                        // console.log(raw[i]);
                         return  sub(raw[i]);
                     }
                 }
@@ -3757,10 +3750,13 @@
                     if (raw[i].name === p) {
                         for (var j = 0; j < raw[i].sub.length; j++) {
                             if (raw[i].sub[j].name === c) {
-                                console.log("raw[i].sub[j]");
-                                console.log(raw[i].sub[j]);
-                                console.log("raw[i].sub[j].id");
-                                console.log(raw[i].sub[j].id);
+                                // console.log("raw[i].sub[j]");
+                                // console.log(raw[i].sub[j]);
+                                // console.log("raw[i].sub[j].id");
+                                // console.log(raw[i].sub[j].id);
+                                var districtId = raw[i].sub[j].id;
+                                $("#areaid").val(districtId);
+                                localStorage.setItem("areaId",districtId);
                                 return sub(raw[i].sub[j]);
                             }
                         }
@@ -3769,16 +3765,45 @@
                 return [""];
             };
 
+
+            var getCounty = function (p, c,x) {
+                for (var i = 0; i < raw.length; i++) {
+                    if (raw[i].name === p) {
+                        for (var j = 0; j < raw[i].sub.length; j++) {
+                            if (raw[i].sub[j].name === c) {
+                                if(raw[i].sub[j].sub){
+                                    for (var k = 0; k < raw[i].sub[j].sub.length; k++) {
+                                        if (raw[i].sub[j].sub[k].name === x) {
+                                            var areaid = raw[i].sub[j].sub[k].id;
+                                            $("#areaid").val(areaid);
+                                            localStorage.setItem("areaId",areaid);
+                                            return sub(raw[i].sub[j].sub[k]);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                return [""];
+            };
+
+
+
             var raw = $.smConfig.rawCitiesData;
             var provinces = raw.map(function (d) {
                 return d.name;
             });
+            // console.log("raw[0]")
+            // console.log(raw[0])
             var initCities = sub(raw[0]);
             var initDistricts = [""];
+            var initCounty = [""];
 
             var currentProvince = provinces[0];
             var currentCity = initCities[0];
             var currentDistrict = initDistricts[0];
+            var currentCounty = initCounty[0];
 
             var defaults = {
                 cssClass: "city-picker",
@@ -3790,17 +3815,32 @@
                         var newCities = getCities(newProvince);
                         newCity = newCities[0];
                         var newDistricts = getDistricts(newProvince, newCity);
+                        var newCounty = getCounty(newProvince, newCity, newDistricts);
                         picker.cols[1].replaceValues(newCities);
                         picker.cols[2].replaceValues(newDistricts);
+                        picker.cols[3].replaceValues(newCounty);
                         currentProvince = newProvince;
                         currentCity = newCity;
+                        currentCounty = newCounty;
                         picker.updateValue();
                         return;
                     }
                     newCity = picker.cols[1].value;
+                    // console.log(newCity)
+                    newCounty = picker.cols[2].value;
+
                     if (newCity !== currentCity) {
                         picker.cols[2].replaceValues(getDistricts(newProvince, newCity));
+                        picker.cols[3].replaceValues(getCounty(newProvince, newCity ,newCounty));
                         currentCity = newCity;
+                        currentCounty = newCounty;
+                        picker.updateValue();
+                        return;
+                    }
+
+                    if (newCounty !== currentCounty) {
+                        picker.cols[3].replaceValues(getCounty(newProvince, newCity, newCounty));
+                        currentCounty = newCounty;
                         picker.updateValue();
                     }
                 },
@@ -3817,6 +3857,10 @@
                     {
                         values: initDistricts,
                         cssClass: "col-district"
+                    },
+                    {
+                        values: initCounty,
+                        cssClass: "col-county"
                     }
                 ]
             };
@@ -3825,7 +3869,7 @@
 
             //计算value
             var val = $(this).val();
-            console.log(val)
+            // console.log(val);
             if (val) {
                 p.value = val.split(" ");
                 if (p.value[0]) {
@@ -3838,6 +3882,15 @@
                 } else {
                     currentDistrict = p.value[2];
                     p.cols[2].values = getDistricts(p.value[0], p.cols[1].values[0]);
+                    // console.log("p.cols[1].values[0]");
+                    // console.log(p.cols[1].values[0]);
+                }
+                if (p.value[2]) {
+                    currentCounty = p.value[2];
+                    p.cols[3].values = getCounty(p.value[0],p.value[1], p.value[2]);
+                } else {
+                    currentCounty = p.value[2];
+                    p.cols[3].values = getCounty(p.value[0], p.cols[1].values[0],p.cols[2].values[0]);
                 }
             }
 
