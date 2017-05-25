@@ -96,5 +96,4 @@ define(function(require,exports,module){
         $("#footerNavPage").html(html);
     });
 
-
-})
+});

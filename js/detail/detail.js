@@ -33,7 +33,6 @@ define(function (require, exports, module) {
                 $.toast("请登录才可以进行后续操作");
                 return location.href = '/m/html/my/login/login.html';
             }
-
         });
 
         //监听 请选择规格
@@ -161,6 +160,8 @@ define(function (require, exports, module) {
                         productId: currentProductID,
                         quantity: count
                     },
+                    cache:false,
+                    async:false,
                     dataType: CART_SITE_URL.DATATYPE,
                     success: function (data) {
                         if (data.authStatus == "200") {
@@ -296,6 +297,8 @@ define(function (require, exports, module) {
                 username: username,
                 id: currentProductID
             },
+            cache:false,
+            async:false,
             dataType: PRODUCT_SITE_URLS.DATATYPE,
             success: function (results) {
                 var specificationValues = results["product"].specificationValues;

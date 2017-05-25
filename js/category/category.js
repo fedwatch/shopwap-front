@@ -60,6 +60,8 @@ define(function (require, exports, module) {
                 dataType:PRODUCT_SITE_URLS.DATATYPE,
                 type:PRODUCT_SITE_URLS.FIND_SUBS.METHOD,
                 data:{username:username,id:$("#categoryId").val()},
+                async:false,
+                cache:false,
                 success:function (data) {
                     // navSubPosition
                     require.async('handlebars',function(){
@@ -147,6 +149,8 @@ define(function (require, exports, module) {
             type:PRODUCT_SITE_URLS.FIND_ROOTS.METHOD,
             dataType:"json",
             data:{username:username},
+            cache:false,
+            async:false,
             success:function (data) {
                 if(data.authStatus == "200"){
                     var tpl = require('/m/layout/cartgory/mainNav.tpl');
@@ -162,6 +166,8 @@ define(function (require, exports, module) {
                             type:PRODUCT_SITE_URLS.FIND_SUBS.METHOD,
                             data:{username:username,id:categoryId},
                             dataType:PRODUCT_SITE_URLS.DATATYPE,
+                            cache:false,
+                            async:false,
                             success:function (data) {
                                 if(data.authStatus == '200'){
                                     var tpl = require('/m/layout/cartgory/navSubPosition.tpl');
@@ -184,6 +190,8 @@ define(function (require, exports, module) {
                                         url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
                                         dataType:PRODUCT_SITE_URLS.DATATYPE,
                                         type:PRODUCT_SITE_URLS.PRODUCT_SEARCH.METHOD,
+                                        cache:false,
+                                        async:false,
                                         data: {
                                             keyword: keyword,
                                             pageNumber: pageNumber,

@@ -11,7 +11,6 @@ define(function (require, exports, module) {
     var paymentPluginId = store.get("paymentPluginId");
     var allAmount = store.get("allAmount");
     var balance = store.get("balance");
-    var paymentPluginId = store.get("paymentPluginId");
     var type = store.get("type") || "payment";
     var amount = store.get("amount");
     var app_request = store.get("app_request") || '3';
@@ -22,10 +21,7 @@ define(function (require, exports, module) {
     var isBalancePay = false;
     jQuery.support.cors = true;
     $(function () {
-
-
         payment(username, mergeSn);
-
         store.set("type", "payment");
         store.set("app_request", "3");
 
@@ -54,6 +50,8 @@ define(function (require, exports, module) {
                 username: username,
                 mergeSn: mergeSn
             },
+            cache:false,
+            async:false,
             success: function (data) {
                 if (data.authStatus == "200") {
                     var paymentPluginId = data.paymentPlugins[0].id;
@@ -108,6 +106,8 @@ define(function (require, exports, module) {
             url: BASE_URL + ORDER_SITE_URL.CALCULATE_AMOUNT.URL,
             type: ORDER_SITE_URL.CALCULATE_AMOUNT.METHOD,
             dataType: ORDER_SITE_URL.DATATYPE,
+            cache:false,
+            async:false,
             data: {
                 username: username,
                 mergeSn: mergeSn,

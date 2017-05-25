@@ -40,6 +40,8 @@ define(function (require, exports, module) {
                 type:CART_SITE_URL.CART_LIST.METHOD,
                 dataType:CART_SITE_URL.DATATYPE,
                 data:{username:username},
+                cache:false,
+                async:false,
                 success:function (data) {
                     if(data.authStatus == "200") {
                         // cartItem
@@ -75,6 +77,8 @@ define(function (require, exports, module) {
                     productId : productId ,//产品id
                     quantity : quantity ,//商品数量
                 },
+                cache:false,
+                async:false,
                 success:function (data) {
                     console.log(data.authMsg)
                 }
@@ -93,6 +97,8 @@ define(function (require, exports, module) {
                 data:{
                     username  :username ,//会员名称
                 },
+                cache:false,
+                async:false,
                 success:function (data) {
                     console.log(data);
                 }
@@ -109,6 +115,8 @@ define(function (require, exports, module) {
                     itemId :itemId,//购物车项id
                     quantity  :quantity ,//商品数量
                 },
+                cache:false,
+                async:false,
                 success:function (data) {
                     console.log(data);
                 }
@@ -125,6 +133,8 @@ define(function (require, exports, module) {
                     username:   username ,//会员名称
                     itemId: itemId  ,//产品id
                 },
+                cache:false,
+                async:false,
                 success:function (data) {
                     console.log(data);
                 }
@@ -139,6 +149,8 @@ define(function (require, exports, module) {
                 data:{
                     username  :username ,//会员名称
                 },
+                cache:false,
+                async:false,
                 success:function (data) {
                     console.log(data);
                     if(data.authStatus == '200'){
@@ -461,7 +473,5 @@ define(function (require, exports, module) {
         var html = template(storeData);
         $("#nothingBuy").html(html);
     });
-
-
 
 });
