@@ -7,11 +7,13 @@ define(function(require,exports,module){
     require('light7');
     require('store');
 
-    require('rsa');
-    require('base64');
-    require('jsbn');
-    require('prng4');
-    require('rng');
+    require('rsa-all');
+    // require('rsa');
+    // require('base64');
+    // require('jsbn');
+    // require('prng4');
+    // require('rng');
+
     require('siteUrl');
 
     var genData = {};
