@@ -1447,7 +1447,7 @@ span.panel-minus-button {
 .nav-tabbar {
     position: relative;
     box-sizing: border-box;
-    display: flex;
+    /*display: flex;*/
     -webkit-box-orient: horizontal;
     flex-direction: row;
     width: 100%;
