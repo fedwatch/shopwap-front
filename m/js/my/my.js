@@ -2,23 +2,21 @@
  * Created by Administrator on 2017/3/10.
  */
 define(function (require, exports, module) {
+    require("siteUrl");
     require('jquery');
     require("light7");
     require("store");
-    require("siteUrl");
     require("getCurrentPage");
-    require('cookie');
+    // require('cookie');
     // var session = require("session");
 
 
     jQuery.support.cors = true;
-
     $(function () {
         var username = store.get("username");
         // console.log(username);
         getIndex(username);
         getCurrentPage();
-
     });
 
 
@@ -57,19 +55,9 @@ define(function (require, exports, module) {
                     $.toast(data.authMsg);
                     return location.href = '../my/login/login.html';
                 }
-
             }
         });
     }
-
-
-
-
-
-
-
-
-
 
     require.async('handlebars', function () {
         var data = {};

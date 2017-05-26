@@ -15,7 +15,7 @@ define(function(require,exports,module){
     require('siteUrl');
 
     var genData = {};
-    var registerResult = {};//内部数据的状态集
+
     jQuery.support.cors = true;
     $(function () {
         var $userPhone = $("#userPhone");//手机号
@@ -26,7 +26,7 @@ define(function(require,exports,module){
         var $userSMSCodeError = $("#userSMSCodeError");//验证码错误提示信息
         var $smsCode = $("#smsCode");//SMS验证码
         var $registerBtn = $('#registerBtn');//立即注册按钮
-
+        var registerResult = {};//内部数据的状态集
 
         /**
          * 获取验证码按钮 失败
