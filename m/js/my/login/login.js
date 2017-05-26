@@ -64,7 +64,10 @@ define(function (require, exports, module) {
                         // $.cookie("xms",data.JSESSIONID,{path:"/"});
                         // $.cookie("hhh",data.JSESSIONID);
                         $.toast(data.authMsg+" 3 秒后自动跳转",3000);
-                        return location.href = "/m/html/index.html"
+
+                        setTimeout(function(){
+                            location.href = "/m/html/index.html"
+                        },3000);
                     }else{
                         $.toast(data.authMsg);
                         $userPhone.val("");
