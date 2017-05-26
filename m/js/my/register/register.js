@@ -13,7 +13,6 @@ define(function(require,exports,module){
     // require('jsbn');
     // require('prng4');
     // require('rng');
-
     require('siteUrl');
 
     var genData = {};
