@@ -34,17 +34,17 @@
     <div class="active-b clearfix">
         <div class="pull-left b-img">
             <div class="bt-img">
-                <a href="javascript:void(0);" class="external" data-id="852">
+                <a href="javascript:void(0);" class="external" data-id="2503">
                     <div>
-                        <img src="https://static.jie.net/group1/M00/55/A7/rBAB4FjQxuiId5brAHBwUGfwRzwAAAADgB7-P4AcHBo027.jpg" style="height:203px;"/>
+                        <img src="https://static.jie.net/group1/M00/55/F7/rBAB4FkdYCuIJQwNAAA1JICL3dUAAAAHwLMptIAADU8927.jpg" style="height:203px;"/>
                         <!--<div class="tipIm"><span class="plunge">直降</span></div>-->
                     </div>
                     <div style="padding:0 0.75rem;">
-                        <div style="font-size:0.667rem;">M‘amour’瑞尼（双层巧克力慕斯蛋糕）</div>
+                        <div style="font-size:0.667rem;">Mellower Coffee 麦隆咖啡 经典系列 甜香</div>
                         <div>
                             <span style="font-size:0.425rem;color:#ff0000;">￥<span
-                                    style="font-size:0.85rem;">228</span></span>
-                            <span style="font-size:0.425rem;color:#999999; margin-left:0.75rem;">已有<span>265</span>人购买</span>
+                                    style="font-size:0.85rem;">28.00</span></span>
+                            <span style="font-size:0.425rem;color:#999999; margin-left:0.75rem;">已有<span>40</span>人购买</span>
                         </div>
                     </div>
 
