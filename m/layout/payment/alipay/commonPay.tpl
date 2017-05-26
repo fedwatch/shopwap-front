@@ -14,7 +14,7 @@
             </div>
             <div class="pull-left order-done">
                 <div class="or-title">订单提交成功</div>
-                <div class="or-title2">请在{{this.waitTime}}分钟之内完成支付</div>
+                <div class="or-title2">请在 {{this.waitTime}} 分钟之内完成支付</div>
             </div>
         </div>
         <div class="desc-content">
