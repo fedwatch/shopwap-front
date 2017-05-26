@@ -42,7 +42,7 @@ define(function (require, exports, module) {
                 username : username,
                 newPwd : newPwd
             },
-            cache:false,
+            cache:true,
             async:false,
             success: function (data) {
                 if (data.authStatus == "200") {
@@ -73,7 +73,7 @@ define(function (require, exports, module) {
                 newPwd: newPwd,
                 pwd: pwd
             },
-            cache:false,
+            cache:true,
             async:false,
             success: function (data) {
                 if (data.authStatus == '200') {

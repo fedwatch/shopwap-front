@@ -38,7 +38,7 @@ define(function (require, exports, module) {
                 pageNumber: pageNumber,
                 pageSize: pageSize,
             },
-            cache:false,
+            cache:true,
             async:false,
             success: function (data) {
                 if (data.authStatus) {
@@ -130,7 +130,7 @@ define(function (require, exports, module) {
                 username: username,
                 id: id
             },
-            cache:false,
+            cache:true,
             async:false,
             success: function (data) {
                 $.toast(data.authMsg);

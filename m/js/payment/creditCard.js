@@ -83,7 +83,7 @@ define(function (require, exports, module) {
                 userPhone: userPhone,
                 codeFlag: codeFlag,
             },
-            cache:false,
+            cache:true,
             async:false,
             success: function (data) {
                 console.log(data);
@@ -111,7 +111,7 @@ define(function (require, exports, module) {
                 bankCardNo: bankCardNo,
                 username: username,
             },
-            cache:false,
+            cache:true,
             async:false,
             success: function (data) {
                 if(data.authStatus=="212"){
@@ -187,7 +187,7 @@ define(function (require, exports, module) {
                 app_request_url: app_request_url,
                 bankName: bankName
             },
-            cache:false,
+            cache:true,
             async:false,
             success: function (data) {
                 console.log(data);

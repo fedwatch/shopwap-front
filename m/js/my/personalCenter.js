@@ -28,7 +28,7 @@ define(function(require,exports,module){
             data: {
                 username : username
             },
-            cache:false,
+            cache:true,
             async:false,
             success:function (data) {
                 if (data.authStatus == "200"){

@@ -115,7 +115,7 @@ define(function(require,exports,module){
             url:BASE_URL+ORDER_SITE_URL.CREATE_PAYMENT.URL,
             type:ORDER_SITE_URL.CREATE_PAYMENT.METHOD,
             dataType:ORDER_SITE_URL.DATATYPE,
-            cache:false,
+            cache:true,
             async:false,
             data:{
                 username:username,
@@ -170,7 +170,7 @@ define(function(require,exports,module){
                 orderStatus :orderStatus,
                 pageNumber :pageNumber
             },
-            cache:false,
+            cache:true,
             async:false,
             success:function (data) {
                 require.async('handlebars',function(){
@@ -199,7 +199,7 @@ define(function(require,exports,module){
                 username:username,
                 sn :sn
             },
-            cache:false,
+            cache:true,
             async:false,
             success:function (data) {
                 if(data.authStatus == '200'){
@@ -227,7 +227,7 @@ define(function(require,exports,module){
                 orderStatus :'all',
                 pageNumber :'1'
             },
-            cache:false,
+            cache:true,
             async:false,
             success:function (data) {
                 require.async('handlebars',function(){

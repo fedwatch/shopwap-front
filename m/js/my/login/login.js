@@ -35,7 +35,7 @@ define(function (require, exports, module) {
                 url: BASE_URL+USER_SITE_URL.PUBLIC_KEY.URL,
                 type: USER_SITE_URL.PUBLIC_KEY.METHOD,
                 dataType:USER_SITE_URL.DATATYPE,
-                cache:false,
+                cache:true,
                 async:false,
                 success: function(data) {
                     var rsaKey = new RSAKey();
@@ -49,7 +49,7 @@ define(function (require, exports, module) {
             $.ajax({
                 url: BASE_URL+USER_SITE_URL.USER_LOGIN.URL,
                 type: USER_SITE_URL.USER_LOGIN.METHOD,
-                cache:false,
+                cache:true,
                 async:false,
                 dataType:USER_SITE_URL.DATATYPE,
                 data:{
