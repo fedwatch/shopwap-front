@@ -9,7 +9,7 @@ define(function (require, exports, module) {
     require("siteUrl");
 
     jQuery.support.cors = true;
-    var MD_URL = '//' + location.host + '/m'
+    var MD_URL = '//'+location.host+'/m'
     $(function () {
         var $searchHint = $('#searchHint');
         var $searchPrompt = $('#searchPrompt');
@@ -40,9 +40,25 @@ define(function (require, exports, module) {
                 $searchVague.css({display: "block"});
                 $("#shopListShowIndex2").css({display: "none"})
             } else {
-                $("#shopListShowIndex2").css({display: "block"})
-                search(searchHint, "", "", "", "", "", "");
+                var pageNumber=1;
+                $("#shopListShowIndex2").css({display: "block"});
+                   $(".container").scroll(function(){
+                        var scrollHeight=$(this).scrollHeight();
+                        var scrollTop=$(this).scrollTop();
+                        var $viewHeight=$(this).height();
+                           if(scrollTop>(scrollHeight-$viewHeight-2)){
+                               if(pageNumber<3){
+                                   setTimeout(function(){
+                                       pageNumber+=1;
+                                       alert(pageNumber);
+                                       search(searchHint,pageNumber, "10", "", "", "", "");
+                                       $('.container').animate({scrollTop:0}, 'slow');
+                                   },5000);
+                               }
+                           };
 
+                   });
+                search(searchHint,pageNumber, "10", "", "", "", "")
             }
         });
 
@@ -60,11 +76,11 @@ define(function (require, exports, module) {
             $(".history").hide();
         });
 
-        $(document).on("click", ".productCategory a", function () {
+        $(document).on("click",".productCategory a",function () {
             var $this = $(this);
             var id = $this.data("id");
-            localStorage.setItem("currentProductID", id);
-            location.href = MD_URL + "/html/detail/detail.html";
+            localStorage.setItem("currentProductID",id);
+            location.href = MD_URL+"/html/detail/detail.html";
         })
 
     });
@@ -141,84 +157,39 @@ define(function (require, exports, module) {
      * @param startPrice
      * @param endPrice
      */
-    function search(keyword, pageNumber, pageSize, categoryIds, brandIds, startPrice, endPrice) {
+    function search(keyword, pageNumber, pageSize) {
         $.ajax({
-            async: false,
             url: BASE_URL + COMMON_SITE_URL.SEARCH.URL,
             type: COMMON_SITE_URL.SEARCH.METHOD,
             dataType: COMMON_SITE_URL.DATATYPE,
             data: {
                 keyword: keyword,
                 pageNumber: pageNumber,
-                pageSize: pageSize,
-                categoryIds: categoryIds,
-                brandIds: brandIds,
-                startPrice: startPrice,
-                endPrice: endPrice
+                pageSize: pageSize
             },
 
             success: function (data) {
-                console.log(data);
+                console.log(data.products.length);
                 $("#searchPrompt").hide();
                 $("#searchVague").css({display: "none"});
                 $("#shopListSort").css({display: "none"});
                 var products = data["products"];
-                console.log("products:" + products.length);
 
-                var loading = false;
-                var maxItems = products.length;
-
-                var itemsPerLoad = 2;
-
-                function addItems(number, lastIndex) {
-                    var html = '';
-                    for (var i = 0; i < lastIndex + number; i++) {
-                        html += '<div class="col-50 productCategory" >' +
-                            '<a href="javascript:;"  data-id="' + products[i].id + '" class="external">' +
-                            '<div style="background: #fff;padding:0 0;margin: .25rem 0;width:100%;height:12rem;overflow: hidden;">' +
-                            '<img src="' + products[i].image + '" alt="" style="width:100%;height:7rem;overflow: hidden;">' +
-                            '<h4 class="product-title" style="padding:0 .25rem;font-size:.7rem;color:#000;">' + products[i].name + '</h4>' +
-                            '<span class="product-price-box" style="padding:0 .25rem;font-size:.5rem;color:#ff0000;">￥<span style="font-size:.65rem;">' + products[i].price + '</span>' + '</span>' + '<span class="product-buyer-number-box" style="font-size:.5rem;color:#999;">已有 <span>' + products[i].sales + '</span>人购买</span>' + '</div>' +
-                            '</a>' + '</div>';
-                    }
-                    console.log(html);
-                    $("#shopListShowIndex2").html(html);
-
-                }
-
-                addItems(itemsPerLoad, 0);
-
-
-                var lastIndex = 2;
-
-                $(document).on('infinite', '.infinite-scroll', function () {
-                    $("#loading").show();
-                    // 如果正在加载，则退出
-                    if (loading) return;
-
-                    // 设置flag
-                    loading = true;
-
-                    setTimeout(function () {
-                        loading = false;
-
-                        if (lastIndex >= maxItems) {
-                            $.detachInfiniteScroll($('.infinite-scroll'));
-                            $('.infinite-scroll-preloader').remove();
-                            $("#loading").hide();
-                            return;
-                        }
-
-                        addItems(itemsPerLoad, lastIndex);
-                        lastIndex = $('.col-50').length;
-                        console.log(lastIndex);
-                    }, 1000);
+                var  html='';
+                products.map(function(data){
+                    html +='<div class="col-50 productCategory" >'+
+                        '<a href="javascript:;"  data-id="'+data.id+'" class="external">'+
+                        '<div style="background: #fff;padding:0 0;margin: .25rem 0;width:100%;height:12rem;overflow: hidden;">'+
+                        '<img src="'+data.image+'" alt="" style="width:100%;height:7rem;overflow: hidden;">'+
+                        '<h4 class="product-title" style="padding:0 .25rem;font-size:.7rem;color:#000;">'+data.name+'</h4>'+
+                        '<span class="product-price-box" style="padding:0 .25rem;font-size:.5rem;color:#ff0000;">￥<span style="font-size:.65rem;">'+data.price+'</span>'+'</span>'+'<span class="product-buyer-number-box" style="font-size:.5rem;color:#999;">已有 <span>'+data.sales+'</span>人购买</span>'+ '</div>'+
+                        '</a>'+ '</div>';
                 });
-            }
 
+                $("#shopListShowIndex2").html(html);
+            }
         });
 
-        $.init();
     }
 });
 
