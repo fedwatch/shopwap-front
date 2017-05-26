@@ -15,7 +15,7 @@ define(function(require,exports,module){
     require('siteUrl');
 
     var genData = {};
-
+    var registerResult = {};//内部数据的状态集
     jQuery.support.cors = true;
     $(function () {
         var $userPhone = $("#userPhone");//手机号
@@ -26,7 +26,7 @@ define(function(require,exports,module){
         var $userSMSCodeError = $("#userSMSCodeError");//验证码错误提示信息
         var $smsCode = $("#smsCode");//SMS验证码
         var $registerBtn = $('#registerBtn');//立即注册按钮
-        var registerResult = {};//内部数据的状态集
+
 
         /**
          * 获取验证码按钮 失败
@@ -84,10 +84,10 @@ define(function(require,exports,module){
 
 
         $(document).on('click','#registerBtn',function () {
+            console.log(registerResult);
             if(registerResult.userPass == true && registerResult.userPhone == true && registerResult.smsCode == true){
                 $registerBtn.addClass('button-success').css($registerBtn_SUCCESS);
                 var enPassword;
-
                 $.ajax({
                     url: BASE_URL+USER_SITE_URL.PUBLIC_KEY.URL,
                     type: USER_SITE_URL.PUBLIC_KEY.METHOD,
@@ -100,7 +100,6 @@ define(function(require,exports,module){
                         enPassword = hex2b64(rsaKey.encrypt($userPass.val()));
                     }
                 });
-
                 $.ajax({
                     url:BASE_URL+USER_SITE_URL.USER_REGISTER.URL,
                     dataType:USER_SITE_URL.DATATYPE,
@@ -121,9 +120,10 @@ define(function(require,exports,module){
                         }
                     }
                 });
-
             }else if (registerResult.userPass == false || registerResult.userPhone == false || registerResult.smsCode == false){
                 $registerBtn.removeClass('button-success').css($registerBtn_FAILED);
+            }else if(typeof registerResult == 'undefined'){
+                $.toast("请填写你的手机号和登录密码！");
             }
         })
 
@@ -191,12 +191,10 @@ define(function(require,exports,module){
         $smsCode.on('blur',function () {
             var smsCodeVal = $smsCode.val();
             checkSMSCode(smsCodeVal);
-            // checkRegisterBtn()
-        })
+        });
 
 
-        $getSMSCodeBtn.on('click',function (e) {
-            e.preventDefault();
+        $(document).on('click','#getSMSCodeBtn',function () {
             // console.log('$getSMSCodeBtn on click');
             if($userPhone.val() && $userPhone.val() !== ''){
                 var phoneNum = $userPhone.val();
@@ -208,10 +206,10 @@ define(function(require,exports,module){
                     async:false,
                     data: {userPhone: phoneNum,codeFlag:"1"},
                     success:function (data) {
-                        console.log(data);
-                        var spData = data;
-                        if (spData.authStatus == "200" && spData.setAuthMsg == true){
-                            $.toast(spData.authMsg,2000);
+                        if (data.authStatus == "200"){
+                            $.toast(data.authMsg);
+                        }else{
+                            $.toast(data.authMsg);
                         }
                         getSMSTimer();
                     }
@@ -225,8 +223,7 @@ define(function(require,exports,module){
 
         function getSMSTimer() {
             var smsCodeBtn = '';
-
-            var SETTIMESECOND = 10;
+            var SETTIMESECOND = 60;
             var nums = SETTIMESECOND;
             $getSMSCodeBtn.css($getSMSCodeBtn_FAILED);
             //将按钮置为 不可点击
@@ -246,8 +243,6 @@ define(function(require,exports,module){
                 }
             }, 1000); //一秒执行一次
         }
-
-
     });
 
     // registerPage
