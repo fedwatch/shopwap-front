@@ -6,13 +6,14 @@ define(function (require, exports, module) {
     require('swiper');
     require('siteUrl');
     require('store');
-    require('cookie');
+    // require('cookie');
 
-    require('jsbn');
-    require('prng4');
-    require('rng');
-    require('rsa');
-    require('base64');
+    // require('jsbn');
+    // require('prng4');
+    // require('rng');
+    // require('rsa');
+    // require('base64');
+    require('rsa-all');
 
 
 

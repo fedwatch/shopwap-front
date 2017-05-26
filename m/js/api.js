@@ -25,9 +25,9 @@ seajs.config({
         "mockjs":M_URL+"/assets/plugin/mockjs",
         "extJquery":M_URL+"/assets/plugin/extJquery",
 
-        "touchSwipe":M_URL+"/assets/plugin/jquery.touchSwipe.min.js",
-        "store":M_URL+"/js/utils/store.min.js",
-        "session":M_URL+"/js/utils/session.js/dist/session.js",
+        "touchSwipe":M_URL+"/assets/plugin/jquery.touchSwipe.min",
+        "store":M_URL+"/js/utils/store.min",
+        "session":M_URL+"/js/utils/session.js/dist/session",
         "weixin":"https://res.wx.qq.com/open/js/jweixin-1.0.0.js",
         "transDetails":M_URL+"/js/utils/transDetails",
         "parseUrl":M_URL+"/js/utils/parseUrl",
@@ -41,6 +41,7 @@ seajs.config({
         "rng":M_URL+"/js/utils/rsa/rng.js",
         "jsbn":M_URL+"/js/utils/rsa/jsbn.js",
         "prng4":M_URL+"/js/utils/rsa/prng4.js",
+        "rsa-all":M_URL+"/js/utils/rsa/rsa-all.js",
 
         "jsonp":M_URL+"/js/utils/jquery.jsonp.js",
         "zepto":"https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js",
