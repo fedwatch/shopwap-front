@@ -15,8 +15,11 @@
                 运费：
                 <span id="shippingCost">
                     {{#if this.freight}}
-                    {{this.freight}}
+                        {{this.freight}}
+                    {{else}}
+                        0.00
                     {{/if}}
+
                 </span>
                 元
             </span>

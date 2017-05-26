@@ -57,7 +57,6 @@ define(function (require, exports, module) {
                 },
                 timeout:3000,
                 success: function(data,textStatus, jqXHR) {
-                    console.log(data);
                     if (data.authStatus == "200" ){
                         store.set("username",username);
                         store.set("userStatus",true);
