@@ -8,11 +8,9 @@ define(function (require, exports, module) {
 
     jQuery.support.cors = true;
     $(function () {
-
         $(document).on('click', '.address-button', function () {
             store.set("editStatus", false);
         })
-
     });
 
     var username = store.get("username");

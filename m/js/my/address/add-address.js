@@ -44,8 +44,9 @@ define(function (require, exports, module) {
                             $userZipCode.val(data.receiver.zipCode);
                             $cityPicker.val(data.receiver.area.fullName);
                             $areaId.val(data.receiver.area.id);
+                            store.set("areaId",data.receiver.area.id);
                             if (data.receiver.isDefault == true) {
-                                $("#user-default").click();
+                                $userDefault.click();
                             }
                         }
                     }
@@ -89,10 +90,10 @@ define(function (require, exports, module) {
             var username = store.get("username");
             var consignee = $userNameAddr.val();
             if(consignee == '' || typeof consignee == "undefined"){
-                $.toast("联系人不可为空")
+                $.toast("联系人不可为空");
                 return;
             }
-            var areaId = $areaId.val() || store.get("areaId");
+            var areaId = store.get("areaId");
             var address = $userAddress.val();
             var zipCode = $userZipCode.val();
             var phone = $userPhoneS.val();
