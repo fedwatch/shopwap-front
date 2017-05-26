@@ -63,6 +63,7 @@ define(function (require, exports, module) {
                         store.set("userStatusTimeStamp",new Date());
                         // $.cookie("xms",data.JSESSIONID,{path:"/"});
                         // $.cookie("hhh",data.JSESSIONID);
+                        $.toast(data.authMsg+" 3 秒后自动跳转",3000);
                         return location.href = "/m/html/index.html"
                     }else{
                         $.toast(data.authMsg);
