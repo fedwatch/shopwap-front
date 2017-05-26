@@ -24,15 +24,16 @@ define(function (require, exports, module) {
         orderInfo(username, itemIds);
 
         $(document).on("click", ".detailOrderBtn", function () {
+            calculate(username, receiverId, itemIds)
             create(username, itemIds, receiverId, memoArr);
         });
     });
 
     /**
      * 计算应付金额,生成预订单
-     * @param username
-     * @param receiverId
-     * @param itemIds
+     * @param username  会员用户名
+     * @param receiverId    收货地址id
+     * @param itemIds   购物车项id(此处为数组 Long[])
      */
     function calculate(username, receiverId, itemIds) {
 

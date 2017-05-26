@@ -4,7 +4,6 @@
 define(function (require, exports, module) {
     require('jquery');
     require('swiper');
-    // require('mockjs');
     require('light7');
     require('store');
     require('siteUrl');
@@ -16,7 +15,9 @@ define(function (require, exports, module) {
 
     jQuery.support.cors = true;
     $(function () {
-        setSpecificationId();
+
+
+        setSpecificationId(username,currentProductID)
 
         //监听 购物车
         $(document).on('click', ".cart-badge", function () {
@@ -49,9 +50,6 @@ define(function (require, exports, module) {
 
         //监听 加入购物车
         $(document).on('click', '.addToCartBtn', addToCart);
-
-
-
 
         //立即下单
         $(document).on('click', ".buyNowBtn", function () {
@@ -288,9 +286,11 @@ define(function (require, exports, module) {
     });
 
     /**
-     *
+     * 设置产品的规格
+     * @param username
+     * @param currentProductID
      */
-    function setSpecificationId() {
+    function setSpecificationId(username,currentProductID) {
         // usermd
         $.ajax({
             url: BASE_URL + PRODUCT_SITE_URLS.PRODUCT_VIEW.URL,
@@ -302,15 +302,22 @@ define(function (require, exports, module) {
             cache:false,
             async:false,
             dataType: PRODUCT_SITE_URLS.DATATYPE,
-            success: function (results) {
-                var specificationValues = results["product"].specificationValues;
-                var productSpec = [];
-                specificationValues.map(function (data) {
-                    productSpec.push(data.id)
-                });
-                var len = productSpec.length;
-                for (var i = 0; i < len; i++) {
-                    $("#specification-id-" + productSpec[i]).removeClass("active").addClass("active");
+            success: function (data) {
+                if(data.authStatus == '200'){
+                    if(data["product"]){
+                        var specificationValues = data["product"].specificationValues;
+                        var productSpec = [];
+                        specificationValues.map(function (data) {
+                            productSpec.push(data.id)
+                        });
+                        var len = productSpec.length;
+                        for (var i = 0; i < len; i++) {
+                            $("#specification-id-" + productSpec[i]).removeClass("active").addClass("active");
+                        }
+                    }
+                }else{
+                    $.toast(data.authMsg);
+                    return history.go(-1);
                 }
             }
         })

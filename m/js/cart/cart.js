@@ -182,6 +182,13 @@ define(function (require, exports, module) {
             var $cartItemEditPanel = $siblingsDOM.children('div.cart-item-edit-panel');
             $cartItemText.hide();
             $cartItemEditPanel.show().css({display: 'inline-flex'});
+
+            /*
+            @TODO
+            缺少商品数量的数据绑定 数据原子性不明显
+            数量不能和用户操作绑定
+            */
+
         });
 
         // 购物车下单
@@ -385,11 +392,11 @@ define(function (require, exports, module) {
             number = parseInt(number) + 1;
             $this.parent().find('input.panel-text-input').val(number);
             var quantity = $this.parents(".cart-store-img-text-label").find(".cart-item-text > .cart-item-display-flex > .cart-item-quantity > .quantity-ct");
-            quantity.text(number);
-
             var itemId = $this.parents(".cart-store-img-text-label").find(".cart-item-select-wrapper>.cart-list-select").data("itemid");
             var quant = $this.parents(".cart-store-img-text-label").find(".cart-item-text > .cart-item-display-flex > .cart-item-quantity > .quantity-ct").text()
             cartEdit(username,itemId,quant);
+
+            quantity.text(number);
         });
 
         // 数量减少

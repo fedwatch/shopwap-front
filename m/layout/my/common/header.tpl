@@ -15,7 +15,7 @@
                     {{#if logo}}
                     <img src="{{logo}}" alt="" class="user_profile_avatar">
                     {{else}}
-                    <img src="../../assets/images/cool-girl.jpg" alt="" class="user_profile_avatar">
+                    <img src="../../assets/images/customer-photo.jpg" alt="" class="user_profile_avatar">
                     {{/if}}
                 </a>
             </div>
