@@ -1,0 +1,26 @@
+{
+  "short_name": "爽街街",
+  "name": "爽街街 移动端H5入口 - 橙旗控股",
+  "icons": [
+    {
+      "src": "launcher-icon-1x.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "launcher-icon-2x.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "launcher-icon-4x.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "/m/html/index.html?launcher=true",
+  "display":"standalone",
+  "background_color": "#2196F3",
+  "theme_color": "#2196F3",
+  "orientation": "landscape"
+}

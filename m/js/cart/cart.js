@@ -186,7 +186,7 @@ define(function (require, exports, module) {
             /*
             @TODO
             缺少商品数量的数据绑定 数据原子性不明显
-            数量不能和用户操作绑定
+            购物车数量不能和用户操作绑定
             */
 
         });

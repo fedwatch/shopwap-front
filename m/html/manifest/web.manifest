@@ -1,0 +1,11 @@
+CACHE MANIFEST
+
+CACHE:
+/m/assets/plugin/jquery.min.js
+/m/assets/plugin/sea.js
+/m/assets/plugin/seajs-text.js
+
+
+
+NETWORK:
+*
