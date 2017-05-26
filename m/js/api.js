@@ -12,6 +12,7 @@ seajs.config({
         "jquery":M_URL+"/assets/plugin/jquery.min.js",
         "page":M_URL+"/js/utils/page.js",
         "iscrollProbe":M_URL+"/js/utils/iscroll-probe.js",
+        "pageScroll":M_URL+"/js/utils/pageScroll.js",
         "bankCheck":M_URL+"/js/utils/bankCheck.js",
         "divideAmount":M_URL+"/js/utils/divideAmount.js",
         "startScore":M_URL+"/js/utils/startScore.js",

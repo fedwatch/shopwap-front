@@ -140,7 +140,7 @@ define(function (require, exports, module) {
      * @param startPrice
      * @param endPrice
      */
-    function search(keyword, pageNumber, pageSize, categoryIds, brandIds, startPrice, endPrice) {
+    function search(keyword, pageNumber, pageSize) {
         $.ajax({
             url: BASE_URL + COMMON_SITE_URL.SEARCH.URL,
             type: COMMON_SITE_URL.SEARCH.METHOD,
@@ -148,11 +148,7 @@ define(function (require, exports, module) {
             data: {
                 keyword: keyword,
                 pageNumber: pageNumber,
-                pageSize: pageSize,
-                categoryIds: categoryIds,
-                brandIds: brandIds,
-                startPrice: startPrice,
-                endPrice: endPrice
+                pageSize: pageSize
             },
 
             success: function (data) {
