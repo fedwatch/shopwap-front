@@ -117,7 +117,7 @@
 		
 		
 		var reverseTime = null;
-		var isComplete = false;
+		var isStart = false;
 		var cacheXhr = null;
 		//scroll config
 		var scrollOption = {
@@ -134,7 +134,7 @@
 		
 		iscrollObj.on("scrollStart", function(){
 			var _thisScroll = this;
-			isComplete =  false;
+			isStart =  true;
 			
 			if(config.refresh){
 				pullDownStatus("normal");
@@ -176,8 +176,7 @@
 		});
 		
 		iscrollObj.on("scrollEnd", function(){
-			if(isComplete){
-				isComplete =  false;
+			if(!isStart){
 				return false;
 			}
 			
@@ -190,7 +189,6 @@
 				if(_thisScroll.y >= config.distance ){
 					executeRefresh();
 				}else if(_thisScroll.y > (-1 * downDistance)){
-					isComplete =  true;
 					_thisScroll.scrollTo(0, (-1 * downDistance), config.releaseTime);
 				}
 				
@@ -203,10 +201,11 @@
 				if(_thisScroll.y <= _thisScroll.maxScrollY){
 					executeLoadPage();
 				}else if(_thisScroll.y < (_thisScroll.maxScrollY + upDistance)){
-					isComplete =  true;
 					_thisScroll.scrollTo(0, (_thisScroll.maxScrollY + upDistance), config.releaseTime);
 				}
 			}
+			
+			isStart =  false;
 			
 		});
 		
@@ -381,7 +380,7 @@
 					var pStatus = pullDownStatus();
 					var downDistance = pStatus.outerHeight();
 					if(_thisScroll.y > (-1 * downDistance)){
-						isComplete = true;
+						isStart =  false;
 						_thisScroll.scrollTo(0, (-1 * downDistance), config.releaseTime);
 					}
 					
@@ -392,7 +391,7 @@
 					var uStatus = pullUpStatus();
 					var upDistance = uStatus.outerHeight();
 					if(_thisScroll.y < (_thisScroll.maxScrollY + upDistance)){
-						isComplete = true;
+						isStart =  false;
 						_thisScroll.scrollTo(0, (_thisScroll.maxScrollY + upDistance), config.releaseTime);
 					}
 					
