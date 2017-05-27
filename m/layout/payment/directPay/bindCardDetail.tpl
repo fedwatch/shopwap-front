@@ -16,6 +16,7 @@
                     <p>
                         支付金额：
                         <i>￥</i> <span>308.00</span>
+                        <!--<span id="allAmount"></span>-->
                     </p>
                 </div>
             </div>
