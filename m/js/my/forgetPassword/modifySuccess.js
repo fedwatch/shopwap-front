@@ -6,7 +6,7 @@
 define(function(require,exports,module){
     require('jquery');
     require('swiper');
-    require('moclight7kjs');
+
 
     $(function () {
         var $userPhone = $("#userPhone");//手机号

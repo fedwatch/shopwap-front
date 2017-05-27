@@ -83,7 +83,6 @@ define(function(require,exports,module){
             if( registerResult.passable == true){
                 $registerBtn.addClass('button-success').css($registerBtn_SUCCESS);
                 console.log('http:// register success result')
-
                 resetPassword(username ,confirmPass )
             }else{
                 $registerBtn.removeClass('button-success').css($registerBtn_FAILED);
