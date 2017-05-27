@@ -1535,7 +1535,7 @@ span.nav-text.active {
 
 
 .shopList .productCategory{
-
+    float:left;
 }
 .shopList .goList{
     width:100%;
@@ -1543,9 +1543,12 @@ span.nav-text.active {
 
 .shopList .productContainer{
     width:100%;
-
 }
-
+#shopListShowIndex2 .productContainer .productCategory{
+    width:48%;
+    margin:0 1%;
+    float:left;
+}
 .contentWrapper{
     overflow:hidden;
 }
