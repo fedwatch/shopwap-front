@@ -6,7 +6,7 @@ define(function (require, exports, module) {
     require('jquery');
     require('store');
     require('siteUrl');
-    require('user');
+    require('getUser');
     require('light7');
 
     jQuery.support.cors = true;
