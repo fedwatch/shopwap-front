@@ -141,6 +141,10 @@ define(function(require,exports,module){
         $(document).on('click','#getSMSCodeBtn',function () {
             if($userPhone.val() !== ''){
                 var phoneNum = $userPhone.val();
+                if(typeof phoneNum == "undefined"){
+                    console.log("phoneNum is undefined");
+                    return;
+                }
                 $.ajax({
                     url:BASE_URL+USER_SITE_URL.SEND_DYNAMIC_CODE.URL,
                     type:USER_SITE_URL.SEND_DYNAMIC_CODE.METHOD,

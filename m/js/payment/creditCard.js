@@ -25,7 +25,7 @@ define(function (require, exports, module) {
 
         bankcardBind(bankCardNo, username);
 
-        var timer = 5;
+        var timer = 60;
         var verBtnStatus = false;
         $(document).on('click', '.verBtn', function () {
             if (verBtnStatus == true)
@@ -43,7 +43,7 @@ define(function (require, exports, module) {
                         $this.text("获取验证码").css("background", "#ff503e");
                         $this.attr("disabled", false);
                         verBtnStatus = true;
-                        return timer = 5;
+                        return timer = 60;
                     }
                 }
             }, 1000);
