@@ -49,7 +49,7 @@
 					end:"加载完成"
 				},
 				iscrollOption:null,
-				distance:5,
+				distance:2,
 				releaseTime:200,
 				onBefore:null,
 				onSuccess:null,
@@ -118,9 +118,12 @@
 		
 		var reverseTime = null;
 		var isComplete = false;
+		var cacheXhr = null;
 		//scroll config
 		var scrollOption = {
 			scrollbars : true,
+			fadeScrollbars:true,
+			shrinkScrollbars:"scale",
 			bounce:true,
 			probeType:2
 		};
@@ -150,7 +153,7 @@
 				var pStatus = pullDownStatus();
 				var downDistance = pStatus.outerHeight();
 				
-				if(_thisScroll.y >= 0){
+				if(_thisScroll.y >= (-1 * config.distance)){
 					pullDownStatus("release");
 				}else if(_thisScroll.y > (-1 * downDistance)){
 					pullDownStatus("normal");
@@ -183,7 +186,7 @@
 				var pStatus = pullDownStatus();
 				var downDistance = pStatus.outerHeight();
 				
-				if(_thisScroll.y >= 0){
+				if(_thisScroll.y >= (-1 * config.distance)){
 					executeRefresh();
 				}else if(_thisScroll.y > (-1 * downDistance)){
 					_thisScroll.scrollTo(0, (-1 * downDistance), config.releaseTime);
@@ -242,6 +245,10 @@
 		function remoteLoadData(callBack){
 			var requestData = {};
 			
+			if(cacheXhr != null && cacheXhr.readyState > 0 && cacheXhr.readState < 4){
+				cacheXhr.abort();
+			}
+			
 			$.extend(requestData, config.param);
 			if(config.pagination){
 				var newParam = $.extend({},config.paginationParam);
@@ -282,6 +289,8 @@
 				}
 				
 			});
+			
+			cacheXhr = xhr;
 			
 			return xhr;
 		}
@@ -411,7 +420,7 @@
 			}
 			
 			if(config.pagination){
-				var uStatus = pullUpStatus("normal");
+				var uStatus = pullUpStatus("normal"); 
 				$scroller.append(uStatus);
 			}
 			
