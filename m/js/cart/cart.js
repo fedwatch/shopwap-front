@@ -203,14 +203,11 @@ define(function (require, exports, module) {
                 if(cartItemIdArray.length !== 0){
                     location.href= "/m/html/order/order.html";
                 }else{
-                    $.toast("购物车没有商品！")
+                    $.toast("购物车没有选中商品！")
                 }
-
             } else{
                 return location.href = '/m/html/my/login/login.html';
             }
-
-
         });
 
         // 触发 完成 事件

@@ -126,7 +126,6 @@ define(function(require,exports,module){
                 $smsCode.closest('li.register_input').removeClass("error");
                 console.log("验证码正确");
                 store.set("smsCode",$smsCode.val());
-
             }
         }
 
