@@ -46,11 +46,11 @@ define(function (require, exports, module) {
             if (!(/^1[3|4|5|7|8]\d{9}$/.test(str))) {
                 $.toast("请输入正确的手机号");
                 $securityCode.attr("disabled", "disabled");
-                $getVertCode.css({backgroundColor: "#b2aead"});
+                $(".vert-code").css({backgroundColor: "#b2aead"});
 
             } else {
                 $securityCode.removeAttr("disabled");
-                $getVertCode.css({backgroundColor: "#ff503e"});
+                $(".vert-code").css({backgroundColor: "#ff503e"});
 
             }
 
@@ -88,20 +88,20 @@ define(function (require, exports, module) {
                                     var smsCodeBtn = '';
                                     var SETTIMESECOND = 60;
                                     var nums = SETTIMESECOND;
-                                    $getVertCode.css($getSMSCodeBtn_FAILED);
+                                    $(".vert-code").css($getSMSCodeBtn_FAILED);
                                     //将按钮置为 不可点击
-                                    $getVertCode.attr("disabled", true);
-                                    $getVertCode.text(nums + ' s');
+                                    $(".vert-code").attr("disabled", true);
+                                    $(".vert-code").text(nums + ' s');
                                     smsCodeBtn = setInterval(function () {
                                         nums--;
                                         if (nums > 0) {
-                                            $getVertCode.text(nums + ' s');
+                                            $(".vert-code").text(nums + ' s');
                                         } else {
                                             clearInterval(smsCodeBtn); //清除js定时器
                                             //将按钮置为 可点击
-                                            $getVertCode.css($getSMSCodeBtn_SUCCESS);
-                                            $getVertCode.attr("disabled", false);
-                                            $getVertCode.text('获取验证码');
+                                            $(".vert-code").css($getSMSCodeBtn_SUCCESS);
+                                            $(".vert-code").attr("disabled", false);
+                                            $(".vert-code").text('获取验证码');
                                             nums = SETTIMESECOND; //重置时间
                                             vertCodeState = true
                                         }
