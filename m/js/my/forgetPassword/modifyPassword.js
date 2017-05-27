@@ -78,9 +78,7 @@ define(function(require,exports,module){
             return registerResult;
         }
 
-
         $(document).on('click','#registerBtn',function () {
-
             checkPassword();
             if( registerResult.passable == true){
                 $registerBtn.addClass('button-success').css($registerBtn_SUCCESS);
