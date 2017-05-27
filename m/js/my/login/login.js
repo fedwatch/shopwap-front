@@ -3,16 +3,8 @@
 define(function (require, exports, module) {
     require('jquery');
     require('light7');
-    require('swiper');
     require('siteUrl');
     require('store');
-    // require('cookie');
-
-    // require('jsbn');
-    // require('prng4');
-    // require('rng');
-    // require('rsa');
-    // require('base64');
     require('rsa-all');
 
 
@@ -27,7 +19,7 @@ define(function (require, exports, module) {
         var regex = /^1\d{10}$/;
 
         $(document).on('click','#loginBtn',function () {
-            var username = $.trim($userPhone.val());
+            var username = $.trim($('#userPhone').val());
             if( !regex.test(username  || username == '' || username == '')){
                 return $.toast("用户名或密码输入有误！")
             }
@@ -40,7 +32,7 @@ define(function (require, exports, module) {
                 success: function(data) {
                     var rsaKey = new RSAKey();
                     rsaKey.setPublic(b64tohex(data.modulus), b64tohex(data.exponent));
-                    enPassword = hex2b64(rsaKey.encrypt($userPass.val()));
+                    enPassword = hex2b64(rsaKey.encrypt($('#userPass').val()));
                 }
             });
 
@@ -61,11 +53,7 @@ define(function (require, exports, module) {
                     if (data.authStatus == "200" ){
                         store.set("username",username);
                         store.set("userStatus",true);
-                        store.set("userStatusTimeStamp",new Date());
-                        // $.cookie("xms",data.JSESSIONID,{path:"/"});
-                        // $.cookie("hhh",data.JSESSIONID);
                         $.toast(data.authMsg+" 3 秒后自动跳转",3000);
-
                         setTimeout(function(){
                             location.href = "/m/html/index.html"
                         },3000);
