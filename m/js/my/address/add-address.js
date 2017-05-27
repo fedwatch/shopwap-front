@@ -105,12 +105,12 @@ define(function (require, exports, module) {
                 $.toast("地址不可为空");
                 return;
             }
-            var isDefault = userDefault;
+           // var isDefault = userDefault;
             if (editStatus == null || editStatus == false) {
-                receiverSave(username, consignee, areaId, address, zipCode, phone, isDefault)
+                receiverSave(username, consignee, areaId, address, zipCode, phone, userDefault)
 
             } else if (editStatus) {
-                receiverUpdate(username, addressId, consignee, areaId, address, zipCode, phone, isDefault)
+                receiverUpdate(username, addressId, consignee, areaId, address, zipCode, phone, userDefault)
                 // return history.go(-1)
             }
 
@@ -149,7 +149,7 @@ define(function (require, exports, module) {
     }
 
 
-    function receiverSave(username, consignee, areaId, address, zipCode, phone, isDefault) {
+    function receiverSave(username, consignee, areaId, address, zipCode, phone, userDefault) {
         $.ajax({
             url: BASE_URL + MEMBER_SITE_URL.SAVE.URL,
             type: MEMBER_SITE_URL.SAVE.METHOD,
@@ -161,7 +161,7 @@ define(function (require, exports, module) {
                 address: address,
                 zipCode: zipCode,
                 phone: phone,
-                isDefault: isDefault,
+                isDefault: userDefault,
             },
             cache:true,
             async:false,
@@ -181,7 +181,7 @@ define(function (require, exports, module) {
     }
 
 
-    function receiverUpdate(username, id, consignee, areaId, address, zipCode, phone, isDefault) {
+    function receiverUpdate(username, id, consignee, areaId, address, zipCode, phone, userDefault) {
         $.ajax({
             url: BASE_URL + MEMBER_SITE_URL.UPDATE.URL,
             type: MEMBER_SITE_URL.UPDATE.METHOD,
@@ -194,7 +194,7 @@ define(function (require, exports, module) {
                 address: address,
                 zipCode: zipCode,
                 phone: phone,
-                isDefault: isDefault,
+                isDefault: userDefault,
             },
             cache:true,
             async:false,
