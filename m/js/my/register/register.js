@@ -196,14 +196,13 @@ define(function(require,exports,module){
 
 
         $(document).on('click','#getSMSCodeBtn',function () {
-            // console.log('$getSMSCodeBtn on click');
-            if($userPhone.val() && $userPhone.val() !== ''){
+            if($userPhone.val() !== ''){
                 var phoneNum = $userPhone.val();
+                console.log(phoneNum)
                 $.ajax({
                     url:BASE_URL+USER_SITE_URL.SEND_DYNAMIC_CODE.URL,
                     type:USER_SITE_URL.SEND_DYNAMIC_CODE.METHOD,
                     dataType:USER_SITE_URL.DATATYPE,
-                    cache:true,
                     async:false,
                     data: {userPhone: phoneNum,codeFlag:"1"},
                     success:function (data) {

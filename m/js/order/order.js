@@ -7,18 +7,16 @@ define(function (require, exports, module) {
     require('siteUrl');
     require('light7');
     require('store');
-    require('user');
+    require('getUser');
     require('divideAmount');
 
     jQuery.support.cors = true;
 
     var username = store.get("username");
     var snArrs = store.get("snArrs");
-
     var itemIds = store.get("cartItemId");
     var receiverId = store.get("receiverId");
     var memoArr = store.get("memoArr");
-
 
     $(function () {
         orderInfo(username, itemIds);
