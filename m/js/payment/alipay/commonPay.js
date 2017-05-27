@@ -9,13 +9,12 @@ define(function (require, exports, module) {
     var username = store.get("username");
     var mergeSn = store.get("mergeSn");
     var paymentPluginId = store.get("paymentPluginId");
-    var allAmount = store.get("allAmount");
     var balance = store.get("balance");
     var type = store.get("type") || "payment";
     var amount = store.get("amount");
     var app_request = store.get("app_request") || '3';
     var cardId=store.get("cardId");
-
+    var allAmount = store.get("allAmount");
     var isLock = store.get("isLock")||false;
 
     var isBalancePay = false;
@@ -57,6 +56,7 @@ define(function (require, exports, module) {
                     var paymentPluginId = data.paymentPlugins[0].id;
                     store.set("paymentPluginId", paymentPluginId);
                     var allAmount = data.allAmount;
+                    console.log("sssss:"+allAmount);
                     store.set("allAmount", allAmount);
                     balance = data.balance;
                     store.set("balance", balance);
@@ -120,10 +120,11 @@ define(function (require, exports, module) {
                     store.set("amount", amount);
 
                     if (isBalancePay == true) {
+                        var allAmount = store.get("allAmount");
                        // debugger;
                         $("#balance-yue").css({visibility: "visible"}).find("span").text(data.balancePay);
                      if (balance >= allAmount) {
-
+                          // debugger;
                             $("#balance-yue").css({visibility: "visible"}).find("span").text(data.balancePay);
                             $("#paychoice").css({display: "none"});
                             /*$("#surePays").click(function () {
