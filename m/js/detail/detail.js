@@ -8,14 +8,23 @@ define(function (require, exports, module) {
     require('store');
     require('siteUrl');
 
+
+
     //USERMD
     var username = store.get("username");
     var currentProductID = store.get("currentProductID");
     var userStatus = store.get("userStatus");
 
+
     jQuery.support.cors = true;
     $(function () {
+        if(typeof currentProductID == 'undefined'){
+            $.toast("非法访问! 2 秒后跳转到首页",2000);
 
+            setTimeout(function () {
+                location.href = '../index.html';
+            },2000)
+        }
 
         setSpecificationId(username,currentProductID)
 
@@ -53,12 +62,35 @@ define(function (require, exports, module) {
 
         //立即下单
         $(document).on('click', ".buyNowBtn", function () {
-            // location.href = "/html/payment/payment.html";
             if(userStatus){
-                window.location.href = "/m/html/order/order.html";
+                var cartState = $("#cartState").val();
+                if (cartState == "false") {
+                    $("#goodsDetailMask").show();
+                    $("#goodsDetailsPage").show();
+                } else if (cartState == "true") {
+                    $("#goodsDetailMask").hide();
+                    $("#goodsDetailsPage").hide();
+                }
+                if (cartState == "true") {
+                    var username = store.get("username");
+                    var currentProductID = store.get("currentProductID");
+                    var count = $("input[name=goodsNumber]").val();
+                    if(typeof username !== 'undefined' && typeof currentProductID !== 'undefined' && typeof count !== 'undefined'
+                        &&  username !== '' && currentProductID !== '' && count !== ''){
+                        store.set("mark",true);
+                    }else{
+                        store.set("mark",false);
+                    }
+                    var mark = store.get("mark");
+                    if(mark == true){
+                        addCartForBuyNow(username,currentProductID,count)
+                    }
+                }
             }else{
-                $.toast("请登录才可以进行后续操作");
-                return location.href = '/m/html/my/login/login.html';
+                $.toast("请登录才可以进行后续操作",2000);
+                setTimeout(function () {
+                    location.href = '/m/html/my/login/login.html';
+                },2000)
             }
 
         });
@@ -129,26 +161,59 @@ define(function (require, exports, module) {
     });
 
 
+    /**
+     *
+     * @param username
+     * @param currentProductID
+     * @param count
+     * @returns
+     *  authMsg:"success"
+     *  authStatus:"200"
+     *  count:1
+     *  itemId:3081
+     */
+    function addCartForBuyNow(username,currentProductID,count){
+        $.ajax({
+            url: BASE_URL + CART_SITE_URL.CART_ADD.URL,
+            type: CART_SITE_URL.CART_ADD.METHOD,
+            data: {
+                username: username,
+                productId: currentProductID,
+                quantity: count
+            },
+            cache:true,
+            async:false,
+            dataType: CART_SITE_URL.DATATYPE,
+            success: function (data) {
+                if (data.authStatus == "200") {
+                    if(data.itemId){
+                        store.set("cartItemId",[data.itemId]);
+                        $("#cartState").val(false)
+                        return location.href = "/m/html/order/order.html";
+                    }else{
+                        console.log("item id 不存在")
+                    }
+
+                }
+            }
+        })
+    }
 
     function addToCart() {
         if (userStatus){
             var amount = store.get("amount");
             calculateFreight(username, currentProductID, amount, "shippingCost");
-
-
             var cartState = $("#cartState").val();
             if (cartState == "false") {
                 $("#goodsDetailMask").show();
                 $("#goodsDetailsPage").show();
-
             } else if (cartState == "true") {
                 $("#goodsDetailMask").hide();
                 $("#goodsDetailsPage").hide();
             }
 
             var count = $("input[name=goodsNumber]").val();
-
-
+            store.set("currentProductCount",count);
             if (cartState == "true") {
                 $.ajax({
                     url: BASE_URL + CART_SITE_URL.CART_ADD.URL,
@@ -278,6 +343,9 @@ define(function (require, exports, module) {
                         $("#detailWrapper").html(html);
                     });
 
+                }
+                else if (data.authStatus == "500"){
+                   console.log(data.authMsg);
                 }
             }
         })

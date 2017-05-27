@@ -1,6 +1,8 @@
-<div class="cart-badge">
-    <i class="icon icon-cart"></i>
-    <span class="badge">0</span>
+<div class="cartBadgeBtn">
+    <div class="cart-badge">
+        <i class="icon icon-cart"></i>
+        <span class="badge">0</span>
+    </div>
 </div>
 <div class="addToCartBtn">
     <span class="addCartText">加入购物车</span>

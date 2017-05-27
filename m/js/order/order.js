@@ -20,9 +20,13 @@ define(function (require, exports, module) {
 
     $(function () {
         orderInfo(username, itemIds);
-
         $(document).on("click", ".detailOrderBtn", function () {
-            calculate(username, receiverId, itemIds)
+            if(receiverId){
+                calculate(username, receiverId, itemIds);
+            }else{
+                return;
+            }
+
             create(username, itemIds, receiverId, memoArr);
         });
     });
@@ -226,7 +230,6 @@ define(function (require, exports, module) {
                         console.log(data);
                         $amountPayable.map(function (item, index) {
                             var ss = item.amountPayable;
-                            console.log(ss);
                             var ars = ss.toString().split(".");
                             $(".int-part").eq(index).text(ars[0]);
                             $(".small-part").eq(index).text(ars[1]);
@@ -241,6 +244,7 @@ define(function (require, exports, module) {
                         var html = template(data);
                         $("#orderBottomBar").html(html);
                     });
+
                     //用户留言
                     var $memo = data.orders;
                     var memoArr = [];
@@ -248,6 +252,7 @@ define(function (require, exports, module) {
                         var $memo = item.memo;
                         memoArr.push($memo);
                     });
+
                     store.set("receiverId", data.receiver.id);
                     store.set("memoArr", memoArr);
                 }

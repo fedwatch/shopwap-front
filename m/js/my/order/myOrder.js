@@ -82,7 +82,7 @@ define(function(require,exports,module){
         });
 
         // 查看物流
-        $(document).on("click",".checkLogBtn",function (e) {
+        $(document).on("click",".checkLogBtn",function () {
             var $this = $(this);
             store.set("sn",$this.data("sn"));
             return location.href = '/m/html/user/logistics.html';
