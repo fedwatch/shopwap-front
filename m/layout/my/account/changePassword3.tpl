@@ -1,5 +1,5 @@
 <header class="bar bar-nav">
-    <a class="button button-link button-nav pull-left external" href="javascript:void(0);" external="false" data-transition='slide-out'>
+    <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)" external="false" data-transition='slide-out'>
         <span class="icon icon-left"></span>
     </a>
     <h1 class='title'>修改登录密码</h1>

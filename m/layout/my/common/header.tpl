@@ -7,7 +7,6 @@
 </header>
 
 <div class="content">
-
     <div class="list-block reset-con">
         <div class="content-block con-b2">
             <div class="user_profile_icon u-p-i2">
