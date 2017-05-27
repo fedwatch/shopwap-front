@@ -197,7 +197,7 @@ define(function(require,exports,module){
 
         $(document).on('click','#getSMSCodeBtn',function () {
             if($userPhone.val() !== ''){
-                var phoneNum = $("#userPass").val();
+                var phoneNum = $("#userPhone").val();
                 console.log(phoneNum)
                 $.ajax({
                     url:BASE_URL+USER_SITE_URL.SEND_DYNAMIC_CODE.URL,
