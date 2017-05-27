@@ -17,7 +17,7 @@
                         <div><span class="status-title">物流状态</span><span class="status">{{this.expressResult.state}}</span></div>
                         <div><span>承运来源</span><span> {{this.shipping.deliveryCorp}}</span></div>
                         <div><span>运单编号 </span><span>{{this.shipping.trackingNo}}</span></div>
-                        <div><span>官方电话 </span><span>{{this.shipping.phone}}</span></div>
+                        <!--<div><span>官方电话 </span><span>{{this.shipping.phone}}</span></div>-->
                     </div>
                 </a>
             </li>

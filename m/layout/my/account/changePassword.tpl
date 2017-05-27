@@ -26,7 +26,7 @@
                         <div class="item-input vert-input">
                             <input type="text" id="security-code">
                         </div>
-                      <div class="item-title vert-code">获取验证码</div>
+                      <a href="javascript:void(0);" class="item-title vert-code">获取验证码</a>
                     </div>
                 </div>
             </li>
