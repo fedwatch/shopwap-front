@@ -49,7 +49,7 @@
 					end:"加载完成"
 				},
 				iscrollOption:null,
-				distance:2,
+				distance:0,
 				releaseTime:200,
 				onBefore:null,
 				onSuccess:null,
@@ -134,6 +134,7 @@
 		
 		iscrollObj.on("scrollStart", function(){
 			var _thisScroll = this;
+			isComplete =  false;
 			
 			if(config.refresh){
 				pullDownStatus("normal");
@@ -153,7 +154,7 @@
 				var pStatus = pullDownStatus();
 				var downDistance = pStatus.outerHeight();
 				
-				if(_thisScroll.y >= (-1 * config.distance)){
+				if(_thisScroll.y >= config.distance){
 					pullDownStatus("release");
 				}else if(_thisScroll.y > (-1 * downDistance)){
 					pullDownStatus("normal");
@@ -186,9 +187,10 @@
 				var pStatus = pullDownStatus();
 				var downDistance = pStatus.outerHeight();
 				
-				if(_thisScroll.y >= (-1 * config.distance)){
+				if(_thisScroll.y >= config.distance ){
 					executeRefresh();
 				}else if(_thisScroll.y > (-1 * downDistance)){
+					isComplete =  true;
 					_thisScroll.scrollTo(0, (-1 * downDistance), config.releaseTime);
 				}
 				
@@ -201,6 +203,7 @@
 				if(_thisScroll.y <= _thisScroll.maxScrollY){
 					executeLoadPage();
 				}else if(_thisScroll.y < (_thisScroll.maxScrollY + upDistance)){
+					isComplete =  true;
 					_thisScroll.scrollTo(0, (_thisScroll.maxScrollY + upDistance), config.releaseTime);
 				}
 			}

@@ -456,7 +456,7 @@ padding:0.5rem 0
     height:100% !important;
 }
 #shopListShowIndex2{
-    height:100%;
+    height:750px;
 }
 .search-main .history{
     width:90%;
@@ -1556,6 +1556,7 @@ span.nav-text.active {
 
 .shopList .productCategory{
     float:left;
+    height:250px;
 }
 .shopList .goList{
     width:100%;
@@ -1563,18 +1564,15 @@ span.nav-text.active {
 
 .shopList .productContainer{
     position:relative;
-    width:100%;
+
 }
+
 #shopListShowIndex2 .productContainer .productCategory{
     width:48%;
     margin:0 1%;
     float:left;
 }
-/*#shopListShowIndex2 .page-pullUp ,#shopListShowIndex2 .page-pullDown{
-    text-align:center;
-    font-size:0.607rem;
 
-}*/
 .contentWrapper{
     position:relative;
     height:100%;
