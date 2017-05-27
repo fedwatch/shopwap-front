@@ -43,6 +43,9 @@ define(function(require,exports,module){
         };
 
 
+        $userPassword2.on('blur',function () {
+            checkPassword();
+        })
 
         function checkPassword() {
             // debugger;
