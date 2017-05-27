@@ -27,6 +27,7 @@
                 </div>
             </li>
             <p  id="userPassword1Error">您输入的登录密码有误，请重新输入！</p>
+            <p  id="userPassword3Error">请输入8到16位的登录密码！</p>
 
             <li class="register_input ">
                 <div class="item-content">

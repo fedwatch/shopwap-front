@@ -16,6 +16,7 @@ define(function(require,exports,module){
         var $userPassword2 = $("#userPassword2");//登录密码2
         var userPassword1Error = $("#userPassword1Error");//登录密码错误提示信息
         var userPassword2Error = $("#userPassword2Error");//手机号错误提示信息
+        var userPassword3Error = $("#userPassword3Error");//手机号错误提示信息
         var $registerBtn = $('#registerBtn');//立即注册按钮
         var registerResult = {};//内部数据的状态集
 
@@ -48,6 +49,11 @@ define(function(require,exports,module){
             var up1 = $userPassword1.val();
             var up2 = $userPassword2.val();
 
+            if (up1.length < 8 || up2.length < 8){
+                $.toast("正确密码长度为8到16位",2000);
+                return;
+            }
+
             if(up1 == up2
                 && up1 !== ''
                 && up2 !== ''
@@ -61,7 +67,6 @@ define(function(require,exports,module){
                 registerResult.passable = true;
                 console.log('passable true')
             }else{
-
                 $userPassword1.closest('li.register_input').addClass('error');
                 $userPassword2.closest('li.register_input').addClass('error');
                 registerResult.passable = false;
