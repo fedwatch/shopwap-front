@@ -71,8 +71,8 @@ define(function(require,exports,module){
         };
 
 
-        $userPhone.on('blur',function () {
-            var userPhoneVal =  $userPhone.val();
+        $("#userPhone").on('blur',function () {
+            var userPhoneVal =  $("#userPhone").val();
             checkMobile(userPhoneVal);
             // checkRegisterBtn()
         });
@@ -119,8 +119,8 @@ define(function(require,exports,module){
 
 
 
-        $smsCode.on('blur',function () {
-            var smsCodeVal = $smsCode.val();
+        $("#smsCode").on('blur',function () {
+            var smsCodeVal = $("#smsCode").val();
             checkSMSCode(smsCodeVal);
         });
 
