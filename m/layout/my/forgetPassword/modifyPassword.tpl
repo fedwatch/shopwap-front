@@ -45,7 +45,7 @@
     <div class="content-block">
         <div class="row">
             <div class="col-100">
-                <a href="javascript:;" class="button button-big" id="registerBtn" style="border:0;color:#fff;background:#f84b15;border-radius: 4rem">
+                <a href="javascript:;" class="button button-big" id="registerBtn" style="display:block;border:0;color:#fff;background:#f84b15;border-radius: 4rem">
                     确认重置
                 </a>
             </div>

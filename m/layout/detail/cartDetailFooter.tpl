@@ -3,8 +3,8 @@
     <span class="badge">0</span>
 </div>
 <div class="addToCartBtn">
-    加入购物车
+    <span class="addCartText">加入购物车</span>
 </div>
 <div class="buyNowBtn">
-    立即购买
+    <span class="buyNowText">立即购买</span>
 </div>

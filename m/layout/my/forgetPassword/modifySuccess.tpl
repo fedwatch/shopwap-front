@@ -15,7 +15,7 @@
     <div class="content-block" style="margin-top:5rem;">
         <div class="row">
             <div class="col-100">
-                <a href="/m/html/my/login/login.html" class="button button-big external" id="registerBtn" style="border:0;color:#fff;background:#f84b15;border-radius: 4rem">
+                <a href="/m/html/my/login/login.html" class="button button-big external" id="registerBtn" style="display:block;border:0;color:#fff;background:#f84b15;border-radius: 4rem">
                     立即登录
                 </a>
             </div>
