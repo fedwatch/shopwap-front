@@ -13,9 +13,8 @@ define(function (require, exports, module) {
     $(function () {
         var $userPhone = $('#userPhone');
         var $userPass = $('#userPass');
-        var $smsCode = $('#smsCode');
-        var $loginBtn = $('#loginBtn');
-        var resultState = {},enPassword;
+        var resultState = {},
+            enPassword;
         var regex = /^1\d{10}$/;
 
         $(document).on('click','#loginBtn',function () {
