@@ -1549,11 +1549,11 @@ span.nav-text.active {
     margin:0 1%;
     float:left;
 }
-#shopListShowIndex2 .page-pullUp ,#shopListShowIndex2 .page-pullDown{
+/*#shopListShowIndex2 .page-pullUp ,#shopListShowIndex2 .page-pullDown{
     text-align:center;
     font-size:0.607rem;
 
-}
+}*/
 .contentWrapper{
     overflow:hidden;
 }

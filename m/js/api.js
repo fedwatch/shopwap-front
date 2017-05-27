@@ -11,6 +11,7 @@ seajs.config({
     alias:{
         "jquery":M_URL+"/assets/plugin/jquery.min.js",
         "iscroll":M_URL+"/js/utils/iscroll.js",
+        "iscrollProbe":M_URL+"/js/utils/iscroll-probe.js",
         "page":M_URL+"/js/utils/page.js",
         "iscrollProbe":M_URL+"/js/utils/iscroll-probe.js",
         "pageScroll":M_URL+"/js/utils/pageScroll.js",
