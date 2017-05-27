@@ -19,8 +19,13 @@ define(function (require, exports, module) {
     var memoArr = store.get("memoArr");
 
     $(function () {
+        var username = store.get("username");
+        var itemIds = store.get("cartItemId");
+        var receiverId = store.get("receiverId");
         orderInfo(username, itemIds);
         $(document).on("click", ".detailOrderBtn", function () {
+            var itemIds = store.get("cartItemId");
+            var receiverId = store.get("receiverId");
             if(receiverId){
                 calculate(username, receiverId, itemIds);
             }else{
