@@ -452,11 +452,18 @@ padding:0.5rem 0
     height:100%;
 }
     /*搜索页面*/
+.ccSearch{
+    position: absolute;
+    top: 50px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
 .search-main{
     height:100% !important;
 }
 #shopListShowIndex2{
-    height:22.76rem;
+    height:100%;
 }
 .search-main .history{
     width:90%;
@@ -544,8 +551,8 @@ padding:0.5rem 0
     position: absolute;
     width: 1.0rem;
     height: 1.0rem;
-    left: 15%;
-    top: 14px;
+    left: 16%;
+    top: 16px;
 }
 .header-search .navbar-search .cancelText {
     font-size: 1em;
