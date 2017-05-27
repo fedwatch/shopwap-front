@@ -10,7 +10,7 @@ define(function(require,exports,module){
     require('store');
     require('siteUrl');
 
-
+    var registerResult = {};//内部数据的状态集
     jQuery.support.cors = true;
     $(function () {
         var $userPhone = $("#userPhone");//手机号
@@ -21,7 +21,7 @@ define(function(require,exports,module){
         var $userSMSCodeError = $("#userSMSCodeError");//验证码错误提示信息
         var $smsCode = $("#smsCode");//SMS验证码
         var $registerBtn = $('#registerBtn');//立即注册按钮
-        var registerResult = {};//内部数据的状态集
+
 
         /**
          * 获取验证码按钮 失败
@@ -85,33 +85,19 @@ define(function(require,exports,module){
                 $userPhoneError.hide();
                 $getSMSCodeBtn.css($getSMSCodeBtn_SUCCESS).attr("disabled",false);
                 registerResult.userPhone = true;
+                store.set("userPhoneState",true)
                 $userPhone.closest('li.register_input').removeClass("error");
                 store.set("username",$userPhone.val())
             } else {
                 $.toast("手机号码不正确");
                 $userPhoneError.show();
                 $getSMSCodeBtn.css($getSMSCodeBtn_FAILED).attr("disabled",true);
+                store.set("userPhoneState",false)
                 registerResult.userPhone = false;
                 $userPhone.closest('li.register_input').addClass("error");
 
             }
         }
-
-        // function checkPassword(str) {
-        //     if(str.length <6 || str == ''){
-        //         $userPassError.show();
-        //         console.log("用户密码不正确");
-        //         registerResult.userPass = false;
-        //         // $userPass.closest('li.register_input').addClass("error");
-        //         console.log(registerResult);
-        //     }else{
-        //         $userPassError.hide();
-        //         registerResult.userPass = true;
-        //         // $userPass.closest('li.register_input').removeClass("error");
-        //         console.log("用户密码正确");
-        //         console.log(registerResult);
-        //     }
-        // }
 
 
         function checkSMSCode(str) {
@@ -119,10 +105,12 @@ define(function(require,exports,module){
                 $userSMSCodeError.show();
                 $.toast("验证码不正确");
                 registerResult.smsCode = false;
+                store.set("smsCodeState",false)
                 $smsCode.closest('li.register_input').addClass("error");
             }else{
                 $userSMSCodeError.hide();
                 registerResult.smsCode = true;
+                store.set("smsCodeState",true)
                 $smsCode.closest('li.register_input').removeClass("error");
                 console.log("验证码正确");
                 store.set("smsCode",$smsCode.val());
@@ -191,14 +179,15 @@ define(function(require,exports,module){
         }
 
        $(document).on('click','#registerBtn',function () {
-           if( registerResult.userPhone == true && registerResult.smsCode == true){
+           var userPhoneState = store.get("userPhoneState");
+           var smsCodeState = store.get("smsCodeState");
+           if( userPhoneState == true && smsCodeState == true){
                $registerBtn.addClass('button-success').css($registerBtn_SUCCESS);
                var username = store.get("username");
                var smsCode = store.get("smsCode");
                findPassword(username,smsCode);
-           }else if (registerResult.userPhone == false || registerResult.smsCode == false){
+           }else if (userPhoneState == false || smsCodeState == false){
                $registerBtn.removeClass('button-success').css($registerBtn_FAILED);
-               console.log('http:// register failed result')
            }
        })
     });
