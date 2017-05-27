@@ -139,7 +139,7 @@ define(function(require,exports,module){
 
         $(document).on('click','#getSMSCodeBtn',function () {
             if($userPhone.val() !== ''){
-                var phoneNum = $userPhone.val();
+                var phoneNum = $("#userPhone").val();
                 if(typeof phoneNum == "undefined"){
                     console.log("phoneNum is undefined");
                     return;
