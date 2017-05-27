@@ -226,20 +226,20 @@ define(function(require,exports,module){
             var smsCodeBtn = '';
             var SETTIMESECOND = 60;
             var nums = SETTIMESECOND;
-            $getSMSCodeBtn.css($getSMSCodeBtn_FAILED);
+            $("#getSMSCodeBtn").css($getSMSCodeBtn_FAILED);
             //将按钮置为 不可点击
-            $getSMSCodeBtn.attr("disabled",true);
-            $getSMSCodeBtn.text(nums+' s');
+            $("#getSMSCodeBtn").attr("disabled",true);
+            $("#getSMSCodeBtn").text(nums+' s');
             smsCodeBtn = setInterval(function(){
                 nums--;
                 if(nums > 0){
-                    $getSMSCodeBtn.text(nums+' s');
+                    $("#getSMSCodeBtn").text(nums+' s');
                 }else{
                     clearInterval(smsCodeBtn); //清除js定时器
                     //将按钮置为 可点击
-                    $getSMSCodeBtn.css($getSMSCodeBtn_SUCCESS);
-                    $getSMSCodeBtn.attr("disabled",false);
-                    $getSMSCodeBtn.text('获取验证码');
+                    $("#getSMSCodeBtn").css($getSMSCodeBtn_SUCCESS);
+                    $("#getSMSCodeBtn").attr("disabled",false);
+                    $("#getSMSCodeBtn").text('获取验证码');
                     nums = SETTIMESECOND; //重置时间
                 }
             }, 1000); //一秒执行一次
