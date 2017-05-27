@@ -16,65 +16,66 @@ define(function(require,exports,module){
     require('siteUrl');
 
     var genData = {};
+    var $userPhone = $("#userPhone");//手机号
+    var $userPass = $("#userPass");//登录密码
+    var $getSMSCodeBtn = $("#getSMSCodeBtn");//获取验证码按钮
+    var $userPassError = $("#userPassError");//登录密码错误提示信息
+    var $userPhoneError = $("#userPhoneError");//手机号错误提示信息
+    var $userSMSCodeError = $("#userSMSCodeError");//验证码错误提示信息
+    var $smsCode = $("#smsCode");//SMS验证码
+    var $registerBtn = $('#registerBtn');//立即注册按钮
+    var registerResult = {};//内部数据的状态集
+
+    /**
+     * 获取验证码按钮 失败
+     * @type {{background: string, color: string, border: string}}
+     */
+    var $getSMSCodeBtn_FAILED = {
+        background:"#c7c7c7",
+        color:"#515151",
+        border:"#c7c7c7",
+        borderTopLeftRadius:"0",
+        borderTopRightRadius:"2rem",
+        borderBottomRightRadius: "2rem",
+        borderBottomLeftRadius: "0",
+        width: "5.24rem"
+    };
+    /**
+     * 获取验证码按钮 成功
+     * @type {{background: string, color: string, border: string}}
+     */
+    var $getSMSCodeBtn_SUCCESS = {
+        background:"#ffdf0b",
+        border:"0",
+        color:"#515151",
+        borderTopLeftRadius:"0",
+        borderTopRightRadius:"2rem",
+        borderBottomRightRadius: "2rem",
+        borderBottomLeftRadius: "0",
+        width: "5.24rem"
+    };
+    /**
+     * 注册按钮 失败
+     * @type {{background: string, color: string, border: string}}
+     */
+    var $registerBtn_FAILED = {
+        background:"#c7c7c7",
+        color:"#515151",
+        border:"#c7c7c7",
+    };
+    /**
+     * 注册按钮 成功
+     * @type {{background: string, color: string, border: string}}
+     */
+    var $registerBtn_SUCCESS = {
+        background:"#f84b15",
+        color:"#fff",
+        border:"#f84b15"
+    };
 
     jQuery.support.cors = true;
     $(function () {
-        var $userPhone = $("#userPhone");//手机号
-        var $userPass = $("#userPass");//登录密码
-        var $getSMSCodeBtn = $("#getSMSCodeBtn");//获取验证码按钮
-        var $userPassError = $("#userPassError");//登录密码错误提示信息
-        var $userPhoneError = $("#userPhoneError");//手机号错误提示信息
-        var $userSMSCodeError = $("#userSMSCodeError");//验证码错误提示信息
-        var $smsCode = $("#smsCode");//SMS验证码
-        var $registerBtn = $('#registerBtn');//立即注册按钮
-        var registerResult = {};//内部数据的状态集
 
-        /**
-         * 获取验证码按钮 失败
-         * @type {{background: string, color: string, border: string}}
-         */
-        var $getSMSCodeBtn_FAILED = {
-            background:"#c7c7c7",
-            color:"#515151",
-            border:"#c7c7c7",
-            borderTopLeftRadius:"0",
-            borderTopRightRadius:"2rem",
-            borderBottomRightRadius: "2rem",
-            borderBottomLeftRadius: "0",
-            width: "5.24rem"
-        };
-        /**
-         * 获取验证码按钮 成功
-         * @type {{background: string, color: string, border: string}}
-         */
-        var $getSMSCodeBtn_SUCCESS = {
-            background:"#ffdf0b",
-            border:"0",
-            color:"#515151",
-            borderTopLeftRadius:"0",
-            borderTopRightRadius:"2rem",
-            borderBottomRightRadius: "2rem",
-            borderBottomLeftRadius: "0",
-            width: "5.24rem"
-        };
-        /**
-         * 注册按钮 失败
-         * @type {{background: string, color: string, border: string}}
-         */
-        var $registerBtn_FAILED = {
-            background:"#c7c7c7",
-            color:"#515151",
-            border:"#c7c7c7",
-        };
-        /**
-         * 注册按钮 成功
-         * @type {{background: string, color: string, border: string}}
-         */
-        var $registerBtn_SUCCESS = {
-            background:"#f84b15",
-            color:"#fff",
-            border:"#f84b15"
-        };
 
 
         $userPhone.on('blur',function () {
