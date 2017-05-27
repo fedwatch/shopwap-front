@@ -167,7 +167,7 @@ define(function(require,exports,module){
 
         function getSMSTimer() {
             var smsCodeBtn = '';
-            var SETTIMESECOND = 10
+            var SETTIMESECOND = 60;
             var nums = SETTIMESECOND;
             $getSMSCodeBtn.css($getSMSCodeBtn_FAILED);
             //将按钮置为 不可点击
@@ -193,7 +193,7 @@ define(function(require,exports,module){
                $registerBtn.addClass('button-success').css($registerBtn_SUCCESS);
                var username = store.get("username");
                var smsCode = store.get("smsCode");
-               findPassword(username,smsCode)
+               findPassword(username,smsCode);
            }else if (registerResult.userPhone == false || registerResult.smsCode == false){
                $registerBtn.removeClass('button-success').css($registerBtn_FAILED);
                console.log('http:// register failed result')
