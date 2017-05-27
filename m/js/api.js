@@ -9,6 +9,7 @@
 var M_URL  = '/m';
 seajs.config({
     alias:{
+        //通用库
         "jquery":M_URL+"/assets/plugin/jquery.min.js",
         "iscroll":M_URL+"/js/utils/iscroll.js",
         "iscrollProbe":M_URL+"/js/utils/iscroll-probe.js",

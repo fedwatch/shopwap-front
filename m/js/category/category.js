@@ -15,6 +15,9 @@ define(function (require, exports, module) {
         getCurrentPage();
         initCategoryActive();
 
+        /**
+         *
+         */
         $(document).on('click','.productCategory a',function (e) {
             e.preventDefault();
             // console.log(this);
@@ -22,29 +25,9 @@ define(function (require, exports, module) {
         });
 
 
-
-
-        // $.ajax({
-        //     url:"",
-        //     dataType:"json",
-        //     type:"post",
-        //     data:{},
-        //     success:function (data) {
-        //         // productCategory
-        //         require.async('handlebars',function(){
-        //             var getData = data;
-        //             var tpl = require('/layout/cartgory/productCategory.tpl');
-        //             var template = Handlebars.compile(tpl);
-        //             var html = template(getData);
-        //             $("#productCategory").html(html);
-        //             getNavSubText();
-        //         });
-        //     }
-        // });
-
-
-
-        //主分类
+        /**
+         * 主分类
+         */
         $(document).on('click','.nav-tabbar-item .nav-text',function(e){
             // e.preventDefault();
             var $this = $(this);
@@ -86,8 +69,6 @@ define(function (require, exports, module) {
             $("#categorySubId").val($this.data("category-sub-id"));
             getProductInfo();
         });
-
-        // getNavSubText();
     });
 
     function getProductDetail(id){
@@ -121,7 +102,6 @@ define(function (require, exports, module) {
                 pageSize: pageSize
             },
             async:false,
-            cache:true,
             success:function (data) {
                 // productCategory
                 require.async('handlebars',function(){

@@ -11,10 +11,12 @@ define(function(require,exports,module){
     require("siteUrl");
 
     jQuery.support.cors = true;
-    var MD_URL = '//'+location.host+'/m'
+    var MD_URL = '//'+location.host+'/m';
     $(function () {
         getCurrentPage();
+
         findAreaByIp();
+
         var bannerSwiper = new Swiper('.swiper-banner', {
             pagination: '.pagination',
             loop: true,
@@ -29,8 +31,8 @@ define(function(require,exports,module){
         $(document).on("click",".bt-img a",function () {
             var $this = $(this);
             var id = $this.data("id");
-            localStorage.setItem("currentProductID",id);
-            location.href = MD_URL+"/html/detail/detail.html";
+            store.set("currentProductID",id);
+            return location.href = MD_URL+"/html/detail/detail.html";
         })
 
     });
@@ -38,7 +40,6 @@ define(function(require,exports,module){
 
 
     function findAreaByIp(){
-        // /product/findAreaByIp
         $.ajax({
             url:BASE_URL+PRODUCT_SITE_URLS.FIND_AREA_BY_IP.URL,
             dataType:PRODUCT_SITE_URLS.DATATYPE,
@@ -84,7 +85,6 @@ define(function(require,exports,module){
         var template = Handlebars.compile(tpl);
         var html = template(data);
         $("#navbarSearch").html(html);
-        // $("#navbarSearch").html(tpl);
     });
 
     // footerNav

@@ -140,7 +140,7 @@ define(function(require,exports,module){
 
         $(document).on('click','#getSMSCodeBtn',function () {
             console.log("getSMSCodeBtn clicked")
-            if($userPhone.val() && $userPhone.val() !== ''){
+            if($userPhone.val() !== ''){
                 var phoneNum = $userPhone.val();
                 $.ajax({
                     url:BASE_URL+USER_SITE_URL.SEND_DYNAMIC_CODE.URL,
