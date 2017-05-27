@@ -9,7 +9,7 @@ define(function (require, exports, module) {
     $(function () {
         var $userPassword = $("#userPassword");
         var $sureUserPassword = $("#userPasswordT");
-        $userPassword.on("blur", function () {
+        $("#userPassword").on("blur", function () {
             var $userPasswordVal = $userPassword.val();
             checkPassword($userPasswordVal, $userPassword, "li");
         });

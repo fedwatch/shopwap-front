@@ -59,7 +59,7 @@ define(function (require, exports, module) {
             return flag;
         }
 
-        $newPassword.on("blur", function () {
+        $("#new-password").on("blur", function () {
 
             var $newPasswordVal = $newPassword.val();
             checkPassword($newPasswordVal);

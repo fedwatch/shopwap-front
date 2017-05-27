@@ -43,7 +43,7 @@ define(function(require,exports,module){
         };
 
 
-        $userPassword2.on('blur',function () {
+        $("#userPassword2").on('blur',function () {
             checkPassword();
         })
 
@@ -85,11 +85,9 @@ define(function(require,exports,module){
             checkPassword();
             if( registerResult.passable == true){
                 $registerBtn.addClass('button-success').css($registerBtn_SUCCESS);
-                console.log('http:// register success result')
                 resetPassword(username ,confirmPass )
             }else{
                 $registerBtn.removeClass('button-success').css($registerBtn_FAILED);
-                console.log('http:// register failed result')
             }
         })
 

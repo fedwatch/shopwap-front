@@ -8,11 +8,6 @@ define(function(require,exports,module){
     require('store');
 
     require('rsa-all');
-    // require('rsa');
-    // require('base64');
-    // require('jsbn');
-    // require('prng4');
-    // require('rng');
     require('siteUrl');
 
     var genData = {};
@@ -81,7 +76,6 @@ define(function(require,exports,module){
         $(document).on('blur','#userPhone',function () {
             var userPhoneVal =  $userPhone.val();
             checkMobile(userPhoneVal);
-            // checkRegisterBtn()
         });
 
 

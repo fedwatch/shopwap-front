@@ -18,6 +18,7 @@ define(function (require, exports, module) {
         var regex = /^1\d{10}$/;
 
         $(document).on('click','#loginBtn',function () {
+
             var username = $.trim($('#userPhone').val());
             if( !regex.test(username  || username == '' || username == '')){
                 return $.toast("用户名或密码输入有误！")

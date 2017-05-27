@@ -57,7 +57,7 @@ define(function (require, exports, module) {
         }
 
 
-        $phoneNumber.on("blur", function () {
+        $("#phone-num").on("blur", function () {
             var $phoneNumberVal = $phoneNumber.val();
             var res = checkPhone($phoneNumberVal);
         });
