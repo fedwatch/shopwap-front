@@ -1562,6 +1562,8 @@ span.nav-text.active {
 
 }*/
 .contentWrapper{
+    position:relative;
+    height:100%;
     overflow:hidden;
 }
 

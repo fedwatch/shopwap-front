@@ -76,10 +76,12 @@
 		
 		$.extend(config, options);
 		
-		_this.css({display:"block",overflow:"hidden",maxHeight:"100%"});
-		if(_this.children().length > 1){
+		_this.css({display:"block",position:"relative", overflow:"hidden",maxHeight:"100%"});
+		var  $scrollerChild = _this.children();
+		if($scrollerChild.length != 1){
 			_this.wrapInner("<div class='"+config.scrollerClass+"'></div>");
 		}
+		
 		
 		//分页对象
 		var paginationObj = {
@@ -340,6 +342,7 @@
 		function executeLoadPage(){
 			if(!paginationObj.hasNextPage()){
 				pullUpStatus("noMore");
+				completeHandler();
 				return false;
 			}
 			
@@ -366,6 +369,7 @@
 					var pStatus = pullDownStatus();
 					var downDistance = pStatus.outerHeight();
 					if(_thisScroll.y > (-1 * downDistance)){
+						isComplete = true;
 						_thisScroll.scrollTo(0, (-1 * downDistance), config.releaseTime);
 					}
 					
@@ -376,11 +380,12 @@
 					var uStatus = pullUpStatus();
 					var upDistance = uStatus.outerHeight();
 					if(_thisScroll.y < (_thisScroll.maxScrollY + upDistance)){
+						isComplete = true;
 						_thisScroll.scrollTo(0, (_thisScroll.maxScrollY + upDistance), config.releaseTime);
 					}
+					
 				}
 				
-				isComplete = true;
 			},60);
 		}
 		
@@ -396,6 +401,9 @@
 			var contentWrapper = $("<div class='"+config.contentClass+"'></div>");
 			var $scroller = $(iscrollObj.scroller);
 			$scroller.wrapInner(contentWrapper);
+			
+			//设置内容的最小高度
+			fetchContentWrapper().css({minHeight:$(iscrollObj.wrapper).height()});
 			
 			if(config.refresh){
 				var dStatus = pullDownStatus("normal");
@@ -416,6 +424,12 @@
 		var cacheOp = {
 			source:_this,
 			scroller:iscrollObj,
+			paginationObj:paginationObj,
+			setTotalPages:function(totalPages){
+				if(!isNaN(totalPages)){
+					this.paginationObj.totalPages = totalPages;
+				}
+			},
 			load:function(param){
 				config.param = param;
 				executeRefresh();

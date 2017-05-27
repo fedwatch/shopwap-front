@@ -4,7 +4,7 @@
  * 
  */
 
-(function($,iSroll){
+(function($,ISroll){
 	
 	$.fn.page = function(options){
 		var _this = this;
@@ -25,22 +25,19 @@
 				param:null,
 				content:null,
 				pageSize:20,
-				searchProperty:"",
-				searchValue:"",
 				paginationParam:{
 					pageSize:"T{pageSize}",
 					pageNumber:"T{pageNumber}",
-					searchProperty:"T{searchProperty}",
-					searchValue:"T{searchValue}",
-					orderProperty:"T{orderProperty}",
-					orderDirection:"T{orderDirection}"
 				},
+				refresh:true,
 				pagination:true,
+				scrollerClass:"page-scroller",
+				contentClass:"contentWrapper",
 				pullUpIdent:"page-pullUp",
 				pullDownIdent:"page-pullDown",
 				pullUpStatus:{
 					normal:"上拉加载更多",
-					release:"释放加载页面",
+					release:"释放加载更多",
 					loading:"正在加载数据",
 					end:"加载完成",
 					noMore:"没有更多数据了"
@@ -53,12 +50,13 @@
 				},
 				iscrollOption:null,
 				distance:5,
+				releaseTime:200,
 				onBefore:null,
 				onSuccess:null,
 				onError:null,
-				processResult:function(data) {
-                    return JSON.stringify(data);
-                }
+				processResult:function(data){
+					return JSON.stringify(data);
+				}
 		};
 		
 		//获取配置
@@ -77,22 +75,20 @@
 		}
 		
 		$.extend(config, options);
-
-		var $container = _this.closest(".container");
-		var availHeight = $container.height();
-		_this.css({position:"relative",overflow:"hidden",height:availHeight});
-
+		
+		_this.css({display:"block",position:"relative", overflow:"hidden",maxHeight:"100%"});
+		var  $scrollerChild = _this.children();
+		if($scrollerChild.length != 1){
+			_this.wrapInner("<div class='"+config.scrollerClass+"'></div>");
+		}
+		
+		
 		//分页对象
 		var paginationObj = {
 				pageable:false,
-				segmentSize:6,
 				pageNumber:1,
 				pageSize:config.pageSize,
 				totalPages:null,
-				searchProperty:config.searchProperty,
-				searchValue:config.searchValue,
-				orderProperty:null,
-				orderDirection:null,
 				hasPreviousPage:function(){
 					if(this.pageNumber > 0){
 						return true;
@@ -118,6 +114,96 @@
 					return false;
 				}
 		};
+		
+		
+		var reverseTime = null;
+		var isComplete = false;
+		//scroll config
+		var scrollOption = {
+			scrollbars : true,
+			bounce:true,
+			probeType:2
+		};
+
+		$.extend(scrollOption, config.iscrollOption);
+			
+		var iscrollObj = new IScroll(_this.get(0), scrollOption);
+		
+		iscrollObj.on("scrollStart", function(){
+			var _thisScroll = this;
+			
+			if(config.refresh){
+				pullDownStatus("normal");
+			}
+			
+			if(config.pagination){
+				pullUpStatus("normal");
+			}
+			
+		});
+		
+		iscrollObj.on("scroll",function(){
+			var _thisScroll = this;
+			
+			//刷新支持
+			if(config.refresh){
+				var pStatus = pullDownStatus();
+				var downDistance = pStatus.outerHeight();
+				
+				if(_thisScroll.y >= 0){
+					pullDownStatus("release");
+				}else if(_thisScroll.y > (-1 * downDistance)){
+					pullDownStatus("normal");
+				}
+				
+			}
+			
+			//分页支持
+			if(config.pagination){
+				var uStatus = pullUpStatus();
+				var upDistance = uStatus.outerHeight();
+				if(_thisScroll.y <= _thisScroll.maxScrollY){
+					pullUpStatus("release");
+				}else if(_thisScroll.y < (_thisScroll.maxScrollY + upDistance)){
+					pullUpStatus("normal");
+				}
+			}
+			
+		});
+		
+		iscrollObj.on("scrollEnd", function(){
+			if(isComplete){
+				isComplete =  false;
+				return false;
+			}
+			
+			var _thisScroll = this;
+			//刷新支持
+			if(config.refresh){
+				var pStatus = pullDownStatus();
+				var downDistance = pStatus.outerHeight();
+				
+				if(_thisScroll.y >= 0){
+					executeRefresh();
+				}else if(_thisScroll.y > (-1 * downDistance)){
+					_thisScroll.scrollTo(0, (-1 * downDistance), config.releaseTime);
+				}
+				
+			}
+			
+			//分页支持
+			if(config.pagination){
+				var uStatus = pullUpStatus();
+				var upDistance = uStatus.outerHeight();
+				if(_thisScroll.y <= _thisScroll.maxScrollY){
+					executeLoadPage();
+				}else if(_thisScroll.y < (_thisScroll.maxScrollY + upDistance)){
+					_thisScroll.scrollTo(0, (_thisScroll.maxScrollY + upDistance), config.releaseTime);
+				}
+			}
+			
+		});
+		
 		
 		/**
 		 * 参数转换
@@ -154,8 +240,8 @@
 		 * 
 		 */
 		function remoteLoadData(callBack){
-            $.support.cors = true;
 			var requestData = {};
+			
 			$.extend(requestData, config.param);
 			if(config.pagination){
 				var newParam = $.extend({},config.paginationParam);
@@ -190,7 +276,11 @@
 				error:function(xhr,textStatus, er){
 					console.error("load data fail - " + er);
 					invokeFn(config.onError, xhr,textStatus, er);
+				},
+				complete:function(){
+					completeHandler();
 				}
+				
 			});
 			
 			return xhr;
@@ -238,14 +328,13 @@
 		
 		//刷新操作
 		function executeRefresh(){
+			pullDownStatus("loading");
 			paginationObj.pageNumber = 1;
 			var xhr = remoteLoadData(function(data){
 				var htmlStr = invokeFn(config.processResult, data);
-				var contentWrapper = fetchContentWrapper();
-                contentWrapper.html(htmlStr);
+				fetchContentWrapper().html(htmlStr);
 				//refresh
 				pullDownStatus("end");
-				iscrollObj.refresh();
 			});
 			return xhr;
 		}
@@ -253,106 +342,78 @@
 		function executeLoadPage(){
 			if(!paginationObj.hasNextPage()){
 				pullUpStatus("noMore");
+				completeHandler();
 				return false;
 			}
 			
+			pullUpStatus("loading");
 			paginationObj.pageNumber += 1;
 			var xhr = remoteLoadData(function(data){
 				var htmlStr = invokeFn(config.processResult, data);
-				var contentWrapper = fetchContentWrapper();
-                contentWrapper.append(htmlStr);
+				fetchContentWrapper().append(htmlStr);
 				//refresh
 				pullUpStatus("end");
-				iscrollObj.refresh();
-
 			});
 			
 			return xhr;
 		}
 		
-		//scroll config
-		var scrollOption = {
-			scrollbars : true,
-			onRefresh: function () {
-				var _thisScroll = this;
-				
-				var pStatus = pullDownStatus("normal");
-				var uStatus = pullUpStatus("normal");
-				var downDistance = pStatus.outerHeight();
-				var upDistance = uStatus.outerHeight();
-				refreshAble = false;
-				loadAble = false;
-				
-				_thisScroll.minScrollY = -downDistance;
-				
-			},
-			onScrollMove: function () {
-				var _thisScroll = this;
-				var pStatus = pullDownStatus();
-				var uStatus = pullUpStatus();
-				var downDistance = pStatus.outerHeight();
-				var upDistance = uStatus.outerHeight();
-				
-				if(_thisScroll.y > config.distance && !pStatus.hasClass("release")){
-					pullDownStatus("release");
-					refreshAble = true;
-					_thisScroll.minScrollY = 0;
-				}else if(iscrollObj.y < config.distance && pStatus.hasClass("release")){
-					pullDownStatus("normal");
-					refreshAble = false;
-					_thisScroll.minScrollY = -downDistance;
-				}else if(_thisScroll.y  < (_thisScroll.maxScrollY - config.distance) && !uStatus.hasClass("release") ){
-					pullUpStatus("release");
-					loadAble = true;
-                    //_thisScroll.maxScrollY = _thisScroll.maxScrollY;
-				}else if(_thisScroll.y  > (_thisScroll.maxScrollY + config.distance) && uStatus.hasClass("release")){
-					pullUpStatus("normal");
-					loadAble = false;
-                    //this.maxScrollY = upDistance;
-
-				}
-
-
-				console.log(_thisScroll.y + ":" + (_thisScroll.maxScrollY - config.distance));
-				
-			},
-			onScrollEnd: function () {
-				var _thisScroll = this;
-				if(refreshAble){
-					pullDownStatus("loading");
-					executeRefresh();
-				}else if(loadAble){
-					pullUpStatus("loading");
-					executeLoadPage();
+		
+		function completeHandler(){
+			iscrollObj.refresh();
+			clearTimeout(reverseTime);
+			reverseTime = setTimeout(function(){
+				var _thisScroll = iscrollObj;
+				//刷新支持
+				if(config.refresh){
+					var pStatus = pullDownStatus();
+					var downDistance = pStatus.outerHeight();
+					if(_thisScroll.y > (-1 * downDistance)){
+						isComplete = true;
+						_thisScroll.scrollTo(0, (-1 * downDistance), config.releaseTime);
+					}
 					
 				}
 				
+				//分页支持
+				if(config.pagination){
+					var uStatus = pullUpStatus();
+					var upDistance = uStatus.outerHeight();
+					if(_thisScroll.y < (_thisScroll.maxScrollY + upDistance)){
+						isComplete = true;
+						_thisScroll.scrollTo(0, (_thisScroll.maxScrollY + upDistance), config.releaseTime);
+					}
+					
+				}
 				
-			}
-		};
-
-		$.extend(scrollOption, config.iscrollOption);
-			
-		var iscrollObj = new iScroll(_this.get(0), scrollOption);
-		var refreshAble = false;
-		var loadAble = false;
+			},60);
+		}
+		
 		
 		//获取滚动元素
 		function fetchContentWrapper(){
 			var $scroller = $(iscrollObj.scroller);
-			return $scroller.children(".contentWrapper");
+			return $scroller.children("." + config.contentClass);
 		}
 		
 		//初始化状态
 		function initStatus(){
-			var contentWrapper = $("<div class='contentWrapper'></div>");
+			var contentWrapper = $("<div class='"+config.contentClass+"'></div>");
 			var $scroller = $(iscrollObj.scroller);
 			$scroller.wrapInner(contentWrapper);
 			
-			var dStatus = pullDownStatus("normal");
-			$scroller.prepend(dStatus);
-			var uStatus = pullUpStatus("normal");
-			$scroller.append(uStatus);
+			//设置内容的最小高度
+			fetchContentWrapper().css({minHeight:$(iscrollObj.wrapper).height()});
+			
+			if(config.refresh){
+				var dStatus = pullDownStatus("normal");
+				$scroller.prepend(dStatus);
+			}
+			
+			if(config.pagination){
+				var uStatus = pullUpStatus("normal");
+				$scroller.append(uStatus);
+			}
 			
 			iscrollObj.refresh();
 		}
@@ -363,6 +424,12 @@
 		var cacheOp = {
 			source:_this,
 			scroller:iscrollObj,
+			paginationObj:paginationObj,
+			setTotalPages:function(totalPages){
+				if(!isNaN(totalPages)){
+					this.paginationObj.totalPages = totalPages;
+				}
+			},
 			load:function(param){
 				config.param = param;
 				executeRefresh();
@@ -382,4 +449,4 @@
 		return cacheOp;
 	};
 	
-})(jQuery,iScroll);
+})(jQuery,IScroll);
