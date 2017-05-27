@@ -22,22 +22,7 @@ define(function (require, exports, module) {
             }
         }
 
-        function oldCheackPassword() {
-            var data = Mock.mock(/\/getPass/, {
-                "number|6-16": 100
-            });
-            $.ajax({
-                url: '/getPass',
-                type: 'get',
-                dataType: 'json',
-                success: function (data) {
-                    console.log("旧密码正确");
-                },
-                error: function (data) {
-                    console.log("旧密码错误");
-                }
-            });
-        }
+
 
         function checkPassword(str) {
             var strong = /^(?![a-zA-z]+$)(?!\d+$)(?![!@#$%^&*]+$)(?![a-zA-z\d]+$)(?![a-zA-z!@#$%^&*]+$)(?![\d!@#$%^&*]+$)[a-zA-Z\d!@#$%^&*]+$/;
