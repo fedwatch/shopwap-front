@@ -1533,12 +1533,23 @@ span.nav-text.active {
     color: #f84b15;
 }
 
+
 .shopList .productCategory{
-    float:left;
+
 }
 .shopList .goList{
     width:100%;
 }
+
+.shopList .productContainer{
+    width:100%;
+
+}
+
+.contentWrapper{
+    overflow:hidden;
+}
+
 /**
     商品次级导航条
  */

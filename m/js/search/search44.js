@@ -4,7 +4,8 @@
 define(function (require, exports, module) {
     require('jquery');
     require('light7');
-    // require("page");
+    require("iscroll");
+     require("page");
     require('store');
     require("siteUrl");
 
@@ -35,31 +36,37 @@ define(function (require, exports, module) {
             var searchHint = $this.val();
             var historyList = store.set("historySearch", searchHint);
 
+            var pageOp = $("#shopListShowIndex2").page({
+                url:BASE_URL + COMMON_SITE_URL.SEARCH.URL,
+                param:{},
+                processResult:function(result){
+                    var html = "";
+                    if(result.products != null){
+                        $.each(result.products, function(index, data){
+                            html +='<div class="col-50 productCategory" >'+
+                                '<a href="javascript:;"  data-id="'+data.id+'" class="external">'+
+                                '<div style="background: #fff;padding:0 0;margin: .25rem 0;width:100%;height:12rem;overflow: hidden;">'+
+                                '<img src="'+data.image+'" alt="" style="width:100%;height:7rem;overflow: hidden;">'+
+                                '<h4 class="product-title" style="padding:0 .25rem;font-size:.7rem;color:#000;">'+data.name+'</h4>'+
+                                '<span class="product-price-box" style="padding:0 .25rem;font-size:.5rem;color:#ff0000;">￥<span style="font-size:.65rem;">'+data.price+'</span>'+'</span>'+'<span class="product-buyer-number-box" style="font-size:.5rem;color:#999;">已有 <span>'+data.sales+'</span>人购买</span>'+ '</div>'+
+                                '</a>'+ '</div>';
+                        });
+
+                    }
+
+                    return html;
+                }
+            });
+
             if (searchHint == "") {
                 $cancelTextIcon.show().css({display: "inline-block"});
                 $searchVague.css({display: "block"});
                 $("#shopListShowIndex2").css({display: "none"})
             } else {
-                var pageNumber=1;
-                $("#shopListShowIndex2").css({display: "block"});
-                   $(".container").scroll(function(){
-                        var scrollHeight=$(this).scrollHeight();
-                        var scrollTop=$(this).scrollTop();
-                        var $viewHeight=$(this).height();
-                           if(scrollTop>(scrollHeight-$viewHeight-2)){
-                               if(pageNumber<3){
-                                   setTimeout(function(){
-                                       pageNumber+=1;
-                                       alert(pageNumber);
-                                       search(searchHint,pageNumber, "10", "", "", "", "");
-                                       $('.container').animate({scrollTop:0}, 'slow');
-                                   },5000);
-                               }
-                           };
-
-                   });
-                search(searchHint,pageNumber, "10", "", "", "", "")
+                $("#shopListShowIndex2").css({display: "block"})
+                pageOp.load({keyword:searchHint});
             }
+
         });
 
         $("#cancelTextIcon").click(function () {
@@ -136,60 +143,5 @@ define(function (require, exports, module) {
             $("#historySearch").html(html);
         }
     });
-
-    // hotSearch
-    /*   require.async('handlebars',function(){
-     var data = genData;
-     var tpl = require('/layout/search/hotSearch.tpl');
-     var template = Handlebars.compile(tpl);
-     var html = template(data);
-     $("#hotSearch").html(html);
-     });
-     */
-
-    /**
-     *
-     * @param keyword
-     * @param pageNumber
-     * @param pageSize
-     * @param categoryIds
-     * @param brandIds
-     * @param startPrice
-     * @param endPrice
-     */
-    function search(keyword, pageNumber, pageSize) {
-        $.ajax({
-            url: BASE_URL + COMMON_SITE_URL.SEARCH.URL,
-            type: COMMON_SITE_URL.SEARCH.METHOD,
-            dataType: COMMON_SITE_URL.DATATYPE,
-            data: {
-                keyword: keyword,
-                pageNumber: pageNumber,
-                pageSize: pageSize
-            },
-
-            success: function (data) {
-                console.log(data.products.length);
-                $("#searchPrompt").hide();
-                $("#searchVague").css({display: "none"});
-                $("#shopListSort").css({display: "none"});
-                var products = data["products"];
-
-                var  html='';
-                products.map(function(data){
-                    html +='<div class="col-50 productCategory" >'+
-                        '<a href="javascript:;"  data-id="'+data.id+'" class="external">'+
-                        '<div style="background: #fff;padding:0 0;margin: .25rem 0;width:100%;height:12rem;overflow: hidden;">'+
-                        '<img src="'+data.image+'" alt="" style="width:100%;height:7rem;overflow: hidden;">'+
-                        '<h4 class="product-title" style="padding:0 .25rem;font-size:.7rem;color:#000;">'+data.name+'</h4>'+
-                        '<span class="product-price-box" style="padding:0 .25rem;font-size:.5rem;color:#ff0000;">￥<span style="font-size:.65rem;">'+data.price+'</span>'+'</span>'+'<span class="product-buyer-number-box" style="font-size:.5rem;color:#999;">已有 <span>'+data.sales+'</span>人购买</span>'+ '</div>'+
-                        '</a>'+ '</div>';
-                });
-
-                $("#shopListShowIndex2").html(html);
-            }
-        });
-
-    }
 });
 
