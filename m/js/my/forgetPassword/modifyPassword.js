@@ -98,7 +98,7 @@ define(function(require,exports,module){
                     username : username,
                     newPwd : newPwd
                 },
-                cache:false,
+                cache:true,
                 async:false,
                 success:function (data) {
                     if(data.authStatus == '200'){

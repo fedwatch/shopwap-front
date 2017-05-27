@@ -50,7 +50,7 @@ define(function (require, exports, module) {
                 username: username,
                 mergeSn: mergeSn
             },
-            cache:false,
+            cache:true,
             async:false,
             success: function (data) {
                 if (data.authStatus == "200") {
@@ -106,7 +106,7 @@ define(function (require, exports, module) {
             url: BASE_URL + ORDER_SITE_URL.CALCULATE_AMOUNT.URL,
             type: ORDER_SITE_URL.CALCULATE_AMOUNT.METHOD,
             dataType: ORDER_SITE_URL.DATATYPE,
-            cache:false,
+            cache:true,
             async:false,
             data: {
                 username: username,
@@ -161,7 +161,7 @@ define(function (require, exports, module) {
                 bankCardNo: bankCardNo,
                 username: username,
             },
-            cache:false,
+            cache:true,
             async:false,
             success: function (data) {
 
@@ -181,7 +181,7 @@ define(function (require, exports, module) {
             data: {
                 username: username,
             },
-            cache:false,
+            cache:true,
             async:false,
             success: function (data) {
                 // console.log(data);
@@ -246,7 +246,7 @@ define(function (require, exports, module) {
                 username: username,
                 bankName: bankName
             },
-            cache:false,
+            cache:true,
             async:false,
             success: function (data) {
                 // console.log(data);
@@ -284,7 +284,7 @@ define(function (require, exports, module) {
                 username: username,
                 app_request_url: app_request_url,
             },
-            cache:false,
+            cache:true,
             async:false,
             success: function (data) {
                 if (data.authStatus == '200') {
@@ -332,7 +332,7 @@ define(function (require, exports, module) {
                 mergeSn : mergeSn ,
 
             },
-            cache:false,
+            cache:true,
             async:false,
             success: function (data) {
                 if (data.authStatus){
@@ -362,7 +362,7 @@ define(function (require, exports, module) {
                 username: username,
                 mergeSn : mergeSn  ,
             },
-            cache:false,
+            cache:true,
             async:false,
             success: function (data) {
                 if(data.authStatus == '200'){

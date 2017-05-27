@@ -61,7 +61,7 @@ define(function (require, exports, module) {
                 type:PRODUCT_SITE_URLS.FIND_SUBS.METHOD,
                 data:{username:username,id:$("#categoryId").val()},
                 async:false,
-                cache:false,
+                cache:true,
                 success:function (data) {
                     // navSubPosition
                     require.async('handlebars',function(){
@@ -121,7 +121,7 @@ define(function (require, exports, module) {
                 pageSize: pageSize
             },
             async:false,
-            cache:false,
+            cache:true,
             success:function (data) {
                 // productCategory
                 require.async('handlebars',function(){
@@ -151,7 +151,7 @@ define(function (require, exports, module) {
             type:PRODUCT_SITE_URLS.FIND_ROOTS.METHOD,
             dataType:"json",
             data:{username:username},
-            cache:false,
+            cache:true,
             async:false,
             success:function (data) {
 
@@ -169,7 +169,7 @@ define(function (require, exports, module) {
                             type:PRODUCT_SITE_URLS.FIND_SUBS.METHOD,
                             data:{username:username,id:categoryId},
                             dataType:PRODUCT_SITE_URLS.DATATYPE,
-                            cache:false,
+                            cache:true,
                             async:false,
                             success:function (data) {
                                 if(data.authStatus == '200'){
@@ -192,7 +192,7 @@ define(function (require, exports, module) {
                                     //     url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
                                     //     dataType:PRODUCT_SITE_URLS.DATATYPE,
                                     //     type:PRODUCT_SITE_URLS.PRODUCT_SEARCH.METHOD,
-                                    //     cache:false,
+                                    //     cache:true,
                                     //     async:false,
                                     //     data: {
                                     //         keyword: keyword,
@@ -234,7 +234,7 @@ define(function (require, exports, module) {
             url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
             dataType:PRODUCT_SITE_URLS.DATATYPE,
             type:PRODUCT_SITE_URLS.PRODUCT_SEARCH.METHOD,
-            cache:false,
+            cache:true,
             async:false,
             data: {
                 keyword: keyword,

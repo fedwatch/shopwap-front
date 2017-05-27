@@ -13,7 +13,6 @@ define(function(require,exports,module){
     // require('jsbn');
     // require('prng4');
     // require('rng');
-
     require('siteUrl');
 
     var genData = {};
@@ -93,7 +92,7 @@ define(function(require,exports,module){
                 $.ajax({
                     url: BASE_URL+USER_SITE_URL.PUBLIC_KEY.URL,
                     type: USER_SITE_URL.PUBLIC_KEY.METHOD,
-                    cache:false,
+                    cache:true,
                     async:false,
                     dataType:USER_SITE_URL.DATATYPE,
                     success: function(data) {
@@ -106,7 +105,7 @@ define(function(require,exports,module){
                     url:BASE_URL+USER_SITE_URL.USER_REGISTER.URL,
                     dataType:USER_SITE_URL.DATATYPE,
                     type:USER_SITE_URL.USER_REGISTER.METHOD,
-                    cache:false,
+                    cache:true,
                     async:false,
                     data:{
                         username:$.trim($userPhone.val()),
@@ -204,7 +203,7 @@ define(function(require,exports,module){
                     url:BASE_URL+USER_SITE_URL.SEND_DYNAMIC_CODE.URL,
                     type:USER_SITE_URL.SEND_DYNAMIC_CODE.METHOD,
                     dataType:USER_SITE_URL.DATATYPE,
-                    cache:false,
+                    cache:true,
                     async:false,
                     data: {userPhone: phoneNum,codeFlag:"1"},
                     success:function (data) {

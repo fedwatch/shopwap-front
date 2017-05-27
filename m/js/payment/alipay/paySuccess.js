@@ -28,7 +28,7 @@ define(function(require,exports,module){
                 username:username,
                 paymentSn:paymentSn
             },
-            cache:false,
+            cache:true,
             async:false,
             success:function (data) {
                 if(data.authStatus == '200'){
@@ -58,7 +58,7 @@ define(function(require,exports,module){
                 username:username,
                 mergeSn:mergeSn
             },
-            cache:false,
+            cache:true,
             async:false,
             success:function (data) {
                 console.log(data);

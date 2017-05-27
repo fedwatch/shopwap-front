@@ -33,7 +33,7 @@ define(function (require, exports, module) {
                         username: username,
                         id: addressId
                     },
-                    cache:false,
+                    cache:true,
                     async:false,
                     success: function (data) {
                         // console.log(data.authMsg);
@@ -134,7 +134,7 @@ define(function (require, exports, module) {
                 pageNumber: pageNumber,
                 pageSize: pageSize,
             },
-            cache:false,
+            cache:true,
             async:false,
             success: function (data) {
                 if (data.authStatus) {
@@ -163,7 +163,7 @@ define(function (require, exports, module) {
                 phone: phone,
                 isDefault: isDefault,
             },
-            cache:false,
+            cache:true,
             async:false,
             success: function (data) {
                 if(data.authStatus == '200'){
@@ -196,7 +196,7 @@ define(function (require, exports, module) {
                 phone: phone,
                 isDefault: isDefault,
             },
-            cache:false,
+            cache:true,
             async:false,
             success: function (data) {
                 if(data.authStatus == '200'){

@@ -158,7 +158,7 @@ define(function (require, exports, module) {
                         productId: currentProductID,
                         quantity: count
                     },
-                    cache:false,
+                    cache:true,
                     async:false,
                     dataType: CART_SITE_URL.DATATYPE,
                     success: function (data) {
@@ -199,7 +199,7 @@ define(function (require, exports, module) {
                 username: username,
                 id: currentProductID
             },
-            cache:false,
+            cache:true,
             async:false,
             dataType: PRODUCT_SITE_URLS.DATATYPE,
             success: function (results) {
@@ -299,7 +299,7 @@ define(function (require, exports, module) {
                 username: username,
                 id: currentProductID
             },
-            cache:false,
+            cache:true,
             async:false,
             dataType: PRODUCT_SITE_URLS.DATATYPE,
             success: function (data) {
@@ -341,7 +341,7 @@ define(function (require, exports, module) {
                 id: id,
                 buyCount: buyCount
             },
-            cache:false,
+            cache:true,
             async:false,
             dataType: PRODUCT_SITE_URLS.DATATYPE,
             success: function (data) {
@@ -362,7 +362,7 @@ define(function (require, exports, module) {
             data: {
                 username: username,
             },
-            cache:false,
+            cache:true,
             async:false,
             dataType: CART_SITE_URL.DATATYPE,
             success: function (data) {

@@ -146,7 +146,7 @@ define(function(require,exports,module){
                     url:BASE_URL+USER_SITE_URL.SEND_DYNAMIC_CODE.URL,
                     type:USER_SITE_URL.SEND_DYNAMIC_CODE.METHOD,
                     dataType:USER_SITE_URL.DATATYPE,
-                    cache:false,
+                    cache:true,
                     async:false,
                     data: {
                         userPhone: phoneNum,
@@ -219,7 +219,7 @@ define(function(require,exports,module){
                 username : username,
                 smsCode: smsCode
             },
-            cache:false,
+            cache:true,
             async:false,
             success:function (data) {
                 if(data.authStatus == '200'){
