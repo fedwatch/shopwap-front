@@ -135,11 +135,10 @@ define(function(require,exports,module){
         $smsCode.on('blur',function () {
             var smsCodeVal = $smsCode.val();
             checkSMSCode(smsCodeVal);
-        })
+        });
 
 
         $(document).on('click','#getSMSCodeBtn',function () {
-            console.log("getSMSCodeBtn clicked")
             if($userPhone.val() !== ''){
                 var phoneNum = $userPhone.val();
                 $.ajax({
