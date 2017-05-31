@@ -241,11 +241,8 @@ define(function (require, exports, module) {
             var removeItems = [];
             removeItems.push(currentProductId);
 
-
-
             var cartStoreId = [];
             var cartProductId = [];
-
             var stackVideo  = "";
 
             cartDelete(username,removeItems);
@@ -391,8 +388,8 @@ define(function (require, exports, module) {
             var quantity = $this.parents(".cart-store-img-text-label").find(".cart-item-text > .cart-item-display-flex > .cart-item-quantity > .quantity-ct");
             var itemId = $this.parents(".cart-store-img-text-label").find(".cart-item-select-wrapper>.cart-list-select").data("itemid");
             var quant = $this.parents(".cart-store-img-text-label").find(".cart-item-text > .cart-item-display-flex > .cart-item-quantity > .quantity-ct").text()
+            quant=parseInt(quant)+1
             cartEdit(username,itemId,quant);
-
             quantity.text(number);
         });
 
@@ -406,8 +403,22 @@ define(function (require, exports, module) {
             }
             $this.parent().find('input.panel-text-input').val(number);
             var quantity = $this.parents(".cart-store-img-text-label").find(".cart-item-text > .cart-item-display-flex > .cart-item-quantity > .quantity-ct");
+            var itemId = $this.parents(".cart-store-img-text-label").find(".cart-item-select-wrapper>.cart-list-select").data("itemid");
+            var quant = $this.parents(".cart-store-img-text-label").find(".cart-item-text > .cart-item-display-flex > .cart-item-quantity > .quantity-ct").text()
+            quant = parseInt(quant)-1;
+            cartEdit(username,itemId,quant);
             quantity.text(number)
         });
+
+        $(document).on('blur','.panel-text-input',function () {
+            var $this = $(this);
+            var quant = $this.val();
+            var quantity = $this.parents(".cart-store-img-text-label").find(".cart-item-text > .cart-item-display-flex > .cart-item-quantity > .quantity-ct");
+            var itemId = $this.parents(".cart-store-img-text-label").find(".cart-item-select-wrapper>.cart-list-select").data("itemid");
+            quant = parseInt(quant);
+            cartEdit(username,itemId,quant);
+            quantity.text(quant)
+        })
 
         //已选中数量
         function checkedText() {

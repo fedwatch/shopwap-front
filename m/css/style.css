@@ -1111,17 +1111,20 @@ span.panel-minus-button {
 
 .cart-item-edit-panel .panel-remove-btn {
     width: 25%;
-    text-align: center;
     background: #eb4c1e;
     color: #fff;
-    height: 4.5rem;
+    height: 2.5rem;
     vertical-align: middle;
     display: flex;
     align-items: center;
+    margin: .113rem 0;
 }
 
 .panel-remove-btn span {
-    padding: 0 .4rem;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    display: block;
 }
 
 .cart-footer {

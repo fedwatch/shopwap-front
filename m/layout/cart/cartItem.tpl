@@ -46,9 +46,7 @@
                         </div>
                         <div class="cart-item-quantity pull-right">
                             <span class="quantity-symbol">X</span>
-                            <span class="quantity-ct">
-                                {{quantity}}
-                            </span>
+                            <span class="quantity-ct">{{quantity}}</span>
                         </div>
                     </div>
                 </div>
@@ -58,7 +56,7 @@
                                 <span class="panel-plus-button panelAddBtn">
                                     <i class="icon icon-panel-plus"></i>
                                 </span>
-                            <input type="text" class="panel-text-input" value="1">
+                            <input type="text" class="panel-text-input" value="{{quantity}}">
                             <span class="panel-minus-button panelMinusBtn">
                                     <i class="icon icon-panel-minus"></i>
                                 </span>
