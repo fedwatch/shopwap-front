@@ -4,7 +4,6 @@
 define(function (require, exports, module) {
     require('jquery');
     require('light7');
-   // require("iscroll");
     require("iscrollProbe");
     require("page");
     require('store');

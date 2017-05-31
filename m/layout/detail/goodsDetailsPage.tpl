@@ -9,7 +9,7 @@
     </div>
 </div>
 
-
+{{#if product.specifications}}
 <div class="detail-body">
     {{#each product.specifications}}
     <div class="body-title">{{name}}：</div>
@@ -20,16 +20,7 @@
     </div>
     {{/each}}
 </div>
-
-
-<!--<div class="detail-body">-->
-    <!--<div class="body-title">颜色：</div>-->
-    <!--<div class="popup-page">-->
-        <!--{{#each color}}-->
-        <!--<span class="color-button number-input">{{this}}</span>-->
-        <!--{{/each}}-->
-    <!--</div>-->
-<!--</div>-->
+{{/if}}
 
 <div class="detail-body">
     <div class="numbers-board popup-page">
