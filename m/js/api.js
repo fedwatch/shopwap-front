@@ -42,6 +42,8 @@ seajs.config({
         "hbCompare":M_URL+"/js/utils/hbCompare",
         "varietyValidation":M_URL+"/js/utils/varietyValidation.js",
 
+        "lazyload":M_URL+"/js/utils/lazyload.min",
+
         "rsa":M_URL+"/js/utils/rsa/rsa.js",
         "base64":M_URL+"/js/utils/rsa/base64.js",
         "rng":M_URL+"/js/utils/rsa/rng.js",

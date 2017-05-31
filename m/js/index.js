@@ -4,6 +4,7 @@
 define(function(require,exports,module){
     require('jquery');
     require("swiper");
+    require("lazyload");
     require("light7");
     // require("mockjs");
     require("getCurrentPage");
@@ -13,6 +14,12 @@ define(function(require,exports,module){
     jQuery.support.cors = true;
     var MD_URL = '//'+location.host+'/m';
     $(function () {
+
+        $("img.lazy").lazyload({
+            threshold : 0,
+            effect : "fadeIn",
+            event: "click"
+        });
         getCurrentPage();
 
         findAreaByIp();

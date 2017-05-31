@@ -4,17 +4,15 @@
 define(function (require, exports, module) {
     require('jquery');
     require('swiper');
+    require('lazyload');
     require('light7');
     require('store');
     require('siteUrl');
-
-
 
     //USERMD
     var username = store.get("username");
     var currentProductID = store.get("currentProductID");
     var userStatus = store.get("userStatus");
-
 
     jQuery.support.cors = true;
     $(function () {
@@ -25,6 +23,12 @@ define(function (require, exports, module) {
                 location.href = '../index.html';
             },2000)
         }
+
+
+        $("img.lazy").lazyload({
+            threshold : 0,
+            effect : "fadeIn",
+        });
 
         setSpecificationId(username,currentProductID)
 

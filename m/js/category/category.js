@@ -4,6 +4,7 @@
 define(function (require, exports, module) {
     require('jquery');
     require('getCurrentPage');
+    require("lazyload");
     require('store');
     require('siteUrl');
 
@@ -12,7 +13,17 @@ define(function (require, exports, module) {
     var username = store.get("username");
 
     $(function () {
+
+
+
         getCurrentPage();
+
+        $("img.lazy").lazyload({
+            threshold : 0,
+            effect : "fadeIn",
+        });
+
+
         initCategoryActive();
 
         /**
@@ -55,10 +66,22 @@ define(function (require, exports, module) {
                         $("#navSubPosition").html(html);
                         $("#categorySubId").val($this.data("category-sub-id"));
                         $(".nav-sub-text").first().addClass("active");
+
+                    });
+                    $("img.lazy").lazyload({
+                        threshold : 0,
+                        effect : "fadeIn",
                     });
                     getProductInfo();
                 }
             });
+
+            $("img.lazy").lazyload({
+                threshold : 0,
+                effect : "fadeIn",
+            });
+
+
         });
 
         //二级分类
@@ -68,6 +91,10 @@ define(function (require, exports, module) {
             $this.addClass("active");
             $("#categorySubId").val($this.data("category-sub-id"));
             getProductInfo();
+            $("img.lazy").lazyload({
+                threshold : 0,
+                effect : "fadeIn",
+            });
         });
     });
 
@@ -168,34 +195,6 @@ define(function (require, exports, module) {
                                     var endPrice = '';
                                     var pageSize = '20';
                                     getSearchResults(keyword,pageNumber,categoryIds,brandIds,startPrice,endPrice,pageSize,'productCategory');
-                                    // $.ajax({
-                                    //     url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
-                                    //     dataType:PRODUCT_SITE_URLS.DATATYPE,
-                                    //     type:PRODUCT_SITE_URLS.PRODUCT_SEARCH.METHOD,
-                                    //     cache:true,
-                                    //     async:false,
-                                    //     data: {
-                                    //         keyword: keyword,
-                                    //         pageNumber: pageNumber,
-                                    //         categoryIds: categoryIds,
-                                    //         brandIds: brandIds,
-                                    //         startPrice: startPrice,
-                                    //         endPrice: endPrice,
-                                    //         pageSize: pageSize
-                                    //     },
-                                    //     success:function (data) {
-                                    //         // productCategory
-                                    //         require.async('handlebars',function(){
-                                    //             if(data.authStatus == "200"){
-                                    //                 var tpl = require('/m/layout/cartgory/productCategory.tpl');
-                                    //                 var template = Handlebars.compile(tpl);
-                                    //                 var html = template(data);
-                                    //                 $("#productCategory").html(html);
-                                    //             }
-                                    //         });
-                                    //         $($(".nav-sub-render .nav-sub-text")[0]).addClass("active");
-                                    //     }
-                                    // });
                                 }
                             }
                         });
