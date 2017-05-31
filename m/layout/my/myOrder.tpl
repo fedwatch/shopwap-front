@@ -72,8 +72,8 @@
                     {{/compare}}
 
                     {{#compare this.orderStatus 'completed'}}
-                    <a href="/html/user/logistics.html" class="external checkLogBtn uccButton" data-sn="{{sn}}"> 查看物流 </a>
-                    <a href="/html/user/review.html" class="external commentBtn uccButton" data-sn="{{sn}}"> 评价 </a>
+                    <a href="m/html/user/logistics.html" class="external checkLogBtn uccButton" data-sn="{{sn}}"> 查看物流 </a>
+                    <!--<a href="m/html/user/review.html" class="external commentBtn uccButton" data-sn="{{sn}}"> 评价 </a>-->
                     {{/compare}}
 
                     {{#compare this.orderStatus 'unconfirmed'}}

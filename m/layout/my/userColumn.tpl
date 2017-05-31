@@ -46,7 +46,7 @@
         <li class="item-content item-link">
             <!--<div class="item-media"><i class="icon icon-friends"></i></div>-->
             <div class="item-inner">
-                <a href="tel:4009217818" style="width:100%;display: block;">
+                <a href="tel:4009217818" class="external" style="width:100%;display: block;">
                     <div class="item-title">
                         联系客服
 

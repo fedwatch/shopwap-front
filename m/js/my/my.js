@@ -7,20 +7,15 @@ define(function (require, exports, module) {
     require("light7");
     require("store");
     require("getCurrentPage");
-    // require('cookie');
-    // var session = require("session");
-
 
     jQuery.support.cors = true;
-    $(function () {
-        var username = store.get("username");
-        // console.log(username);
-        getIndex(username);
-        getCurrentPage();
-    });
+    var username = store.get("username");
+
+    getIndex(username);
+    getCurrentPage();
 
 
-    function getIndex(username){
+    function getIndex(username) {
         $.ajax({
             url: BASE_URL + MEMBER_SITE_URL.INDEX.URL,
             type: MEMBER_SITE_URL.INDEX.METHOD,
@@ -28,8 +23,8 @@ define(function (require, exports, module) {
             data: {
                 username: username
             },
-            cache:true,
-            async:false,
+            cache: true,
+            async: false,
             success: function (data) {
                 if (data.authStatus == '200') {
                     require.async('handlebars', function () {
