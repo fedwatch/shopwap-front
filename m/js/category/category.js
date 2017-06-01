@@ -4,7 +4,7 @@
 define(function (require, exports, module) {
     require('jquery');
     require('getCurrentPage');
-    require("lazyload");
+    // require("lazyload");
     require('store');
     require('siteUrl');
 
@@ -15,7 +15,15 @@ define(function (require, exports, module) {
     $(function () {
         getCurrentPage();
 
-        $("img.lazy").lazyload({});
+        // function lazyload(){
+        //     $("img.lazy").lazyload({
+        //         threshold : 10,
+        //         effect : "show",
+        //         failure_limit: 10,
+        //         event: "scroll",
+        //         no_fake_img_loader:true
+        //     });
+        // }
 
 
         initCategoryActive();
@@ -62,18 +70,24 @@ define(function (require, exports, module) {
                         $(".nav-sub-text").first().addClass("active");
 
                     });
-                    $("img.lazy").lazyload({
-                        threshold : 0,
-                        effect : "fadeIn",
-                    });
+                    // $("img.lazy").lazyload({
+                    //     threshold : 0,
+                    //     effect : "show",
+                    //     failure_limit: 10,
+                    //     event: "scroll",
+                    //     no_fake_img_loader:true
+                    // });
                     getProductInfo();
                 }
             });
 
-            $("img.lazy").lazyload({
-                threshold : 0,
-                effect : "fadeIn",
-            });
+            // $("img.lazy").lazyload({
+            //     threshold : 0,
+            //     effect : "show",
+            //     failure_limit: 10,
+            //     event: "scroll",
+            //     no_fake_img_loader:true
+            // });
 
 
         });
@@ -85,10 +99,13 @@ define(function (require, exports, module) {
             $this.addClass("active");
             $("#categorySubId").val($this.data("category-sub-id"));
             getProductInfo();
-            $("img.lazy").lazyload({
-                threshold : 0,
-                effect : "fadeIn",
-            });
+            // $("img.lazy").lazyload({
+            //     threshold : 0,
+            //     effect : "show",
+            //     failure_limit: 10,
+            //     event: "scroll",
+            //     no_fake_img_loader:true
+            // });
         });
     });
 

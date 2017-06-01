@@ -2,8 +2,8 @@
     <div class="swiper-wrapper">
         {{#each this.product.productImages}}
             <div class="swiper-slide">
-                <img src="../../assets/images/default-photo-m.jpg"
-                     data-original="{{this.source}}"
+                <img
+                src="{{this.source}}"
                      alt="{{this.alt}}" class="lazy">
             </div>
         {{/each}}

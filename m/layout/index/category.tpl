@@ -2,7 +2,7 @@
     <div class="active-t clearfix">
         <div class="pull-left act-left">
             <a href="https://jie.net/static/dragonboat0522/wap/dragonboat.html#item1" class="external">
-                <img  class="lazy" src="../assets/images/default-photo-m.jpg" data-original="../assets/images/index9.png"/>
+                <img  class="lazy"  src="../assets/images/index9.png"/>
                 <div class="zero-gift">
                     <div class="gift-font">新人0元礼</div>
                     <div class="check-act"><a href="javascript:;">点击查看活动详情</a></div>
@@ -12,7 +12,7 @@
         <div class="pull-left act-right">
             <div class="act-a">
                 <a href="https://jie.net/static/dragonboat0522/wap/dragonboat.html#item3" class="external">
-                    <img  class="lazy" src="../assets/images/default-photo-m.jpg" data-original="../assets/images/index7.png"/>
+                    <img  class="lazy"  src="../assets/images/index7.png"/>
                     <div class="zero-gift">
                         <div class="zongzi">粽情粽意</div>
                         <div class="zong-price">端午特价</div>
@@ -21,7 +21,7 @@
             </div>
             <div class="act-a">
                 <a href="https://jie.net/static/dragonboat0522/wap/dragonboat.html#item2" class="external">
-                    <img  class="lazy" src="../assets/images/default-photo-m.jpg" data-original="../assets/images/index8.png"/>
+                    <img  class="lazy"  src="../assets/images/index8.png"/>
                     <div class="zero-gift-two">
                         <div class="seckill-area">秒杀专区</div>
                         <div class="ut-price-goods">降价商品，限时秒杀</div>
@@ -36,7 +36,7 @@
             <div class="bt-img">
                 <a href="javascript:void(0);" class="external" data-id="2503">
                     <div>
-                        <img  class="lazy" src="../assets/images/default-photo-m.jpg" data-original="https://static.jie.net/group1/M00/55/F7/rBAB4FkdYCuIJQwNAAA1JICL3dUAAAAHwLMptIAADU8927.jpg" style="height:203px;"/>
+                        <img  class="lazy"  src="https://static.jie.net/group1/M00/55/F7/rBAB4FkdYCuIJQwNAAA1JICL3dUAAAAHwLMptIAADU8927.jpg" style="height:203px;"/>
                         <!--<div class="tipIm"><span class="plunge">直降</span></div>-->
                     </div>
                     <div style="padding:0 0.75rem;">
@@ -55,7 +55,7 @@
             <div class="bt-img">
                 <a href="javascript:void(0);" class="external" data-id="2499">
                     <div class="clearfix" style="line-height:1.2rem;">
-                        <img  class="lazy" data-original="https://static.jie.net/group1/M00/55/F7/rBAB31kdXLqIZnNFAAKInQsl6coAAAAHwKQKu0AAoi1245.jpg" src="../assets/images/default-photo-m.jpg" style="height:203px;"/>
+                        <img  class="lazy" src="https://static.jie.net/group1/M00/55/F7/rBAB31kdXLqIZnNFAAKInQsl6coAAAAHwKQKu0AAoi1245.jpg"  style="height:203px;"/>
                         <!--<div class="tipIm"><span class="plunge">0元购</span></div>-->
                     </div>
                     <div style="padding:0 0.75rem;">

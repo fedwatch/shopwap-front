@@ -4,7 +4,7 @@
 define(function (require, exports, module) {
     require('jquery');
     require('swiper');
-    require('lazyload');
+    // require('lazyload');
     require('light7');
     require('store');
     require('siteUrl');
@@ -25,10 +25,10 @@ define(function (require, exports, module) {
         }
 
 
-        $("img.lazy").lazyload({
-            threshold : 0,
-            effect : "fadeIn",
-        });
+        // $("img.lazy").lazyload({
+        //     threshold : 0,
+        //     effect : "fadeIn",
+        // });
 
         setSpecificationId(username,currentProductID)
 

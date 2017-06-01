@@ -4,7 +4,7 @@
 define(function(require,exports,module){
     require('jquery');
     require("swiper");
-    require("lazyload");
+    // require("lazyload");
     require("light7");
     // require("mockjs");
     require("getCurrentPage");
@@ -15,13 +15,13 @@ define(function(require,exports,module){
     var MD_URL = '//'+location.host+'/m';
     $(function () {
 
-        $("img.lazy").lazyload({
-            threshold : 0,
-            effect : "show",
-            failure_limit: 10,
-            event: "scroll",
-            no_fake_img_loader:true
-        });
+        // $("img.lazy").lazyload({
+        //     threshold : 0,
+        //     effect : "show",
+        //     failure_limit: 10,
+        //     event: "scroll",
+        //     no_fake_img_loader:true
+        // });
         getCurrentPage();
 
         findAreaByIp();
