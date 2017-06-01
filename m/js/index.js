@@ -17,8 +17,10 @@ define(function(require,exports,module){
 
         $("img.lazy").lazyload({
             threshold : 0,
-            effect : "fadeIn",
-            event: "click"
+            effect : "show",
+            failure_limit: 10,
+            event: "click",
+            no_fake_img_loader:true
         });
         getCurrentPage();
 
