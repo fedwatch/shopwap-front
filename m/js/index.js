@@ -19,7 +19,7 @@ define(function(require,exports,module){
             threshold : 0,
             effect : "show",
             failure_limit: 10,
-            event: "click",
+            event: "scroll",
             no_fake_img_loader:true
         });
         getCurrentPage();

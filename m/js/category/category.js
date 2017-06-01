@@ -13,14 +13,14 @@ define(function (require, exports, module) {
     var username = store.get("username");
 
     $(function () {
-
-
-
         getCurrentPage();
 
         $("img.lazy").lazyload({
             threshold : 0,
-            effect : "fadeIn",
+            effect : "show",
+            failure_limit: 10,
+            event: "scroll",
+            no_fake_img_loader:true
         });
 
 
