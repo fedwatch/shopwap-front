@@ -15,13 +15,7 @@ define(function (require, exports, module) {
     $(function () {
         getCurrentPage();
 
-        $("img.lazy").lazyload({
-            threshold : 0,
-            effect : "show",
-            failure_limit: 10,
-            event: "scroll",
-            no_fake_img_loader:true
-        });
+        $("img.lazy").lazyload({});
 
 
         initCategoryActive();
