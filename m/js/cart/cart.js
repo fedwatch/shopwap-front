@@ -14,8 +14,10 @@ define(function (require, exports, module) {
 
     var username = store.get("username");
     var userStatus = store.get("userStatus");
+    $(function () {
+        cartList(username);
+    })
 
-    cartList(username);
 
     /**
      * 购物车查看
@@ -42,6 +44,8 @@ define(function (require, exports, module) {
                     });
 
                 } else if (data.authStatus == "500") {
+                    $("#nothingBuy").show();
+                } else{
                     $("#nothingBuy").show();
                 }
             }
