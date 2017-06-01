@@ -248,10 +248,12 @@ define(function (require, exports, module) {
         var $this = $(this);
         $(".offEditPanel").show();
     });
+
     //失效宝贝区
     $(document).on("click", ".cancelOffItem", function () {
         $(".offEditPanel").hide();
     });
+
     //失效宝贝区
     $(document).on("click", ".removeOffItem", function (e) {
         var $parent = $(e.target).closest('div.offEditPanel').parent();
