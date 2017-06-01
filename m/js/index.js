@@ -55,8 +55,8 @@ define(function(require,exports,module){
                 if(data.authStatus == '200'){
                     store.set("areaId",data.area.id);
                 }else{
-                    console.log(data.authMsg)
-                    console.log(data.authStatus)
+                    console.log(data.authMsg);
+                    console.log(data.authStatus);
                 }
             }
         });
