@@ -2,8 +2,8 @@
  * Created by Administrator on 2017/3/10.
  */
 //基本URL
-var BASE_URL = "//"+location.host+"/wap";
-// var BASE_URL = "//192.168.3.70:8888/wap";
+//var BASE_URL = "//"+location.host+"/wap";
+ var BASE_URL = "//192.168.3.70:8888/wap";
 
 var CONFIG_CATEGORY_MAIN_ID = "105";
 var CONFIG_CATEGORY_SECOND_ID = "112";
