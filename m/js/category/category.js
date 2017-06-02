@@ -9,12 +9,18 @@ define(function (require, exports, module) {
     // require("lazyload");
     require('store');
     require('siteUrl');
-
+    var FastClick = require('fastclick');
 
     jQuery.support.cors = true;
     var username = store.get("username");
 
     $(function () {
+
+        var scroller = new IScroll('#productCategory', {  click: true,tap: true });
+        $('#productCategory').on('click, tap', '.productCategory a', function() {
+            //do something....
+        });
+
         getCurrentPage();
 
         // function lazyload(){
@@ -53,7 +59,13 @@ define(function (require, exports, module) {
             var tabbarBottomline = $("#tabbar-bottomline");
             tabbarBottomline.css("transform","translate3d("+w+"px, 0px, 0px)");
             var textLen = $(this).text().length;
-
+            if (textLen == 4) {
+                tabbarBottomline.css("width", "5rem");
+            } else if (textLen == 3) {
+                tabbarBottomline.css("width", "4rem");
+            } else if (textLen == 2) {
+                tabbarBottomline.css("width", "3rem");
+            }
 
             //点击获取二级菜单
             $.ajax({
