@@ -35,7 +35,7 @@ define(function (require, exports, module) {
          */
         $(document).on('click','.productCategory a',function (e) {
             e.preventDefault();
-            // console.log(this);
+           //console.log(this);
             getProductDetail($(this).data("product-id"));
         });
 
@@ -117,6 +117,7 @@ define(function (require, exports, module) {
     function getProductDetail(id){
         var productId = id;
         store.set("currentProductID",productId);
+        console.log(productId);
         location.href = '/m/html/detail/detail.html';
     }
 
