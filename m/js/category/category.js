@@ -35,8 +35,8 @@ define(function (require, exports, module) {
          */
         $(document).on('click','.productCategory a',function (e) {
             e.preventDefault();
-            // console.log(this);
-            getProductDetail($(this).data("product-id"));
+            console.log($(this));
+            getProductDetail($(this).data("id"));
         });
 
 
