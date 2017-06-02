@@ -1,11 +1,11 @@
 <div class="detail-header" >
     <div class="detail-image" >
-        <img class="lazy" src="{{this.product.image}}"  alt="" class="img-round" >
+        <img class="lazy img-round" src="{{this.product.image}}"  alt="">
     </div>
     <div class="detail-desc" >
         <span class="detail-desc-price" >￥ <span class="product-price">{{this.product.price}}</span></span><br>
         <span class="detail-desc-stock" >库存：<span id="inStock">{{this.product.stock}}</span> 件</span><br>
-        <span class="detail-desc-choice" >描述：<span id="productDescription">{{this.product.brand.introduction}}</span></span>
+        <!--<span class="detail-desc-choice" >描述：<span id="productDescription">{{this.product.brand.introduction}}</span></span>-->
     </div>
 </div>
 
@@ -15,7 +15,11 @@
     <div class="body-title">{{name}}：</div>
     <div class="popup-page spec-{{id}}" >
         {{#each this.specificationValues}}
-        <span class="spec-button number-input" id="specification-id-{{this.id}}" data-specification-id="{{this.id}}">{{this.name}}</span>
+        <span class="spec-button number-input"
+              id="specification-id-{{this.id}}"
+              data-specification-id="{{this.id}}">
+            {{this.name}}
+        </span>
         {{/each}}
     </div>
     {{/each}}

@@ -47,8 +47,11 @@ define(function (require, exports, module) {
             $("#categoryId").val($this.data("category-id"));
             var w = $this.offset().left;
             $(".nav-tabbar-item .nav-text").removeClass("active");
-            $this.find("span.nav-text").addClass("active");
-            $("#tabbar-bottomline").css("transform","translate3d("+w+"px, 0px, 0px)");
+            $this.addClass("active");
+            var tabbarBottomline = $("#tabbar-bottomline");
+            tabbarBottomline.css("transform","translate3d("+w+"px, 0px, 0px)");
+            var textLen = $(this).text().length;
+
 
             //点击获取二级菜单
             $.ajax({
