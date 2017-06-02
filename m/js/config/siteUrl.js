@@ -3,11 +3,11 @@
  */
 //基本URL
 var BASE_URL = "//"+location.host+"/wap";
- // var BASE_URL = "//192.168.3.70:8888/wap";
+// var BASE_URL = "//192.168.3.70:8888/wap";
 
 var CONFIG_CATEGORY_MAIN_ID = "105";
 var CONFIG_CATEGORY_SECOND_ID = "112";
-var M_URL  = '/m';
+var M_URL = '/m';
 // 用户信息
 var USER_SITE_URL = {
     //数据接收类型
@@ -96,19 +96,19 @@ var ORDER_SITE_URL = {
     // 查看订单
     VIEW: {URL: "/member/order/view", METHOD: "GET"},
     //创建并合并支付
-    CREATE_PAYMENT:{URL:"/member/order/createPayment",METHOD:"POST"},
+    CREATE_PAYMENT: {URL: "/member/order/createPayment", METHOD: "POST"},
     //支付界面，合并支付
-    PAY_MENT:{URL:"/member/order/payment",METHOD:"GET"},
+    PAY_MENT: {URL: "/member/order/payment", METHOD: "GET"},
     //订单锁定检查
-    CHECK_LOCK:{URL:"/member/order/checkLock",METHOD:"POST"},
+    CHECK_LOCK: {URL: "/member/order/checkLock", METHOD: "POST"},
     //计算订单支付金额
-    CALCULATE_AMOUNT:{URL:"/member/order/calculateAmount",METHOD:"POST"},
+    CALCULATE_AMOUNT: {URL: "/member/order/calculateAmount", METHOD: "POST"},
     // 支付手动解锁订单
-    UNLOCK:{URL:"/member/order/unlock",METHOD:"POST"},
+    UNLOCK: {URL: "/member/order/unlock", METHOD: "POST"},
     // 检查支付是否完成,根据支付订单检查
-    CHECK_PAYMENT:{URL:"/member/order/checkPayment",METHOD:"POST"},
+    CHECK_PAYMENT: {URL: "/member/order/checkPayment", METHOD: "POST"},
     // 支付结果订单信息
-    PAYMENT_VIEW:{URL:"/member/order/paymentView",METHOD:"GET"},
+    PAYMENT_VIEW: {URL: "/member/order/paymentView", METHOD: "GET"},
 };
 
 // 会员信息

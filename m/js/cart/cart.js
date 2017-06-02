@@ -172,13 +172,6 @@ define(function (require, exports, module) {
         var $cartItemEditPanel = $siblingsDOM.children('div.cart-item-edit-panel');
         $cartItemText.hide();
         $cartItemEditPanel.show().css({display: 'inline-flex'});
-
-        /*
-         @TODO
-         缺少商品数量的数据绑定 数据原子性不明显
-         购物车数量不能和用户操作绑定
-         */
-
     });
 
     // 购物车下单
@@ -262,7 +255,7 @@ define(function (require, exports, module) {
     $(document).on("click", ".removeOffItem", function (e) {
         var id = $(this).parents(".failGoods").find(".cart-off-store-img-text-label").data("id");
         $(this).parents(".failGoods").remove();
-        cartDelete(username,id);
+        cartDelete(username,[id]);
         // $(".offEditPanel").hide();
     });
 
