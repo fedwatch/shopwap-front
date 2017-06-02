@@ -3,6 +3,8 @@
  */
 define(function (require, exports, module) {
     require('jquery');
+    require("iscrollProbe");
+    require("page");
     require('getCurrentPage');
     // require("lazyload");
     require('store');
@@ -118,7 +120,8 @@ define(function (require, exports, module) {
         location.href = '/m/html/detail/detail.html';
     }
 
-    function getProductInfo(){
+//商品查询1
+ function getProductInfo(){
         var categoryIdsHidden = $("#categoryId").val();
         var categorySubId = $("#categorySubId").val();
         var keyword = '';
@@ -129,7 +132,30 @@ define(function (require, exports, module) {
         var endPrice = '';
         var pageSize = '';
 
-        $.ajax({
+     var pageOp = $("#productCategory").page({
+         url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
+         param:{},
+         processResult:function(result){
+             var html = "";
+             if(result.products != null){
+                 $.each(result.products, function(index, data){
+                     html +='<div class="col-50 productCategory" >'+
+                         '<a href="javascript:;"  data-id="'+data.id+'" class="external">'+
+                         '<div style="background: #fff;padding:0 0;margin: .25rem 0;width:100%;height:12rem;overflow: hidden;">'+
+                         '<img src="'+data.image+'" alt="" style="width:100%;height:7rem;overflow: hidden;">'+
+                         '<h4 class="product-title" style="padding:0 .25rem;font-size:.7rem;color:#000;">'+data.name+'</h4>'+
+                         '<span class="product-price-box" style="padding:0 .25rem;font-size:.5rem;color:#ff0000;">￥<span style="font-size:.65rem;">'+data.price+'</span>'+'</span>'+'<span class="product-buyer-number-box" style="font-size:.5rem;color:#999;">已有 <span>'+data.sales+'</span>人购买</span>'+ '</div>'+
+                         '</a>'+ '</div>';
+                 });
+
+             }
+
+             return html;
+         }
+     });
+     pageOp.load({categoryIds:categoryIds});
+
+/*        $.ajax({
             url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
             dataType:PRODUCT_SITE_URLS.DATATYPE,
             type:PRODUCT_SITE_URLS.PRODUCT_SEARCH.METHOD,
@@ -154,7 +180,7 @@ define(function (require, exports, module) {
                     }
                 });
             }
-        });
+        });*/
     }
 
 
@@ -220,10 +246,40 @@ define(function (require, exports, module) {
         })
     });
 
+    //商品查询
+   function getSearchResults(keyword,pageNumber,categoryIds,brandIds,startPrice,endPrice,pageSize,DOM){
+       var pageOp = $("#productCategory").page({
+           url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
+           param:{},
+           processResult:function(result){
+               var html = "";
+               if(result.products != null){
+                   $.each(result.products, function(index, data){
+                       html +='<div class="col-50 productCategory" >'+
+                           '<a href="javascript:;"  data-id="'+data.id+'" class="external">'+
+                           '<div style="background: #fff;padding:0 0;margin: .25rem 0;width:100%;height:12rem;overflow: hidden;">'+
+                           '<img src="'+data.image+'" alt="" style="width:100%;height:7rem;overflow: hidden;">'+
+                           '<h4 class="product-title" style="padding:0 .25rem;font-size:.7rem;color:#000;">'+data.name+'</h4>'+
+                           '<span class="product-price-box" style="padding:0 .25rem;font-size:.5rem;color:#ff0000;">￥<span style="font-size:.65rem;">'+data.price+'</span>'+'</span>'+'<span class="product-buyer-number-box" style="font-size:.5rem;color:#999;">已有 <span>'+data.sales+'</span>人购买</span>'+ '</div>'+
+                           '</a>'+ '</div>';
+                   });
 
+               }
 
-    function getSearchResults(keyword,pageNumber,categoryIds,brandIds,startPrice,endPrice,pageSize,DOM){
-        $.ajax({
+               return html;
+           }
+       });
+
+       pageOp.load({
+           keyword: keyword,
+           pageNumber: pageNumber,
+           categoryIds: categoryIds,
+           brandIds: brandIds,
+           startPrice: startPrice,
+           endPrice: endPrice,
+           pageSize: pageSize});
+
+/*        $.ajax({
             url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
             dataType:PRODUCT_SITE_URLS.DATATYPE,
             type:PRODUCT_SITE_URLS.PRODUCT_SEARCH.METHOD,
@@ -248,46 +304,10 @@ define(function (require, exports, module) {
                         $("#"+DOM).html(html);
                     }
                 });
-                $($(".nav-sub-render .nav-sub-text")[0]).addClass("active");
+               // $($(".nav-sub-render .nav-sub-text")[0]).addClass("active");
             }
-        });
+        });*/
     }
-
-
-    //
-    // // productCategory
-    // require.async('handlebars',function(){
-    //     var keyword = '';
-    //     var pageNumber = '';
-    //     var categoryIds = CONFIG_CATEGORY_MAIN_ID+","+CONFIG_CATEGORY_SECOND_ID;
-    //     var brandIds = '';
-    //     var startPrice = '';
-    //     var endPrice = '';
-    //     var pageSize = '';
-    //     $.ajax({
-    //         url:BASE_URL+PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
-    //         type:PRODUCT_SITE_URLS.PRODUCT_SEARCH.METHOD,
-    //         data: {
-    //             keyword: keyword,
-    //             pageNumber: pageNumber,
-    //             categoryIds: categoryIds,
-    //             brandIds: brandIds,
-    //             startPrice: startPrice,
-    //             endPrice: endPrice,
-    //             pageSize: pageSize
-    //         },
-    //         dataType:PRODUCT_SITE_URLS.DATATYPE,
-    //         success:function (data) {
-    //             // console.log(data);
-    //             if(data.authStatus == "200"){
-    //                 var tpl = require('/m/layout/cartgory/productCategory.tpl');
-    //                 var template = Handlebars.compile(tpl);
-    //                 var html = template(data);
-    //                 $("#productCategory").html(html);
-    //             }
-    //         }
-    //     });
-    // });
 
     // footerNav
     require.async('handlebars',function(){

@@ -1567,8 +1567,6 @@ span.nav-text {
 span.nav-text.active {
     color: #f84b15;
 }
-
-
 .shopList .productCategory{
     float:left;
     height:250px;
@@ -1582,7 +1580,7 @@ span.nav-text.active {
 
 }
 
-#shopListShowIndex2 .productContainer .productCategory{
+.productContainer .productCategory{
     width:48%;
     margin:0 1%;
     float:left;
