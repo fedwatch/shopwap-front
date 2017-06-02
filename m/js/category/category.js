@@ -145,7 +145,7 @@ define(function (require, exports, module) {
                          '<img class="lazy" src="'+data.image+'"  alt="" style="width:100%;height:7rem;overflow: hidden;">'+
                          '<h4 class="product-title" style="padding:0 .25rem;font-size:.7rem;color:#000;">'+data.name+'</h4>'+
                      '<span class="product-price-box" style="padding:0 .25rem;font-size:.5rem;color:#ff0000;">￥<span style="font-size:.65rem;">'+data.price+'</span></span>'+
-                     '<span class="product-buyer-number-box" style="font-size:.5rem;color:#999;">已有 <span>'+data.sales+'</span>人购买</span>+ </div></a> </div>';
+                     '<span class="product-buyer-number-box" style="font-size:.5rem;color:#999;">已有 <span>'+data.sales+'</span>人购买</span></div></a> </div>';
                  });
 
              }
@@ -261,7 +261,7 @@ define(function (require, exports, module) {
                            '<img class="lazy" src="'+data.image+'"  alt="" style="width:100%;height:7rem;overflow: hidden;">'+
                            '<h4 class="product-title" style="padding:0 .25rem;font-size:.7rem;color:#000;">'+data.name+'</h4>'+
                            '<span class="product-price-box" style="padding:0 .25rem;font-size:.5rem;color:#ff0000;">￥<span style="font-size:.65rem;">'+data.price+'</span></span>'+
-                           '<span class="product-buyer-number-box" style="font-size:.5rem;color:#999;">已有 <span>'+data.sales+'</span>人购买</span>+ </div></a> </div>';
+                           '<span class="product-buyer-number-box" style="font-size:.5rem;color:#999;">已有 <span>'+data.sales+'</span>人购买</span></div></a> </div>';
                    });
 
 
