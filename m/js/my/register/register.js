@@ -6,7 +6,6 @@ define(function(require,exports,module){
     require('swiper');
     require('light7');
     require('store');
-
     require('rsa-all');
     require('siteUrl');
 
@@ -109,8 +108,11 @@ define(function(require,exports,module){
                     },
                     success:function (data) {
                         if(data.authStatus == "200"){
-                            $.toast(data.authMsg);
-                            return location.href="/m/html/my/my.html"
+                            $.toast(data.authMsg,3000);
+                            setTimeout(function(){
+                                return location.href="/m/html/my/my.html"
+                            },3000);
+
                         }else{
                             $.toast(data.authMsg);
                         }
@@ -194,7 +196,7 @@ define(function(require,exports,module){
         $(document).on('click','#getSMSCodeBtn',function () {
             if($userPhone.val() !== ''){
                 var phoneNum = $("#userPhone").val();
-                console.log(phoneNum)
+                console.log(phoneNum);
                 $.ajax({
                     url:BASE_URL+USER_SITE_URL.SEND_DYNAMIC_CODE.URL,
                     type:USER_SITE_URL.SEND_DYNAMIC_CODE.METHOD,

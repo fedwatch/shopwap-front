@@ -43,6 +43,7 @@ seajs.config({
         "varietyValidation":M_URL+"/js/utils/varietyValidation.js",
 
         "lazyload":M_URL+"/js/utils/lazyload.min",
+        "jLazyload":M_URL+"/js/utils/jquery.lazyload.min",
 
         "rsa":M_URL+"/js/utils/rsa/rsa.js",
         "base64":M_URL+"/js/utils/rsa/base64.js",
@@ -50,7 +51,6 @@ seajs.config({
         "jsbn":M_URL+"/js/utils/rsa/jsbn.js",
         "prng4":M_URL+"/js/utils/rsa/prng4.js",
         "rsa-all":M_URL+"/js/utils/rsa/rsa-all.js",
-
         "jsonp":M_URL+"/js/utils/jquery.jsonp.js",
         "zepto":"https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js",
         "swipeout":M_URL+"/assets/plugin/light7/dist/js/light7-swipeout.js",
