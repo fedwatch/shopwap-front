@@ -260,9 +260,10 @@ define(function (require, exports, module) {
 
     //失效宝贝区
     $(document).on("click", ".removeOffItem", function (e) {
-        var $parent = $(e.target).closest('div.offEditPanel').parent();
-        $parent.find(".cart-off-store-img-text-label").remove();
-        $(".offEditPanel").hide();
+        var id = $(this).parents(".failGoods").find(".cart-off-store-img-text-label").data("id");
+        $(this).parents(".failGoods").remove();
+        cartDelete(username,id);
+        // $(".offEditPanel").hide();
     });
 
 
