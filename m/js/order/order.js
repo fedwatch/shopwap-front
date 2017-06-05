@@ -23,17 +23,19 @@ define(function (require, exports, module) {
         var itemIds = store.get("cartItemId");
         var receiverId = store.get("receiverId");
         orderInfo(username, itemIds);
-        $(document).on("click", ".detailOrderBtn", function () {
-            var itemIds = store.get("cartItemId");
-            var receiverId = store.get("receiverId");
-            if(receiverId){
-                calculate(username, receiverId, itemIds);
-            }else{
-                return;
-            }
 
-            create(username, itemIds, receiverId, memoArr);
-        });
+    });
+
+    $(document).on("click", ".detailOrderBtn", function (e) {
+        e.preventDefault();
+        var itemIds = store.get("cartItemId");
+        var receiverId = store.get("receiverId");
+        if(receiverId){
+            calculate(username, receiverId, itemIds);
+        }else{
+            return;
+        }
+        create(username, itemIds, receiverId, memoArr);
     });
 
     /**
