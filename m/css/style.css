@@ -4,7 +4,7 @@
     background: #fff;
     background-size: cover
 }
-
+* { touch-action: none; }
 /* 首页头部搜索 */
 .header-index {
     position: fixed;
