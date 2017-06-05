@@ -23,7 +23,6 @@ define(function (require, exports, module) {
         var itemIds = store.get("cartItemId");
         var receiverId = store.get("receiverId");
         orderInfo(username, itemIds);
-
     });
 
     $(document).on("click", ".detailOrderBtn", function (e) {
@@ -33,6 +32,7 @@ define(function (require, exports, module) {
         if(receiverId){
             calculate(username, receiverId, itemIds);
         }else{
+            $.toast("默认地址未选！");
             return;
         }
         create(username, itemIds, receiverId, memoArr);
