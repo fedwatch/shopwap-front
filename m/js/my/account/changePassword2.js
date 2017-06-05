@@ -29,8 +29,8 @@ define(function (require, exports, module) {
             var middle = /^(?![a-zA-z]+$)(?!\d+$)(?![!@#$%^&*]+$)[a-zA-Z\d!@#$%^&*]+$/;
             var weak = /^(?:\d+|[a-zA-Z]+|[!@#$%^&*]+)$/;
             var flag = true;
-            if (str.length < 6 || str == "" || str.length > 16) {
-                $.toast("请输入6到16位字符串");
+            if (str.length < 8 || str == "" || str.length > 16) {
+                $.toast("请输入8到16位字符串");
                 flag = true;
                 selectInput($newPassword, "li", flag);
             } else {

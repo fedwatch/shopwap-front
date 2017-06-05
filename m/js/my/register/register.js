@@ -148,7 +148,7 @@ define(function(require,exports,module){
         }
 
         function checkPassword(str) {
-            if(str.length <6 || str == ''){
+            if(str.length <8 || str == '' || str.length > 16){
                 $userPassError.show();
                 console.log("用户密码不正确");
                 registerResult.userPass = false;
