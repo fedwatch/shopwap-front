@@ -52,7 +52,7 @@ define(function (require, exports, module) {
                     store.set("userStatus",true);
                     $.toast(data.authMsg+" 3 秒后自动跳转",3000);
                     setTimeout(function(){
-                        location.href = "/www/html/index.html"
+                        location.href = "/www/index.html"
                     },3000);
                 }else{
                     $.toast(data.authMsg);
