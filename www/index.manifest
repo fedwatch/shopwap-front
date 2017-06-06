@@ -1,0 +1,11 @@
+CACHE MANIFEST
+#我是注释，这个文件名叫test2.manifest
+CACHE:
+/m/assets/plugin/jquery.min.js
+/m/assets/plugin/sea.js
+/m/assets/plugin/seajs-text.js
+
+
+
+NETWORK:
+*

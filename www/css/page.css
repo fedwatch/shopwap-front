@@ -1,0 +1,118 @@
+@CHARSET "UTF-8";
+
+.page-pullUp{
+	display:block;
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	font-size:12px;
+	transition:all 200ms;
+	-webkit-transition:all 200ms;
+	
+}
+
+.page-pullUp.normal{
+	
+	
+}
+
+.page-pullUp.release{
+	
+	
+}
+.page-pullUp.loading{
+	
+	
+}
+
+.page-pullUp.end{
+
+	
+}
+
+
+.page-pullDown{
+	display:block;
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	font-size:12px;
+	transition:all 200ms;
+	-webkit-transition:all 200ms;
+}
+
+
+.page-pullDown.normal{
+	
+	
+}
+.page-pullDown.release{
+	
+	
+}
+.page-pullDown.loading{
+	
+	
+}
+
+.page-pullDown.end{
+	
+	
+}
+
+
+/**通用动画**/
+
+.loading:before{
+  content:"";
+  display:inline-block;
+  vertical-align:middle;
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  margin: 2px;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  border: 2px solid #2c99f5;
+  border-bottom-color: transparent;
+  background: transparent !important;
+  display: inline-block;
+  -webkit-animation: loadingAnimate 0.75s 0s linear infinite;
+          animation: loadingAnimate 0.75s 0s linear infinite; 
+}
+
+@-webkit-keyframes loadingAnimate {
+  0% {
+    -webkit-transform: rotate(0deg) scale(1);
+            transform: rotate(0deg) scale(1); }
+
+  50% {
+    -webkit-transform: rotate(180deg) scale(0.6);
+            transform: rotate(180deg) scale(0.6); 
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg) scale(1);
+            transform: rotate(360deg) scale(1); } 
+   }
+
+
+@keyframes loadingAnimate {
+  0% {
+    -webkit-transform: rotate(0deg) scale(1);
+            transform: rotate(0deg) scale(1); }
+
+  50% {
+    -webkit-transform: rotate(180deg) scale(0.6);
+            transform: rotate(180deg) scale(0.6); 
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg) scale(1);
+            transform: rotate(360deg) scale(1); } 
+   }
+
+
+          
+          
+            

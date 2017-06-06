@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>账户安全 - 我的 - 街街网</title>
+    <!--js 头部引入-->
+    <meta charset="UTF-8">
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../../../css/common.css">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/account.css">
+
+    <script type="text/javascript" src="../../../assets/plugin/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../assets/plugin/sea.js"></script>
+    <script type="text/javascript" src="../../../assets/plugin/seajs-text.js"></script>
+
+
+    <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7.min.js"></script>
+    <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
+    <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-swipeout.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../../assets/plugin/light7/dist/css/light7.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../assets/plugin/light7/dist/css/light7-swiper.min.css"/>
+
+    <script>
+        seajs.use(['../../../js/api'])
+    </script>
+    <script>
+        $(function(){
+            var $resetPass=$("#reset-pass");
+            $resetPass.on('click', function () {
+                $.modal({
+                    verticalButtons: true,
+                    buttons: [
+                        {
+                            text: '<div class="secu-li"><a href="javascript:;" class="secu-bot">通过手机验证码找回<span class="arrow pull-right"> &gt;</span></a></div>',
+                            onClick: function() {
+                                window.location.href="./changePassword.html";
+                            }
+                        },
+                        /***  {
+                            text: '<div class="secu-li"><a href="javascript:;" class="secu-bot">通过旧密码找回<span class="arrow pull-right"> &gt;</span></a></div>',
+                            onClick: function() {
+                                window.location.href="./changePassword2.html";
+                            }
+                        }***/
+                    ]
+                });
+                $(".modal-buttons").addClass("secu-but-radius");
+            });
+        });
+    </script>
+</head>
+<body class="page">
+<div id="securityPage">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)"  data-transition='slide-out'>
+            <span class="icon icon-left"></span>
+        </a>
+        <h1 class='title'>账号安全</h1>
+    </header>
+    <div class="content security">
+        <div class="list-block">
+            <div class="item-content" id="reset-pass">
+                <div class="item-inner">
+                    <span class="external reset-password">
+                        重置登录密码
+                    </span>
+                    <span class="arrow pull-right"> &gt;</span>
+                </div>
+            </div>
+        </div>
+        <!---
+           <div class="content-block log-out" >
+               <div class="row">
+                   <div class="col-100">
+                       <a href="../login/login.html" class="external button button-big button-password rg-col" >退出登录</a>
+                   </div>
+               </div>
+           </div>-->
+    </div>
+</div>
+</body>
+</html>
