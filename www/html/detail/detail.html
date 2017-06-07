@@ -7,18 +7,436 @@
     <meta content="telephone=no" name="format-detection">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>商品详情 - 街街网</title>
-    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon"/>
 
-    <script type="text/javascript" src="/www/assets/plugin/jquery.min.js"></script>
-    <script type="text/javascript" src="/www/assets/plugin/sea.js"></script>
-    <script type="text/javascript" src="/www/assets/plugin/seajs-text.js"></script>
-    <link rel="stylesheet" type="text/css" href="/www/assets/plugin/light7/dist/css/light7.css"/>
-    <script type="text/javascript" src="/www/assets/plugin/light7/dist/js/light7.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/www/assets/plugin/light7/dist/css/light7-swiper.min.css"/>
-    <script type="text/javascript" src="/www/assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
-    <script type="text/javascript" src="/www/assets/plugin/light7/dist/js/light7-swipeout.js"></script>
+    <script type="text/javascript" src="../../assets/plugin/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../assets/plugin/light7/dist/css/light7.css"/>
+    <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../assets/plugin/light7/dist/css/light7-swiper.min.css"/>
+    <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
+    <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7-swipeout.js"></script>
+    <script type="text/javascript" src="../../assets/plugin/idangerous.swiper.min.js"></script>
+    <script type="text/javascript" src="../../assets/plugin/handlebars-v1.3.0.js"></script>
+    <script type="text/javascript" src="../../js/config/siteUrl.js"></script>
+    <script type="text/javascript" src="../../js/utils/store.min.js"></script>
+    <script type="text/javascript" src="../../js/utils/getTemplate.js"></script>
+    <script type="text/javascript" src="../../js/utils/transDetails.js"></script>
+
+
+
     <script>
-        seajs.use(['../../js/api','../../js/detail/detail']);
+        $(function () {
+
+            //USERMD
+            var username = store.get("username");
+            var currentProductID = store.get("currentProductID");
+            var userStatus = store.get("userStatus");
+
+            $.toast("username:"+username+" currentProductID:"+currentProductID+" userStatus:"+userStatus);
+
+            jQuery.support.cors = true;
+            // usermd
+            $.ajax({
+                url: BASE_URL + PRODUCT_SITE_URLS.PRODUCT_VIEW.URL,
+                type: PRODUCT_SITE_URLS.PRODUCT_VIEW.METHOD,
+                data: {
+                    username: username,
+                    id: currentProductID
+                },
+                dataType: PRODUCT_SITE_URLS.DATATYPE,
+                success: function (results) {
+                    var data = results;
+                    if (data.authStatus == "200") {
+                        var template = Handlebars.compile($("#productSliderTpl").html());
+                        var html = template(data);
+                        $("#productSlider").html(html);
+
+
+                        //规格页
+                        var template = Handlebars.compile($("#goodsDetailsPageTpl").html());
+                        var html = template(data);
+                        $("#goodsDetailsPage").html(html);
+
+
+                        var template = Handlebars.compile($("#topLinkMenuTpl").html());
+                        var html = template(data);
+                        $("#topLinkMenu").html(html);
+
+                        var template = Handlebars.compile($("#cartDetailFooterTpl").html());
+                        var html = template(data);
+                        $("#cartDetailFooter").html(html);
+
+
+
+                        var template = Handlebars.compile($("#detailOneTpl").html());
+                        var html = template(data);
+                        $("#detailOne").html(html);
+
+                        //七天无理由退换
+                        var template = Handlebars.compile($("#cartIndexTpl").html());
+                        var html = template(data);
+                        $("#cartIndex").html(html);
+
+                        //detailPromo
+                        var template = Handlebars.compile($("#detailPromoTpl").html());
+                        var html = template(data);
+                        $("#detailPromo").html(html);
+
+                        var template = Handlebars.compile($("#detailWrapperTpl").html());
+                        var html = template(data);
+                        $("#detailWrapper").html(html);
+
+                    }
+                    else if (data.authStatus == "500"){
+                        console.log(data.authMsg);
+                    }
+                }
+            })
+
+            if (typeof currentProductID == 'undefined') {
+                $.toast("非法访问! 2 秒后跳转到首页", 2000);
+
+                setTimeout(function () {
+                    location.href = '../index.html';
+                }, 2000)
+            }
+            var productImagesSlider = new Swiper('.product-images-slider', {
+                // pagination:'.swiper-pagination',
+                // autoplay:'1000',
+                spaceBetween: '10'
+            });
+
+
+            //获取已有购物车物品数量
+            getCartCount(username, ".cart-badge > .badge");
+
+            // $("img.lazy").lazyload({
+            //     threshold : 0,
+            //     effect : "fadeIn",
+            // });
+
+            setSpecificationId(username, currentProductID)
+
+            //监听 购物车
+            $(document).on('click', ".cart-badge", function () {
+                if (userStatus) {
+                    getCartCount(username, ".cart-badge > .badge");
+                    var sum = $(".cart-badge > .badge").text();
+                    if (sum == "0") {
+                        $.toast("请添加商品");
+                        return;
+                    } else {
+                        window.location.href = "/www/html/cart/cart.html";
+                    }
+                } else {
+                    $.toast("请登录才可以进行后续操作");
+                    return location.href = '/www/html/my/login/login.html';
+                }
+            });
+
+            //监听 请选择规格
+            $(document).on('click', ".specifications-type", function () {
+                if ($("#specShow").html() == "") {
+                    $("#goodsDetailsPage").show();
+                    $("#goodsDetailMask").show();
+                }
+            });
+
+            var cart = [];
+            var item = {};
+            item.item = [];
+
+            //监听 加入购物车
+            $(document).on('click', '.addToCartBtn', addToCart);
+
+            //立即下单
+            $(document).on('click', ".buyNowBtn", function () {
+                if (userStatus) {
+                    var cartState = $("#cartState").val();
+                    if (cartState == "false") {
+                        $("#goodsDetailMask").show();
+                        $("#goodsDetailsPage").show();
+                    } else if (cartState == "true") {
+                        $("#goodsDetailMask").hide();
+                        $("#goodsDetailsPage").hide();
+                    }
+                    if (cartState == "true") {
+                        var username = store.get("username");
+                        var currentProductID = store.get("currentProductID");
+                        var count = $("input[name=goodsNumber]").val();
+                        if (typeof username !== 'undefined' && typeof currentProductID !== 'undefined' && typeof count !== 'undefined'
+                            && username !== '' && currentProductID !== '' && count !== '') {
+                            store.set("mark", true);
+                        } else {
+                            store.set("mark", false);
+                        }
+                        var mark = store.get("mark");
+                        if (mark == true) {
+                            addCartForBuyNow(username, currentProductID, count)
+                        }
+                    }
+                } else {
+                    $.toast("请登录才可以进行后续操作", 2000);
+                    setTimeout(function () {
+                        location.href = '/www/html/my/login/login.html';
+                    }, 2000)
+                }
+
+            });
+
+            //边缘遮罩层 *
+            $(".goods-detail-mask").on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(".goods-details-page").hide();
+                $("#goodsDetailMask").hide();
+            });
+
+            //规格
+            $(document).on('click', '.spec-button', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                var $this = $(this);
+                $this.parent().find(".spec-button").removeClass("active");
+                $this.addClass("active");
+
+                var len = $(".popup-page > .spec-button.active").length;
+                var i = 0;
+                var text = [];
+                for (i = 0; i < len; i++) {
+                    text += $(".popup-page > .spec-button.active").eq(i).text() + ","
+
+                }
+                $("#specResult").val(text);
+                $("#cartState").val("true");
+            });
+
+            //数量 -
+            $(document).on('click', ".goods-minus-btn", function (e) {
+
+                if ($(".numbers-board > .goods-minus-btn").hasClass("active")) {
+                    var num = parseInt($("input[name=goodsNumber]").val());
+                    if (num == 1) {
+                        $(".numbers-board > .goods-minus-btn").removeClass("active");
+                        return;
+                    } else {
+                        num = num - 1;
+                    }
+                    $("input[name=goodsNumber]").val(num);
+                    $("#numberResult").val(num);
+                    $("#cartState").val("true");
+                } else {
+                    return;
+                }
+            });
+            //数量 +
+            $(document).on('click', ".goods-plus-btn", function (e) {
+
+                if ($(".numbers-board > .goods-plus-btn").hasClass("active")) {
+                    var num = parseInt($("input[name=goodsNumber]").val());
+                    num = num + 1;
+                    if (num > 1) {
+                        $(".numbers-board > .goods-minus-btn").removeClass("active");
+                        $(".numbers-board > .goods-minus-btn").addClass("active");
+                    }
+                    $("input[name=goodsNumber]").val(num);
+                    $("#numberResult").val(num);
+                    $("#cartState").val("true");
+                } else {
+                    return;
+                }
+            });
+
+        });
+
+
+
+
+
+
+        /**
+         *
+         * @param username
+         * @param currentProductID
+         * @param count
+         * @returns
+         *  authMsg:"success"
+         *  authStatus:"200"
+         *  count:1
+         *  itemId:3081
+         */
+        function addCartForBuyNow(username, currentProductID, count) {
+            $.ajax({
+                url: BASE_URL + CART_SITE_URL.CART_ADD.URL,
+                type: CART_SITE_URL.CART_ADD.METHOD,
+                data: {
+                    username: username,
+                    productId: currentProductID,
+                    quantity: count
+                },
+                cache: true,
+                async: false,
+                dataType: CART_SITE_URL.DATATYPE,
+                success: function (data) {
+                    if (data.authStatus == "200") {
+                        if (data.itemId) {
+                            store.set("cartItemId", [data.itemId]);
+                            $("#cartState").val(false)
+                            return location.href = "/www/html/order/order.html";
+                        } else {
+                            console.log("item id 不存在")
+                        }
+
+                    }
+                }
+            })
+        }
+
+        function addToCart() {
+            if (userStatus) {
+                var amount = store.get("amount");
+                calculateFreight(username, currentProductID, amount, "shippingCost");
+                var cartState = $("#cartState").val();
+                if (cartState == "false") {
+                    $("#goodsDetailMask").show();
+                    $("#goodsDetailsPage").show();
+                } else if (cartState == "true") {
+                    $("#goodsDetailMask").hide();
+                    $("#goodsDetailsPage").hide();
+                }
+
+                var count = $("input[name=goodsNumber]").val();
+                store.set("currentProductCount", count);
+                if (cartState == "true") {
+                    $.ajax({
+                        url: BASE_URL + CART_SITE_URL.CART_ADD.URL,
+                        type: CART_SITE_URL.CART_ADD.METHOD,
+                        data: {
+                            username: username,
+                            productId: currentProductID,
+                            quantity: count
+                        },
+                        cache: true,
+                        async: false,
+                        dataType: CART_SITE_URL.DATATYPE,
+                        success: function (data) {
+                            if (data.authStatus == "200") {
+                                getCartCount(username, ".cart-badge > .badge");
+                                $("#cartState").val(false)
+                            }
+
+                        }
+                    })
+                }
+            } else {
+                $.toast("请登录才可以进行后续操作");
+                location.href = '/www/html/my/login/login.html';
+            }
+
+        }
+
+
+        // 设置选择规格到html
+        function setTextToSpecShow() {
+            var sm = "";
+            var specResult = $("#specResult").val();
+            var colorResult = $("#colorResult").val() || $(".popup-page >.color-button.number-input.active").text();
+            var numberResult = $("#numberResult").val() || 1;
+            sm = specResult + "," + colorResult + "," + numberResult;
+            $("#specShow").html(sm);
+        }
+
+
+        /**
+         * 设置产品的规格
+         * @param username
+         * @param currentProductID
+         */
+        function setSpecificationId(username,currentProductID) {
+            // usermd
+            $.ajax({
+                url: BASE_URL + PRODUCT_SITE_URLS.PRODUCT_VIEW.URL,
+                type: PRODUCT_SITE_URLS.PRODUCT_VIEW.METHOD,
+                data: {
+                    username: username,
+                    id: currentProductID
+                },
+                cache:true,
+                async:false,
+                dataType: PRODUCT_SITE_URLS.DATATYPE,
+                success: function (data) {
+                    if(data.authStatus == '200'){
+                        if(data["product"]){
+                            var specificationValues = data["product"].specificationValues;
+                            var productSpec = [];
+                            specificationValues.map(function (data) {
+                                productSpec.push(data.id)
+                            });
+                            var len = productSpec.length;
+                            for (var i = 0; i < len; i++) {
+                                $("#specification-id-" + productSpec[i]).removeClass("active").addClass("active");
+                            }
+                        }
+                    }else{
+                        $.toast(data.authMsg);
+                        return history.go(-1);
+                    }
+                }
+            })
+        }
+
+
+        /**
+         * 计算运费
+         * @param username
+         * @param id
+         * @param buyCount
+         * @param DOM
+         */
+        function calculateFreight(username, id, buyCount, DOM) {
+            // usermd
+            $.ajax({
+                url: BASE_URL + PRODUCT_SITE_URLS.CALCULATE_FREIGHT.URL,
+                type: PRODUCT_SITE_URLS.CALCULATE_FREIGHT.METHOD,
+                data: {
+                    username: username,
+                    id: id,
+                    buyCount: buyCount
+                },
+                dataType: PRODUCT_SITE_URLS.DATATYPE,
+                success: function (data) {
+                    // console.log(data);
+                    if (data.authStatus == "200") {
+                        $("#" + DOM).text(data.freight);
+                    }
+                }
+            })
+        }
+
+        //获取购物车数据
+        function getCartCount(username, DOM) {
+            // usermd
+            $.ajax({
+                url: BASE_URL + CART_SITE_URL.CART_COUNT.URL,
+                type: CART_SITE_URL.CART_COUNT.METHOD,
+                data: {
+                    username: username,
+                },
+                cache:true,
+                async:false,
+                dataType: CART_SITE_URL.DATATYPE,
+                success: function (data) {
+                    if (data.authStatus == "200") {
+                        var sum = data.count;
+                        store.set("amount", sum);
+                        $(DOM).text(sum);
+                    }
+                }
+            })
+        }
+
+
     </script>
 </head>
 <body>
@@ -42,7 +460,182 @@
 </div>
 
 
+<script type="text/x-handlebars-template" id="productSliderTpl">
+    <div class="product-images-slider" data-space-between='10' data-pagination='.swiper-pagination' data-autoplay="1000">
+        <div class="swiper-wrapper">
+            {{#each this.product.productImages}}
+            <div class="swiper-slide">
+                <img
+                        src="{{this.source}}"
+                        alt="{{this.alt}}" class="lazy">
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</script>
 
+<script type="text/x-handlebars-template" id="goodsDetailsPageTpl">
+    <div class="detail-header" >
+        <div class="detail-image" >
+            <img class="lazy img-round" src="{{this.product.image}}"  alt="">
+        </div>
+        <div class="detail-desc" >
+            <span class="detail-desc-price" >￥ <span class="product-price">{{this.product.price}}</span></span><br>
+            <span class="detail-desc-stock" >库存：<span id="inStock">{{this.product.stock}}</span> 件</span><br>
+            <!--<span class="detail-desc-choice" >描述：<span id="productDescription">{{this.product.brand.introduction}}</span></span>-->
+        </div>
+    </div>
+
+    {{#if product.specifications}}
+    <div class="detail-body">
+        {{#each product.specifications}}
+        <div class="body-title">{{name}}：</div>
+        <div class="popup-page spec-{{id}}" >
+            {{#each this.specificationValues}}
+            <span class="spec-button number-input"
+                  id="specification-id-{{this.id}}"
+                  data-specification-id="{{this.id}}">
+            {{this.name}}
+        </span>
+            {{/each}}
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+
+    <div class="detail-body">
+        <div class="numbers-board popup-page">
+            数量：
+            <span class="number-input goods-minus-btn"> - </span>
+            <input type="text" name="goodsNumber" value="0">
+            <span class="number-input active goods-plus-btn"> + </span>
+        </div>
+    </div>
+</script>
+
+
+
+<script type="text/x-handlebars-template" id="topLinkMenuTpl">
+    <div class="backLink">
+        <a href="javascript:history.go(-1);" class="external">
+            <i class="icon icon-detail-back-icon"></i>
+        </a>
+    </div>
+</script>
+
+
+<script type="text/x-handlebars-template" id="cartDetailFooterTpl">
+    <div class="cartBadgeBtn">
+        <div class="cart-badge">
+            <i class="icon icon-cart"></i>
+            <span class="badge">0</span>
+        </div>
+    </div>
+    <div class="addToCartBtn">
+        <span class="addCartText">加入购物车</span>
+    </div>
+    <div class="buyNowBtn">
+        <span class="buyNowText">立即购买</span>
+    </div>
+</script>
+
+<script type="text/x-handlebars-template" id="detailOneTpl">
+    <!--产品名称、价格、运费、发货地-->
+    <div class="detail-content list-block" style="background: #fff;padding-top:.5rem;">
+        <div class="product-title-box" >
+            <!--<h1 class="product-title" id="productName"></h1>-->
+            <h1 class="product-title">{{this.product.name}}</h1>
+        </div>
+
+        <div class="product-price-box" >
+            <span>￥<span id="productPrice">{{this.product.price}}</span></span>
+        </div>
+        <div class="shopping-cost detail-item-content" >
+            <!--运费-->
+            <div class="shipping-cost-box pull-left" >
+            <span>
+                运费：
+                <span id="shippingCost">
+                    {{#if this.freight}}
+                        {{this.freight}}
+                    {{else}}
+                        0.00
+                    {{/if}}
+
+                </span>
+                元
+            </span>
+            </div>
+            <!--发货地-->
+            <div class="seller-location pull-right" id="productPlace">广东福山</div>
+        </div>
+        <div id="cartIndex" style="background: #fff"></div>
+    </div>
+</script>
+
+<script type="text/x-handlebars-template" id="cartIndexTpl">
+    <div class="cart-index">
+        <div>
+            <i class="icon icon-cart-level-1">
+                <!--<img src="assets/images/gou.png">-->
+            </i>
+            <span>1级优质商品</span>
+        </div>
+        <div>
+            <i class="icon icon-cart-7-days">
+                <!--<img src="assets/images/gou.png">-->
+            </i>
+            <span>7天无理由退换</span>
+        </div>
+        <div>
+            <i class="icon icon-cart-48-hours">
+                <!--<img src="assets/images/gou.png">-->
+            </i>
+            <span>48小时快速退款</span>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-handlebars-template" id="detailPromoTpl">
+    <!--促销-->
+    <div class="detail-content list-block" style="background: #fff;">
+
+        <div class="detail-item-content" style="background: #fff;margin: .5rem 0;">
+            <div class="promotion-title pull-left">促销</div>
+            {{#each product.promotions}}
+            <div class="promotion-type pull-right">
+                <i class="icon icon-promo-minus"></i>
+                {{name}}
+            </div>
+            {{/each}}
+        </div>
+
+        <div class="detail-item-content" style="background: #fff;margin: .5rem 0;">
+            <div class="specifications-title pull-left">请选择规格</div>
+            <div class="specifications-type pull-right">
+                <span id="specShow"></span>
+                <i class="specifications-icon icon icon-more-link"></i>
+
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-handlebars-template" id="detailWrapperTpl">
+    <!--商品详情-->
+    <div class="detail-content list-block" style="background: #fff;" >
+        <div class="detail-item-content">
+            <div class="detail-block label">商品详情</div>
+        </div>
+        {{#each this.product.productImages}}
+        <div class="goods-description text-center">
+            <img class="lazy" src="{{this.source}}"  alt="{{this.alt}}">
+        </div>
+        {{/each}}
+    </div>
+</script>
+
+<script type="text/x-handlebars-template"></script>
 
 
 <input type="hidden" id="specResult">

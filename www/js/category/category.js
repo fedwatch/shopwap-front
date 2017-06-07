@@ -23,17 +23,6 @@ define(function (require, exports, module) {
 
         getCurrentPage();
 
-        // function lazyload(){
-        //     $("img.lazy").lazyload({
-        //         threshold : 10,
-        //         effect : "show",
-        //         failure_limit: 10,
-        //         event: "scroll",
-        //         no_fake_img_loader:true
-        //     });
-        // }
-
-
         initCategoryActive();
 
         /**
