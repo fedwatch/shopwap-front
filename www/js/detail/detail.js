@@ -2,12 +2,6 @@
  * Created by Administrator on 2017/3/13.
  */
 define(function (require, exports, module) {
-    require('jquery');
-    require('swiper');
-    // require('lazyload');
-    require('light7');
-    require('store');
-    require('siteUrl');
 
     //USERMD
     var username = store.get("username");
