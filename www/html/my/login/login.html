@@ -21,17 +21,16 @@
     <script type="text/javascript" src="../../../js/utils/store.min.js"></script>
     <script type="text/javascript" src="../../../js/utils/rsa/rsa-all.js"></script>
     <script type="text/javascript" src="../../../js/config/siteUrl.js"></script>
-
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
-    jQuery.support.cors = true;
 
-
-    var $userPhone = $('#userPhone');
-    var $userPass = $('#userPass');
-    var resultState = {},
-        enPassword;
-    var regex = /^1\d{10}$/;
     $(function () {
+        jQuery.support.cors = true;
+        var $userPhone = $('#userPhone');
+        var $userPass = $('#userPass');
+        var resultState = {},
+            enPassword;
+        var regex = /^1\d{10}$/;
         $(document).on('click', '#loginBtn', function () {
 
             var username = $.trim($('#userPhone').val());
@@ -42,7 +41,7 @@
                 url: BASE_URL + USER_SITE_URL.PUBLIC_KEY.URL,
                 type: USER_SITE_URL.PUBLIC_KEY.METHOD,
                 dataType: USER_SITE_URL.DATATYPE,
-                cache: true,
+//                cache: true,
                 async: false,
                 success: function (data) {
                     var rsaKey = new RSAKey();
@@ -55,7 +54,7 @@
             $.ajax({
                 url: BASE_URL + USER_SITE_URL.USER_LOGIN.URL,
                 type: USER_SITE_URL.USER_LOGIN.METHOD,
-                cache: true,
+//                cache: true,
                 async: false,
                 dataType: USER_SITE_URL.DATATYPE,
                 data: {
@@ -69,7 +68,7 @@
                         store.set("userStatus", true);
                         $.toast(data.authMsg + " 3 秒后自动跳转", 3000);
                         setTimeout(function () {
-                            location.href = "/www/index.html"
+                            location.href = "../../../index.html"
                         }, 3000);
                     } else {
                         $.toast(data.authMsg);
@@ -99,9 +98,10 @@
 <script type="text/x-handlebars-template" id="loginTpl">
     <!--用户登录-->
     <header class="bar bar-nav">
-        <a class="button button-link button-nav pull-left external" href="/m/html/index.html"
+        <a class="button button-link button-nav pull-left external" href="../../../index.html"
            data-transition='slide-out'>
-            <span class="icon icon-left"></span>
+            <!--<span class="icon icon-left"></span>-->
+            <i class="fa fa-chevron-left"></i>
         </a>
         <h1 class='title'>用户登录</h1>
     </header>

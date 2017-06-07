@@ -21,7 +21,7 @@
     <script type="text/javascript" src="../../assets/plugin/page.js"></script>
     <!--<script type="text/javascript" src="/www/assets/plugin/sea.js"></script>-->
     <!--<script type="text/javascript" src="/www/assets/plugin/seajs-text.js"></script>-->
-
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../../assets/plugin/light7/dist/css/light7.css"/>
     <link rel="stylesheet" type="text/css" href="../../assets/plugin/light7/dist/css/light7-swiper.min.css"/>
     <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7.min.js"></script>
@@ -34,7 +34,7 @@
     <script type="text/javascript" src="../../js/config/siteUrl.js"></script>
     <script>
        $(function () {
-        jQuery.support.cors = true;
+           jQuery.support.cors = true;
         var username = store.get("username");
         var scroller = new IScroll('#productCategory', {click: true, tap: true});
         $('#productCategory').on('click, tap', '.productCategory a', function () {
@@ -84,6 +84,16 @@
         function initCategoryActive() {
             $(".nav-tabbar-item").first().find(".nav-render > .nav-text").addClass("active");
             $(".nav-sub-text").first().addClass("active");
+            var tabbarBottomline = $("#tabbar-bottomline");
+            var textLen = $($('.nav-tabbar-item .nav-text')).eq(0).text().length;
+            if (textLen == 4) {
+                tabbarBottomline.css("width", "5rem");
+            } else if (textLen == 3) {
+                tabbarBottomline.css("width", "4rem");
+            } else if (textLen == 2) {
+                tabbarBottomline.css("width", "3rem");
+            }
+
         }
 
     // mainNav
@@ -111,6 +121,7 @@
                         async: false,
                         success: function (data) {
                             if (data.authStatus == '200') {
+
                                 var template = Handlebars.compile($("#navSubPositionTpl").html());
                                 var html = template(data);
                                 $("#navSubPosition").html(html);
@@ -125,6 +136,9 @@
                                 var endPrice = '';
                                 var pageSize = '20';
                                 getSearchResults(keyword, pageNumber, categoryIds, brandIds, startPrice, endPrice, pageSize, 'productCategory');
+
+                                initCategoryActive();
+
                             }
                         }
                     });
@@ -301,19 +315,19 @@
 <script type="text/x-handlebars-template"  id="footerTpl">
     <!--现在的页脚-->
     <nav class="footer-bar bar bar-tab ">
-        <a id="home-link" class="tab-item  external" href="/m/html/index.html">
+        <a id="home-link" class="tab-item  external" href="../../index.html">
             <i class="icon icon-nav-home"></i>
             <span class="tab-label">首页</span>
         </a>
-        <a id="category-link" class="tab-item external" href="/m/html/category/category.html">
+        <a id="category-link" class="tab-item external" href="../../html/category/category.html">
             <i class="icon icon-nav-category"></i>
             <span class="tab-label">分类</span>
         </a>
-        <a id="cart-link" class="tab-item external" href="/m/html/cart/cart.html">
+        <a id="cart-link" class="tab-item external" href="../../html/cart/cart.html">
             <i class="icon icon-nav-cart"></i>
             <span class="tab-label">购物车</span>
         </a>
-        <a id="user-link" class="tab-item external"  href="/m/html/my/my.html">
+        <a id="user-link" class="tab-item external"  href="../../html/my/my.html">
             <i class="icon icon-nav-user"></i>
             <span class="tab-label">我的</span>
         </a>
