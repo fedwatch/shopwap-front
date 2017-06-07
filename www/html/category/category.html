@@ -33,218 +33,218 @@
     <script type="text/javascript" src="../../js/utils/getCurrentPage.js"></script>
     <script type="text/javascript" src="../../js/config/siteUrl.js"></script>
     <script>
+        /**
+         * Created by Administrator on 2017/3/28.
+         */
+       $(function () {
+        jQuery.support.cors = true;
+        var username = store.get("username");
+        var scroller = new IScroll('#productCategory', {click: true, tap: true});
+        $('#productCategory').on('click, tap', '.productCategory a', function () {
+            //do something....
+        });
 
-      function getTemplate(data, tplFile, DOM) {
-          var getData = data;
-          var template = Handlebars.compile($("#" + tplFile).html());
-          var html = template(getData);
-          $("#" + DOM).html(html);
-      }
+        getCurrentPage();
+        initCategoryActive();
 
-      jQuery.support.cors = true;
-      var MD_URL = '//' + location.host + '/www';
-      var username = store.get("username");
-      $.ajax({
-          url: BASE_URL + PRODUCT_SITE_URLS.FIND_ROOTS.URL,
-          type: PRODUCT_SITE_URLS.FIND_ROOTS.METHOD,
-          dataType: "json",
-          data: {username: username},
-          cache: true,
-          async: false,
-          success: function (data) {
+        //商品查询1
+        function getProductInfo() {
+            var categoryIdsHidden = $("#categoryId").val();
+            var categorySubId = $("#categorySubId").val();
+            var keyword = '';
+            var pageNumber = '';
+            var categoryIds = categoryIdsHidden + "," + categorySubId;
+            var brandIds = '';
+            var startPrice = '';
+            var endPrice = '';
+            var pageSize = '';
 
-              if (data.authStatus == "200") {
-                  getTemplate(data,'mainNavTpl','mainNav');
-                  // navSubPosition
-                  var categoryId = data.productCategories[0].id;
-                  $.ajax({
-                      url: BASE_URL + PRODUCT_SITE_URLS.FIND_SUBS.URL,
-                      type: PRODUCT_SITE_URLS.FIND_SUBS.METHOD,
-                      data: {username: username, id: categoryId},
-                      dataType: PRODUCT_SITE_URLS.DATATYPE,
-                      cache: true,
-                      async: false,
-                      success: function (data) {
-                          if (data.authStatus == '200') {
-                              getTemplate(data,'navSubPositionTpl','navSubPosition');
-                              var categoryIdsHidden = categoryId;
-                              var categorySubId = data.productCategories[0].id;
-                              var keyword = '';
-                              var pageNumber = '1';
-                              var categoryIds = categoryIdsHidden + "," + categorySubId;
-                              var brandIds = '';
-                              var startPrice = '';
-                              var endPrice = '';
-                              var pageSize = '20';
-                              getSearchResults(keyword, pageNumber, categoryIds, brandIds, startPrice, endPrice, pageSize, 'productCategory');
-                          }
-                      }
-                  });
+            var pageOp = $("#productCategory").page({
+                url: BASE_URL + PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
+                param: {},
+                processResult: function (result) {
+                    var html = "";
+                    if (result.products != null) {
+                        $.each(result.products, function (index, data) {
+                            html += '<div class="col-50 productCategory" >' +
+                                '<a href="javascript:;"  data-id="' + data.id + '" class="external">' +
+                                '<div style="background: #fff;padding:0 0;margin: .25rem 0;width:100%;height:12rem;overflow: hidden;">' +
+                                '<img src="' + data.image + '" alt="" style="width:100%;height:7rem;overflow: hidden;">' +
+                                '<h4 class="product-title" style="padding:0 .25rem;font-size:.7rem;color:#000;">' + data.name + '</h4>' +
+                                '<span class="product-price-box" style="padding:0 .25rem;font-size:.5rem;color:#ff0000;">￥<span style="font-size:.65rem;">' + data.price + '</span>' + '</span>' + '<span class="product-buyer-number-box" style="font-size:.5rem;color:#999;">已有 <span>' + data.sales + '</span>人购买</span>' + '</div>' +
+                                '</a>' + '</div>';
+                        });
 
-              }
-          }
-      });
-      //商品查询1
-      function getProductInfo() {
-          var categoryIdsHidden = $("#categoryId").val();
-          var categorySubId = $("#categorySubId").val();
-          var keyword = '';
-          var pageNumber = '';
-          var categoryIds = categoryIdsHidden + "," + categorySubId;
-          var brandIds = '';
-          var startPrice = '';
-          var endPrice = '';
-          var pageSize = '';
+                    }
 
-          var pageOp = $("#productCategory").page({
-              url: BASE_URL + PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
-              param: {},
-              processResult: function (result) {
-                  var html = "";
-                  if (result.products != null) {
-                      $.each(result.products, function (index, data) {
-                          html += '<div class="col-50 productCategory" >' +
-                              '<a href="javascript:;"  data-id="' + data.id + '" class="external">' +
-                              '<div style="background: #fff;padding:0 0;margin: .25rem 0;width:100%;height:12rem;overflow: hidden;">' +
-                              '<img src="' + data.image + '" alt="" style="width:100%;height:7rem;overflow: hidden;">' +
-                              '<h4 class="product-title" style="padding:0 .25rem;font-size:.7rem;color:#000;">' + data.name + '</h4>' +
-                              '<span class="product-price-box" style="padding:0 .25rem;font-size:.5rem;color:#ff0000;">￥<span style="font-size:.65rem;">' + data.price + '</span>' + '</span>' + '<span class="product-buyer-number-box" style="font-size:.5rem;color:#999;">已有 <span>' + data.sales + '</span>人购买</span>' + '</div>' +
-                              '</a>' + '</div>';
-                      });
+                    return html;
+                }
+            });
+            pageOp.load({categoryIds: categoryIds});
 
-                  }
+        }
 
-                  return html;
-              }
-          });
-          pageOp.load({categoryIds: categoryIds});
+        function initCategoryActive() {
+            $(".nav-tabbar-item").first().find(".nav-render > .nav-text").addClass("active");
+            $(".nav-sub-text").first().addClass("active");
+        }
 
-      }
+    // mainNav
+        $.ajax({
+            url: BASE_URL + PRODUCT_SITE_URLS.FIND_ROOTS.URL,
+            type: PRODUCT_SITE_URLS.FIND_ROOTS.METHOD,
+            dataType: "json",
+            data: {username: username},
+            cache: true,
+            async: false,
+            success: function (data) {
+            if (data.authStatus == "200") {
+                var template = Handlebars.compile($("#mainNavTpl").html());
+                var html = template(data);
+                $("#mainNav").html(html);
 
-      function initCategoryActive() {
-          $(".nav-tabbar-item").first().find(".nav-render > .nav-text").addClass("active");
-          $(".nav-sub-text").first().addClass("active");
-      }
-      // mainNav
+                    // navSubPosition
+                    var categoryId = data.productCategories[0].id;
+                    $.ajax({
+                        url: BASE_URL + PRODUCT_SITE_URLS.FIND_SUBS.URL,
+                        type: PRODUCT_SITE_URLS.FIND_SUBS.METHOD,
+                        data: {username: username, id: categoryId},
+                        dataType: PRODUCT_SITE_URLS.DATATYPE,
+                        cache: true,
+                        async: false,
+                        success: function (data) {
+                            if (data.authStatus == '200') {
+                                var template = Handlebars.compile($("#navSubPositionTpl").html());
+                                var html = template(data);
+                                $("#navSubPosition").html(html);
 
+                                var categoryIdsHidden = categoryId;
+                                var categorySubId = data.productCategories[0].id;
+                                var keyword = '';
+                                var pageNumber = '1';
+                                var categoryIds = categoryIdsHidden + "," + categorySubId;
+                                var brandIds = '';
+                                var startPrice = '';
+                                var endPrice = '';
+                                var pageSize = '20';
+                                getSearchResults(keyword, pageNumber, categoryIds, brandIds, startPrice, endPrice, pageSize, 'productCategory');
+                            }
+                        }
+                    });
+                }
+            }
+        })
 
-      //商品查询
-      function getSearchResults(keyword, pageNumber, categoryIds, brandIds, startPrice, endPrice, pageSize, DOM) {
-          var pageOp = $("#productCategory").page({
-              url: BASE_URL + PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
-              param: {},
-              processResult: function (result) {
-                  var html = "";
-                  if (result.products != null) {
-                      $.each(result.products, function (index, data) {
-                          html += '<div class="col-50 productCategory" >' +
-                              '<a href="javascript:;"  data-id="' + data.id + '" class="external">' +
-                              '<div style="background: #fff;padding:0 0;margin: .25rem 0;width:100%;height:12rem;overflow: hidden;">' +
-                              '<img src="' + data.image + '" alt="" style="width:100%;height:7rem;overflow: hidden;">' +
-                              '<h4 class="product-title" style="padding:0 .25rem;font-size:.7rem;color:#000;">' + data.name + '</h4>' +
-                              '<span class="product-price-box" style="padding:0 .25rem;font-size:.5rem;color:#ff0000;">￥<span style="font-size:.65rem;">' + data.price + '</span>' + '</span>' + '<span class="product-buyer-number-box" style="font-size:.5rem;color:#999;">已有 <span>' + data.sales + '</span>人购买</span>' + '</div>' +
-                              '</a>' + '</div>';
-                      });
+        //商品查询
+        function getSearchResults(keyword, pageNumber, categoryIds, brandIds, startPrice, endPrice, pageSize, DOM) {
+            var pageOp = $("#productCategory").page({
+                url: BASE_URL + PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
+                param: {},
+                processResult: function (result) {
+                    var html = "";
+                    if (result.products != null) {
+                        $.each(result.products, function (index, data) {
+                            html += '<div class="col-50 productCategory" >' +
+                                '<a href="javascript:;"  data-id="' + data.id + '" class="external">' +
+                                '<div style="background: #fff;padding:0 0;margin: .25rem 0;width:100%;height:12rem;overflow: hidden;">' +
+                                '<img src="' + data.image + '" alt="" style="width:100%;height:7rem;overflow: hidden;">' +
+                                '<h4 class="product-title" style="padding:0 .25rem;font-size:.7rem;color:#000;">' + data.name + '</h4>' +
+                                '<span class="product-price-box" style="padding:0 .25rem;font-size:.5rem;color:#ff0000;">￥<span style="font-size:.65rem;">' + data.price + '</span>' + '</span>' + '<span class="product-buyer-number-box" style="font-size:.5rem;color:#999;">已有 <span>' + data.sales + '</span>人购买</span>' + '</div>' +
+                                '</a>' + '</div>';
+                        });
 
-                  }
+                    }
 
-                  return html;
-              }
-          });
+                    return html;
+                }
+            });
 
-          pageOp.load({
-              keyword: keyword,
-              pageNumber: pageNumber,
-              categoryIds: categoryIds,
-              brandIds: brandIds,
-              startPrice: startPrice,
-              endPrice: endPrice,
-              pageSize: pageSize
-          });
+            pageOp.load({
+                keyword: keyword,
+                pageNumber: pageNumber,
+                categoryIds: categoryIds,
+                brandIds: brandIds,
+                startPrice: startPrice,
+                endPrice: endPrice,
+                pageSize: pageSize
+            });
+        }
 
-      }
+       /**
+        * 主分类
+        */
+       $(document).on('click', '.nav-tabbar-item .nav-text', function (e) {
+           // e.preventDefault();
+           var $this = $(this);
+           $("#categoryId").val($this.data("category-id"));
+           var w = $this.offset().left;
+           $(".nav-tabbar-item .nav-text").removeClass("active");
+           $this.addClass("active");
+           var tabbarBottomline = $("#tabbar-bottomline");
+           tabbarBottomline.css("transform", "translate3d(" + w + "px, 0px, 0px)");
+           var textLen = $(this).text().length;
+           if (textLen == 4) {
+               tabbarBottomline.css("width", "5rem");
+           } else if (textLen == 3) {
+               tabbarBottomline.css("width", "4rem");
+           } else if (textLen == 2) {
+               tabbarBottomline.css("width", "3rem");
+           }
 
-
-      var footerTpl = {};
-      getTemplate(footerTpl, 'footerTpl', 'footerNavPage');
-
-      function getProductDetail(id) {
-          var productId = id;
-          store.set("currentProductID", productId);
-          location.href = '/www/html/detail/detail.html';
-      }
-
-      var scroller = new IScroll('#productCategory', {click: true, tap: true});
-      $('#productCategory').on('click, tap', '.productCategory a', function () {
-          //do something....
-      });
-
-      getCurrentPage();
-
-      initCategoryActive();
-
-
-      $(document).on('click', '.productCategory a', function (e) {
-          e.preventDefault();
-          console.log($(this));
-          getProductDetail($(this).data("id"));
-      });
-
-      /**
-       * 主分类
-       */
-      $(document).on('click', '.nav-tabbar-item .nav-text', function (e) {
-          // e.preventDefault();
-          var $this = $(this);
-          $("#categoryId").val($this.data("category-id"));
-          var w = $this.offset().left;
-          $(".nav-tabbar-item .nav-text").removeClass("active");
-          $this.addClass("active");
-          var tabbarBottomline = $("#tabbar-bottomline");
-          tabbarBottomline.css("transform", "translate3d(" + w + "px, 0px, 0px)");
-          var textLen = $(this).text().length;
-          if (textLen == 4) {
-              tabbarBottomline.css("width", "5rem");
-          } else if (textLen == 3) {
-              tabbarBottomline.css("width", "4rem");
-          } else if (textLen == 2) {
-              tabbarBottomline.css("width", "3rem");
-          }
-
-          //点击获取二级菜单
-          $.ajax({
-              url: BASE_URL + PRODUCT_SITE_URLS.FIND_SUBS.URL,
-              dataType: PRODUCT_SITE_URLS.DATATYPE,
-              type: PRODUCT_SITE_URLS.FIND_SUBS.METHOD,
-              data: {username: username, id: $("#categoryId").val()},
-              async: false,
-              cache: true,
-              success: function (data) {
-                  // navSubPosition
-                  require.async('handlebars', function () {
-                      var getData = data;
-                      getTemplate(data,'navSubPositionTpl','navSubPosition');
-                      $("#categorySubId").val($this.data("category-sub-id"));
-                      $(".nav-sub-text").first().addClass("active");
-
-                  });
-
-                  getProductInfo();
-              }
-          });
-
-      });
-
-      //二级分类
-      $(document).on('click', '.nav-sub-tabbar-item .nav-sub-text', function (e) {
-          var $this = $(this);
-          $(".nav-sub-render .nav-sub-text").removeClass("active");
-          $this.addClass("active");
-          $("#categorySubId").val($this.data("category-sub-id"));
-          getProductInfo();
-      });
+           //点击获取二级菜单
+           $.ajax({
+               url: BASE_URL + PRODUCT_SITE_URLS.FIND_SUBS.URL,
+               dataType: PRODUCT_SITE_URLS.DATATYPE,
+               type: PRODUCT_SITE_URLS.FIND_SUBS.METHOD,
+               data: {username: username, id: $("#categoryId").val()},
+               async: false,
+               cache: true,
+               success: function (data) {
+                   if(data.authStatus == "200"){
+                       var template = Handlebars.compile($("#navSubPositionTpl").html());
+                       var html = template(data);
+                       $("#navSubPosition").html(html);
+                       $("#categorySubId").val($this.data("category-sub-id"));
+                       $(".nav-sub-text").first().addClass("active");
+                   }
+                   getProductInfo();
+               }
+           });
 
 
+       });
+       //二级分类
+       $(document).on('click', '.nav-sub-tabbar-item .nav-sub-text', function (e) {
+           var $this = $(this);
+           $(".nav-sub-render .nav-sub-text").removeClass("active");
+           $this.addClass("active");
+           $("#categorySubId").val($this.data("category-sub-id"));
+           getProductInfo();
+
+       });
+
+       function getProductDetail(id) {
+           var productId = id;
+           store.set("currentProductID", productId);
+           location.href = '../../html/detail/detail.html';
+       }
+       /**
+        *
+        */
+       $(document).on('click', '.productCategory a', function (e) {
+           e.preventDefault();
+           console.log($(this));
+           getProductDetail($(this).data("id"));
+       });
+
+
+       // footerNav
+       var data={};
+       var template = Handlebars.compile($("#footerTpl").html());
+       var html = template(data);
+       $("#footerNavPage").html(html);
+
+    })
     </script>
 </head>
 <body>
