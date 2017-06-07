@@ -62,8 +62,11 @@
                     }
                     else if (data.authStatus == '403') {
                         store.clear();
-                        $.toast(data.authMsg);
-                        return location.href = '../my/login/login.html';
+                        $.toast(data.authMsg,1500);
+                        setTimeout(function(){
+                            return location.href = '../my/login/login.html';
+                        },1500)
+
                     }
                 }
             });
