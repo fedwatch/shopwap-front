@@ -19,13 +19,374 @@
     <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7.min.js"></script>
     <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
     <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7-swipeout.js"></script>
-    <script type="text/javascript" src="../../assets/plugin/sea.js"></script>
-    <script type="text/javascript" src="../../assets/plugin/seajs-text.js"></script>
+    <!--<script type="text/javascript" src="../../assets/plugin/sea.js"></script>-->
+    <!--<script type="text/javascript" src="../../assets/plugin/seajs-text.js"></script>-->
+
+    <script type="text/javascript" src="../../assets/plugin/handlebars-v1.3.0.js"></script>
+    <script type="text/javascript" src="../../js/config/siteUrl.js"></script>
+    <script type="text/javascript" src="../../js/utils/store.min.js"></script>
+    <script type="text/javascript" src="../../js/utils/getTemplate.js"></script>
+    <script type="text/javascript" src="../../js/utils/transCommonPay.js"></script>
+    <script type="text/javascript" src="../../js/utils/parseUrl.js"></script>
+    <script type="text/javascript" src="../../js/config/getUser.js"></script>
+
     <script>
-        seajs.use(['../../js/api','../../js/payment/creditCard'])
+//        seajs.use(['../../js/api','../../js/payment/creditCard'])
+
+//        require('jquery');
+//        require('store');
+//        require('siteUrl');
+//        require('light7');
+//        require('user');
+
+        var bankCardNo = store.get("bankCardNo");
+        var username = store.get("username");
+        var isBalancePay = store.get("isBalancePay") || false;
+        var type = store.get("type") || "payment";
+        var paymentPluginId = store.get("paymentPluginId") || "lianlianpayPlugin";
+        var mergeSn = store.get("mergeSn");
+        var amount = store.get("amount");
+        var allAmount = store.get("allAmount");
+        var app_request = store.get("app_request") || '3';
+        var cardType = store.get("cardType") || '1';
+        var cardId = store.get("cardId");
+
+        jQuery.support.cors = true;
+        $(function () {
+
+            bankcardBind(bankCardNo, username);
+
+            var timer = 60;
+            var verBtnStatus = false;
+            $(document).on('click', '.verBtn', function () {
+                if (verBtnStatus == true)
+                    verBtnStatus = false;
+                var $this = $(this);
+                if (verBtnStatus == false) {
+                    sendDynamicCode(username,'3');
+                }
+                setInterval(function () {
+                    if (verBtnStatus == false) {
+                        timer = timer - 1;
+                        $this.text(timer + "秒").css("background", "#999");
+                        $this.attr("disabled", true);
+                        if (timer == 0) {
+                            $this.text("获取验证码").css("background", "#ff503e");
+                            $this.attr("disabled", false);
+                            verBtnStatus = true;
+                            return timer = 60;
+                        }
+                    }
+                }, 1000);
+            });
+
+            $(document).on('click', '.firstBind', function () {
+                // debugger;
+                var $this = $(this);
+                var bankCode = store.get("bankCode");
+                var bankCardType = store.get("bankCardType");
+                var bankName = store.get("bankName");
+                var phoneNum = store.get("username");
+                var cardNum = $("#cardNum").val();
+                var trueUsername = store.get("username");
+                var verifyCode = $("#verifyCode").val();
+                var verificationCode = $("#verificationCode").val() || null;
+                var expiryDate = $("#creditMonth").val() + $("#creditYear").val() || null;
+                var bankCardNo = store.get("bankCardNo");
+                var host = location.protocol+"//"+location.host+"/www/html";
+                console.log(amount);
+                console.log(host);
+                boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode,
+                    bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, trueUsername, bankName,host);
+                // location.href = './alipay/paySuccess.html'
+
+            })
+
+        });
+
+
+        function sendDynamicCode(userPhone, codeFlag) {
+            $.ajax({
+                url: BASE_URL + USER_SITE_URL.SEND_DYNAMIC_CODE.URL,
+                type: USER_SITE_URL.SEND_DYNAMIC_CODE.METHOD,
+                dataType: USER_SITE_URL.DATATYPE,
+                data: {
+                    userPhone: userPhone,
+                    codeFlag: codeFlag,
+                },
+                cache:true,
+                async:false,
+                success: function (data) {
+                    console.log(data);
+                    if (data.authStatus == '200') {
+                        $.toast(data.authMsg);
+                    } else {
+                        $.toast(data.authMsg);
+                    }
+                }
+            })
+        }
+
+
+        /**
+         * 根据卡号查询卡信息
+         * @param bankCardNo
+         * @param username
+         */
+        function bankcardBind(bankCardNo, username) {
+            $.ajax({
+                url: BASE_URL + PAYMENT_SITE_URL.BANKCARD_BIND.URL,
+                type: PAYMENT_SITE_URL.BANKCARD_BIND.METHOD,
+                dataType: PAYMENT_SITE_URL.DATATYPE,
+                data: {
+                    bankCardNo: bankCardNo,
+                    username: username,
+                },
+                cache:true,
+                async:false,
+                success: function (data) {
+                    if(data.authStatus=="212"){
+                        window.location.href="../payment/alipay/commonPay.html";
+                    } else if(data.authStatus=="200"){
+                        var template = Handlebars.compile($("#creditCardTpl").html());
+                        var html = template(data);
+                        $("#credit-card").html(html);
+                        $("#allAmount").text(allAmount);
+
+                        if(data.memberBank){
+                            store.set("bankCode", data.memberBank.bankCode);
+                            store.set("bankCardType", data.memberBank.bankCardType);
+                            store.set("bankCardNo", data.memberBank.bankCardNo);
+                            store.set("bankName", data.memberBank.bankName);
+                        }else{
+                            $.toast(data.authMsg);
+                        }
+                    }
+                }
+            })
+        }
+
+
+        /**
+         * 绑定银行卡并支付 首次支付
+         * @param isBalancePay
+         * @param type
+         * @param paymentPluginId
+         * @param mergeSn
+         * @param amount
+         * @param app_request
+         * @param bankCardType
+         * @param bankCode
+         * @param bankCardNo
+         * @param cardType
+         * @param cardNum
+         * @param phoneNum
+         * @param verificationCode
+         * @param expiryDate
+         * @param verifyCode
+         * @param username
+         * @param bankName
+         * @param app_request_url
+         */
+        function boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode, bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, username, bankName,app_request_url) {
+            $.ajax({
+                url: BASE_URL + PAYMENT_SITE_URL.BOUND_CARD_PAY.URL,
+                type: PAYMENT_SITE_URL.BOUND_CARD_PAY.METHOD,
+                dataType: PAYMENT_SITE_URL.DATATYPE,
+                data: {
+                    isBalancePay: isBalancePay,
+                    type: type,
+                    paymentPluginId: paymentPluginId,
+                    mergeSn: mergeSn,
+                    amount: amount,
+                    app_request: app_request,
+                    bankCardType: bankCardType,
+                    bankCode: bankCode,
+                    bankCardNo: bankCardNo,
+                    cardType: cardType,
+                    cardNum: cardNum,
+                    phoneNum: phoneNum,
+                    verificationCode: verificationCode,
+                    expiryDate: expiryDate,
+                    verifyCode: verifyCode,
+                    username: username,
+                    app_request_url: app_request_url,
+                    bankName: bankName
+                },
+                cache:true,
+                async:false,
+                success: function (data) {
+                    console.log(data);
+                    if(data.parameterMap){
+                        store.set("req_data",data.parameterMap.req_data);
+                        if(data.authStatus == '200'){
+                            return location.href = './sendMoney.html';
+                        }
+                    }
+                    $.toast(data.authMsg);
+
+
+                }
+            })
+        }
     </script>
 </head>
 <body class="page">
 <div id="credit-card"></div>
+
+<script type="text/x-handlebars-template" id="creditCardTpl">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)"
+           data-transition='slide-out'>
+            <span class="icon icon-left"></span>
+        </a>
+        <h1 class='title'>快捷支付</h1>
+    </header>
+    <div class="content creditCard">
+
+        <div class="pay-money">
+            <div class="item-media">支付金额：</div>
+            <div class="item-inner"> <span id="allAmount"></span> 元</div>
+        </div>
+
+        <div class="list-block ">
+            <ul class="list-tab">
+
+
+
+                <li>
+                    <div class="item-content">
+                        <div class="item-media">卡&nbsp;&nbsp;类&nbsp;&nbsp;型</div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="text" placeholder="" value="{{transBankCardType memberBank.bankCardType}}">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media">银行卡号</div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="text" placeholder="" value="{{memberBank.bankCardNo}}" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media">发&nbsp;&nbsp;卡&nbsp;&nbsp;行</div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="text" placeholder="" autocomplete="off" value="{{memberBank.bankName}}">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                {{#equals memberBank.bankCardType 'blue'}}
+                <!-- 信用卡 start -->
+                <li>
+                    <div class="item-content">
+                        <!--<div class="item-media"><i class="icon icon-user"></i></div>-->
+                        <div class="item-media">有&nbsp;&nbsp;效&nbsp;&nbsp;期</div>
+                        <div class="item-inner" style="border:none;">
+                            <div class="item-input">
+                                <select name="creditMonth" id="creditMonth" class="creditMonth">
+                                    <option value="" selected>请选择</option>
+                                    <option value="01">1</option>
+                                    <option value="02">2</option>
+                                    <option value="03">3</option>
+                                    <option value="04">4</option>
+                                    <option value="05">5</option>
+                                    <option value="06">6</option>
+                                    <option value="07">7</option>
+                                    <option value="08">8</option>
+                                    <option value="09">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                <span>∨</span> 月
+                                <select name="creditYear" id="creditYear" class="creditMonth">
+                                    <option value="" selected>请选择</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                </select>
+                                <span>∨</span>年
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media">卡安全码</div>
+                        <div class="item-inner verification">
+                            <div class="item-input">
+                                <input type="text" placeholder="" id="verificationCode">
+                            </div>
+                        </div>
+                        <div class="item-media tab-item mat-tips">卡背面3位数字</div>
+                    </div>
+                </li>
+                <!-- 信用卡 end -->
+                {{else}}
+
+
+
+                {{/equals}}
+
+                <li>
+                    <div class="item-content">
+                        <div class="item-media">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="text" placeholder="" id="trueUsername"  autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media">身&nbsp;&nbsp;份&nbsp;&nbsp;证</div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="text" placeholder="" id="cardNum" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media">手&nbsp;&nbsp;机&nbsp;&nbsp;号</div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="text" placeholder="" value="{{memberBank.member.username}}" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="item-content">
+                        <div class="item-media">验&nbsp;&nbsp;证&nbsp;&nbsp;码</div>
+                        <div class="item-inner verification">
+                            <div class="item-input">
+                                <input type="text" placeholder="" autocomplete="off" id="verifyCode">
+                            </div>
+                        </div>
+                        <div class="item-media tab-item mat-tips vert verBtn">获取验证码</div>
+                    </div>
+                </li>
+
+            </ul>
+            <div class="credit-button"><a href="javascript:void(0)" class="firstBind external button button-big button-fill button-success">确认开通并支付</a></div>
+        </div>
+
+    </div>
+</script>
 </body>
 </html>

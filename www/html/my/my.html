@@ -12,20 +12,68 @@
 
     <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/plugin/light7/dist/css/light7.css"/>
 
     <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon" />
-
     <script type="text/javascript" src="../../assets/plugin/jquery.min.js"></script>
-    <script type="text/javascript" src="../../assets/plugin/sea.js"></script>
-    <script type="text/javascript" src="../../assets/plugin/seajs-text.js"></script>
 
-
-    <link rel="stylesheet" type="text/css" href="../../assets/plugin/light7/dist/css/light7.css"/>
     <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7.min.js"></script>
+    <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
+    <!--<script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7-city-picker.min.js"></script>-->
+
+    <script type="text/javascript" src="../../assets/plugin/handlebars-v1.3.0.js"></script>
+    <script type="text/javascript" src="../../js/config/siteUrl.js"></script>
+    <script type="text/javascript" src="../../js/utils/store.min.js"></script>
+    <script type="text/javascript" src="../../js/utils/getCurrentPage.js"></script>
+    <script type="text/javascript" src="../../js/utils/hbCompare.js"></script>
 
 
     <script>
-        seajs.use(['../../js/api','../../js/my/my'])
+        jQuery.support.cors = true;
+        var username = store.get("username");
+
+        getIndex(username);
+        getCurrentPage();
+
+
+        function getIndex(username) {
+            $.ajax({
+                url: BASE_URL + MEMBER_SITE_URL.INDEX.URL,
+                type: MEMBER_SITE_URL.INDEX.METHOD,
+                dataType: MEMBER_SITE_URL.DATATYPE,
+                data: {
+                    username: username
+                },
+//                cache: true,
+//                async: false,
+                success: function (data) {
+                    if (data.authStatus == '200') {
+//                        var tpl = require('/zqVue/shopwap-front/www/layout/my/common/header.tpl');
+                        var template = Handlebars.compile($("#headerTpl").html());
+                        var html = template(data);
+                        $("#my_header").html(html);
+                        $(".user-id").text(username);
+
+                        // userColumn
+//                        var tpl = require('/zqVue/shopwap-front/www/layout/my/userColumn.tpl');
+                        var template = Handlebars.compile($("#userColumnTpl").html());
+                        var html = template(data);
+                        $("#userColumn").html(html);
+                    }
+                    else if (data.authStatus == '403') {
+                        store.clear();
+                        $.toast(data.authMsg);
+                        return location.href = '../my/login/login.html';
+                    }
+                }
+            });
+        }
+
+        var data = {};
+//        var tpl = require('/zqVue/shopwap-front/www/layout/common/footerBar.tpl');
+        var template = Handlebars.compile($("#footerBarTpl").html());
+        var html = template(data);
+        $("#footer").html(html);
     </script>
 </head>
 <body>
@@ -33,6 +81,172 @@
     <div id="my_header"></div>
     <div id="footer"></div>
 </div>
+
+
+<script type="text/x-handlebars-template" id="userColumnTpl">
+    <!--我的 用户操作栏 2 -->
+    <div class="userColumn list-block list">
+        <ul>
+            <li class="item-content item-link">
+                <!--<div class="item-media"><i class="icon icon-settings"></i></div>-->
+                <div class="item-inner">
+                    <a href="/m/html/my/myOrder/myOrder.html" class="external" style="width:100%;display:block;">
+                        <div class="item-title">我的订单</div>
+                    </a>
+                </div>
+            </li>
+            <!--<li class="item-content item-link">-->
+            <!--&lt;!&ndash;<div class="item-media"><i class="icon icon-me"></i></div>&ndash;&gt;-->
+            <!--<div class="item-inner">-->
+            <!--<a href="/html/my/coupon/coupon.html" class="external" style="width:100%;display:block;">-->
+            <!--<div class="item-title">优惠券</div>-->
+            <!--</a>-->
+            <!--</div>-->
+            <!--</li>-->
+            <li class="item-content item-link">
+                <!--<div class="item-media"><i class="icon icon-message"></i></div>-->
+                <div class="item-inner">
+                    <a href="/m/html/my/address/address.html" style="width:100%;display: block;" class="external">
+                        <div class="item-title">地址管理</div>
+                    </a>
+                </div>
+            </li>
+            <!--<li class="item-content item-link">-->
+            <!--&lt;!&ndash;<div class="item-media"><i class="icon icon-star"></i></div>&ndash;&gt;-->
+            <!--<div class="item-inner">-->
+            <!--<a href="/html/my/account/accountSecurity.html" style="width:100%;display: block;" class="external">-->
+            <!--<div class="item-title">账号安全</div>-->
+            <!--</a>-->
+            <!--</div>-->
+            <!--</li>-->
+            <!--<li class="item-content item-link">-->
+            <!--&lt;!&ndash;<div class="item-media"><i class="icon icon-friends"></i></div>&ndash;&gt;-->
+            <!--<div class="item-inner">-->
+            <!--<a href="/html/my/feedback/feedback.html" style="width:100%;display: block;" class="external">-->
+            <!--<div class="item-title">-->
+            <!--意见反馈-->
+            <!--</div>-->
+            <!--</a>-->
+            <!--</div>-->
+            <!--</li>-->
+            <li class="item-content item-link">
+                <!--<div class="item-media"><i class="icon icon-friends"></i></div>-->
+                <div class="item-inner">
+                    <a href="tel:4009217818" class="external" style="width:100%;display: block;">
+                        <div class="item-title">
+                            联系客服
+
+                            <span class="pull-right" style="color:#ff503e;">
+                            400-921-7818
+                        </span>
+                        </div>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+</script>
+
+<script type="text/x-handlebars-template" id="headerTpl">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)"
+           data-transition='slide-out'>
+            <span class="icon icon-left"></span>
+        </a>
+        <h1 class="title">我的街街</h1>
+    </header>
+
+    <div class="content">
+        <div class="list-block reset-con">
+            <div class="content-block con-b2">
+                <div class="user_profile_icon u-p-i2">
+                    <a href="/m/html/my/personalCenter.html" class="clearfix external">
+                        {{#if logo}}
+                        <img src="{{logo}}" alt="" class="user_profile_avatar">
+                        {{else}}
+                        <img src="../../assets/images/customer-photo.jpg" alt="" class="user_profile_avatar">
+                        {{/if}}
+                    </a>
+                </div>
+                {{#compare this.authStatus '200'}}
+                <div>
+                    <div class="user-id">{{this.username}}</div>
+                    <div class="rest-money">
+                        <span class="reset2-img"></span>
+                        <span class="reset2">{{this.balance}}</span>
+                        <!--<a class="reset-detail">余额明细</a>-->
+                    </div>
+                </div>
+                {{/compare}}
+
+                <!--<div class="login_button_group">-->
+                <!--<div class="my-login">-->
+                <!--<a href="/html/my/login/login.html" class="external register-button">登陆</a>-->
+                <!--<a href="/html/my/register/register.html" class="external register-button">注册</a>-->
+                <!--&lt;!&ndash;<a href="javascript:void(0);"  class="external register-button">帐号详情</a>&ndash;&gt;-->
+                <!--&lt;!&ndash;<a href="javascript:void(0);" class="external register-button logoutButton">退出</a>&ndash;&gt;-->
+                <!--</div>-->
+                <!--</div>-->
+
+            </div>
+
+            <div class="content-block obligation">
+                <div>
+                    <ul class="clearfix">
+                        <li style="border-left:none;">
+                            待付款
+                            <span class="show-amount">{{this.waitingPaymentOrderCount}}</span>
+                        </li>
+                        <li>
+                            待发货
+                            <span class="show-amount">{{this.waitingShippingOrderCount}}</span>
+                        </li>
+                        <li>
+                            待收货
+                            <span class="show-amount">{{this.waitingReciveOrderCount}}</span>
+                        </li>
+                        <li>
+                            待评价
+                            <span class="show-amount">{{this.waitingCommentOrderCount}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="list-block" style="margin-bottom:3.5rem;">
+            <div class="content-block" style="padding:0;margin:0;">
+                <div id="userColumn"></div>
+            </div>
+        </div>
+    </div>
+
+</script>
+
+<script type="text/x-handlebars-template" id="footerBarTpl">
+    <!--现在的页脚-->
+    <nav class="footer-bar bar bar-tab ">
+        <a id="home-link" class="tab-item  external" href="../../index.html">
+            <i class="icon icon-nav-home"></i>
+            <span class="tab-label">首页</span>
+        </a>
+        <a id="category-link" class="tab-item external" href="../../html/category/category.html">
+            <i class="icon icon-nav-category"></i>
+            <span class="tab-label">分类</span>
+        </a>
+        <a id="cart-link" class="tab-item external" href="../../html/cart/cart.html">
+            <i class="icon icon-nav-cart"></i>
+            <span class="tab-label">购物车</span>
+        </a>
+        <a id="user-link" class="tab-item external"  href="../../html/my/my.html">
+            <i class="icon icon-nav-user"></i>
+            <span class="tab-label">我的</span>
+        </a>
+    </nav>
+</script>
 
 </body>
 </html>

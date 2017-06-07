@@ -14,23 +14,143 @@
     <link rel="stylesheet" href="../../../css/account.css">
     <link rel="stylesheet" href="../../../css/pay.css">
 
-    <link rel="stylesheet" type="text/css" href="/www/assets/plugin/light7/dist/css/light7.css"/>
-    <link rel="stylesheet" type="text/css" href="/www/assets/plugin/light7/dist/css/light7-swiper.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../assets/plugin/light7/dist/css/light7.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../assets/plugin/light7/dist/css/light7-swiper.min.css"/>
 
-    <script type="text/javascript" src="/www/assets/plugin/jquery.min.js"></script>
-    <script type="text/javascript" src="/www/assets/plugin/light7/dist/js/light7.min.js"></script>
-    <script type="text/javascript" src="/www/assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
-    <script type="text/javascript" src="/www/assets/plugin/light7/dist/js/light7-swipeout.js"></script>
+    <script type="text/javascript" src="../../../assets/plugin/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7.min.js"></script>
+    <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
+    <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-swipeout.js"></script>
 
 
-    <script type="text/javascript" src="/www/assets/plugin/sea.js"></script>
-    <script type="text/javascript" src="/www/assets/plugin/seajs-text.js"></script>
+    <script type="text/javascript" src="../../../assets/plugin/handlebars-v1.3.0.js"></script>
+    <script type="text/javascript" src="../../../js/config/siteUrl.js"></script>
+    <script type="text/javascript" src="../../../js/utils/store.min.js"></script>
+    <script type="text/javascript" src="../../../js/utils/getTemplate.js"></script>
+    <!--<script type="text/javascript" src="../../../js/utils/transCommonPay.js"></script>-->
+    <script type="text/javascript" src="../../../js/utils/parseUrl.js"></script>
+    <script type="text/javascript" src="../../../js/config/getUser.js"></script>
+
 
     <script>
-        seajs.use(['../../../js/api','../../../js/payment/alipay/paySuccess'])
+//        seajs.use(['../../../js/api','../../../js/payment/alipay/paySuccess'])
+
+//        require("jquery");
+//        require("store");
+//        require("siteUrl");
+//        require("parseUrl");
+
+        $(function(){
+            var href = location.href;
+            var username = store.get("username");
+            var n = parseURL(href);
+            var paymentSn = n.params.paymentSn;
+            paymentView(username,paymentSn);
+
+
+            $(document).on("click",".checkMyOrderBtn",function () {
+                return location.href = '/www/html/my/myOrder/myOrder.html';
+            })
+        });
+
+
+
+        function paymentView(username,paymentSn){
+            $.ajax({
+                url:BASE_URL+ORDER_SITE_URL.PAYMENT_VIEW.URL,
+                dataType:ORDER_SITE_URL.DATATYPE,
+                type:ORDER_SITE_URL.PAYMENT_VIEW.METHOD,
+                data:{
+                    username:username,
+                    paymentSn:paymentSn
+                },
+                cache:true,
+                async:false,
+                success:function (data) {
+                    if(data.authStatus == '200'){
+//                        require.async("handlebars",function(){
+//                            var tpl=require('/zqVue/shopwap-front/www/layout/payment/alipay/paySuccess.tpl');
+                            var template=Handlebars.compile($("#paySuccessTpl").html());
+                            var html=template(data);
+                            $("#paySuccess").html(html);
+//                        })
+                    }
+
+                }
+            });
+        }
+
+        /**
+         * 检查支付是否完成,根据支付订单检查
+         * @param username
+         * @param mergeSn
+         */
+        function checkPayment(username, mergeSn){
+            $.ajax({
+                url:BASE_URL+ORDER_SITE_URL.CHECK_PAYMENT.URL,
+                dataType:ORDER_SITE_URL.DATATYPE,
+                type:ORDER_SITE_URL.CHECK_PAYMENT.METHOD,
+                data:{
+                    username:username,
+                    mergeSn:mergeSn
+                },
+                cache:true,
+                async:false,
+                success:function (data) {
+                    console.log(data);
+                }
+            });
+        }
+
+
     </script>
 </head>
 <body  class="page">
 <div id="paySuccess"></div>
+
+
+<script type="text/x-handlebars-template" id="paySuccessTpl">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)"
+           data-transition='slide-out'>
+            <span class="icon icon-left"></span>
+        </a>
+        <h1 class="title">支付成功</h1>
+    </header>
+
+
+    <div class="content">
+        {{#order}}
+        <div class="paySuccess-bg">
+            <div class="pay-succ-con">
+                <div class="clearfix title5">
+                    <div class="pull-left ang8"></div>
+                    <div class="pull-left sum-am">
+                        <div class="sum-t">您已成功付款<span>{{../paymentAmount}}</span>元！</div>
+                        <div>商户会尽快发货</div>
+                    </div>
+                </div>
+                <div class="user-desc pay-content">
+                    <div class="order-addr ">
+                        <span>收货地址：</span>
+                        <span>{{this.consignee}}   {{this.phone}}</span>
+                    </div>
+                    <span class="detail-addr">
+                    {{this.areaName}} {{this.address}}
+                </span>
+                </div>
+            </div>
+        </div>
+        {{/order}}
+        <div class="content-block">
+            <p>
+                <a class="checkMyOrderBtn button button-big button-fill external rg-col" href="javascript:;" >
+                    查看订单
+                </a>
+            </p>
+        </div>
+    </div>
+
+</script>
 </body>
 </html>
