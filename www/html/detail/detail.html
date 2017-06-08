@@ -33,8 +33,6 @@
 
 
 
-//            $.toast("username:"+username+" currentProductID:"+currentProductID+" userStatus:"+userStatus);
-
             jQuery.support.cors = true;
             // usermd
             $.ajax({
@@ -100,20 +98,12 @@
                     location.href = '../index.html';
                 }, 2000)
             }
-            var productImagesSlider = new Swiper('.product-images-slider', {
-                // pagination:'.swiper-pagination',
-                // autoplay:'1000',
-                spaceBetween: '10'
-            });
+            var productImagesSlider = new Swiper('.product-images-slider', {});
 
 
             //获取已有购物车物品数量
             getCartCount(username, ".cart-badge > .badge");
 
-            // $("img.lazy").lazyload({
-            //     threshold : 0,
-            //     effect : "fadeIn",
-            // });
 
             setSpecificationId(username, currentProductID)
 
@@ -141,10 +131,6 @@
                     $("#goodsDetailMask").show();
                 }
             });
-
-            var cart = [];
-            var item = {};
-            item.item = [];
 
             //监听 加入购物车
             $(document).on('click', '.addToCartBtn', addToCart);
@@ -195,7 +181,7 @@
             //规格
             $(document).on('click', '.spec-button', function (e) {
                 e.preventDefault();
-                e.stopPropagation();
+
                 var $this = $(this);
                 $this.parent().find(".spec-button").removeClass("active");
                 $this.addClass("active");
@@ -209,6 +195,7 @@
                 }
                 $("#specResult").val(text);
                 $("#cartState").val("true");
+                e.stopPropagation();
             });
 
             //数量 -
@@ -461,9 +448,7 @@
         <div class="swiper-wrapper">
             {{#each this.product.productImages}}
             <div class="swiper-slide">
-                <img
-                        src="{{this.source}}"
-                        alt="{{this.alt}}" class="lazy">
+                <img src="{{this.source}}" alt="{{this.alt}}" class="lazy">
             </div>
             {{/each}}
         </div>
@@ -569,25 +554,10 @@
 </script>
 
 <script type="text/x-handlebars-template" id="cartIndexTpl">
-    <div class="cart-index">
-        <div>
-            <i class="icon icon-cart-level-1">
-                <!--<img src="assets/images/gou.png">-->
-            </i>
-            <span>1级优质商品</span>
-        </div>
-        <div>
-            <i class="icon icon-cart-7-days">
-                <!--<img src="assets/images/gou.png">-->
-            </i>
-            <span>7天无理由退换</span>
-        </div>
-        <div>
-            <i class="icon icon-cart-48-hours">
-                <!--<img src="assets/images/gou.png">-->
-            </i>
-            <span>48小时快速退款</span>
-        </div>
+    <div class="nav-index" style=" background: #f5f5f5;">
+        <div><i><img src="../../assets/images/level-1-icon.png"></i><span>1级优质商品</span></div>
+        <div><i><img src="../../assets/images/7-days-icon.png"></i><span>7天无理由退换</span></div>
+        <div><i><img src="../../assets/images/48-hours-icon.png"></i><span>48小时快速退款</span></div>
     </div>
 </script>
 

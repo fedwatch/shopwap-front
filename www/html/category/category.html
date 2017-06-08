@@ -29,6 +29,7 @@
     <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7-swipeout.js"></script>
     <script type="text/javascript" src="../../assets/plugin/handlebars-v1.3.0.js"></script>
     <script type="text/javascript" src="../../assets/plugin/idangerous.swiper.min.js"></script>
+
     <script type="text/javascript" src="../../js/utils/store.min.js"></script>
     <script type="text/javascript" src="../../js/utils/getCurrentPage.js"></script>
     <script type="text/javascript" src="../../js/utils/parseUrl.js"></script>
@@ -40,11 +41,18 @@
 
             jQuery.support.cors = true;
             var username = store.get("username");
-            var scroller = new IScroll('#productCategory', {click: true});
-            $(document).on('click', '#productCategory a div', function () {
-                console.log("click")
-                //do something....
-            });
+            var scroller = new IScroll('#productCategory', {click: iScrollClick()});
+
+            function iScrollClick(){
+                // workaround click bug iscroll #674
+                if (/iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent)) return false;
+                if (/Chrome/i.test(navigator.userAgent)) return (/Android/i.test(navigator.userAgent));
+                if (/Silk/i.test(navigator.userAgent)) return false;
+                if (/Android/i.test(navigator.userAgent)) {
+                    var s=navigator.userAgent.substr(navigator.userAgent.indexOf('Android')+8,3);
+                    return parseFloat(s[0]+s[3]) < 44 ? false : true}
+            }
+
 
             getCurrentPage();
             initCategoryActive();
@@ -250,7 +258,7 @@
              */
             $(document).on('click', '.productCategory a', function (e) {
 //           e.preventDefault();
-                console.log($(this));
+                console.log("click,tap happened!");
                 getProductDetail($(this).data("id"));
             });
 
@@ -277,23 +285,24 @@
         function getParamsShow(){
             var l = parseURL(location.href);
 //            console.log(l.params)
-            if(location.protocol === 'http' || location.protocol === 'https'){
-                var categoryId = l.params.categoryId;
-                var left = $(document).find("span.nav-text[data-category-id="+categoryId+"]").offset().left;
-                console.log(left)
+            if(typeof l.params.length !== 'undefined'){
+                //            console.log(l.params)
+                if(location.protocol === 'http' || location.protocol === 'https'){
+                    var categoryId = l.params.categoryId;
+                    var left = $(document).find("span.nav-text[data-category-id="+categoryId+"]").offset().left;
+                    console.log(left)
 //                $(".nav-scrollview").scrollLeft("300")
-                $(document).find("span.nav-text[data-category-id="+categoryId+"]").click();
-            }else{
+                    $(document).find("span.nav-text[data-category-id="+categoryId+"]").click();
+                }else{
 //                console.log(l.source)
-                var res = l.source.split("=");
+                    var res = l.source.split("=");
 //                console.log(res)
-                var left = $(document).find("span.nav-text[data-category-id="+res[1]+"]").offset().left;
-                console.log(left)
-                $(".nav-scrollview").scrollLeft(left)
-                $(document).find("span.nav-text[data-category-id="+res[1]+"]").click();
+                    var left = $(document).find("span.nav-text[data-category-id="+res[1]+"]").offset().left;
+                    console.log(left)
+                    $(".nav-scrollview").scrollLeft(left)
+                    $(document).find("span.nav-text[data-category-id="+res[1]+"]").click();
+                }
             }
-
-
         }
 
     </script>
