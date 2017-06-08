@@ -36,8 +36,9 @@
        $(function () {
            jQuery.support.cors = true;
         var username = store.get("username");
-        var scroller = new IScroll('#productCategory', {click: true, tap: true});
-        $('#productCategory').on('click, tap', '.productCategory a', function () {
+        var scroller = new IScroll('#productCategory', {click: true});
+        $(document).on('click', '#productCategory a div', function () {
+            console.log("click")
             //do something....
         });
 
@@ -243,7 +244,7 @@
         *
         */
        $(document).on('click', '.productCategory a', function (e) {
-           e.preventDefault();
+//           e.preventDefault();
            console.log($(this));
            getProductDetail($(this).data("id"));
        });
@@ -270,8 +271,9 @@
             </div>
         </div>
     </div>
-    <div id="footerNavPage" style="position:absolute;bottom:0;width:100%;height:2.5rem;"></div>
+
 </div>
+<div id="footerNavPage"></div>
 <script type="text/x-handlebars-template"  id="navSubPositionTpl">
     <!--二级商品分类-->
     <div class="nav-sub-tabs">

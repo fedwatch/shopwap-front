@@ -1562,7 +1562,7 @@ body .color-success:active,
 }
 
 .bar-nav {
-    top: 0;
+    top: 20px!important;
 }
 
 .title {
