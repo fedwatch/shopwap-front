@@ -31,9 +31,13 @@
     <script type="text/javascript" src="../../assets/plugin/idangerous.swiper.min.js"></script>
     <script type="text/javascript" src="../../js/utils/store.min.js"></script>
     <script type="text/javascript" src="../../js/utils/getCurrentPage.js"></script>
+    <script type="text/javascript" src="../../js/utils/parseUrl.js"></script>
     <script type="text/javascript" src="../../js/config/siteUrl.js"></script>
     <script>
         $(function () {
+
+
+
             jQuery.support.cors = true;
             var username = store.get("username");
             var scroller = new IScroll('#productCategory', {click: true});
@@ -256,7 +260,42 @@
             var html = template(data);
             $("#footerNavPage").html(html);
 
+//            setTimeout(function () {
+//
+//            },800)
+
+
+            setTimeout(function(){
+                getParamsShow();
+            },1000)
+
+
+
         })
+
+
+        function getParamsShow(){
+            var l = parseURL(location.href);
+//            console.log(l.params)
+            if(location.protocol === 'http' || location.protocol === 'https'){
+                var categoryId = l.params.categoryId;
+                var left = $(document).find("span.nav-text[data-category-id="+categoryId+"]").offset().left;
+                console.log(left)
+//                $(".nav-scrollview").scrollLeft("300")
+                $(document).find("span.nav-text[data-category-id="+categoryId+"]").click();
+            }else{
+//                console.log(l.source)
+                var res = l.source.split("=");
+//                console.log(res)
+                var left = $(document).find("span.nav-text[data-category-id="+res[1]+"]").offset().left;
+                console.log(left)
+                $(".nav-scrollview").scrollLeft(left)
+                $(document).find("span.nav-text[data-category-id="+res[1]+"]").click();
+            }
+
+
+        }
+
     </script>
 </head>
 <body>
