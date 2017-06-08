@@ -6,15 +6,15 @@
     <!--js 头部引入-->
     <meta charset="UTF-8">
     <!--<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />-->
-    <meta content="telephone=no" name="format-detection" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
 
     <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" type="text/css" href="../../assets/plugin/light7/dist/css/light7.css"/>
 
-    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon"/>
     <script type="text/javascript" src="../../assets/plugin/jquery.min.js"></script>
 
     <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7.min.js"></script>
@@ -62,10 +62,10 @@
                     }
                     else if (data.authStatus == '403') {
                         store.clear();
-                        $.toast(data.authMsg,1500);
-                        setTimeout(function(){
+                        $.toast(data.authMsg, 1500);
+                        setTimeout(function () {
                             return location.href = '../my/login/login.html';
-                        },1500)
+                        }, 1500)
 
                     }
                 }
@@ -73,7 +73,7 @@
         }
 
         var data = {};
-//        var tpl = require('/zqVue/shopwap-front/www/layout/common/footerBar.tpl');
+        //        var tpl = require('/zqVue/shopwap-front/www/layout/common/footerBar.tpl');
         var template = Handlebars.compile($("#footerBarTpl").html());
         var html = template(data);
         $("#footer").html(html);
@@ -152,6 +152,7 @@
 </script>
 
 <script type="text/x-handlebars-template" id="headerTpl">
+    <div class="appStatusBar" style="background:#ff503e;"></div>
     <header class="bar bar-nav">
         <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)"
            data-transition='slide-out'>
@@ -161,6 +162,7 @@
     </header>
 
     <div class="content">
+        <div class="appStatusBar"></div>
         <div class="list-block reset-con">
             <div class="content-block con-b2">
                 <div class="user_profile_icon u-p-i2">
@@ -196,24 +198,26 @@
 
             <div class="content-block obligation">
                 <div>
-                    <ul class="clearfix">
-                        <li style="border-left:none;">
-                            待付款
-                            <span class="show-amount">{{this.waitingPaymentOrderCount}}</span>
-                        </li>
-                        <li>
-                            待发货
-                            <span class="show-amount">{{this.waitingShippingOrderCount}}</span>
-                        </li>
-                        <li>
-                            待收货
-                            <span class="show-amount">{{this.waitingReciveOrderCount}}</span>
-                        </li>
-                        <li>
-                            待评价
-                            <span class="show-amount">{{this.waitingCommentOrderCount}}</span>
-                        </li>
-                    </ul>
+                    <a href="../../html/my/myOrder/myOrder.html" class="external">
+                        <ul class="clearfix">
+                            <li style="border-left:none;">
+                                待付款
+                                <span class="show-amount">{{this.waitingPaymentOrderCount}}</span>
+                            </li>
+                            <li>
+                                待发货
+                                <span class="show-amount">{{this.waitingShippingOrderCount}}</span>
+                            </li>
+                            <li>
+                                待收货
+                                <span class="show-amount">{{this.waitingReciveOrderCount}}</span>
+                            </li>
+                            <li>
+                                待评价
+                                <span class="show-amount">{{this.waitingCommentOrderCount}}</span>
+                            </li>
+                        </ul>
+                    </a>
                 </div>
             </div>
 
@@ -243,7 +247,7 @@
             <i class="icon icon-nav-cart"></i>
             <span class="tab-label">购物车</span>
         </a>
-        <a id="user-link" class="tab-item external"  href="../../html/my/my.html">
+        <a id="user-link" class="tab-item external" href="../../html/my/my.html">
             <i class="icon icon-nav-user"></i>
             <span class="tab-label">我的</span>
         </a>

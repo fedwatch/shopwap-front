@@ -4,11 +4,12 @@
     <title>用户评价 - 街街网</title>
     <!--js 头部引入-->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
     <meta content="telephone=no" name="format-detection"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/bindCard.css">
@@ -29,17 +30,18 @@
     <script type="text/javascript" src="../../js/config/siteUrl.js"></script>
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
-//        seajs.use(['../../js/api','../../js/user/logistics'])
+        //        seajs.use(['../../js/api','../../js/user/logistics'])
 
-//        require('jquery');
-//        require('light7');
-//        require('light7-swiper');
-//        require('light7-swipeout');
-//        require('siteUrl');
-//        require('store');
+        //        require('jquery');
+        //        require('light7');
+        //        require('light7-swiper');
+        //        require('light7-swipeout');
+        //        require('siteUrl');
+        //        require('store');
 
-        jQuery.support.cors = true;
+
         $(function () {
+            jQuery.support.cors = true;
             var sn = store.get("sn");
             var username = store.get("username");
             $.ajax({
@@ -51,14 +53,14 @@
                     if (result.authStatus == "200") {
                         console.log(result);
 //                        require.async('handlebars', function () {
-                            var getData = result;
+                        var getData = result;
 //                            var tpl = require('/zqVue/shopwap-front/www/layout/user/logistics.tpl');
-                            var template = Handlebars.compile($("#logisticsTpl").html());
-                            var html = template(getData);
-                            $("#logistics").html(html);
-                            $.init();
+                        var template = Handlebars.compile($("#logisticsTpl").html());
+                        var html = template(getData);
+                        $("#logistics").html(html);
+                        $.init();
 
-                            $("#J_listtext2 li").eq(0).addClass("latest");
+                        $("#J_listtext2 li").eq(0).addClass("latest");
 //                        });
                     }
                 }
@@ -85,9 +87,11 @@
             <ul>
                 <li>
                     <a href="#" class="item-link item-content">
-                        <div class="item-media"><img src="../../assets/images/wuliu-logo.jpg" style='width: 4rem;'></div>
+                        <div class="item-media"><img src="../../assets/images/wuliu-logo.jpg" style='width: 4rem;'>
+                        </div>
                         <div class="logic-detail">
-                            <div><span class="status-title">物流状态</span><span class="status">{{this.expressResult.state}}</span></div>
+                            <div><span class="status-title">物流状态</span><span
+                                    class="status">{{this.expressResult.state}}</span></div>
                             <div><span>承运来源</span><span> {{this.shipping.deliveryCorp}}</span></div>
                             <div><span>运单编号 </span><span>{{this.shipping.trackingNo}}</span></div>
                             <!--<div><span>官方电话 </span><span>{{this.shipping.phone}}</span></div>-->
@@ -102,9 +106,10 @@
                     <a href="#" class="item-link item-content">
                         <div class="item-inner">
                             <div class="list-block media-list star clearfix">
-                                <div   class="clearfix logistics-desc" >
+                                <div class="clearfix logistics-desc">
                                     <div class="pull-left logistics-log {{#if this.expressResult.com}}sf{{/if}}"></div>
-                                    <div class="pull-left logistics-title">本数据由<span class="express-company">{{this.shipping.deliveryCorp}}</span>提供</div>
+                                    <div class="pull-left logistics-title">本数据由<span class="express-company">{{this.shipping.deliveryCorp}}</span>提供
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -122,10 +127,11 @@
                                 <ul id="J_listtext2" class="status-list">
 
                                     {{#each this.expressResult.expressData}}
-                                    <li  >
+                                    <li>
                                         <div class="logistics-c">
-                                            <div class="logistics-path"><span>[{{../this.shipping.area}}{{../this.shipping.deliveryCorp}}]</span>{{this.context}}</div>
-                                            <div class="arrive-time">2017-03-20  14:45:46</div>
+                                            <div class="logistics-path"><span>[{{../this.shipping.area}}{{../this.shipping.deliveryCorp}}]</span>{{this.context}}
+                                            </div>
+                                            <div class="arrive-time">2017-03-20 14:45:46</div>
                                         </div>
                                     </li>
                                     {{/each}}

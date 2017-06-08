@@ -5,14 +5,14 @@
     <title>账户安全 - 我的 - 街街网</title>
     <!--js 头部引入-->
     <meta charset="UTF-8">
-    <meta content="telephone=no" name="format-detection" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
 
     <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/account.css">
-    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon"/>
 
     <script type="text/javascript" src="../../assets/plugin/jquery.min.js"></script>
     <!--<script type="text/javascript" src="../../assets/plugin/sea.js"></script>-->
@@ -33,17 +33,16 @@
     <!--<script type="text/javascript" src="../../js/utils/hbCompare.js"></script>-->
 
     <script>
-//        seajs.use(['../../js/api','../../js/my/personalCenter'])
-//        require('jquery');
-//        require("siteUrl");
-//        require("store");
-//        require("light7");
-
+        //        seajs.use(['../../js/api','../../js/my/personalCenter'])
+        //        require('jquery');
+        //        require("siteUrl");
+        //        require("store");
+        //        require("light7");
 
 
         $(function () {
             jQuery.support.cors = true;
-            $(document).on('click','.logout',function () {
+            $(document).on('click', '.logout', function () {
                 var username = store.get("username");
                 userLogout(username);
             })
@@ -53,22 +52,22 @@
          * 用户登出
          * @param username
          */
-        function userLogout(username){
+        function userLogout(username) {
             $.ajax({
-                url:BASE_URL+USER_SITE_URL.USER_LOGOUT.URL,
-                type:USER_SITE_URL.USER_LOGOUT.METHOD,
-                dataType:USER_SITE_URL.DATATYPE,
+                url: BASE_URL + USER_SITE_URL.USER_LOGOUT.URL,
+                type: USER_SITE_URL.USER_LOGOUT.METHOD,
+                dataType: USER_SITE_URL.DATATYPE,
                 data: {
-                    username : username
+                    username: username
                 },
-                cache:true,
-                async:false,
-                success:function (data) {
-                    if (data.authStatus == "200"){
+                cache: true,
+                async: false,
+                success: function (data) {
+                    if (data.authStatus == "200") {
                         store.clear();
                         $.toast(data.authMsg);
                         return location.href = '../../index.html';
-                    }else{
+                    } else {
                         $.toast(data.authMsg)
                     }
                 }
@@ -79,7 +78,8 @@
 <body class="page">
 <div id="securityPage">
     <header class="bar bar-nav">
-        <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)"  data-transition='slide-out'>
+        <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)"
+           data-transition='slide-out'>
             <i class="fa fa-chevron-left"></i>
         </a>
         <h1 class='title'>账户安全</h1>
@@ -95,10 +95,11 @@
                 </div>
             </a>
         </div>
-        <div class="content-block log-out" >
+        <div class="content-block log-out">
             <div class="row">
                 <div class="col-100">
-                    <a href="javascript:void(0);" class="logout external button button-big button-password rg-col" >退出登录</a>
+                    <a href="javascript:void(0);"
+                       class="logout external button button-big button-password rg-col">退出登录</a>
                 </div>
             </div>
         </div>

@@ -4,7 +4,8 @@
     <title>快捷支付 </title>
     <!--js 头部引入-->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
     <meta content="telephone=no" name="format-detection"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
@@ -12,7 +13,7 @@
     <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/bindCard.css">
-    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" type="text/css" href="../../assets/plugin/light7/dist/css/light7.css"/>
     <link rel="stylesheet" type="text/css" href="../../assets/plugin/light7/dist/css/light7-swiper.min.css"/>
     <script type="text/javascript" src="../../assets/plugin/jquery.min.js"></script>
@@ -31,13 +32,13 @@
     <script type="text/javascript" src="../../js/config/getUser.js"></script>
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
-//        seajs.use(['../../js/api','../../js/payment/creditCard'])
+        //        seajs.use(['../../js/api','../../js/payment/creditCard'])
 
-//        require('jquery');
-//        require('store');
-//        require('siteUrl');
-//        require('light7');
-//        require('user');
+        //        require('jquery');
+        //        require('store');
+        //        require('siteUrl');
+        //        require('light7');
+        //        require('user');
 
         var bankCardNo = store.get("bankCardNo");
         var username = store.get("username");
@@ -51,9 +52,9 @@
         var cardType = store.get("cardType") || '1';
         var cardId = store.get("cardId");
 
-        jQuery.support.cors = true;
-        $(function () {
 
+        $(function () {
+            jQuery.support.cors = true;
             bankcardBind(bankCardNo, username);
 
             var timer = 60;
@@ -63,7 +64,7 @@
                     verBtnStatus = false;
                 var $this = $(this);
                 if (verBtnStatus == false) {
-                    sendDynamicCode(username,'3');
+                    sendDynamicCode(username, '3');
                 }
                 setInterval(function () {
                     if (verBtnStatus == false) {
@@ -93,11 +94,11 @@
                 var verificationCode = $("#verificationCode").val() || null;
                 var expiryDate = $("#creditMonth").val() + $("#creditYear").val() || null;
                 var bankCardNo = store.get("bankCardNo");
-                var host = location.protocol+"//"+location.host+"/www/html";
+                var host = location.protocol + "//" + location.host + "/www/html";
                 console.log(amount);
                 console.log(host);
                 boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode,
-                    bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, trueUsername, bankName,host);
+                    bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, trueUsername, bankName, host);
                 // location.href = './alipay/paySuccess.html'
 
             })
@@ -114,8 +115,8 @@
                     userPhone: userPhone,
                     codeFlag: codeFlag,
                 },
-                cache:true,
-                async:false,
+                cache: true,
+                async: false,
                 success: function (data) {
                     console.log(data);
                     if (data.authStatus == '200') {
@@ -142,23 +143,23 @@
                     bankCardNo: bankCardNo,
                     username: username,
                 },
-                cache:true,
-                async:false,
+                cache: true,
+                async: false,
                 success: function (data) {
-                    if(data.authStatus=="212"){
-                        window.location.href="../payment/alipay/commonPay.html";
-                    } else if(data.authStatus=="200"){
+                    if (data.authStatus == "212") {
+                        window.location.href = "../payment/alipay/commonPay.html";
+                    } else if (data.authStatus == "200") {
                         var template = Handlebars.compile($("#creditCardTpl").html());
                         var html = template(data);
                         $("#credit-card").html(html);
                         $("#allAmount").text(allAmount);
 
-                        if(data.memberBank){
+                        if (data.memberBank) {
                             store.set("bankCode", data.memberBank.bankCode);
                             store.set("bankCardType", data.memberBank.bankCardType);
                             store.set("bankCardNo", data.memberBank.bankCardNo);
                             store.set("bankName", data.memberBank.bankName);
-                        }else{
+                        } else {
                             $.toast(data.authMsg);
                         }
                     }
@@ -188,7 +189,7 @@
          * @param bankName
          * @param app_request_url
          */
-        function boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode, bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, username, bankName,app_request_url) {
+        function boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode, bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, username, bankName, app_request_url) {
             $.ajax({
                 url: BASE_URL + PAYMENT_SITE_URL.BOUND_CARD_PAY.URL,
                 type: PAYMENT_SITE_URL.BOUND_CARD_PAY.METHOD,
@@ -213,13 +214,13 @@
                     app_request_url: app_request_url,
                     bankName: bankName
                 },
-                cache:true,
-                async:false,
+                cache: true,
+                async: false,
                 success: function (data) {
                     console.log(data);
-                    if(data.parameterMap){
-                        store.set("req_data",data.parameterMap.req_data);
-                        if(data.authStatus == '200'){
+                    if (data.parameterMap) {
+                        store.set("req_data", data.parameterMap.req_data);
+                        if (data.authStatus == '200') {
                             return location.href = './sendMoney.html';
                         }
                     }
@@ -246,12 +247,11 @@
 
         <div class="pay-money">
             <div class="item-media">支付金额：</div>
-            <div class="item-inner"> <span id="allAmount"></span> 元</div>
+            <div class="item-inner"><span id="allAmount"></span> 元</div>
         </div>
 
         <div class="list-block ">
             <ul class="list-tab">
-
 
 
                 <li>
@@ -336,7 +336,6 @@
                 {{else}}
 
 
-
                 {{/equals}}
 
                 <li>
@@ -344,7 +343,7 @@
                         <div class="item-media">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</div>
                         <div class="item-inner">
                             <div class="item-input">
-                                <input type="text" placeholder="" id="trueUsername"  autocomplete="off">
+                                <input type="text" placeholder="" id="trueUsername" autocomplete="off">
                             </div>
                         </div>
                     </div>
@@ -364,7 +363,8 @@
                         <div class="item-media">手&nbsp;&nbsp;机&nbsp;&nbsp;号</div>
                         <div class="item-inner">
                             <div class="item-input">
-                                <input type="text" placeholder="" value="{{memberBank.member.username}}" autocomplete="off">
+                                <input type="text" placeholder="" value="{{memberBank.member.username}}"
+                                       autocomplete="off">
                             </div>
                         </div>
                     </div>
@@ -383,7 +383,9 @@
                 </li>
 
             </ul>
-            <div class="credit-button"><a href="javascript:void(0)" class="firstBind external button button-big button-fill button-success">确认开通并支付</a></div>
+            <div class="credit-button"><a href="javascript:void(0)"
+                                          class="firstBind external button button-big button-fill button-success">确认开通并支付</a>
+            </div>
         </div>
 
     </div>

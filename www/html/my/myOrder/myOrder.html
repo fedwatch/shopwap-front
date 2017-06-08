@@ -9,7 +9,7 @@
     <meta content="telephone=no" name="format-detection"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="../../../css/common.css">
     <link rel="stylesheet" href="../../../css/style.css">
     <link rel="stylesheet" type="text/css" href="../../../assets/plugin/light7/dist/css/light7.css"/>
@@ -27,35 +27,33 @@
     <!--<script type="text/javascript" src="../../../assets/plugin/seajs-text.js"></script>-->
 
     <script>
-//        seajs.use(['../../../js/api','../../../js/my/order/myOrder'])
+        //        seajs.use(['../../../js/api','../../../js/my/order/myOrder'])
 
 
-//        require('jquery');
-//        require('swiper');
-//        require('store');
-//        require('light7');
+        //        require('jquery');
+        //        require('swiper');
+        //        require('store');
+        //        require('light7');
         // require('mockjs');
-//        require('siteUrl');
+        //        require('siteUrl');
 
-
-        jQuery.support.cors = true;
 
         var reieverStatus;
         var username = store.get("username");
         $(function () {
-
+            jQuery.support.cors = true;
             $.ajax({
-                url:BASE_URL+ORDER_SITE_URL.LIST.URL,
-                type:ORDER_SITE_URL.LIST.METHOD,
-                dataType:ORDER_SITE_URL.DATATYPE,
-                data:{
-                    username:username,
-                    orderStatus :'all',
-                    pageNumber :'1'
+                url: BASE_URL + ORDER_SITE_URL.LIST.URL,
+                type: ORDER_SITE_URL.LIST.METHOD,
+                dataType: ORDER_SITE_URL.DATATYPE,
+                data: {
+                    username: username,
+                    orderStatus: 'all',
+                    pageNumber: '1'
                 },
-                cache:true,
-                async:false,
-                success:function (data) {
+                cache: true,
+                async: false,
+                success: function (data) {
 //                    require.async('handlebars',function(){
 //                        require.async('transMyOrder',function(){
 //                            var tpl = require('/zqVue/shopwap-front/www/layout/my/myOrder.tpl');
@@ -70,7 +68,7 @@
 
 
             // 我的订单 全部 待付款 待发货 待收货 待评价
-            $(document).on("click",".ocItem",function () {
+            $(document).on("click", ".ocItem", function () {
                 var $this = $(this);
                 $(".ocItem").removeClass("active");
 
@@ -81,27 +79,27 @@
                 var completed = $this.hasClass('completed');
 
 
-                if($this.hasClass('all')){
-                    getListOrders(username,'all','1');
-                }else if($this.hasClass('unconfirmed')){
-                    getListOrders(username,'unconfirmed','1');
-                }else if($this.hasClass('confirmed')){
-                    getListOrders(username,'confirmed','1');
-                } else if($this.hasClass('shipped')){
-                    getListOrders(username,'shipped','1');
-                } else if($this.hasClass('completed')){
-                    getListOrders(username,'completed','1');
+                if ($this.hasClass('all')) {
+                    getListOrders(username, 'all', '1');
+                } else if ($this.hasClass('unconfirmed')) {
+                    getListOrders(username, 'unconfirmed', '1');
+                } else if ($this.hasClass('confirmed')) {
+                    getListOrders(username, 'confirmed', '1');
+                } else if ($this.hasClass('shipped')) {
+                    getListOrders(username, 'shipped', '1');
+                } else if ($this.hasClass('completed')) {
+                    getListOrders(username, 'completed', '1');
                 }
 
-                if(all){
+                if (all) {
                     $(".ocItem.all").addClass("active");
-                }else if (unconfirmed){
+                } else if (unconfirmed) {
                     $(".ocItem.unconfirmed").addClass("active");
-                }else if (confirmed){
+                } else if (confirmed) {
                     $(".ocItem.confirmed").addClass("active");
-                }else if (shipped){
+                } else if (shipped) {
                     $(".ocItem.shipped").addClass("active");
-                }else if (completed){
+                } else if (completed) {
                     $(".ocItem.completed").addClass("active");
                 }
 
@@ -109,16 +107,16 @@
             });
 
             // 确认收货
-            $(document).on('click','.confirmReceiptBtn ',function(){
+            $(document).on('click', '.confirmReceiptBtn ', function () {
                 var $this = $(this);
                 console.log($this)
                 var sn = $this.data('sn');
 
-                orderComplete(username,[sn]);
+                orderComplete(username, [sn]);
 
-                if(store.get("reieverStatus") == true){
+                if (store.get("reieverStatus") == true) {
                     $this.text("已收货")
-                }else{
+                } else {
                     $this.text("确认收货")
                 }
 
@@ -135,27 +133,27 @@
             });
 
             // 查看物流
-            $(document).on("click",".checkLogBtn",function () {
+            $(document).on("click", ".checkLogBtn", function () {
                 var $this = $(this);
-                store.set("sn",$this.data("sn"));
+                store.set("sn", $this.data("sn"));
                 return location.href = '/www/html/user/logistics.html';
 
             });
 
             // 立即付款
-            $(document).on("click",".paymentBtn",function () {
+            $(document).on("click", ".paymentBtn", function () {
                 var $this = $(this);
                 var sn = $this.data("sn");
                 console.log(username);
                 console.log(sn);
-                createPayment(username,[sn]);
-                store.set("mergeSn",mergeSn);
+                createPayment(username, [sn]);
+                store.set("mergeSn", mergeSn);
 
                 return location.href = '/www/html/payment/alipay/commonPay.html';
             });
 
             // 立即评价
-            $(document).on('click',".commentBtn",function () {
+            $(document).on('click', ".commentBtn", function () {
 
             });
 
@@ -163,18 +161,18 @@
 
         var mergeSn;
 
-        function createPayment(username,sn){
+        function createPayment(username, sn) {
             $.ajax({
-                url:BASE_URL+ORDER_SITE_URL.CREATE_PAYMENT.URL,
-                type:ORDER_SITE_URL.CREATE_PAYMENT.METHOD,
-                dataType:ORDER_SITE_URL.DATATYPE,
-                cache:true,
-                async:false,
-                data:{
-                    username:username,
-                    sn :sn,
+                url: BASE_URL + ORDER_SITE_URL.CREATE_PAYMENT.URL,
+                type: ORDER_SITE_URL.CREATE_PAYMENT.METHOD,
+                dataType: ORDER_SITE_URL.DATATYPE,
+                cache: true,
+                async: false,
+                data: {
+                    username: username,
+                    sn: sn,
                 },
-                success:function (data) {
+                success: function (data) {
                     mergeSn = data.mergeSn
                     console.log(mergeSn)
                 }
@@ -213,19 +211,19 @@
          待评价:completed
          * @param pageNumber
          */
-        function getListOrders(username,orderStatus,pageNumber){
+        function getListOrders(username, orderStatus, pageNumber) {
             $.ajax({
-                url:BASE_URL+ORDER_SITE_URL.LIST.URL,
-                type:ORDER_SITE_URL.LIST.METHOD,
-                dataType:ORDER_SITE_URL.DATATYPE,
-                data:{
-                    username:username,
-                    orderStatus :orderStatus,
-                    pageNumber :pageNumber
+                url: BASE_URL + ORDER_SITE_URL.LIST.URL,
+                type: ORDER_SITE_URL.LIST.METHOD,
+                dataType: ORDER_SITE_URL.DATATYPE,
+                data: {
+                    username: username,
+                    orderStatus: orderStatus,
+                    pageNumber: pageNumber
                 },
-                cache:true,
-                async:false,
-                success:function (data) {
+                cache: true,
+                async: false,
+                success: function (data) {
 //                    var tpl = require('/zqVue/shopwap-front/www/layout/my/orderData.tpl');
                     var template = Handlebars.compile($("#orderDataTpl").html());
                     var html = template(data);
@@ -239,30 +237,29 @@
          * @param username
          * @param sn
          */
-        function orderComplete(username,sn){
+        function orderComplete(username, sn) {
             $.ajax({
-                url:BASE_URL+ORDER_SITE_URL.COMPLETE.URL,
-                type:ORDER_SITE_URL.COMPLETE.METHOD,
-                dataType:ORDER_SITE_URL.DATATYPE,
-                data:{
-                    username:username,
-                    sn :sn
+                url: BASE_URL + ORDER_SITE_URL.COMPLETE.URL,
+                type: ORDER_SITE_URL.COMPLETE.METHOD,
+                dataType: ORDER_SITE_URL.DATATYPE,
+                data: {
+                    username: username,
+                    sn: sn
                 },
-                cache:true,
-                async:false,
-                success:function (data) {
-                    if(data.authStatus == '200'){
-                        store.set("reieverStatus",true);
+                cache: true,
+                async: false,
+                success: function (data) {
+                    if (data.authStatus == '200') {
+                        store.set("reieverStatus", true);
                         $.toast(data.authMsg);
-                    }else{
-                        store.set("reieverStatus",false);
+                    } else {
+                        store.set("reieverStatus", false);
                         $.toast(data.authMsg)
                     }
 
                 }
             })
         }
-
 
 
     </script>
@@ -276,7 +273,8 @@
     {{#each orders}}
     <div class="cart-item">
         <div class="cart-store-title-label">
-            <span class="pull-left storeName"><i class="icon icon-store-icon"></i> {{this.bizSupplierInfo.shopName}}</span>
+            <span class="pull-left storeName"><i
+                    class="icon icon-store-icon"></i> {{this.bizSupplierInfo.shopName}}</span>
             <span class="pull-right tradeStatus"> {{transOrderStatus this.orderStatus}} </span>
         </div>
         {{#each orderItems}}
@@ -291,7 +289,7 @@
                         <span class="cart-item-buying-desc">{{this.product.specificationValues.description}}</span>
                     </div>
 
-                    <div class="priceWrapper col-33" >
+                    <div class="priceWrapper col-33">
                         <span class="nowPrice">￥ {{this.product.price}}</span><br>
                         <del class="pastPrice">￥ {{this.product.marketPrice}}</del>
                         <br>
@@ -304,12 +302,13 @@
         </div>
 
         <div class="totalBox">
-            共 <span class="totalQuant">{{this.quantity}}</span> 件商品 合计：￥<span class="totalPrice">{{this.subtotal}}</span> (含运费 ￥<span class="logPrice">{{this.freight}}</span>)
+            共 <span class="totalQuant">{{this.quantity}}</span> 件商品 合计：￥<span
+                class="totalPrice">{{this.subtotal}}</span> (含运费 ￥<span class="logPrice">{{this.freight}}</span>)
         </div>
         {{/each}}
 
 
-        <div class="userChooseCol" >
+        <div class="userChooseCol">
 
             {{#compare this.orderStatus 'shipped'}}
             <a href="javascript:void(0);" class="external checkLogBtn uccButton" data-sn="{{sn}}"> 查看物流 </a>
@@ -317,7 +316,8 @@
             {{/compare}}
 
             {{#compare this.orderStatus 'completed'}}
-            <a href="../../../html/user/logistics.html" class="external checkLogBtn uccButton" data-sn="{{sn}}"> 查看物流 </a>
+            <a href="../../../html/user/logistics.html" class="external checkLogBtn uccButton" data-sn="{{sn}}">
+                查看物流 </a>
             <!--<a href="/html/user/review.html" class="external commentBtn uccButton" data-sn="{{sn}}"> 评价 </a>-->
             {{/compare}}
 
@@ -338,8 +338,6 @@
         </div>
 
 
-
-
     </div>
     {{/each}}
     {{else}}
@@ -351,10 +349,10 @@
     {{/if}}
 
 
-
 </script>
 
 <script type="text/x-handlebars-template" id="myOrderTpl">
+    <div class="appStatusBar" style="background:#fff;"></div>
     <!--我的订单-->
     <header class="bar bar-nav">
         <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)"
@@ -365,22 +363,23 @@
     </header>
 
     <div class="content">
+        <div class="appStatusBar"></div>
         <div class="orderColumn">
             <div class="row text-center ">
-                <div class="col-20 ocItem all"  >
-                    全部
+                <div class="col-20 ocItem all">
+                    <span>全部</span>
                 </div>
-                <div class="col-20 ocItem unconfirmed" >
-                    待付款
+                <div class="col-20 ocItem unconfirmed">
+                    <span>待付款</span>
                 </div>
-                <div class="col-20 ocItem confirmed" >
-                    待发货
+                <div class="col-20 ocItem confirmed">
+                    <span>待发货</span>
                 </div>
-                <div class="col-20 ocItem shipped" >
-                    待收货
+                <div class="col-20 ocItem shipped">
+                    <span>待收货</span>
                 </div>
-                <div class="col-20 ocItem completed" >
-                    待评价
+                <div class="col-20 ocItem completed">
+                    <span>待评价</span>
                 </div>
             </div>
         </div>
@@ -406,7 +405,7 @@
                                 <span class="cart-item-buying-desc">{{this.product.specificationValues.description}}</span>
                             </div>
 
-                            <div class="priceWrapper col-33" >
+                            <div class="priceWrapper col-33">
                                 <span class="nowPrice">￥ {{this.product.price}}</span><br>
                                 <del class="pastPrice">￥ {{this.product.marketPrice}}</del>
                                 <br>
@@ -418,10 +417,11 @@
 
                 </div>
                 <div class="totalBox">
-                    共 <span class="totalQuant">{{this.quantity}}</span> 件商品 合计：￥<span class="totalPrice">{{this.subtotal}}</span> (含运费 ￥<span class="logPrice">{{this.freight}}</span>)
+                    共 <span class="totalQuant">{{this.quantity}}</span> 件商品 合计：￥<span class="totalPrice">{{this.subtotal}}</span>
+                    (含运费 ￥<span class="logPrice">{{this.freight}}</span>)
                 </div>
                 {{/each}}
-                <div class="userChooseCol" >
+                <div class="userChooseCol">
 
                     {{#compare this.orderStatus 'shipped'}}
                     <a href="javascript:void(0);" class="external checkLogBtn uccButton" data-sn="{{sn}}"> 查看物流 </a>
@@ -429,7 +429,8 @@
                     {{/compare}}
 
                     {{#compare this.orderStatus 'completed'}}
-                    <a href="m/html/user/logistics.html" class="external checkLogBtn uccButton" data-sn="{{sn}}"> 查看物流 </a>
+                    <a href="m/html/user/logistics.html" class="external checkLogBtn uccButton" data-sn="{{sn}}">
+                        查看物流 </a>
                     <!--<a href="m/html/user/review.html" class="external commentBtn uccButton" data-sn="{{sn}}"> 评价 </a>-->
                     {{/compare}}
 

@@ -4,11 +4,12 @@
     <title>地址列表 </title>
     <!--js 头部引入-->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
     <meta content="telephone=no" name="format-detection"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="../../../css/common.css">
     <link rel="stylesheet" href="../../../css/style.css">
     <link rel="stylesheet" href="../../../css/address.css">
@@ -17,8 +18,8 @@
     <link rel="stylesheet" type="text/css" href="../../../assets/plugin/light7/dist/css/light7-swiper.min.css"/>
 
     <script type="text/javascript" src="../../../assets/plugin/jquery.min.js"></script>
-  <!--  <script type="text/javascript" src="../../../assets/plugin/sea.js"></script>
-    <script type="text/javascript" src="../../../assets/plugin/seajs-text.js"></script>-->
+    <!--  <script type="text/javascript" src="../../../assets/plugin/sea.js"></script>
+      <script type="text/javascript" src="../../../assets/plugin/seajs-text.js"></script>-->
     <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7.min.js"></script>
     <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
     <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-swipeout.js"></script>
@@ -27,7 +28,7 @@
     <script type="text/javascript" src="../../../js/utils/store.min.js"></script>
     <script type="text/javascript" src="../../../js/utils/getCurrentPage.js"></script>
     <script type="text/javascript" src="../../../js/config/siteUrl.js"></script>
-    <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-city-picker.js"> </script>
+    <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-city-picker.js"></script>
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
         $(function () {
@@ -57,8 +58,8 @@
                         pageNumber: pageNumber,
                         pageSize: pageSize,
                     },
-                    cache:true,
-                    async:false,
+                    cache: true,
+                    async: false,
                     success: function (data) {
                         if (data.authStatus) {
                             var template = Handlebars.compile($("#addressTpl").html());
@@ -115,8 +116,8 @@
                         username: username,
                         id: id
                     },
-                    cache:true,
-                    async:false,
+                    cache: true,
+                    async: false,
                     success: function (data) {
                         $.toast(data.authMsg);
                     }
@@ -130,60 +131,64 @@
 <!---地址在哪里-->
 <div id="address" class="address"></div>
 <!--地址列表页-->
-<div id="manage-address" class="address manage-address"  style="display:none;"></div>
+<div id="manage-address" class="address manage-address" style="display:none;"></div>
+
+
 <script type="text/x-handlebars-template" id="addressTpl">
+    <div class="appStatusBar" style="background:#fff"></div>
     <header class="bar bar-nav clearfix">
         <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)"
-    data-transition='slide-out'>
+           data-transition='slide-out'>
             <i class="fa fa-chevron-left"></i>
         </a>
         <h1 class='title'>地址管理</h1>
         <span class=" pull-right"></span>
         <a class="button pull-right " href="javascript:;" style="color:#666;border:1px solid #f7f7f8;">
-        <span class="icon edit" style="font-size:.8rem;color:#666;">编辑</span>
+            <span class="icon edit" style="font-size:.8rem;color:#666;">编辑</span>
         </a>
-        </header>
+    </header>
 
-        {{#if receivers}}
+    {{#if receivers}}
     <div class="content manage-address">
+        <div class="appStatusBar"></div>
         {{#each receivers}}
-    <div class="address-list" >
-        <div class="ad-list">
-        <div class="ad-title clearfix">
-        <span class="manage">{{consignee}}</span>
-    <span class="phone">{{phone}}</span>
-    {{#if isDefault}}
-    <span class="default-address pull-right">默认地址</span>
-        {{/if}}
-    </div>
-    <div class="address-text">
-        {{areaName}} {{address}}
-    </div>
-    <div class="address-operate">
-        <div class="operate clearfix">
-        <div class="delete  pull-right" data-id="{{id}}">删除</div>
-        <div class="edit-op pull-right" data-id="{{id}}">编辑</div>
-        </div>
-        </div>
-        </div>
+        <div class="address-list">
+            <div class="ad-list">
+                <div class="ad-title clearfix">
+                    <span class="manage">{{consignee}}</span>
+                    <span class="phone">{{phone}}</span>
+                    {{#if isDefault}}
+                    <span class="default-address pull-right">默认地址</span>
+                    {{/if}}
+                </div>
+                <div class="address-text">
+                    {{areaName}} {{address}}
+                </div>
+                <div class="address-operate">
+                    <div class="operate clearfix">
+                        <div class="delete  pull-right" data-id="{{id}}">删除</div>
+                        <div class="edit-op pull-right" data-id="{{id}}">编辑</div>
+                    </div>
+                </div>
+            </div>
         </div>
         {{/each}}
     </div>
     {{else}}
     <div class="content">
         <div class="content-block">
-        <div class="tip-img"><img src="../../../assets/images/address.png"/></div>
-        <div class="address-w">收货地址在哪里</div>
+            <div class="tip-img"><img src="../../../assets/images/address.png"/></div>
+            <div class="address-w">收货地址在哪里</div>
         </div>
-        </div>
-        {{/if}}
+    </div>
+    {{/if}}
 
 
     <nav class="bar bar-tab">
         <div class="address-bottom">
-        <a href="./add-address.html" class="external address-button"  >添加新地址</a>
+            <a href="./add-address.html" class="external address-button">添加新地址</a>
         </div>
-        </nav>
+    </nav>
 
 </script>
 </body>

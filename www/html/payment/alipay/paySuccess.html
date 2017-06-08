@@ -4,11 +4,12 @@
     <title>支付成功 - 支付 - 街街网</title>
     <!--js 头部引入-->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
     <meta content="telephone=no" name="format-detection"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="../../../css/common.css">
     <link rel="stylesheet" href="../../../css/style.css">
     <link rel="stylesheet" href="../../../css/account.css">
@@ -33,46 +34,45 @@
 
 
     <script>
-//        seajs.use(['../../../js/api','../../../js/payment/alipay/paySuccess'])
+        //        seajs.use(['../../../js/api','../../../js/payment/alipay/paySuccess'])
 
-//        require("jquery");
-//        require("store");
-//        require("siteUrl");
-//        require("parseUrl");
+        //        require("jquery");
+        //        require("store");
+        //        require("siteUrl");
+        //        require("parseUrl");
 
-        $(function(){
+        $(function () {
             var href = location.href;
             var username = store.get("username");
             var n = parseURL(href);
             var paymentSn = n.params.paymentSn;
-            paymentView(username,paymentSn);
+            paymentView(username, paymentSn);
 
 
-            $(document).on("click",".checkMyOrderBtn",function () {
+            $(document).on("click", ".checkMyOrderBtn", function () {
                 return location.href = '/www/html/my/myOrder/myOrder.html';
             })
         });
 
 
-
-        function paymentView(username,paymentSn){
+        function paymentView(username, paymentSn) {
             $.ajax({
-                url:BASE_URL+ORDER_SITE_URL.PAYMENT_VIEW.URL,
-                dataType:ORDER_SITE_URL.DATATYPE,
-                type:ORDER_SITE_URL.PAYMENT_VIEW.METHOD,
-                data:{
-                    username:username,
-                    paymentSn:paymentSn
+                url: BASE_URL + ORDER_SITE_URL.PAYMENT_VIEW.URL,
+                dataType: ORDER_SITE_URL.DATATYPE,
+                type: ORDER_SITE_URL.PAYMENT_VIEW.METHOD,
+                data: {
+                    username: username,
+                    paymentSn: paymentSn
                 },
-                cache:true,
-                async:false,
-                success:function (data) {
-                    if(data.authStatus == '200'){
+                cache: true,
+                async: false,
+                success: function (data) {
+                    if (data.authStatus == '200') {
 //                        require.async("handlebars",function(){
 //                            var tpl=require('/zqVue/shopwap-front/www/layout/payment/alipay/paySuccess.tpl');
-                            var template=Handlebars.compile($("#paySuccessTpl").html());
-                            var html=template(data);
-                            $("#paySuccess").html(html);
+                        var template = Handlebars.compile($("#paySuccessTpl").html());
+                        var html = template(data);
+                        $("#paySuccess").html(html);
 //                        })
                     }
 
@@ -85,18 +85,18 @@
          * @param username
          * @param mergeSn
          */
-        function checkPayment(username, mergeSn){
+        function checkPayment(username, mergeSn) {
             $.ajax({
-                url:BASE_URL+ORDER_SITE_URL.CHECK_PAYMENT.URL,
-                dataType:ORDER_SITE_URL.DATATYPE,
-                type:ORDER_SITE_URL.CHECK_PAYMENT.METHOD,
-                data:{
-                    username:username,
-                    mergeSn:mergeSn
+                url: BASE_URL + ORDER_SITE_URL.CHECK_PAYMENT.URL,
+                dataType: ORDER_SITE_URL.DATATYPE,
+                type: ORDER_SITE_URL.CHECK_PAYMENT.METHOD,
+                data: {
+                    username: username,
+                    mergeSn: mergeSn
                 },
-                cache:true,
-                async:false,
-                success:function (data) {
+                cache: true,
+                async: false,
+                success: function (data) {
                     console.log(data);
                 }
             });
@@ -105,7 +105,7 @@
 
     </script>
 </head>
-<body  class="page">
+<body class="page">
 <div id="paySuccess"></div>
 
 
@@ -144,7 +144,7 @@
         {{/order}}
         <div class="content-block">
             <p>
-                <a class="checkMyOrderBtn button button-big button-fill external rg-col" href="javascript:;" >
+                <a class="checkMyOrderBtn button button-big button-fill external rg-col" href="javascript:;">
                     查看订单
                 </a>
             </p>

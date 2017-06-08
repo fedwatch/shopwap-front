@@ -4,14 +4,15 @@
     <title>快捷支付 </title>
     <!--js 头部引入-->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
     <meta content="telephone=no" name="format-detection"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
     <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/bindCard.css">
-    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" type="text/css" href="../../assets/plugin/light7/dist/css/light7.css"/>
     <link rel="stylesheet" type="text/css" href="../../assets/plugin/light7/dist/css/light7-swiper.min.css"/>
     <script type="text/javascript" src="../../assets/plugin/jquery.min.js"></script>
@@ -25,13 +26,13 @@
     <!--<script type="text/javascript" src="../../assets/plugin/seajs-text.js"></script>-->
 
     <script>
-//        seajs.use(['../../js/api','../../js/payment/sendMoney'])
+        //        seajs.use(['../../js/api','../../js/payment/sendMoney'])
 
-//        require('jquery');
-//        require('siteUrl');
-//        require('store');
-//        require('light7');
-        jQuery.support.cors = true;
+        //        require('jquery');
+        //        require('siteUrl');
+        //        require('store');
+        //        require('light7');
+
         $(function () {
             // var isBalancePay = store.get("isBalancePay");
             // var type = store.get("type") || "payment";
@@ -42,12 +43,12 @@
             // var app_request = store.get("app_request") || '3';
             // var username = store.get("username");
             // paySubmit(isBalancePay,type,paymentPluginId,mergeSn,amount,cardId,app_request,username);
-
-            setTimeout(function(){
+            jQuery.support.cors = true;
+            setTimeout(function () {
                 var req_data = store.get("req_data");
                 $("#req_data").val(req_data);
                 $("#sendMoneyForm").submit();
-            },0)
+            }, 0)
         });
 
         /**
@@ -61,12 +62,12 @@
          * @param app_request
          * @param username
          */
-        function paySubmit(isBalancePay,type ,paymentPluginId,mergeSn,amount ,cardId ,app_request ,username){
+        function paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username) {
             $.ajax({
-                url:BASE_URL+PAYMENT_SITE_URL.PAY_SUBMIT.URL,
-                type:PAYMENT_SITE_URL.PAY_SUBMIT.METHOD,
-                dataType:PAYMENT_SITE_URL.DATATYPE,
-                data:{
+                url: BASE_URL + PAYMENT_SITE_URL.PAY_SUBMIT.URL,
+                type: PAYMENT_SITE_URL.PAY_SUBMIT.METHOD,
+                dataType: PAYMENT_SITE_URL.DATATYPE,
+                data: {
                     isBalancePay: isBalancePay,
                     type: type,
                     paymentPluginId: paymentPluginId,
@@ -76,8 +77,8 @@
                     app_request: app_request,
                     username: username,
                 },
-                success:function (data) {
-                    if (data.status == "200" && data.su == true){
+                success: function (data) {
+                    if (data.status == "200" && data.su == true) {
                         $.toast("支付跳转中")
                         return location.href = '/www/html/payment/alipay/paySuccess.html'
                     }
@@ -91,13 +92,11 @@
         }
 
 
-
-
     </script>
 </head>
 <body class="page">
-    <form id="sendMoneyForm" method="post" action="https://wap.lianlianpay.com/payment.htm">
-        <input type="hidden" name="req_data" id="req_data">
-    </form>
+<form id="sendMoneyForm" method="post" action="https://wap.lianlianpay.com/payment.htm">
+    <input type="hidden" name="req_data" id="req_data">
+</form>
 </body>
 </html>

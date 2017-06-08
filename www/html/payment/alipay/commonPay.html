@@ -44,8 +44,9 @@
         var isLock = store.get("isLock") || false;
 
         var isBalancePay = false;
-        jQuery.support.cors = true;
+
         $(function () {
+            jQuery.support.cors = true;
             payment(username, mergeSn);
             store.set("type", "payment");
             store.set("app_request", "3");
@@ -566,7 +567,8 @@
                 <div class="item-media">余额</div>
                 <div class="item-inner" style="border-bottom:none;">
                     <div class="item-title label" style="width:auto;">
-                        <span style="font-size:0.789rem;">共￥<span>{{this.balance}}</span><span id="balance-yue" style="visibility:hidden;">,使用￥<span></span></span></span>
+                        <span style="font-size:0.789rem;">共￥<span>{{this.balance}}</span><span id="balance-yue"
+                                                                                               style="visibility:hidden;">,使用￥<span></span></span></span>
                     </div>
                     <div class="item-input" style="width:auto;">
                         <label class="label-switch">
@@ -583,10 +585,11 @@
                 <ul id="payWay">
                     <li class="card">
                         {{#if this.paymentPlugin}}
-                        <div class="card-header checkPay" >
+                        <div class="card-header checkPay">
                             <div class="pay-logo"><img src="{{this.paymentPlugin.logo}}"/></div>
                             <div class="remainPay">
-                                <span class="morePay">支付<span style="color:#ff503e;" id="aliPay">{{this.allAmount}}</span></span>
+                                <span class="morePay">支付<span style="color:#ff503e;"
+                                                              id="aliPay">{{this.allAmount}}</span></span>
                                 <span class="tick tickys" data-value="{{this.paymentPlugin.id}}"></span>
                             </div>
                         </div>
@@ -596,10 +599,10 @@
             </div>
         </div>
 
-        <div class="content-block" >
-            <div class="row"  id="surePays">
+        <div class="content-block">
+            <div class="row" id="surePays">
                 <div class="col-100">
-                    <a href="javascript:;" class="external button button-big button-password rg-col" >确认</a>
+                    <a href="javascript:;" class="external button button-big button-password rg-col">确认</a>
                 </div>
             </div>
         </div>

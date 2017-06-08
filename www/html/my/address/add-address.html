@@ -9,7 +9,7 @@
     <meta content="telephone=no" name="format-detection"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="../../../css/common.css">
     <link rel="stylesheet" href="../../../css/style.css">
     <link rel="stylesheet" href="../../../css/address.css">
@@ -18,8 +18,8 @@
     <link rel="stylesheet" type="text/css" href="../../../assets/plugin/light7/dist/css/light7-swipeout.css"/>
 
     <script type="text/javascript" src="../../../assets/plugin/jquery.min.js"></script>
-   <!-- <script type="text/javascript" src="../../../assets/plugin/sea.js"></script>
-    <script type="text/javascript" src="../../../assets/plugin/seajs-text.js"></script>-->
+    <!-- <script type="text/javascript" src="../../../assets/plugin/sea.js"></script>
+     <script type="text/javascript" src="../../../assets/plugin/seajs-text.js"></script>-->
     <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7.min.js"></script>
     <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
     <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-swipeout.js"></script>
@@ -28,7 +28,7 @@
     <script type="text/javascript" src="../../../js/utils/store.min.js"></script>
     <script type="text/javascript" src="../../../js/utils/getCurrentPage.js"></script>
     <script type="text/javascript" src="../../../js/config/siteUrl.js"></script>
-    <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-city-picker.js"> </script>
+    <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-city-picker.js"></script>
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
         $(function () {
@@ -58,8 +58,8 @@
                             username: username,
                             id: addressId
                         },
-                        cache:true,
-                        async:false,
+                        cache: true,
+                        async: false,
                         success: function (data) {
                             // console.log(data.authMsg);
                             if (data.authStatus == '200') {
@@ -69,7 +69,7 @@
                                 $userZipCode.val(data.receiver.zipCode);
                                 $cityPicker.val(data.receiver.area.fullName);
                                 $areaId.val(data.receiver.area.id);
-                                store.set("areaId",data.receiver.area.id);
+                                store.set("areaId", data.receiver.area.id);
                                 if (data.receiver.isDefault == true) {
                                     $userDefault.click();
                                 }
@@ -103,7 +103,7 @@
                 var $this = $(this);
                 var username = store.get("username");
                 var consignee = $userNameAddr.val();
-                if(consignee == '' || typeof consignee == "undefined"){
+                if (consignee == '' || typeof consignee == "undefined") {
                     $.toast("联系人不可为空");
                     return;
                 }
@@ -111,11 +111,11 @@
                 var address = $userAddress.val();
                 var zipCode = $userZipCode.val();
                 var phone = $userPhoneS.val();
-                if (phone == '' || typeof phone == "undefined"){
+                if (phone == '' || typeof phone == "undefined") {
                     $.toast("手机号不可为空");
                     return;
                 }
-                if( address == '' || typeof address == "undefined"){
+                if (address == '' || typeof address == "undefined") {
                     $.toast("地址不可为空");
                     return;
                 }
@@ -131,185 +131,189 @@
             });
 
 
-        function receiverSave(username, consignee, areaId, address, zipCode, phone, userDefault) {
-            $.ajax({
-                url: BASE_URL + MEMBER_SITE_URL.SAVE.URL,
-                type: MEMBER_SITE_URL.SAVE.METHOD,
-                dataType: MEMBER_SITE_URL.DATATYPE,
-                data: {
-                    username: username,
-                    consignee: consignee,
-                    areaId: areaId,
-                    address: address,
-                    zipCode: zipCode,
-                    phone: phone,
-                    isDefault: userDefault,
-                },
-                cache:true,
-                async:false,
-                success: function (data) {
-                    if(data.authStatus == '200'){
-                        $.toast(data.authMsg);
-                        return history.go(-1);
-                    }else if (data.authStatus == '403'){
-                        $.toast(data.authMsg,3000);
-                        return location.href = '/www/html/my/login/login.html';
-                    }else if(data.authStatus == '500'){
-                        $.toast(data.authMsg);
-                        return;
+            function receiverSave(username, consignee, areaId, address, zipCode, phone, userDefault) {
+                $.ajax({
+                    url: BASE_URL + MEMBER_SITE_URL.SAVE.URL,
+                    type: MEMBER_SITE_URL.SAVE.METHOD,
+                    dataType: MEMBER_SITE_URL.DATATYPE,
+                    data: {
+                        username: username,
+                        consignee: consignee,
+                        areaId: areaId,
+                        address: address,
+                        zipCode: zipCode,
+                        phone: phone,
+                        isDefault: userDefault,
+                    },
+                    cache: true,
+                    async: false,
+                    success: function (data) {
+                        if (data.authStatus == '200') {
+                            $.toast(data.authMsg);
+                            return history.go(-1);
+                        } else if (data.authStatus == '403') {
+                            $.toast(data.authMsg, 3000);
+                            return location.href = '/www/html/my/login/login.html';
+                        } else if (data.authStatus == '500') {
+                            $.toast(data.authMsg);
+                            return;
+                        }
                     }
-                }
-            });
-        }
+                });
+            }
 
 
-        function receiverUpdate(username, id, consignee, areaId, address, zipCode, phone, userDefault) {
-            $.ajax({
-                url: BASE_URL + MEMBER_SITE_URL.UPDATE.URL,
-                type: MEMBER_SITE_URL.UPDATE.METHOD,
-                dataType: MEMBER_SITE_URL.DATATYPE,
-                data: {
-                    username: username,
-                    consignee: consignee,
-                    id: id,
-                    areaId: areaId,
-                    address: address,
-                    zipCode: zipCode,
-                    phone: phone,
-                    isDefault: userDefault,
-                },
-                cache:true,
-                async:false,
-                success: function (data) {
-                    if(data.authStatus == '200'){
-                        $.toast(data.authMsg);
-                        return history.go(-1);
-                    }else if (data.authStatus == '403'){
-                        $.toast(data.authMsg,3000);
-                        return location.href = '/www/html/my/login/login.html';
-                    }else if(data.authStatus == '500'){
-                        $.toast(data.authMsg);
-                        return;
+            function receiverUpdate(username, id, consignee, areaId, address, zipCode, phone, userDefault) {
+                $.ajax({
+                    url: BASE_URL + MEMBER_SITE_URL.UPDATE.URL,
+                    type: MEMBER_SITE_URL.UPDATE.METHOD,
+                    dataType: MEMBER_SITE_URL.DATATYPE,
+                    data: {
+                        username: username,
+                        consignee: consignee,
+                        id: id,
+                        areaId: areaId,
+                        address: address,
+                        zipCode: zipCode,
+                        phone: phone,
+                        isDefault: userDefault,
+                    },
+                    cache: true,
+                    async: false,
+                    success: function (data) {
+                        if (data.authStatus == '200') {
+                            $.toast(data.authMsg);
+                            return history.go(-1);
+                        } else if (data.authStatus == '403') {
+                            $.toast(data.authMsg, 3000);
+                            return location.href = '/www/html/my/login/login.html';
+                        } else if (data.authStatus == '500') {
+                            $.toast(data.authMsg);
+                            return;
+                        }
+
                     }
+                });
+            }
 
-                }
-            });
-        }
-        $(document).on("pageInit", function () {
-            $("#city-picker").cityPicker({
-                toolbarTemplate: '<header class="bar bar-nav">\
+            $(document).on("pageInit", function () {
+                $("#city-picker").cityPicker({
+                    toolbarTemplate: '<header class="bar bar-nav">\
   <button class="button button-link pull-right close-picker">完成</button>\
   <h1 class="title"></h1>\
   </header>'
+                });
             });
-        });
-        $.init();
-    })
+            $.init();
+        })
 
- </script>
+    </script>
 </head>
 <body class="page">
-    <div class="address">
-        <header class="bar bar-nav">
-            <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)"
-               data-transition='slide-out'>
-                <i class="fa fa-chevron-left"></i>
-            </a>
-            <h1 class='title'>地址管理</h1>
-        </header>
-        <div class="content  add-address">
-            <div class="list-block">
-                <ul id="input-list">
-                    <!-- Text inputs -->
-                    <li>
-                        <div class="item-content">
+<div class="address">
+    <div class="appStatusBar" style="background: #fff;"></div>
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)"
+           data-transition='slide-out'>
+            <i class="fa fa-chevron-left"></i>
+        </a>
+        <h1 class='title'>地址管理</h1>
+    </header>
+    <div class="content  add-address">
+        <div class="appStatusBar"></div>
+        <div class="list-block">
+            <ul id="input-list">
+                <!-- Text inputs -->
+                <li>
+                    <div class="item-content">
 
-                            <div class="item-inner">
-                                <div class="item-title label">联&nbsp;&nbsp;系&nbsp;&nbsp;人</div>
-                                <div class="item-input">
-                                    <input type="text" placeholder="用户名" id="ad-user-name"/>
-                                </div>
+                        <div class="item-inner">
+                            <div class="item-title label">联&nbsp;&nbsp;系&nbsp;&nbsp;人</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="用户名" id="ad-user-name"/>
                             </div>
                         </div>
-                    </li>
-                    <li>
-                        <div class="item-content">
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
 
-                            <div class="item-inner">
-                                <div class="item-title label">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话</div>
-                                <div class="item-input">
-                                    <input type="text" placeholder="手机号" id="user-phoneS"/>
-                                </div>
+                        <div class="item-inner">
+                            <div class="item-title label">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="手机号" id="user-phoneS"/>
                             </div>
                         </div>
-                    </li>
-                    <li>
-                        <div class="item-content">
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
 
-                            <div class="item-inner">
-                                <div class="item-title label">城&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;市</div>
-                                <div class="item-input">
-                                    <input type="text" placeholder="" id="city-picker" value=""/>
-                                </div>
+                        <div class="item-inner">
+                            <div class="item-title label">城&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;市</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="" id="city-picker" value=""/>
                             </div>
                         </div>
-                    </li>
-                    <li>
-                        <div class="item-content">
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
 
-                            <div class="item-inner">
-                                <div class="item-title label">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址</div>
-                                <div class="item-input">
-                                    <input type="text" placeholder="" id="user-address" value=''/>
-                                </div>
+                        <div class="item-inner">
+                            <div class="item-title label">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="" id="user-address" value=''/>
                             </div>
                         </div>
-                    </li>
-                    <li>
-                        <div class="item-content">
-                            <div class="item-inner">
-                                <div class="item-title label">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编</div>
-                                <div class="item-input">
-                                    <input type="text" placeholder="可选填" class="" id="user-zipcode"/>
-                                </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="可选填" class="" id="user-zipcode"/>
                             </div>
                         </div>
-                    </li>
-                    <!-- Switch (Checkbox) -->
-                    <li>
-                        <div class="item-content">
+                    </div>
+                </li>
+                <!-- Switch (Checkbox) -->
+                <li>
+                    <div class="item-content">
 
-                            <div class="item-inner">
-                                <div class="item-title label">设为默认</div>
-                                <div class="item-input">
-                                    <label class="label-switch pull-right">
-                                        <input type="checkbox" id="user-default"/>
-                                        <div class="checkbox"></div>
-                                    </label>
-                                </div>
+                        <div class="item-inner">
+                            <div class="item-title label">设为默认</div>
+                            <div class="item-input">
+                                <label class="label-switch pull-right">
+                                    <input type="checkbox" id="user-default"/>
+                                    <div class="checkbox"></div>
+                                </label>
                             </div>
                         </div>
-                    </li>
-                </ul>
-            </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
 
-            <div class="content-block">
-                <div class=" ">
-                    <a href="javascript:void(0);" class="addAddressBtn external button button-big button-fill button-success rg-col"
-                       id="button">确认</a>
-                </div>
+        <div class="content-block">
+            <div class=" ">
+                <a href="javascript:void(0);"
+                   class="addAddressBtn external button button-big button-fill button-success rg-col"
+                   id="button">确认</a>
             </div>
         </div>
     </div>
+</div>
 
 
-    <input type="hidden" id="areaId">
+<input type="hidden" id="areaId">
 
-    <script type="text/javascript" src="../../../assets/plugin/jquery.min.js"></script>
-    <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7.min.js"></script>
-    <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
-    <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-swipeout.js"></script>
-    <script type="text/javascript" src="../../../js/utils/varietyValidation.js"></script>
+<script type="text/javascript" src="../../../assets/plugin/jquery.min.js"></script>
+<script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7.min.js"></script>
+<script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
+<script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-swipeout.js"></script>
+<script type="text/javascript" src="../../../js/utils/varietyValidation.js"></script>
 
 </body>
 </html>

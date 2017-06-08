@@ -7,16 +7,16 @@
     <!--js 头部引入-->
     <meta charset="UTF-8">
     <meta content="telephone=no" name="format-detection"/>
+
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon" />
+
+    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="../../css/style.css">
-
     <script type="text/javascript" src="../../assets/plugin/jquery.min.js"></script>
     <script type="text/javascript" src="../../assets/plugin/sea.js"></script>
     <script type="text/javascript" src="../../assets/plugin/seajs-text.js"></script>
-
     <link rel="stylesheet" type="text/css" href="../../assets/plugin/light7/dist/css/light7.css"/>
     <link rel="stylesheet" type="text/css" href="../../assets/plugin/light7/dist/css/light7-swiper.min.css"/>
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -29,72 +29,33 @@
     <script type="text/javascript" src="../../js/config/siteUrl.js"></script>
     <script type="text/javascript" src="../../js/config/getUser.js"></script>
     <script>
-//        seajs.use(['../../js/api','../../js/cart/cart'])
-//        require('jquery');
-//        require('store');
-//        require('siteUrl');
-//        require('getUser');
-//        require('light7');
-
-        jQuery.support.cors = true;
 
 
-        var username = store.get("username");
-        var userStatus = store.get("userStatus");
         $(function () {
+            jQuery.support.cors = true;
+            var username = store.get("username");
+            var userStatus = store.get("userStatus");
+            var storeData = {};
 
-            var storeData = {
-                data: '7795'
-            };
-//            var tpl = require('/zqVue/shopwap-front/www/layout/cart/cart.tpl');
             var template = Handlebars.compile($("#cartTpl").html());
             var html = template(storeData);
             $("#cartPage").html(html);
 
-
-            // my_header
-//        require.async('handlebars', function () {
-//
-//        });
-
-            // cartHeader
-//        require.async('handlebars', function () {
-            var storeData = {
-                headerTitle: '购物车'
-            };
-//            var tpl = require('/zqVue/shopwap-front/www/layout/cart/cartHeader.tpl');
             var template = Handlebars.compile($("#cartHeaderTpl").html());
             var html = template(storeData);
             $("#cartHeader").html(html);
-//        });
 
-
-            // cartFooter
-//        require.async('handlebars', function () {
-            var storeData = {};
-//            var tpl = require('/zqVue/shopwap-front/www/layout/cart/cartFooter.tpl');
             var template = Handlebars.compile($("#cartFooterTpl").html());
             var html = template(storeData);
             $("#cartFooter").html(html);
-//        });
 
-            // cartIndex
-//        require.async('handlebars', function () {
-            var storeData = {};
-//            var tpl = require('/zqVue/shopwap-front/www/layout/common/cartIndex.tpl');
             var template = Handlebars.compile($("#cartIndexTpl").html());
             var html = template(storeData);
             $("#cartIndex").html(html);
-//        });
 
-            // nothingBuy
-//        require.async('handlebars', function () {
-            var storeData = {};
-//            var tpl = require('/zqVue/shopwap-front/www/layout/cart/nothingBuy.tpl');
             var template = Handlebars.compile($("#nothingBuyTpl").html());
             var html = template(storeData);
             $("#nothingBuy").html(html);
-//        });
 
             cartList(username);
 
@@ -192,7 +153,7 @@
             $(document).on("click", ".removeOffItem", function (e) {
                 var id = $(this).parents(".failGoods").find(".cart-off-store-img-text-label").data("id");
                 $(this).parents(".failGoods").remove();
-                cartDelete(username,[id]);
+                cartDelete(username, [id]);
                 // $(".offEditPanel").hide();
             });
 
@@ -356,23 +317,23 @@
                 type: CART_SITE_URL.CART_LIST.METHOD,
                 dataType: CART_SITE_URL.DATATYPE,
                 data: {username: username},
-                cache: true,
-                async: false,
+//                cache: true,
+//                async: false,
                 success: function (data) {
                     if (data.authStatus == "200") {
                         // cartItem
 //                        require.async('handlebars', function () {
 //                            require.async('transDetails', function () {
 //                                var tpl = require('/zqVue/shopwap-front/www/layout/cart/cartItem.tpl');
-                                var template = Handlebars.compile($("#cartItemTpl").html());
-                                var html = template(data);
-                                $("#cartItem").html(html);
+                        var template = Handlebars.compile($("#cartItemTpl").html());
+                        var html = template(data);
+                        $("#cartItem").html(html);
 //                            });
 //                        });
 
                     } else if (data.authStatus == "500") {
                         $("#nothingBuy").show();
-                    } else{
+                    } else {
                         $("#nothingBuy").show();
                     }
                 }
@@ -513,8 +474,6 @@
         }
 
 
-
-
     </script>
 </head>
 <body>
@@ -615,8 +574,8 @@
                     <span class="unactive-cart-item">失效</span>
                 </div>
                 <div class="cart-item-image">
-                    <a href="/html/detail/detail.html" class="external">
-                        <img src="/assets/images/cart-item-image-product.png" alt="">
+                    <a href="../../html/detail/detail.html" class="external">
+                        <img src="../../assets/images/cart-item-image-product.png" alt="">
                     </a>
                 </div>
                 <div class="cart-unselect-item-text" style="width: 100%;">
@@ -646,8 +605,10 @@
 
 <script type="text/x-handlebars-template" id="cartTpl">
     <!--购物车模版-->
+    <div class="appStatusBar" style="background:#fff;"></div>
     <header id="cartHeader" class="bar bar-nav"></header>
     <div class="cartBg content">
+        <div class="appStatusBar"></div>
         <div id="cartIndex"></div>
         <div id="cartItem"></div>
         <div id="nothingBuy"></div>
@@ -660,7 +621,7 @@
 <script type="text/x-handlebars-template" id="cartFooterTpl">
     <div class="cart-footer">
         <div class="cart-bottom-all-select">
-            <input type="checkbox"  class="cart-all-select" style="display: none;" id="cartAllSelect">
+            <input type="checkbox" class="cart-all-select" style="display: none;" id="cartAllSelect">
             <label for="cartAllSelect"></label>
         </div>
         <div class="cart-bottom-text">
@@ -690,7 +651,7 @@
        data-transition='slide-out'>
         <i class="fa fa-chevron-left"></i>
     </a>
-    <h1 class='title'>{{headerTitle}}</h1>
+    <h1 class='title'>购物车</h1>
 
 </script>
 

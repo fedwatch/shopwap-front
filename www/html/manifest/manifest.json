@@ -19,7 +19,7 @@
     }
   ],
   "start_url": "/m/html/index.html?launcher=true",
-  "display":"standalone",
+  "display": "standalone",
   "background_color": "#2196F3",
   "theme_color": "#2196F3",
   "orientation": "landscape"

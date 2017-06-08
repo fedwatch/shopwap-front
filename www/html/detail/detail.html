@@ -24,16 +24,16 @@
     <script type="text/javascript" src="../../js/utils/transDetails.js"></script>
 
 
-
     <script>
+        //USERMD
+        var username = store.get("username");
+        var currentProductID = store.get("currentProductID");
+        var userStatus = store.get("userStatus");
         $(function () {
 
-            //USERMD
-            var username = store.get("username");
-            var currentProductID = store.get("currentProductID");
-            var userStatus = store.get("userStatus");
 
-            $.toast("username:"+username+" currentProductID:"+currentProductID+" userStatus:"+userStatus);
+
+//            $.toast("username:"+username+" currentProductID:"+currentProductID+" userStatus:"+userStatus);
 
             jQuery.support.cors = true;
             // usermd
@@ -68,7 +68,6 @@
                         $("#cartDetailFooter").html(html);
 
 
-
                         var template = Handlebars.compile($("#detailOneTpl").html());
                         var html = template(data);
                         $("#detailOne").html(html);
@@ -88,7 +87,7 @@
                         $("#detailWrapper").html(html);
 
                     }
-                    else if (data.authStatus == "500"){
+                    else if (data.authStatus == "500") {
                         console.log(data.authMsg);
                     }
                 }
@@ -127,11 +126,11 @@
                         $.toast("请添加商品");
                         return;
                     } else {
-                        window.location.href = "/www/html/cart/cart.html";
+                        window.location.href = "../../html/cart/cart.html";
                     }
                 } else {
                     $.toast("请登录才可以进行后续操作");
-                    return location.href = '/www/html/my/login/login.html';
+                    return location.href = '../../html/my/login/login.html';
                 }
             });
 
@@ -179,7 +178,7 @@
                 } else {
                     $.toast("请登录才可以进行后续操作", 2000);
                     setTimeout(function () {
-                        location.href = '/www/html/my/login/login.html';
+                        location.href = '../../html/my/login/login.html';
                     }, 2000)
                 }
 
@@ -249,10 +248,6 @@
             });
 
         });
-
-
-
-
 
 
         /**
@@ -353,7 +348,7 @@
          * @param username
          * @param currentProductID
          */
-        function setSpecificationId(username,currentProductID) {
+        function setSpecificationId(username, currentProductID) {
             // usermd
             $.ajax({
                 url: BASE_URL + PRODUCT_SITE_URLS.PRODUCT_VIEW.URL,
@@ -362,12 +357,12 @@
                     username: username,
                     id: currentProductID
                 },
-                cache:true,
-                async:false,
+                cache: true,
+                async: false,
                 dataType: PRODUCT_SITE_URLS.DATATYPE,
                 success: function (data) {
-                    if(data.authStatus == '200'){
-                        if(data["product"]){
+                    if (data.authStatus == '200') {
+                        if (data["product"]) {
                             var specificationValues = data["product"].specificationValues;
                             var productSpec = [];
                             specificationValues.map(function (data) {
@@ -378,7 +373,7 @@
                                 $("#specification-id-" + productSpec[i]).removeClass("active").addClass("active");
                             }
                         }
-                    }else{
+                    } else {
                         $.toast(data.authMsg);
                         return history.go(-1);
                     }
@@ -423,8 +418,8 @@
                 data: {
                     username: username,
                 },
-                cache:true,
-                async:false,
+                cache: true,
+                async: false,
                 dataType: CART_SITE_URL.DATATYPE,
                 success: function (data) {
                     if (data.authStatus == "200") {
@@ -461,7 +456,8 @@
 
 
 <script type="text/x-handlebars-template" id="productSliderTpl">
-    <div class="product-images-slider" data-space-between='10' data-pagination='.swiper-pagination' data-autoplay="1000">
+    <div class="product-images-slider" data-space-between='10' data-pagination='.swiper-pagination'
+         data-autoplay="1000">
         <div class="swiper-wrapper">
             {{#each this.product.productImages}}
             <div class="swiper-slide">
@@ -475,13 +471,13 @@
 </script>
 
 <script type="text/x-handlebars-template" id="goodsDetailsPageTpl">
-    <div class="detail-header" >
-        <div class="detail-image" >
-            <img class="lazy img-round" src="{{this.product.image}}"  alt="">
+    <div class="detail-header">
+        <div class="detail-image">
+            <img class="lazy img-round" src="{{this.product.image}}" alt="">
         </div>
-        <div class="detail-desc" >
-            <span class="detail-desc-price" >￥ <span class="product-price">{{this.product.price}}</span></span><br>
-            <span class="detail-desc-stock" >库存：<span id="inStock">{{this.product.stock}}</span> 件</span><br>
+        <div class="detail-desc">
+            <span class="detail-desc-price">￥ <span class="product-price">{{this.product.price}}</span></span><br>
+            <span class="detail-desc-stock">库存：<span id="inStock">{{this.product.stock}}</span> 件</span><br>
             <!--<span class="detail-desc-choice" >描述：<span id="productDescription">{{this.product.brand.introduction}}</span></span>-->
         </div>
     </div>
@@ -490,7 +486,7 @@
     <div class="detail-body">
         {{#each product.specifications}}
         <div class="body-title">{{name}}：</div>
-        <div class="popup-page spec-{{id}}" >
+        <div class="popup-page spec-{{id}}">
             {{#each this.specificationValues}}
             <span class="spec-button number-input"
                   id="specification-id-{{this.id}}"
@@ -512,7 +508,6 @@
         </div>
     </div>
 </script>
-
 
 
 <script type="text/x-handlebars-template" id="topLinkMenuTpl">
@@ -542,17 +537,17 @@
 <script type="text/x-handlebars-template" id="detailOneTpl">
     <!--产品名称、价格、运费、发货地-->
     <div class="detail-content list-block" style="background: #fff;padding-top:.5rem;">
-        <div class="product-title-box" >
+        <div class="product-title-box">
             <!--<h1 class="product-title" id="productName"></h1>-->
             <h1 class="product-title">{{this.product.name}}</h1>
         </div>
 
-        <div class="product-price-box" >
+        <div class="product-price-box">
             <span>￥<span id="productPrice">{{this.product.price}}</span></span>
         </div>
-        <div class="shopping-cost detail-item-content" >
+        <div class="shopping-cost detail-item-content">
             <!--运费-->
-            <div class="shipping-cost-box pull-left" >
+            <div class="shipping-cost-box pull-left">
             <span>
                 运费：
                 <span id="shippingCost">
@@ -623,13 +618,13 @@
 
 <script type="text/x-handlebars-template" id="detailWrapperTpl">
     <!--商品详情-->
-    <div class="detail-content list-block" style="background: #fff;" >
+    <div class="detail-content list-block" style="background: #fff;">
         <div class="detail-item-content">
             <div class="detail-block label">商品详情</div>
         </div>
         {{#each this.product.productImages}}
         <div class="goods-description text-center">
-            <img class="lazy" src="{{this.source}}"  alt="{{this.alt}}">
+            <img class="lazy" src="{{this.source}}" alt="{{this.alt}}">
         </div>
         {{/each}}
     </div>

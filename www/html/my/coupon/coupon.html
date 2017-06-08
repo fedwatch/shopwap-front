@@ -4,11 +4,12 @@
     <title>优惠券 - 我的 - 街街网</title>
     <!--js 头部引入-->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
     <meta content="telephone=no" name="format-detection"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="../../../css/common.css">
     <link rel="stylesheet" href="../../../css/style.css">
     <link rel="stylesheet" type="text/css" href="../../../assets/plugin/light7/dist/css/light7.css"/>
@@ -20,11 +21,11 @@
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <script>
-//        seajs.use(['../../../js/api','../../../js/my/coupon/coupon'])
+        //        seajs.use(['../../../js/api','../../../js/my/coupon/coupon'])
 
 
-//        require('jquery');
-//        require('mockjs');
+        //        require('jquery');
+        //        require('mockjs');
 
         var data = Mock.mock("/getData", {
             "title": {
@@ -47,21 +48,21 @@
         });
 
 
-//        require.async('handlebars', function () {
-            $.ajax({
-                url: "/getData",
-                dataType: "json",
-                type: "get",
-                cache:true,
-                async:false,
-                success: function (data) {
+        //        require.async('handlebars', function () {
+        $.ajax({
+            url: "/getData",
+            dataType: "json",
+            type: "get",
+            cache: true,
+            async: false,
+            success: function (data) {
 //                    var tpl = require('/zqVue/shopwap-front/www/layout/my/coupon.tpl');
-                    var template = Handlebars.compile($("couponTpl").html());
-                    var html = template(data);
-                    $("#couponPage").html(html);
-                }
-            })
-//        });
+                var template = Handlebars.compile($("couponTpl").html());
+                var html = template(data);
+                $("#couponPage").html(html);
+            }
+        })
+        //        });
 
 
     </script>
@@ -96,7 +97,7 @@
 
         </div>
         <div class="list-block coupon-list tabs">
-            <div   id="tab1" class="tab active">
+            <div id="tab1" class="tab active">
                 <ul>
                     <li class="item-content">
                         <div class="item-inner">
@@ -115,7 +116,7 @@
                     </li>
                 </ul>
             </div>
-            <div   id="tab2" class="tab ">
+            <div id="tab2" class="tab ">
                 <ul>
                     <li class="item-content">
                         <div class="item-inner">
@@ -134,7 +135,7 @@
                     </li>
                 </ul>
             </div>
-            <div   id="tab3" class="tab ">
+            <div id="tab3" class="tab ">
                 <ul>
                     <li class="item-content">
                         <div class="item-inner">

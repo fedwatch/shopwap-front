@@ -11,11 +11,12 @@ body {
 }
 
 /* 状态栏 - 首页*/
-.appStatusBar{
-    width:100%;
-    height:20px;
+.appStatusBar {
+    width: 100%;
+    height: 20px;
 }
-.appStatusBar.indexGreen{
+
+.appStatusBar.indexGreen {
     background: #9EC28E;
 }
 
@@ -1871,6 +1872,11 @@ span.nav-sub-text.active {
 }
 
 .categoryList {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    z-index: 999;
+    background-color: red;
     margin: 0 0 .25rem 0 !important;
 }
 
@@ -1910,7 +1916,7 @@ span.nav-sub-text.active {
 /*我的订单*/
 .orderColumn {
     background: #fff;
-    font-size: .85rem;
+    /*font-size: .85rem;*/
 }
 
 .orderColumn .row .ocItem {
@@ -1923,6 +1929,11 @@ span.nav-sub-text.active {
     border-bottom: 1px solid #eb4c1e;
     padding: .35rem .15rem;
 }
+.orderColumn .row .ocItem span {
+    font-size:.56rem!important;
+}
+
+
 
 .myOrderList {
     margin: .3rem 0 !important;
