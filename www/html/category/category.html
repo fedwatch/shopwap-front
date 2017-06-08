@@ -37,11 +37,12 @@
     <script>
         $(function () {
 
-
-
             jQuery.support.cors = true;
             var username = store.get("username");
-            var scroller = new IScroll('#productCategory', {click: iScrollClick()});
+            var scroller = new IScroll('#productCategory', {disableMouse : true,
+                click: iScrollClick(),
+                tap: true,
+                probeType: 2});
 
             function iScrollClick(){
                 // workaround click bug iscroll #674

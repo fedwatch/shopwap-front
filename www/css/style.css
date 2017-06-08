@@ -1490,7 +1490,7 @@ span.panel-minus-button {
     height: 3rem;
     width: 35%;
     background: #eb4c1e;
-    padding: 0 2.07rem;
+    /*padding: 0 2.07rem;*/
 }
 
 .buyNowBtn span.buyNowText {
