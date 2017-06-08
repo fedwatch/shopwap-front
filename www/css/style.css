@@ -1,4 +1,8 @@
 @charset "UTF-8";
+body{
+    /*margin-top:20px!important;*/
+    /*padding-top:20px!important;*/
+}
 /** { touch-action: none; }*/
 .jjPageBg {
     background: #fff;
@@ -8,7 +12,7 @@
 /* 首页头部搜索 */
 .header-index {
     position: fixed;
-    top: 0;
+    top: 20px;
     left: 0;
     width: 100%;
     z-index: 99;
@@ -50,6 +54,11 @@
     background-size: 1.6em;
 }
 
+
+/*.footer-bar{*/
+    /*bottom: 0px!important;*/
+    /*position: fixed;*/
+/*}*/
 /*
 .my_header {
 width: 100%;
