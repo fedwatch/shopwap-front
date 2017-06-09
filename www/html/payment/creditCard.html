@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../js/utils/getTemplate.js"></script>
     <script type="text/javascript" src="../../js/utils/transCommonPay.js"></script>
     <script type="text/javascript" src="../../js/utils/parseUrl.js"></script>
-    <script type="text/javascript" src="../../js/config/getUser.js"></script>
+    <!--<script type="text/javascript" src="../../js/config/getUser.js"></script>-->
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
         var bankCardNo = store.get("bankCardNo");
@@ -83,11 +83,11 @@
                 var verificationCode = $("#verificationCode").val() || null;
                 var expiryDate = $("#creditMonth").val() + $("#creditYear").val() || null;
                 var bankCardNo = store.get("bankCardNo");
-                var host = location.protocol + "//" + location.host + "/www/html";
+                var app_request_url = location.protocol + "//" + location.host + "../../html/";
                 console.log(amount);
                 console.log(host);
                 boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode,
-                    bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, trueUsername, bankName, host);
+                    bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, trueUsername, bankName, app_request_url);
                 // location.href = './alipay/paySuccess.html'
 
             })
@@ -136,7 +136,11 @@
                 async: false,
                 success: function (data) {
                     if (data.authStatus == "212") {
-                        window.location.href = "../payment/alipay/commonPay.html";
+                        $.toast(data.authMsg,1500)
+                        setTimeout(function(){
+                            location.href = "../payment/alipay/commonPay.html";
+                        },1500)
+
                     } else if (data.authStatus == "200") {
                         var template = Handlebars.compile($("#creditCardTpl").html());
                         var html = template(data);
@@ -214,8 +218,6 @@
                         }
                     }
                     $.toast(data.authMsg);
-
-
                 }
             })
         }
@@ -242,8 +244,6 @@
 
         <div class="list-block ">
             <ul class="list-tab">
-
-
                 <li>
                     <div class="item-content">
                         <div class="item-media">卡&nbsp;&nbsp;类&nbsp;&nbsp;型</div>

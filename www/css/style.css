@@ -24,6 +24,7 @@ body {
     background: #9EC28E;
 }
 
+
 /* 首页头部搜索 */
 .header-index {
     position: fixed;
@@ -69,10 +70,9 @@ body {
     background-size: 1.6em;
 }
 
-/*.footer-bar{*/
-/*bottom: 0px!important;*/
-/*position: fixed;*/
-/*}*/
+.footer-bar{
+background: #fff!important;
+}
 /*
 .my_header {
 width: 100%;

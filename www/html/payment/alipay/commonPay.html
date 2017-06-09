@@ -56,7 +56,7 @@
                 var cardId = $this.data("id");
                 store.set("cardId", cardId);
                 console.log(cardId);
-                var app_request_url = location.protocol + "//" + location.host + '/www/html';
+                var app_request_url = location.protocol + "//" + location.host + '../../../html';
                 paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username, app_request_url);
             });
 
@@ -310,7 +310,8 @@
                             return location.href = '../sendMoney.html';
                         }
                     } else if (data.authStatus == '211') {
-                        window.location.href = "../alipay/paySuccess.html?paymentSn=" + data.paymentSn;
+
+                        location.href = "../alipay/paySuccess.html?paymentSn=" + data.paymentSn;
                     }
                     else if (data.authStatus == '500') {
                         // 部分订单已被锁定，不能进行支付操作 需要 执行 解锁
