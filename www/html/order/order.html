@@ -21,6 +21,7 @@
     <script type="text/javascript" src="../../js/utils/store.min.js"></script>
     <script type="text/javascript" src="../../js/config/getUser.js"></script>
     <script type="text/javascript" src="../../js/utils/divideAmount.js"></script>
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
         jQuery.support.cors = true;
 
@@ -170,7 +171,7 @@
                         console.log(mergeSn);
                         if (data.mergeSn) {
                             store.set("mergeSn", data.mergeSn);
-                            return window.location.href = "/www/html/payment/alipay/commonPay.html";
+                            return window.location.href = "../../html/payment/alipay/commonPay.html";
 
                         } else {
                             console.log("data.mergeSn is null")
@@ -258,7 +259,7 @@
 
                         //orderBottomBar
 //                        require.async('handlebars', function () {
-                        var tpl = require('/zqVue/shopwap-front/www/layout/order/orderBottomBar.tpl');
+//                        var tpl = require('/zqVue/shopwap-front/www/layout/order/orderBottomBar.tpl');
                         var template = Handlebars.compile($("#orderBottomBarTpl").html());
                         var html = template(data);
                         $("#orderBottomBar").html(html);
@@ -525,12 +526,13 @@
     </script>
 </head>
 <body>
-<i class="fa fa-chevron-left"></i>
 
 
 <div class="page mainList">
+    <div class="appStatusBar" style="background: #fff;"></div>
     <header id="orderHeader" class="bar bar-nav"></header>
     <div class="detail-page content" style="background: #f4f4f4;padding-bottom: 3rem;">
+        <div class="appStatusBar" style="background: #fff;"></div>
         <div id="orderAddress"></div>
         <div id="orderDetail"></div>
     </div>

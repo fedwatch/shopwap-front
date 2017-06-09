@@ -265,7 +265,7 @@
                         if (data.itemId) {
                             store.set("cartItemId", [data.itemId]);
                             $("#cartState").val(false)
-                            return location.href = "/www/html/order/order.html";
+                            return location.href = "../../html/order/order.html";
                         } else {
                             console.log("item id 不存在")
                         }
@@ -313,7 +313,7 @@
                 }
             } else {
                 $.toast("请登录才可以进行后续操作");
-                location.href = '/www/html/my/login/login.html';
+                location.href = '../../html/my/login/login.html';
             }
 
         }
