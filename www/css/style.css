@@ -1,4 +1,8 @@
 @charset "UTF-8";
+html,body{
+    height:100%;
+    overflow:hidden;
+}
 body {
     /*margin-top:20px!important;*/
     /*padding-top:20px!important;*/
@@ -1521,11 +1525,13 @@ span.panel-minus-button {
 }
 
 .topLinkMenu {
-    position: fixed;
-    top: 0;
-    left: 0;
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*left: 0;*/
     z-index: 222;
     width: 100%;
+    display: block;
+
 }
 
 /**
@@ -1898,7 +1904,7 @@ span.nav-sub-text.active {
     height: 1.5rem;
     line-height: 1.5rem;
     border-radius: 1.5rem;
-    top: 1rem;
+    top: .5rem;
     left: .5rem;
     position: absolute;
 }

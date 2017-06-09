@@ -9,7 +9,6 @@
     <meta content="telephone=no" name="format-detection"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-
     <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/bindCard.css">
@@ -20,9 +19,6 @@
     <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7.min.js"></script>
     <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
     <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7-swipeout.js"></script>
-    <!--<script type="text/javascript" src="../../assets/plugin/sea.js"></script>-->
-    <!--<script type="text/javascript" src="../../assets/plugin/seajs-text.js"></script>-->
-
     <script type="text/javascript" src="../../assets/plugin/handlebars-v1.3.0.js"></script>
     <script type="text/javascript" src="../../js/config/siteUrl.js"></script>
     <script type="text/javascript" src="../../js/utils/store.min.js"></script>
@@ -32,14 +28,6 @@
     <script type="text/javascript" src="../../js/config/getUser.js"></script>
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
-        //        seajs.use(['../../js/api','../../js/payment/creditCard'])
-
-        //        require('jquery');
-        //        require('store');
-        //        require('siteUrl');
-        //        require('light7');
-        //        require('user');
-
         var bankCardNo = store.get("bankCardNo");
         var username = store.get("username");
         var isBalancePay = store.get("isBalancePay") || false;
@@ -51,6 +39,7 @@
         var app_request = store.get("app_request") || '3';
         var cardType = store.get("cardType") || '1';
         var cardId = store.get("cardId");
+        var pageNumber = store.get("pageNumber")||0;
 
 
         $(function () {
@@ -236,6 +225,7 @@
 <div id="credit-card"></div>
 
 <script type="text/x-handlebars-template" id="creditCardTpl">
+    <div class="appStatusBar" style="background:#fff;"></div>
     <header class="bar bar-nav">
         <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)"
            data-transition='slide-out'>
@@ -244,7 +234,7 @@
         <h1 class='title'>快捷支付</h1>
     </header>
     <div class="content creditCard">
-
+        <div class="appStatusBar"></div>
         <div class="pay-money">
             <div class="item-media">支付金额：</div>
             <div class="item-inner"><span id="allAmount"></span> 元</div>

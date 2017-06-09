@@ -1532,9 +1532,19 @@ body .color-success:active,
     padding-left: .5rem;
     background-color: #f7f7f8;
     border-bottom: 1px solid #e7e7e7;
-
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+}
+
+.bar-flat {
+    width:100%;
+    z-index: 10;
+    height: 2.2rem;
+    padding-right: .5rem;
+    padding-left: .5rem;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    background:#fff;
 }
 
 .bar-header-secondary {

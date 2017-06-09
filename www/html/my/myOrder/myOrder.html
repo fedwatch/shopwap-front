@@ -27,16 +27,6 @@
     <!--<script type="text/javascript" src="../../../assets/plugin/seajs-text.js"></script>-->
 
     <script>
-        //        seajs.use(['../../../js/api','../../../js/my/order/myOrder'])
-
-
-        //        require('jquery');
-        //        require('swiper');
-        //        require('store');
-        //        require('light7');
-        // require('mockjs');
-        //        require('siteUrl');
-
 
         var reieverStatus;
         var username = store.get("username");
@@ -136,7 +126,7 @@
             $(document).on("click", ".checkLogBtn", function () {
                 var $this = $(this);
                 store.set("sn", $this.data("sn"));
-                return location.href = '/www/html/user/logistics.html';
+                return location.href = '../../../html/user/logistics.html';
 
             });
 
@@ -149,7 +139,7 @@
                 createPayment(username, [sn]);
                 store.set("mergeSn", mergeSn);
 
-                return location.href = '/www/html/payment/alipay/commonPay.html';
+                return location.href = '../../../html/payment/alipay/commonPay.html';
             });
 
             // 立即评价
