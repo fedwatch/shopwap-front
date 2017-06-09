@@ -153,7 +153,7 @@
                             return history.go(-1);
                         } else if (data.authStatus == '403') {
                             $.toast(data.authMsg, 3000);
-                            return location.href = '/www/html/my/login/login.html';
+                            return location.href = '../../../html/my/login/login.html';
                         } else if (data.authStatus == '500') {
                             $.toast(data.authMsg);
                             return;
@@ -183,10 +183,10 @@
                     success: function (data) {
                         if (data.authStatus == '200') {
                             $.toast(data.authMsg);
-                            return history.go(-1);
+                            return location.href = '../../../html/my/address/address.html';
                         } else if (data.authStatus == '403') {
                             $.toast(data.authMsg, 3000);
-                            return location.href = '/www/html/my/login/login.html';
+                            return location.href = '../../../html/my/login/login.html';
                         } else if (data.authStatus == '500') {
                             $.toast(data.authMsg);
                             return;

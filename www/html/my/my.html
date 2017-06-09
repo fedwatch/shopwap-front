@@ -32,9 +32,20 @@
         jQuery.support.cors = true;
         var username = store.get("username");
 
-        getIndex(username);
-        getCurrentPage();
 
+
+
+        $(function(){
+
+            var data = {};
+            //        var tpl = require('/zqVue/shopwap-front/www/layout/common/footerBar.tpl');
+            var template = Handlebars.compile($("#footerBarTpl").html());
+            var html = template(data);
+            $("#footer").html(html);
+
+            getIndex(username);
+            getCurrentPage();
+        })
 
         function getIndex(username) {
             $.ajax({
@@ -72,11 +83,6 @@
             });
         }
 
-        var data = {};
-        //        var tpl = require('/zqVue/shopwap-front/www/layout/common/footerBar.tpl');
-        var template = Handlebars.compile($("#footerBarTpl").html());
-        var html = template(data);
-        $("#footer").html(html);
     </script>
 </head>
 <body>

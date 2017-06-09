@@ -164,10 +164,8 @@
                 var rs = $this.parent().parent().parent().find(".cart-store-title-label .cart-shop-select");
                 var checkedLength = $this.parent().parent().parent().find(".cart-list-select:checked").length;
                 var currentFlex = $this.parent().parent().find(".cart-item-text > .cart-item-display-flex");
-                var price = parseInt(currentFlex.find(".cart-item-price-box > .sign-number ").text());//单品价格
-                // console.log(price)
-                var quant = parseInt(currentFlex.find(".cart-item-quantity > .quantity-ct ").text());//已购数量
-                // console.log(quant)
+                var price = parseFloat(currentFlex.find(".cart-item-price-box > .sign-number ").text());//单品价格
+                var quant = parseFloat(currentFlex.find(".cart-item-quantity > .quantity-ct ").text());//已购数量
                 if ($this.attr("checked") !== "checked") {
                     pricesArr.splice(pricesArr.length - 1, 1);//单品价格列表 最后端-1
                     quantArr.splice(quantArr.length - 1, 1);
@@ -175,6 +173,8 @@
                     pricesArr.push(price);
                     quantArr.push(quant);
                 }
+                console.log(pricesArr)
+                console.log(quantArr)
                 if (checkedLength !== 0) {
                     rs.attr("checked", true);
                     $(".cart-all-select").attr("checked", true);
@@ -203,8 +203,8 @@
                 if (rs.attr("checked") !== "checked") {
                     rs.attr("checked", true);
                     for (var i = 0; i < len; i++) {
-                        var price = parseInt(currentFlex.eq(i).find(".cart-item-price-box > .sign-number ").text());//单品价格
-                        var quant = parseInt(currentFlex.eq(i).find(".cart-item-quantity > .quantity-ct ").text());//已购数量
+                        var price = parseFloat(currentFlex.eq(i).find(".cart-item-price-box > .sign-number ").text());//单品价格
+                        var quant = parseFloat(currentFlex.eq(i).find(".cart-item-quantity > .quantity-ct ").text());//已购数量
                         pricesArr.push(price);
                         quantArr.push(quant);
                     }
@@ -242,8 +242,8 @@
                     $(".cart-shop-select").attr("checked", true);
                     $(".cart-list-select").attr("checked", true);
                     for (var i = 0; i < len; i++) {
-                        var price = parseInt(currentFlex.eq(i).find(".cart-item-price-box > .sign-number ").text());//单品价格
-                        var quant = parseInt(currentFlex.eq(i).find(".cart-item-quantity > .quantity-ct ").text());//已购数量
+                        var price = parseFloat(currentFlex.eq(i).find(".cart-item-price-box > .sign-number ").text());//单品价格
+                        var quant = parseFloat(currentFlex.eq(i).find(".cart-item-quantity > .quantity-ct ").text());//已购数量
                         pricesArr.push(price);
                         quantArr.push(quant);
                     }

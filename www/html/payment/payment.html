@@ -22,12 +22,21 @@
     <script type="text/javascript" src="../../assets/plugin/handlebars-v1.3.0.js"></script>
     <script type="text/javascript" src="../../js/utils/bankCheck.js"></script>
     <script type="text/javascript" src="../../js/utils/store.min.js"></script>
-
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
 
 
         //银行卡验证方法
         $(function () {
+
+            //        require.async('handlebars', function () {
+            var data = {};
+            //            var tpl = require('/zqVue/shopwap-front/www/layout/payment/directPay/bindCard.tpl');
+            var template = Handlebars.compile($("#bindCardTpl").html());
+            var html = template(data);
+            $("#bind-card").html(html);
+            //        });
+
             jQuery.support.cors = true;
             $(document).on("click", "#bind-button", function () {
                 var bankno = $("#bankno").val();
@@ -46,13 +55,6 @@
         });
 
 
-        //        require.async('handlebars', function () {
-        var data = {};
-        //            var tpl = require('/zqVue/shopwap-front/www/layout/payment/directPay/bindCard.tpl');
-        var template = Handlebars.compile($("#bindCardTpl").html());
-        var html = template(data);
-        $("#bind-card").html(html);
-        //        });
     </script>
 </head>
 <body>

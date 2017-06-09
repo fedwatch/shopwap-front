@@ -286,24 +286,26 @@
         function getParamsShow(){
             var l = parseURL(location.href);
 //            console.log(l.params)
-            if(typeof l.params.length !== 'undefined'){
-                //            console.log(l.params)
-                if(location.protocol === 'http' || location.protocol === 'https'){
-                    var categoryId = l.params.categoryId;
-                    var left = $(document).find("span.nav-text[data-category-id="+categoryId+"]").offset().left;
-                    console.log(left)
+
+
+            //            console.log(l.params)
+            if(location.protocol === 'http' || location.protocol === 'https'){
+                var categoryId = l.params.categoryId;
+                var left = $(document).find("span.nav-text[data-category-id="+categoryId+"]").offset().left;
+                console.log(left)
 //                $(".nav-scrollview").scrollLeft("300")
-                    $(document).find("span.nav-text[data-category-id="+categoryId+"]").click();
-                }else{
+                $(document).find("span.nav-text[data-category-id="+categoryId+"]").click();
+            }else if (location.protocol === 'file:'){
 //                console.log(l.source)
-                    var res = l.source.split("=");
+                var res = l.source.split("=");
 //                console.log(res)
-                    var left = $(document).find("span.nav-text[data-category-id="+res[1]+"]").offset().left;
-                    console.log(left)
-                    $(".nav-scrollview").scrollLeft(left)
-                    $(document).find("span.nav-text[data-category-id="+res[1]+"]").click();
-                }
+                var left = $(document).find("span.nav-text[data-category-id="+res[1]+"]").offset().left;
+                console.log(left)
+                $(".nav-scrollview").scrollLeft(left)
+                $(document).find("span.nav-text[data-category-id="+res[1]+"]").click();
             }
+
+
         }
 
     </script>

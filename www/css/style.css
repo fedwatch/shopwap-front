@@ -1067,6 +1067,7 @@ padding:0.5rem 0
 .cart-item-text h2.cart-item-buying-title {
     font-size: .7rem;
     color: #212121;
+    padding:0 .134rem;
 }
 
 .cart-item-text span.cart-item-buying-desc {
@@ -2082,7 +2083,7 @@ span.nav-sub-text.active {
 .addressWrapper .addAddressWrapper span.addAddressText {
     border-radius: 1rem;
     border:1px solid #fff;
-    padding:0 1.275rem;
+    padding:0 .575rem;
 }
 
 
