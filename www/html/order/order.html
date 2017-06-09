@@ -523,6 +523,26 @@
             });
 
         }
+
+
+        Handlebars.registerHelper("equaln", function (v1, v2, options) {
+            if (v1 == v2) {
+                //满足添加继续执行
+                return options.fn(this);
+            } else {
+                //不满足条件执行{{else}}部分
+                return options.inverse(this);
+            }
+        });
+        Handlebars.registerHelper("noEquals", function (v1, v2, options) {
+            if (v1 !== v2) {
+                //满足添加继续执行
+                return options.fn(this);
+            } else {
+                //不满足条件执行{{else}}部分
+                return options.inverse(this);
+            }
+        });
     </script>
 </head>
 <body>
@@ -559,11 +579,25 @@
                 <div class="leftIcon">
                     <i class="icon icon-address-icon"></i>
                 </div>
-                <div class="addressUserProfile">
-                    <span class="orderUsername">{{this.receiver.consignee}}</span>
-                    <span class="orderUserphone pull-right">{{this.receiver.phone}}</span>
-                    <div>{{this.receiver.areaName}}{{this.receiver.address}}</div>
-                </div>
+                {{#if this.receiver}}
+                    {{#noEquals this.receiver.id 0}}
+                    <div class="addressUserProfile">
+                        <span class="orderUsername">{{this.receiver.consignee}}</span>
+                        <span class="orderUserphone pull-right">{{this.receiver.phone}}</span>
+                        <div>{{this.receiver.areaName}}{{this.receiver.address}}</div>
+                    </div>
+                    {{else}}
+                    <div class="addAddressWrapper">
+                        <span class="addAddressText">&plus; 添加收货地址</span>
+                    </div>
+                    {{/noEquals}}
+
+                    <!--{{#equaln this.receiver.id 0}}-->
+                <!--<div class="addressUserProfile">-->
+                    <!--<h1>添加收货地址</h1>-->
+                <!--</div>-->
+                    <!--{{/equaln}}-->
+                {{/if}}
                 <div class="rightIcon">
                     <i class="icon icon-address-right-arrow"></i>
                 </div>

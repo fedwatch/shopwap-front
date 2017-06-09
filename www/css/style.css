@@ -2074,6 +2074,17 @@ span.nav-sub-text.active {
     padding: 0 .2rem;
     font-size: .8rem;
 }
+.addressWrapper .addAddressWrapper {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.addressWrapper .addAddressWrapper span.addAddressText {
+    border-radius: 1rem;
+    border:1px solid #fff;
+    padding:0 1.275rem;
+}
+
 
 .addressWrapper .rightIcon {
     padding-top: .3rem;

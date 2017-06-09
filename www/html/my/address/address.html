@@ -76,6 +76,7 @@
                 var $addressOperate = $(".address-operate");
                 var $addressList = $(".address-list").find(".ad-list");
                 var $delete = $(".delete");
+                var $setDefault = $(".set-default-address");
                 var flag = true;
                 $edit.click(function () {
                     if (flag == true) {
@@ -101,6 +102,17 @@
                         var id = $this.data("id")
                         receiverDelete(username, id);
                         $addressList.eq(index).remove();
+                        location.reload();
+                    })
+                });
+
+
+                $setDefault.each(function (index, item) {
+                    var $this = $(this);
+                    $(this).click(function () {
+                        var id = $this.data("id")
+
+
                         location.reload();
                     })
                 });
@@ -144,7 +156,7 @@
         <h1 class='title'>地址管理</h1>
         <span class=" pull-right"></span>
         <a class="button pull-right " href="javascript:;" style="color:#666;border:1px solid #f7f7f8;">
-            <span class="icon edit" style="font-size:.8rem;color:#666;">编辑</span>
+            <span class="icon edit" style="font-size:.65rem;color:#666;">编辑</span>
         </a>
     </header>
 
@@ -166,8 +178,15 @@
                 </div>
                 <div class="address-operate">
                     <div class="operate clearfix">
-                        <div class="delete  pull-right" data-id="{{id}}">删除</div>
-                        <div class="edit-op pull-right" data-id="{{id}}">编辑</div>
+                        <div class="set-default-address  pull-left" data-id="{{id}}">
+                            <span class="opIcon pull-left"><img src="../../../assets/images/edit.png" width="15px"></span> <span class="pull-right">设为默认</span>
+                        </div>
+                        <div class="delete  pull-right" data-id="{{id}}">
+                            <span class="opIcon pull-left"><img src="../../../assets/images/delete.png" width="15px"></span> <span class="pull-right">删除</span>
+                        </div>
+                        <div class="edit-op pull-right" data-id="{{id}}">
+                            <span class="opIcon pull-left"><img src="../../../assets/images/edit.png" width="15px"></span> <span class="pull-right">编辑</span>
+                        </div>
                     </div>
                 </div>
             </div>
