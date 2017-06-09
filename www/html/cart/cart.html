@@ -82,12 +82,12 @@
                     }
                     store.set("cartItemId", cartItemIdArray);
                     if (cartItemIdArray.length !== 0) {
-                        location.href = "/www/html/order/order.html";
+                        location.href = "../../html/order/order.html";
                     } else {
                         $.toast("购物车没有选中商品！")
                     }
                 } else {
-                    return location.href = '/www/html/my/login/login.html';
+                    return location.href = '../../html/my/login/login.html';
                 }
             });
 
