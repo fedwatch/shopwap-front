@@ -48,6 +48,9 @@
 
         $(function () {
             jQuery.support.cors = true;
+
+
+            checkLock(username, mergeSn);
             payment(username, mergeSn);
             store.set("type", "payment");
             store.set("app_request", "3");
@@ -409,7 +412,7 @@
                 success: function (data) {
                     if (data.authStatus == '200') {
                         store.set("isLock", false);
-                        location.reload();
+//                        location.reload();
                         console.log("====== unlock ====== start")
                         console.log(store.get("isLock"))
                         console.log("====== unlock ====== end")

@@ -64,12 +64,23 @@
                 async: false,
                 success: function (data) {
                     if (data.authStatus == '200') {
-//                        require.async("handlebars",function(){
-//                            var tpl=require('/zqVue/shopwap-front/www/layout/payment/alipay/paySuccess.tpl');
-                        var template = Handlebars.compile($("#paySuccessTpl").html());
-                        var html = template(data);
-                        $("#paySuccess").html(html);
-//                        })
+                        if(data.paymentStatus === 'wait'){
+                            /**
+                             * 待付款
+                             */
+                            var template = Handlebars.compile($("#payWaitTpl").html());
+                            var html = template(data);
+                            $("#paySuccess").html(html);
+                            store.set("recentPayment",false);
+                        }else{
+                            /**
+                             * 成功付款
+                             */
+                            var template = Handlebars.compile($("#paySuccessTpl").html());
+                            var html = template(data);
+                            $("#paySuccess").html(html);
+                            store.set("recentPayment",true);
+                        }
                     } else{
                         var template = Handlebars.compile($("#payFailureTpl").html());
                         var html = template(data);
@@ -135,6 +146,38 @@
                     <span class="detail-addr">
                     {{this.areaName}} {{this.address}}
                 </span>
+                </div>
+            </div>
+        </div>
+        {{/order}}
+        <div class="content-block">
+            <p>
+                <a class="checkMyOrderBtn button button-big button-fill external rg-col" href="javascript:;">
+                    查看订单
+                </a>
+            </p>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-handlebars-template" id="payWaitTpl">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)"
+           data-transition='slide-out'>
+            <i class="fa fa-chevron-left"></i>
+        </a>
+        <h1 class="title">支付信息</h1>
+    </header>
+    <div class="content">
+        {{#order}}
+        <div class="paySuccess-bg">
+            <div class="pay-succ-con">
+                <div class="clearfix title5">
+                    <div class="pull-left ang8"></div>
+                    <div class="pull-left sum-am">
+                        <div class="sum-t">您尚未完成付款，金额为<span>{{../paymentAmount}}</span>元</div>
+                        <div>请尽快完成支付！</div>
+                    </div>
                 </div>
             </div>
         </div>
