@@ -66,24 +66,28 @@
                 else {
                     console.log(location.host);
                     $.toast(location.host);
-                    var app_request_url = "file://" + location.host + "/www/html/payment/alipay/commonPay.html";
-                    console.log("isBalancePay:"+isBalancePay,
-                        "type:"+type,
-                        "paymentPluginId:"+paymentPluginId,
-                        "mergeSn:"+mergeSn,
-                        "amount:"+amount,
-                        "cardId:"+cardId,
-                        "app_request:"+app_request,
-                        "username:"+username,
-                        "app_request_url:"+app_request_url)
-
+                    var app_request_url = "file://" + location.host + "/www/html/";
+                    console.log("isBalancePay:" + isBalancePay,
+                        "type:" + type,
+                        "paymentPluginId:" + paymentPluginId,
+                        "mergeSn:" + mergeSn,
+                        "amount:" + amount,
+                        "cardId:" + cardId,
+                        "app_request:" + app_request,
+                        "username:" + username,
+                        "app_request_url:" + app_request_url)
                     paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username, app_request_url);
-
                 }
 
             });
 
+            $(document).on('click', '#cancelPayment', function () {
+                $("#paymentContent").show();
+                $("#sendLianLayer").hide();
+                var paymentSn = store.get("paymentSn");
+                location.href = './paySuccess.html?paymentSn=' + paymentSn;
 
+            })
         });
 
         /***支付界面，合并支付
@@ -226,8 +230,6 @@
                         var html = template(data);
                         $("#bankList").html(html);
                     }
-
-
                 }
             })
         }
@@ -321,10 +323,14 @@
                     if (data.authStatus == '200') {
                         if (data.parameterMap) {
                             store.set("req_data", data.parameterMap.req_data);
-                            return location.href = '../sendMoney.html';
+                            store.set("paymentSn", data.paymentSn);
+                            var template = Handlebars.compile($("#sendPaymentTpl").html());
+                            var html = template(data);
+                            $("#paymentContent").hide();
+                            $("#sendLianLayer").html(html);
+                            $("#sendLianLayer").show();
                         }
                     } else if (data.authStatus == '211') {
-
                         location.href = "../alipay/paySuccess.html?paymentSn=" + data.paymentSn;
                     }
                     else if (data.authStatus == '500') {
@@ -542,6 +548,22 @@
     </div>
 </script>
 
+<script type="text/x-handlebars-template" id="sendPaymentTpl">
+    <div class="sendPaymentWrapper">
+        <div class="content-block">
+            <iframe src="../sendMoney.html"
+                    frameborder="0" width="100%" height="380px" id="sourcePay"></iframe>
+            <div class="row">
+                <div class="col-100">
+                    <button id="cancelPayment" class="external button button-big button-password mr-col"
+                            style="width:100%;">关闭支付页面
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
 
 <script type="text/x-handlebars-template" id="commonPayTpl">
     <div class="appStatusBar" style="background:#fff;"></div>
@@ -555,82 +577,86 @@
 
     <div class="content">
         <div class="appStatusBar"></div>
-        <div class="pay-content">
-            <div class="title-p clearfix">
-                <div class="pull-left order-img">
-                    <img src="../../../assets/images/ang8.png"/>
+        <div id="paymentContent">
+            <div class="pay-content">
+                <div class="title-p clearfix">
+                    <div class="pull-left order-img">
+                        <img src="../../../assets/images/ang8.png"/>
+                    </div>
+                    <div class="pull-left order-done">
+                        <div class="or-title">订单提交成功</div>
+                        <div class="or-title2">请在 {{this.waitTime}} 分钟之内完成支付</div>
+                    </div>
                 </div>
-                <div class="pull-left order-done">
-                    <div class="or-title">订单提交成功</div>
-                    <div class="or-title2">请在 {{this.waitTime}} 分钟之内完成支付</div>
+                <div class="desc-content">
+                    <div class="pay-amount">
+                        <span>订单金额：</span>
+                        <span class="pay-span2">
+                        <span class="pay-span3">￥</span><span class="aInt"></span>.<span
+                                class="pay-span3 sCeil">00</span>
+                    </span>
+                    </div>
+                    <div class="order-addr ">
+                        <span>收货地址：</span>
+                        <span>{{this.receiver.consignee}}  {{this.receiver.phone}}</span>
+                    </div>
+                    <div class="order-addr">
+                    <span class="detail-addr">
+                        {{this.receiver.areaName}}{{this.receiver.address}}
+                    </span>
+                    </div>
                 </div>
             </div>
-            <div class="desc-content">
-                <div class="pay-amount">
-                    <span>订单金额：</span>
-                    <span class="pay-span2">
-                    <span class="pay-span3">￥</span><span class="aInt"></span>.<span class="pay-span3 sCeil">00</span>
-                </span>
-                </div>
-                <div class="order-addr ">
-                    <span>收货地址：</span>
-                    <span>{{this.receiver.consignee}}  {{this.receiver.phone}}</span>
-                </div>
-                <div class="order-addr">
-                <span class="detail-addr">
-                    {{this.receiver.areaName}}{{this.receiver.address}}
-                </span>
-                </div>
-            </div>
-        </div>
-        <div class="list-block" style="margin:0.75rem 0 0 0;">
-            <div class="item-content" style="background-color:#fff;">
-                <div class="item-media">余额</div>
-                <div class="item-inner" style="border-bottom:none;">
-                    <div class="item-title label" style="width:auto;">
-                        <span style="font-size:0.789rem;">共￥
-                            <span>{{this.balance}}</span>
-                            <span id="balance-yue" style="visibility:hidden;">,使用￥
-                                <span></span>
+            <div class="list-block" style="margin:0.75rem 0 0 0;">
+                <div class="item-content" style="background-color:#fff;">
+                    <div class="item-media">余额</div>
+                    <div class="item-inner" style="border-bottom:none;">
+                        <div class="item-title label" style="width:auto;">
+                            <span style="font-size:0.789rem;">共￥
+                                <span>{{this.balance}}</span>
+                                <span id="balance-yue" style="visibility:hidden;">,使用￥
+                                    <span></span>
+                                </span>
                             </span>
-                        </span>
-                    </div>
-                    <div class="item-input" style="width:auto;">
-                        <label class="label-switch">
-                            <input type="checkbox" id="balancePayBtn">
-                            <div class="checkbox"></div>
-                        </label>
+                        </div>
+                        <div class="item-input" style="width:auto;">
+                            <label class="label-switch">
+                                <input type="checkbox" id="balancePayBtn">
+                                <div class="checkbox"></div>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="paychoice">
-            <div class="pay-way">剩余金额支付方式:</div>
-            <div class="list-block cards-list" style="margin-top:0;">
-                <ul id="payWay">
-                    <li class="card">
-                        {{#if this.paymentPlugin}}
-                        <div class="card-header checkPay">
-                            <div class="pay-logo"><img src="{{this.paymentPlugin.logo}}"/></div>
-                            <div class="remainPay">
-                                <span class="morePay">支付<span style="color:#ff503e;"
-                                                              id="aliPay">{{this.allAmount}}</span></span>
-                                <span class="tick tickys" data-value="{{this.paymentPlugin.id}}"></span>
+            <div id="paychoice">
+                <div class="pay-way">剩余金额支付方式:</div>
+                <div class="list-block cards-list" style="margin-top:0;">
+                    <ul id="payWay">
+                        <li class="card">
+                            {{#if this.paymentPlugin}}
+                            <div class="card-header checkPay">
+                                <div class="pay-logo"><img src="{{this.paymentPlugin.logo}}"/></div>
+                                <div class="remainPay">
+                                    <span class="morePay">支付<span style="color:#ff503e;"
+                                                                  id="aliPay">{{this.allAmount}}</span></span>
+                                    <span class="tick tickys" data-value="{{this.paymentPlugin.id}}"></span>
+                                </div>
                             </div>
-                        </div>
-                        {{/if}}
-                    </li>
-                </ul>
+                            {{/if}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-block">
+                <div class="row" id="surePays">
+                    <div class="col-100">
+                        <a href="javascript:;" class="external button button-big button-password rg-col">确认</a>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="content-block">
-            <div class="row" id="surePays">
-                <div class="col-100">
-                    <a href="javascript:;" class="external button button-big button-password rg-col">确认</a>
-                </div>
-            </div>
-        </div>
+        <div id="sendLianLayer" style="width:100%;z-index:999;"></div>
 
     </div>
 

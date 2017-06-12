@@ -71,10 +71,12 @@ header.bar.bar-nav a{
     background: #998586 url(../assets/images/search.png) no-repeat 0.3rem center;
     padding-left: 2.5em;
     background-size: 1.6em;
+    font-size:.65rem;
 }
 
 .footer-bar{
 background: #fff!important;
+
 }
 /*
 .my_header {
@@ -593,22 +595,22 @@ padding:0.5rem 0
 }
 
 .header-search .navbar-search .form-control {
-    font-size: 1em;
     color: #000000;
     width: 80%;
     height: 30px;
     line-height: 30px;
     margin: 10px 0 10px;
-    padding-left: 2.5em;
+    padding-left: 3.5em;
     border-radius: 1em;
     border: 0;
+    font-size:.65rem;
     display: inline-block;
 }
 
 .searchImgss {
     position: absolute;
-    width: 1.0rem;
-    height: 1.0rem;
+    width: .8rem;
+    height: .8rem;
     left: 16%;
     top: 35px;
 }
@@ -1441,6 +1443,7 @@ span.panel-minus-button {
     align-items: center;
     /* text-align: center; */
     height: 3rem;
+    background: #fff;
 }
 
 .cart-badge {
@@ -2051,6 +2054,9 @@ span.nav-sub-text.active {
 
 .rg-col {
     background-color: #ff503e !important;
+}
+.mr-col {
+    background-color: #6fcfff !important;
 }
 
 /**

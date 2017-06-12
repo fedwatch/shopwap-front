@@ -29,19 +29,15 @@
 
 
     <script>
-        jQuery.support.cors = true;
+
         var username = store.get("username");
 
         $(function(){
-
-
-
+            jQuery.support.cors = true;
             var data = {};
-            //        var tpl = require('/zqVue/shopwap-front/www/layout/common/footerBar.tpl');
             var template = Handlebars.compile($("#footerBarTpl").html());
             var html = template(data);
-            $("#footer").html(html);
-
+//            $("#footer").html(html);
             getIndex(username);
             getCurrentPage();
         })
@@ -54,18 +50,14 @@
                 data: {
                     username: username
                 },
-//                cache: true,
-//                async: false,
                 success: function (data) {
                     if (data.authStatus == '200') {
-//                        var tpl = require('/zqVue/shopwap-front/www/layout/my/common/header.tpl');
+
                         var template = Handlebars.compile($("#headerTpl").html());
                         var html = template(data);
                         $("#my_header").html(html);
                         $(".user-id").text(username);
 
-                        // userColumn
-//                        var tpl = require('/zqVue/shopwap-front/www/layout/my/userColumn.tpl');
                         var template = Handlebars.compile($("#userColumnTpl").html());
                         var html = template(data);
                         $("#userColumn").html(html);
