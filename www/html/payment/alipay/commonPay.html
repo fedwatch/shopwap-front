@@ -337,21 +337,26 @@
                         location.href = "../alipay/paySuccess.html?paymentSn=" + data.paymentSn;
                     }
                     else if (data.authStatus == '500') {
-                        // 部分订单已被锁定，不能进行支付操作 需要 执行 解锁
-                        store.set("isLock", true);
+//                        // 部分订单已被锁定，不能进行支付操作 需要 执行 解锁
+//                        store.set("isLock", true);
+//
+//                        console.log("====== paySubmit ====== start")
+//                        console.log(store.get("isLock"));
+//                        console.log("====== paySubmit ====== start")
+//
+//                        checkLock(username, mergeSn);
+//
+//                        console.log("====== paySubmit ====== start")
+//                        console.log(store.get("isLock"));
+//                        console.log("====== paySubmit ====== start")
+//                        if (store.get("isLock") == false) {
+//                            paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username)
+//                        }
 
-                        console.log("====== paySubmit ====== start")
-                        console.log(store.get("isLock"));
-                        console.log("====== paySubmit ====== start")
+                        unlock(username,mergeSn);
+//                        paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username)
 
-                        checkLock(username, mergeSn);
-
-                        console.log("====== paySubmit ====== start")
-                        console.log(store.get("isLock"));
-                        console.log("====== paySubmit ====== start")
-                        if (store.get("isLock") == false) {
-                            paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username)
-                        }
+//                        $.toast(data.authMsg);
                     }
 
                     else {
