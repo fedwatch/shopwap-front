@@ -8,19 +8,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>商品详情 - 街街网</title>
     <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon"/>
-
     <script type="text/javascript" src="../../assets/plugin/jquery.min.js"></script>
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../../assets/plugin/light7/dist/css/light7.css"/>
     <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../../assets/plugin/light7/dist/css/light7-swiper.min.css"/>
     <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
-    <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7-swipeout.js"></script>
+    <!--<script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7-swipeout.js"></script>-->
     <script type="text/javascript" src="../../assets/plugin/idangerous.swiper.min.js"></script>
     <script type="text/javascript" src="../../assets/plugin/handlebars-v1.3.0.js"></script>
     <script type="text/javascript" src="../../js/config/siteUrl.js"></script>
     <script type="text/javascript" src="../../js/utils/store.min.js"></script>
-    <script type="text/javascript" src="../../js/utils/getTemplate.js"></script>
+    <!--<script type="text/javascript" src="../../js/utils/getTemplate.js"></script>-->
     <script type="text/javascript" src="../../js/utils/transDetails.js"></script>
 
 
@@ -36,6 +35,17 @@
 //            $(document).on('touchmove',function(){
 //                console.log($(window).scrollTop())
 //            });
+
+//            window.addEventListener('onscroll', function() {
+//                var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+//                console.log(scrollTop);
+//            })
+
+
+            if(window.screenTop > 414){
+                console.log("done")
+            }
+
 
             // usermd
             $.ajax({

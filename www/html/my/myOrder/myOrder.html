@@ -270,7 +270,11 @@
         {{#each orderItems}}
         <div class="cart-store-img-text-label">
             <div class="cart-item-image">
+                {{#if this.thumbnail}}
                 <img src="{{this.thumbnail}}" alt="" style="">
+                {{else}}
+                <img src="../../../assets/images/default-photo-m.jpg" alt="" style="">
+                {{/if}}
             </div>
             <div class="cart-item-text">
                 <div class="row">
@@ -386,7 +390,11 @@
                 {{#each orderItems}}
                 <div class="cart-store-img-text-label">
                     <div class="cart-item-image">
+                        {{#if this.thumbnail}}
                         <img src="{{this.thumbnail}}" alt="" style="">
+                        {{else}}
+                        <img src="../../../assets/images/default-photo-m.jpg" alt="" style="">
+                        {{/if}}
                     </div>
                     <div class="cart-item-text">
                         <div class="row">

@@ -73,6 +73,7 @@
 <div id="logistics"></div>
 
 <script type="text/x-handlebars-template" id="logisticsTpl">
+    <div class="appStatusBar" style="background:#fff;"></div>
     <header class="bar bar-nav">
         <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)"
            data-transition='slide-out'>
@@ -83,6 +84,7 @@
 
     {{#each resultList}}
     <div class="content review logistics">
+        <div class="appStatusBar"></div>
         <div class="list-block media-list">
             <ul>
                 <li>
@@ -131,7 +133,7 @@
                                         <div class="logistics-c">
                                             <div class="logistics-path"><span>[{{../this.shipping.area}}{{../this.shipping.deliveryCorp}}]</span>{{this.context}}
                                             </div>
-                                            <div class="arrive-time">2017-03-20 14:45:46</div>
+                                            <div class="arrive-time">{{time}}</div>
                                         </div>
                                     </li>
                                     {{/each}}
