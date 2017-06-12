@@ -1910,7 +1910,7 @@ span.nav-sub-text.active {
     height: 1.5rem;
     line-height: 1.5rem;
     border-radius: 1.5rem;
-    top: .5rem;
+    top: 1rem;
     left: .5rem;
     position: absolute;
 }
