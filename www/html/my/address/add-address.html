@@ -18,21 +18,24 @@
     <link rel="stylesheet" type="text/css" href="../../../assets/plugin/light7/dist/css/light7-swipeout.css"/>
 
     <script type="text/javascript" src="../../../assets/plugin/jquery.min.js"></script>
-    <!-- <script type="text/javascript" src="../../../assets/plugin/sea.js"></script>
-     <script type="text/javascript" src="../../../assets/plugin/seajs-text.js"></script>-->
     <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7.min.js"></script>
     <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
     <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-swipeout.js"></script>
+    <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-city-picker.js"></script>
+    <script type="text/javascript" src="../../../js/utils/varietyValidation.js"></script>
     <script type="text/javascript" src="../../../assets/plugin/handlebars-v1.3.0.js"></script>
     <script type="text/javascript" src="../../../assets/plugin/idangerous.swiper.min.js"></script>
     <script type="text/javascript" src="../../../js/utils/store.min.js"></script>
     <script type="text/javascript" src="../../../js/utils/getCurrentPage.js"></script>
     <script type="text/javascript" src="../../../js/config/siteUrl.js"></script>
-    <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-city-picker.js"></script>
+
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
+
+
         $(function () {
             jQuery.support.cors = true;
+
             var editStatus = store.get("editStatus");
             var addressId = store.get("addressId");
             var username = store.get("username");
@@ -195,17 +198,22 @@
                     }
                 });
             }
+        });
 
-            $(document).on("pageInit", function () {
+
+        $(document).on("pageInit", function () {
+            console.log("aaaa")
                 $("#city-picker").cityPicker({
                     toolbarTemplate: '<header class="bar bar-nav">\
   <button class="button button-link pull-right close-picker">完成</button>\
   <h1 class="title"></h1>\
   </header>'
                 });
-            });
-            $.init();
-        })
+        });
+
+        $.init();
+
+
 
     </script>
 </head>
@@ -219,7 +227,7 @@
         </a>
         <h1 class='title'>地址管理</h1>
     </header>
-    <div class="content  add-address">
+    <div class="content add-address">
         <div class="appStatusBar"></div>
         <div class="list-block">
             <ul id="input-list">
@@ -263,7 +271,7 @@
                         <div class="item-inner">
                             <div class="item-title label">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址</div>
                             <div class="item-input">
-                                <input type="text" placeholder="" id="user-address" value=''/>
+                                <input type="text" placeholder="" id="user-address" value=""/>
                             </div>
                         </div>
                     </div>
@@ -297,7 +305,7 @@
         </div>
 
         <div class="content-block">
-            <div class=" ">
+            <div>
                 <a href="javascript:void(0);"
                    class="addAddressBtn external button button-big button-fill button-success rg-col"
                    id="button">确认</a>
@@ -309,11 +317,7 @@
 
 <input type="hidden" id="areaId">
 
-<script type="text/javascript" src="../../../assets/plugin/jquery.min.js"></script>
-<script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7.min.js"></script>
-<script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
-<script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-swipeout.js"></script>
-<script type="text/javascript" src="../../../js/utils/varietyValidation.js"></script>
+
 
 </body>
 </html>

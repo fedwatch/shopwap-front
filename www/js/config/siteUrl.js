@@ -131,6 +131,8 @@ var MEMBER_SITE_URL = {
     VIEW: {URL: "/member/receiver/view", METHOD: "POST"},
     // 会员首页
     INDEX: {URL: "/member/index", METHOD: "GET"},
+    // 设置默认的收货地址
+    UPDATE_DEFAULT: {URL: "/member/receiver/updateDefaultAddress", METHOD: "POST"},
 };
 
 // 商品信息

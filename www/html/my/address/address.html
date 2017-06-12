@@ -112,8 +112,7 @@
                     var $this = $(this);
                     $(this).click(function () {
                         var id = $this.data("id")
-
-
+                        updateDefault(username,id);
                         location.reload();
                     })
                 });
@@ -138,6 +137,23 @@
             }
         })
 
+        function updateDefault(username ,id){
+            $.ajax({
+                url: BASE_URL + MEMBER_SITE_URL.UPDATE_DEFAULT.URL,
+                type: MEMBER_SITE_URL.UPDATE_DEFAULT.METHOD,
+                dataType: MEMBER_SITE_URL.DATATYPE,
+                data: {
+                    username: username,
+                    id: id
+                },
+                cache: true,
+                async: false,
+                success: function (data) {
+                    $.toast(data.authMsg);
+                }
+            });
+        }
+
     </script>
 </head>
 <body class="page">
@@ -155,8 +171,7 @@
             <i class="fa fa-chevron-left"></i>
         </a>
         <h1 class='title'>地址管理</h1>
-        <span class=" pull-right"></span>
-        <a class="button pull-right " href="javascript:;" style="color:#666;border:1px solid #f7f7f8;">
+        <a class="button pull-right addressBtn" href="javascript:;" style="">
             <span class="icon edit" style="font-size:.65rem;color:#666;">编辑</span>
         </a>
     </header>

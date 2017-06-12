@@ -28,7 +28,6 @@
     <script type="text/javascript" src="../../../js/utils/store.min.js"></script>
     <script type="text/javascript" src="../../../js/utils/getTemplate.js"></script>
     <script type="text/javascript" src="../../../js/utils/transCommonPay.js"></script>
-    <!--<script type="text/javascript" src="../../../js/config/getUser.js"></script>-->
 
     <script>
 
@@ -48,8 +47,6 @@
 
         $(function () {
             jQuery.support.cors = true;
-
-
             checkLock(username, mergeSn);
             payment(username, mergeSn);
             store.set("type", "payment");
@@ -332,37 +329,20 @@
                             $("#paymentContent").hide();
                             $("#sendLianLayer").html(html);
                             $("#sendLianLayer").show();
+                            $("#sourcePay").attr("src","../sendMoney.html");
+                            $("#sourcePay").css("width","100%").css("height","380px");
+//                            window.open("../sendMoney.html");
                         }
-                    } else if (data.authStatus == '211') {
+                    }
+                    else if (data.authStatus == '211') {
                         location.href = "../alipay/paySuccess.html?paymentSn=" + data.paymentSn;
                     }
                     else if (data.authStatus == '500') {
-//                        // 部分订单已被锁定，不能进行支付操作 需要 执行 解锁
-//                        store.set("isLock", true);
-//
-//                        console.log("====== paySubmit ====== start")
-//                        console.log(store.get("isLock"));
-//                        console.log("====== paySubmit ====== start")
-//
-//                        checkLock(username, mergeSn);
-//
-//                        console.log("====== paySubmit ====== start")
-//                        console.log(store.get("isLock"));
-//                        console.log("====== paySubmit ====== start")
-//                        if (store.get("isLock") == false) {
-//                            paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username)
-//                        }
-
                         unlock(username,mergeSn);
-//                        paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username)
-
-//                        $.toast(data.authMsg);
                     }
-
                     else {
                         $.toast(data.authMsg);
                     }
-
                 }
             })
         }
@@ -559,8 +539,8 @@
 <script type="text/x-handlebars-template" id="sendPaymentTpl">
     <div class="sendPaymentWrapper">
         <div class="content-block">
-            <iframe src="../sendMoney.html"
-                    frameborder="0" width="100%" height="380px" id="sourcePay"></iframe>
+            <iframe frameborder="0" width="100%" height="380px" id="sourcePay" scrolling="no" style="display:block;"></iframe>
+
             <div class="row">
                 <div class="col-100">
                     <button id="cancelPayment" class="external button button-big button-password mr-col"
