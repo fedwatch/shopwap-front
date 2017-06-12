@@ -32,10 +32,9 @@
         jQuery.support.cors = true;
         var username = store.get("username");
 
-
-
-
         $(function(){
+
+
 
             var data = {};
             //        var tpl = require('/zqVue/shopwap-front/www/layout/common/footerBar.tpl');
@@ -185,7 +184,7 @@
                     <div class="user-id">{{this.username}}</div>
                     <div class="rest-money">
                         <span class="reset2-img"></span>
-                        <span class="reset2">{{this.balance}}</span>
+                        <span class="reset2">￥ {{this.balance}} 元</span>
                         <!--<a class="reset-detail">余额明细</a>-->
                     </div>
                 </div>

@@ -31,9 +31,12 @@
         var userStatus = store.get("userStatus");
         $(function () {
 
-
-
             jQuery.support.cors = true;
+
+//            $(document).on('touchmove',function(){
+//                console.log($(window).scrollTop())
+//            });
+
             // usermd
             $.ajax({
                 url: BASE_URL + PRODUCT_SITE_URLS.PRODUCT_VIEW.URL,
@@ -49,6 +52,9 @@
                         var template = Handlebars.compile($("#productSliderTpl").html());
                         var html = template(data);
                         $("#productSlider").html(html);
+
+                        console.log($(".swiper-slide img").eq(0).height());
+
 
 
                         //规格页
@@ -425,11 +431,10 @@
 <div class="page mainList">
 
     <div class="detail-page content" style="background: #f4f4f4;">
-        <header class="bar-flat">
-            <div class="topLinkMenu" id="topLinkMenu"></div>
-        </header>
+        <!--<header class="bar-flat">-->
 
-
+        <!--</header>-->
+        <div class="topLinkMenu" id="topLinkMenu"></div>
         <div class="images-slider" id="productSlider"></div>
         <!--商品标题-->
         <div id="detailOne"></div>
@@ -539,7 +544,7 @@
             </span>
             </div>
             <!--发货地-->
-            <div class="seller-location pull-right" id="productPlace">广东福山</div>
+            <div class="seller-location pull-right" id="productPlace"></div>
         </div>
         <div id="cartIndex" style="background: #fff"></div>
     </div>
@@ -589,6 +594,13 @@
             <img class="lazy" src="{{this.source}}" alt="{{this.alt}}">
         </div>
         {{/each}}
+        <div class="detail-item-content" style="background:#f5f5f5;">
+            <div class="detail-block label" style="color: #878787;">市场价说明</div>
+        </div>
+        <div style="margin:1.5rem 0 3.5rem 0;width:100%;height:2.3rem;padding-bottom:3rem;">
+            <img src="../../assets/images/market-price.jpg" style="margin-bottom:3rem;width:100%;" >
+        </div>
+
     </div>
 </script>
 

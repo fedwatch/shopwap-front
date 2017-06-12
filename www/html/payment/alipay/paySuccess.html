@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../../../css/style.css">
     <link rel="stylesheet" href="../../../css/account.css">
     <link rel="stylesheet" href="../../../css/pay.css">
-
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../../../assets/plugin/light7/dist/css/light7.css"/>
     <link rel="stylesheet" type="text/css" href="../../../assets/plugin/light7/dist/css/light7-swiper.min.css"/>
 
@@ -30,20 +30,23 @@
     <script type="text/javascript" src="../../../js/utils/getTemplate.js"></script>
     <!--<script type="text/javascript" src="../../../js/utils/transCommonPay.js"></script>-->
     <script type="text/javascript" src="../../../js/utils/parseUrl.js"></script>
-    <script type="text/javascript" src="../../../js/config/getUser.js"></script>
+    <!--<script type="text/javascript" src="../../../js/config/getUser.js"></script>-->
 
 
     <script>
         $(function () {
+            jQuery.support.cors = true;
             var href = location.href;
             var username = store.get("username");
+            var pageNumber = store.get("pageNumber")||0;
             var n = parseURL(href);
             var paymentSn = n.params.paymentSn;
+
             paymentView(username, paymentSn);
 
 
             $(document).on("click", ".checkMyOrderBtn", function () {
-                return location.href = '/www/html/my/myOrder/myOrder.html';
+                return location.href = '../../../html/my/myOrder/myOrder.html';
             })
         });
 
@@ -162,7 +165,7 @@
         <div class="paySuccess-bg">
             <div class="pay-succ-con">
                 <div class="clearfix title5">
-                    <div class="pull-left ang8"></div>
+                    <div class="pull-left ang9"></div>
                     <div class="pull-left sum-am">
                         <div class="sum-t">您付款<span>{{paymentAmount}}</span>元，已失败！</div>
                         <div>{{authMsg}}</div>

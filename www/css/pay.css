@@ -165,6 +165,15 @@
     -moz-background-size:100% 100%;
     background-size:100% 100%;
 }
+.paySuccess-bg .ang9{
+    width:1.88rem;
+    height:1.88rem;
+    margin-top:0.5rem;
+    background:url('../assets/images/ang10.png') no-repeat;
+    -webkit-background-size:100% 100%;
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
 .paySuccess-bg .pay-succ-con{
     padding:1.94rem 1.214rem 0.971rem 1.214rem;
 }
