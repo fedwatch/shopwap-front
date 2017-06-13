@@ -3,8 +3,8 @@
  */
 //基本URL
 // var BASE_URL = "http://"+location.host+"/wap";
-// var BASE_URL = "http://192.168.3.70:8888/wap";
-var BASE_URL = "https://jie.net/wap";
+var BASE_URL = "http://192.168.3.70:8888/wap";
+// var BASE_URL = "https://jie.net/wap";
 // var BASE_URL = "http://60.205.84.124/wap";
 
 

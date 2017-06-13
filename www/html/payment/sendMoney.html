@@ -27,6 +27,10 @@
     <script>
         $(function () {
             jQuery.support.cors = true;
+            var now = new Date();
+            console.log(now);
+
+            store.set("pageUrl_",location.href+"____"+now);
             setTimeout(function () {
                 var req_data = store.get("req_data");
                 $("#req_data").val(req_data);

@@ -78,6 +78,7 @@
                 var bankName = store.get("bankName");
                 var phoneNum = store.get("username");
                 var cardNum = $("#cardNum").val();
+                var realName = $("#realName").val();
                 var trueUsername = store.get("username");
                 var verifyCode = $("#verifyCode").val();
                 var verificationCode = $("#verificationCode").val() || null;
@@ -87,7 +88,7 @@
                 console.log(amount);
                 console.log(host);
                 boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode,
-                    bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, trueUsername, bankName, app_request_url);
+                    bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, trueUsername, bankName, app_request_url,realName);
                 // location.href = './alipay/paySuccess.html'
 
             })
@@ -181,8 +182,9 @@
          * @param username
          * @param bankName
          * @param app_request_url
+         * @param realName
          */
-        function boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode, bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, username, bankName, app_request_url) {
+        function boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode, bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, username, bankName, app_request_url,realName ) {
             $.ajax({
                 url: BASE_URL + PAYMENT_SITE_URL.BOUND_CARD_PAY.URL,
                 type: PAYMENT_SITE_URL.BOUND_CARD_PAY.METHOD,
@@ -205,6 +207,7 @@
                     verifyCode: verifyCode,
                     username: username,
                     app_request_url: app_request_url,
+                    realName: realName,
                     bankName: bankName
                 },
                 cache: true,
@@ -333,7 +336,7 @@
                         <div class="item-media">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</div>
                         <div class="item-inner">
                             <div class="item-input">
-                                <input type="text" placeholder="" id="trueUsername" autocomplete="off">
+                                <input type="text" placeholder="" id="realName" autocomplete="off">
                             </div>
                         </div>
                     </div>
