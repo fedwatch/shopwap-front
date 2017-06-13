@@ -70,6 +70,15 @@
                 }, 1000);
             });
 
+
+            $(document).on('click', '#cancelPayment', function () {
+                $("#paymentContent").show();
+                $("#sendLianLayer").hide();
+                var paymentSn = store.get("paymentSn");
+                location.href = './alipay/paySuccess.html?paymentSn=' + paymentSn;
+
+            })
+
             $(document).on('click', '.firstBind', function () {
                 // debugger;
                 var $this = $(this);
@@ -94,6 +103,8 @@
             })
 
         });
+
+
 
 
         function sendDynamicCode(userPhone, codeFlag) {
@@ -222,7 +233,7 @@
                             $("#paymentContent").hide();
                             $("#sendLianLayer").html(html);
                             $("#sendLianLayer").show();
-                            $("#sourcePay").attr("src","../sendMoney.html");
+                            $("#sourcePay").attr("src","sendMoney.html");
                             $("#sourcePay").css("width","100%").css("height","380px");
 //                            window.open("../sendMoney.html");
                         }
