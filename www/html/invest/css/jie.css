@@ -657,11 +657,7 @@ html, body {
     text-align: center;
 }
 
-@media screen and (max-height: 480px and min-height:
-
-440px
-
-;) {
+@media screen and (max-height: 480px) and (min-height:440px) {
     .img-con {
         margin-top: 120px;
     }
