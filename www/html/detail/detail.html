@@ -21,31 +21,31 @@
     <script type="text/javascript" src="../../js/utils/store.min.js"></script>
     <!--<script type="text/javascript" src="../../js/utils/getTemplate.js"></script>-->
     <script type="text/javascript" src="../../js/utils/transDetails.js"></script>
-
-
     <script>
         //USERMD
         var username = store.get("username");
         var currentProductID = store.get("currentProductID");
         var userStatus = store.get("userStatus");
         $(function () {
-
             jQuery.support.cors = true;
+            $(document).on('touchmove',function(){
+                var detailOneTop = $("#detailOne").offset().top;
+//                console.log(detailOneTop);
+                if(detailOneTop < 0){
+                    $("#topLinkMenu").hide();
+                }else if (detailOneTop > 0){
+                    $("#topLinkMenu").show();
+                }
+            });
 
-//            $(document).on('touchmove',function(){
-//                console.log($(window).scrollTop())
-//            });
 
-//            window.addEventListener('onscroll', function() {
-//                var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
-//                console.log(scrollTop);
-//            })
             /**
              *
              */
             function getLoginStatus(){
 
             }
+
 
 
             if(window.screenTop > 414){
@@ -68,16 +68,11 @@
                         var template = Handlebars.compile($("#productSliderTpl").html());
                         var html = template(data);
                         $("#productSlider").html(html);
-
                         console.log($(".swiper-slide img").eq(0).height());
-
-
-
                         //规格页
                         var template = Handlebars.compile($("#goodsDetailsPageTpl").html());
                         var html = template(data);
                         $("#goodsDetailsPage").html(html);
-
 
                         var template = Handlebars.compile($("#topLinkMenuTpl").html());
                         var html = template(data);
@@ -86,7 +81,6 @@
                         var template = Handlebars.compile($("#cartDetailFooterTpl").html());
                         var html = template(data);
                         $("#cartDetailFooter").html(html);
-
 
                         var template = Handlebars.compile($("#detailOneTpl").html());
                         var html = template(data);
@@ -256,6 +250,8 @@
             });
 
         });
+
+
 
 
         /**
