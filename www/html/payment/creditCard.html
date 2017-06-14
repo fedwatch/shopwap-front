@@ -48,6 +48,8 @@
 
             var timer = 60;
             var verBtnStatus = false;
+
+            $("#realName").focus();
             $(document).on('click', '.verBtn', function () {
                 if (verBtnStatus == true)
                     verBtnStatus = false;
@@ -80,7 +82,6 @@
             })
 
             $(document).on('click', '.firstBind', function () {
-                // debugger;
                 var $this = $(this);
                 var bankCode = store.get("bankCode");
                 var bankCardType = store.get("bankCardType");
@@ -96,6 +97,20 @@
                 var app_request_url = location.protocol + "//" + location.host + "../../html/";
                 console.log(amount);
 //                console.log(host);
+
+
+                if (realName === '' || typeof  realName === 'undefined'){
+                    $.toast("姓名不可为空");
+                    return ;
+                }
+                if (cardNum === '' || typeof  cardNum === 'undefined'){
+                    $.toast("身份证不可为空");
+                    return ;
+                }
+                if (verifyCode === '' || typeof  verifyCode === 'undefined'){
+                    $.toast("身份证不可为空");
+                    return ;
+                }
                 boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode,
                     bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, trueUsername, bankName, app_request_url,realName);
                 // location.href = './alipay/paySuccess.html'
@@ -241,12 +256,10 @@
                     else if (data.authStatus == '211') {
                         location.href = "../alipay/paySuccess.html?paymentSn=" + data.paymentSn;
                     }
-                    else if (data.authStatus == '500') {
-                        unlock(username,mergeSn);
-                    }
                     else {
                         $.toast(data.authMsg);
                     }
+
                 }
             })
         }
@@ -278,7 +291,7 @@
                             <div class="item-media">卡&nbsp;&nbsp;类&nbsp;&nbsp;型</div>
                             <div class="item-inner">
                                 <div class="item-input">
-                                    <input type="text" placeholder="" value="{{transBankCardType memberBank.bankCardType}}">
+                                    <input type="text" placeholder="" value="{{transBankCardType memberBank.bankCardType}}" disabled>
                                 </div>
                             </div>
                         </div>
@@ -288,7 +301,7 @@
                             <div class="item-media">银行卡号</div>
                             <div class="item-inner">
                                 <div class="item-input">
-                                    <input type="text" placeholder="" value="{{memberBank.bankCardNo}}" autocomplete="off">
+                                    <input type="text" placeholder="" value="{{memberBank.bankCardNo}}" autocomplete="off" disabled>
                                 </div>
                             </div>
                         </div>
@@ -298,7 +311,7 @@
                             <div class="item-media">发&nbsp;&nbsp;卡&nbsp;&nbsp;行</div>
                             <div class="item-inner">
                                 <div class="item-input">
-                                    <input type="text" placeholder="" autocomplete="off" value="{{memberBank.bankName}}">
+                                    <input type="text" placeholder="" autocomplete="off" value="{{memberBank.bankName}}" disabled>
                                 </div>
                             </div>
                         </div>
@@ -383,7 +396,7 @@
                             <div class="item-inner">
                                 <div class="item-input">
                                     <input type="text" placeholder="" value="{{memberBank.member.username}}"
-                                           autocomplete="off">
+                                           autocomplete="off" disabled>
                                 </div>
                             </div>
                         </div>
