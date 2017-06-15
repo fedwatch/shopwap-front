@@ -775,6 +775,25 @@ padding:0.5rem 0
     font-weight: 400;
 }
 
+/**
+    商品分类
+ */
+
+.productCategory .productWindow{
+    background: #fff;
+    padding: 0 0;
+    margin: .25rem 0;
+    width: 100%;
+    height: 12rem;
+    overflow: hidden;
+}
+.productCategory .productWindow .product-title{
+    padding: 0 .25rem;
+    font-size: .7rem;
+    font-weight: 500;
+    color: #000;
+}
+
 /*****滑动筛选*****/
 .overlay {
     position: fixed;

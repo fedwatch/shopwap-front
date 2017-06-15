@@ -21,6 +21,7 @@
     <script type="text/javascript" src="../../js/utils/store.min.js"></script>
     <!--<script type="text/javascript" src="../../js/utils/getTemplate.js"></script>-->
     <script type="text/javascript" src="../../js/utils/transDetails.js"></script>
+    <script src="https://jie.net/resources/shop/js/jquery.lazyload.js"></script>
     <script>
         //USERMD
         var username = store.get("username");
@@ -28,6 +29,10 @@
         var userStatus = store.get("userStatus");
         $(function () {
             jQuery.support.cors = true;
+
+
+
+            $("img.lazy").lazyload();
             $(document).on('touchmove',function(){
                 var detailOneTop = $("#detailOne").offset().top;
 //                console.log(detailOneTop);
@@ -68,7 +73,7 @@
                         var template = Handlebars.compile($("#productSliderTpl").html());
                         var html = template(data);
                         $("#productSlider").html(html);
-                        console.log($(".swiper-slide img").eq(0).height());
+//                        console.log($(".swiper-slide img").eq(0).height());
                         //规格页
                         var template = Handlebars.compile($("#goodsDetailsPageTpl").html());
                         var html = template(data);
@@ -443,9 +448,6 @@
     <div class="topLinkMenu bar-flat" id="topLinkMenu"></div>
 
     <div class="detail-page content" style="background: #f4f4f4;">
-        <!--<header class="bar-flat">-->
-
-        <!--</header>-->
 
         <div class="images-slider" id="productSlider"></div>
         <!--商品标题-->
@@ -470,7 +472,7 @@
         <div class="swiper-wrapper">
             {{#each this.product.productImages}}
             <div class="swiper-slide">
-                <img src="{{this.source}}" alt="{{this.alt}}" class="lazy">
+                <img src="{{this.source}}"  alt="{{this.alt}}" class="lazy" data-original="{{this.source}}">
             </div>
             {{/each}}
         </div>
@@ -542,18 +544,18 @@
         <div class="shopping-cost detail-item-content">
             <!--运费-->
             <div class="shipping-cost-box pull-left">
-            <span>
-                运费：
-                <span id="shippingCost">
-                    {{#if this.freight}}
-                        {{this.freight}}
-                    {{else}}
-                        0.00
-                    {{/if}}
+            <!--<span>-->
+                <!--运费：-->
+                <!--<span id="shippingCost">-->
+                    <!--{{#if this.freight}}-->
+                        <!--{{this.freight}}-->
+                    <!--{{else}}-->
+                        <!--0.00-->
+                    <!--{{/if}}-->
 
-                </span>
-                元
-            </span>
+                <!--</span>-->
+                <!--元-->
+            <!--</span>-->
             </div>
             <!--发货地-->
             <div class="seller-location pull-right" id="productPlace"></div>
