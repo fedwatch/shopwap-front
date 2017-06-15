@@ -4,10 +4,6 @@ html,body{
     overflow:hidden;
     -webkit-overflow-scrolling:touch;
 }
-body {
-    /*margin-top:20px!important;*/
-    /*padding-top:20px!important;*/
-}
 
 /** { touch-action: none; }*/
 .jjPageBg {
@@ -60,7 +56,6 @@ header.bar.bar-nav a{
 }
 
 .header-index .right-search .form-control {
-    font-size: .8rem;
     color: #fffcfc;
     width: 100%;
     height: 30px;
@@ -77,7 +72,10 @@ header.bar.bar-nav a{
 
 .footer-bar{
 background: #fff!important;
-
+}
+.bottomDisplayBox{
+    height:70px;
+    width:100%;
 }
 /*
 .my_header {
@@ -465,7 +463,7 @@ padding:0.5rem 0
 .shop-index .shop-cate .b-img {
     width: 49%;
     background-color: #fff;
-    margin-bottom: 60px;
+    margin: 5px 0;
 }
 
 .shop-index .shop-cate .b-img .bt-img {
