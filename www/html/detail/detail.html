@@ -30,10 +30,10 @@
         $(function () {
             jQuery.support.cors = true;
 
-
-
             $("img.lazy").lazyload();
-            $(document).on('touchmove',function(){
+
+            $(document).on('touchstart touchmove scroll touchend',function(e){
+//                console.log(e)
                 var detailOneTop = $("#detailOne").offset().top;
 //                console.log(detailOneTop);
                 if(detailOneTop < 0){
@@ -42,15 +42,6 @@
                     $("#topLinkMenu").show();
                 }
             });
-
-
-            /**
-             *
-             */
-            function getLoginStatus(){
-
-            }
-
 
 
             if(window.screenTop > 414){
@@ -110,7 +101,7 @@
                         console.log(data.authMsg);
                     }
                 }
-            })
+            });
 
             if (typeof currentProductID == 'undefined') {
                 $.toast("非法访问! 2 秒后跳转到首页", 2000);
@@ -286,12 +277,13 @@
                     if (data.authStatus == "200") {
                         if (data.itemId) {
                             store.set("cartItemId", [data.itemId]);
-                            $("#cartState").val(false)
+                            $("#cartState").val(false);
                             return location.href = "../../html/order/order.html";
                         } else {
                             console.log("item id 不存在")
                         }
-
+                    }else{
+                        $.toast(data.authMsg);
                     }
                 }
             })
@@ -328,6 +320,8 @@
                             if (data.authStatus == "200") {
                                 getCartCount(username, ".cart-badge > .badge");
                                 $("#cartState").val(false)
+                            }else{
+                                $.toast(data.authMsg);
                             }
 
                         }
@@ -541,25 +535,25 @@
         <div class="product-price-box">
             <span>￥<span id="productPrice">{{this.product.price}}</span></span>
         </div>
-        <div class="shopping-cost detail-item-content">
-            <!--运费-->
-            <div class="shipping-cost-box pull-left">
-            <!--<span>-->
-                <!--运费：-->
-                <!--<span id="shippingCost">-->
-                    <!--{{#if this.freight}}-->
-                        <!--{{this.freight}}-->
-                    <!--{{else}}-->
-                        <!--0.00-->
-                    <!--{{/if}}-->
+        <!--<div class="shopping-cost detail-item-content">-->
+            <!--&lt;!&ndash;运费&ndash;&gt;-->
+            <!--<div class="shipping-cost-box pull-left">-->
+            <!--&lt;!&ndash;<span>&ndash;&gt;-->
+                <!--&lt;!&ndash;运费：&ndash;&gt;-->
+                <!--&lt;!&ndash;<span id="shippingCost">&ndash;&gt;-->
+                    <!--&lt;!&ndash;{{#if this.freight}}&ndash;&gt;-->
+                        <!--&lt;!&ndash;{{this.freight}}&ndash;&gt;-->
+                    <!--&lt;!&ndash;{{else}}&ndash;&gt;-->
+                        <!--&lt;!&ndash;0.00&ndash;&gt;-->
+                    <!--&lt;!&ndash;{{/if}}&ndash;&gt;-->
 
-                <!--</span>-->
-                <!--元-->
-            <!--</span>-->
-            </div>
-            <!--发货地-->
-            <div class="seller-location pull-right" id="productPlace"></div>
-        </div>
+                <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                <!--&lt;!&ndash;元&ndash;&gt;-->
+            <!--&lt;!&ndash;</span>&ndash;&gt;-->
+            <!--</div>-->
+            <!--&lt;!&ndash;发货地&ndash;&gt;-->
+            <!--<div class="seller-location pull-right" id="productPlace"></div>-->
+        <!--</div>-->
         <div id="cartIndex" style="background: #fff"></div>
     </div>
 </script>
