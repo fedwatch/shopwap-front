@@ -87,8 +87,24 @@
                 var paymentSn = store.get("paymentSn");
                 location.href = './paySuccess.html?paymentSn=' + paymentSn;
 
-            })
-        });
+            });
+
+            $(document).on("click", "#balancePayBtn", function () {
+                if (isBalancePay == true) {
+                    setTimeout(function () {
+                        calculate_amount(username, mergeSn, paymentPluginId, isBalancePay);
+                        isBalancePay = false;
+                    }, 500);
+
+                } else {
+                    setTimeout(function () {
+                        calculate_amount(username, mergeSn, paymentPluginId, isBalancePay);
+                        isBalancePay = true;
+                    }, 500);
+                }
+
+            });
+        })
 
         /***支付界面，合并支付
          * @param username
@@ -132,15 +148,7 @@
                         //选择支付方式
                         choicePay();
 
-                        $("#balancePayBtn").click(function () {
-                            if (isBalancePay == false) {
-                                isBalancePay = true;
-                                calculate_amount(username, mergeSn, paymentPluginId, isBalancePay);
-                            } else {
-                                isBalancePay = false;
-                                calculate_amount(username, mergeSn, paymentPluginId, isBalancePay);
-                            }
-                        });
+
                     }
                 }
             })
@@ -167,17 +175,22 @@
                         var amount = data.amount;
                         store.set("amount", amount);
                         if (isBalancePay == true) {
-                            var allAmount = store.get("allAmount");
+
+                           var allAmount = store.get("allAmount");
                             $("#balance-yue").css({visibility: "visible"}).find("span").text(data.balancePay);
                             if (balance >= allAmount) {
+                                $(".tick").removeClass("tickSelected");
                                 $("#balance-yue").css({visibility: "visible"}).find("span").text(data.balancePay);
                                 $("#paychoice").css({display: "none"});
                             } else {
+                                $(".tick").addClass("tickSelected");
                                 $("#balance-yue").css({visibility: "visible"}).find("span").text(data.balancePay);
                                 $("#paychoice").css({display: "block"});
                                 $("#payWay").find("#aliPay").text(data.amount);
-                            }
+                          }
                         } else {
+                            $("#paychoice").show();
+                            $(".tick").addClass("tickSelected");
                             $("#paychoice").css({display: "block"});
                             $("#balance-yue").css({visibility: "hidden"});
                             $("#payWay").find("#aliPay").text(data.amount);
@@ -625,9 +638,9 @@
                             <div class="card-header checkPay">
                                 <div class="pay-logo"><img src="{{this.paymentPlugin.logo}}"/></div>
                                 <div class="remainPay">
-                                    <span class="morePay">支付<span style="color:#ff503e;"
+                                    <span class="morePay" style="visibility: visible">支付<span style="color:#ff503e;"
                                                                   id="aliPay">{{this.allAmount}}</span></span>
-                                    <span class="tick tickys" data-value="{{this.paymentPlugin.id}}"></span>
+                                    <span class="tick tickys tickSelected" data-value="{{this.paymentPlugin.id}}"></span>
                                 </div>
                             </div>
                             {{/if}}
