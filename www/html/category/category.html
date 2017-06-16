@@ -255,18 +255,18 @@
             });
 
 
-
-            var scroller = new IScroll('#productCategory', {disableMouse : true,click: iScrollClick(),tap: true,probeType: 2});
-
-            function iScrollClick(){
-                // workaround click bug iscroll #674
-                if (/iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent)) return false;
-                if (/Chrome/i.test(navigator.userAgent)) return (/Android/i.test(navigator.userAgent));
-                if (/Silk/i.test(navigator.userAgent)) return false;
-                if (/Android/i.test(navigator.userAgent)) {
-                    var s=navigator.userAgent.substr(navigator.userAgent.indexOf('Android')+8,3);
-                    return parseFloat(s[0]+s[3]) < 44 ? false : true}
-            }
+//
+//            var scroller = new IScroll('#productCategory', {disableMouse : true,click: iScrollClick(),tap: true,probeType: 2});
+//
+//            function iScrollClick(){
+//                // workaround click bug iscroll #674
+//                if (/iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent)) return false;
+//                if (/Chrome/i.test(navigator.userAgent)) return (/Android/i.test(navigator.userAgent));
+//                if (/Silk/i.test(navigator.userAgent)) return false;
+//                if (/Android/i.test(navigator.userAgent)) {
+//                    var s=navigator.userAgent.substr(navigator.userAgent.indexOf('Android')+8,3);
+//                    return parseFloat(s[0]+s[3]) < 44 ? false : true}
+//            }
 
         });
 

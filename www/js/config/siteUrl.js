@@ -8,6 +8,11 @@ var BASE_URL = "https://jie.net/wap";
 // var BASE_URL = "http://60.205.84.124/wap";
 
 
+var GLOBAL_INFO = {
+    api:"0.4.7"
+}
+GLOBAL_INFO.version = '0.0.3';
+
 var CONFIG_CATEGORY_MAIN_ID = "105";
 var CONFIG_CATEGORY_SECOND_ID = "112";
 var M_URL = '/m';
