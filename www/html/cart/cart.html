@@ -304,6 +304,13 @@
                 quantity.text(quant)
             })
 
+
+            $(document).on("click",".cart-item-image a",function () {
+                var cid = $(this).data("itemId");
+                store.set("currentProductID", cid);
+                location.href = "../../html/detail/detail.html";
+            })
+
         })
 
 
@@ -497,13 +504,13 @@
         {{#each cartItems}}
         {{#if isMarketable}}
         <!--正常商品显示-->
-        <div class="cart-store-img-text-label">
+        <div class="cart-store-img-text-label" >
             <div class="cart-item-select-wrapper">
                 <input type="checkbox" class="cart-list-select" id="cartSelect-{{id}}" data-itemId="{{id}}">
                 <label for="cartSelect-{{id}}"></label>
             </div>
             <div class="cart-item-image">
-                <a href="" class="external">
+                <a href="javascript:void(0);" class="external" data-itemId="{{productId}}">
                     {{#if image}}
                     <img src="{{image}}" alt="">
                     {{else}}
@@ -574,7 +581,7 @@
                     <span class="unactive-cart-item">失效</span>
                 </div>
                 <div class="cart-item-image">
-                    <a href="../../html/detail/detail.html" class="external">
+                    <a href="javascript:void(0);" class="external" data-itemId="{{productId}}">
                         <img src="../../assets/images/cart-item-image-product.png" alt="">
                     </a>
                 </div>
