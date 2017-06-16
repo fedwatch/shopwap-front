@@ -461,11 +461,17 @@ padding:0.5rem 0
 }
 
 .shop-index .shop-cate .b-img {
-    width: 49%;
+    /*width: 49%;*/
     background-color: #fff;
     margin: 5px 0;
 }
-
+/* 模版内样式 */
+.indexProductColumn{
+    width: 50%;
+    padding: 0 .133rem;
+    max-height: 20rem;
+    overflow: hidden;
+}
 .shop-index .shop-cate .b-img .bt-img {
     position: relative;
     width: 100%;
@@ -1703,6 +1709,14 @@ span.nav-text.active {
 
 #productCategory {
     height: 100% !important;
+}
+
+.productWrapper{
+    /*position: absolute;*/
+    width: 100%;
+    /*top: 90px;*/
+    bottom: 50px;
+    margin-top:2.5rem;
 }
 
 .contentWrapper {

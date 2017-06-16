@@ -48,11 +48,17 @@
                 cache: true,
                 async: false,
                 success: function (data) {
-                    var template = Handlebars.compile($("#myOrderTpl").html());
-                    var html = template(data);
-                    $("#myOrderPage").html(html);
-                    $($(".ocItem")[0]).addClass("active");
-
+                    if(data.authStatus === '200'){
+                        var template = Handlebars.compile($("#myOrderTpl").html());
+                        var html = template(data);
+                        $("#myOrderPage").html(html);
+                        $($(".ocItem")[0]).addClass("active");
+                    }else if (data.authStatus === '403') {
+                        $.toast(data.authMsg);
+                        setTimeout(function(){
+                            return location.href = '../login/login.html';
+                        },1500)
+                    }
 
                 }
             });

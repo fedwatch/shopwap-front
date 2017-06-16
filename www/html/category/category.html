@@ -244,7 +244,15 @@
 
             setTimeout(function(){
                 getParamsShow();
-            },800)
+            },800);
+
+
+            $(window).on('touchmove',function(){
+                console.log("moving")
+                var target = 0;
+                if (target == 300)
+                $('.categoryList').css("position","fixed");
+            });
 
 
 
@@ -337,13 +345,20 @@
 </head>
 <body>
 <div id="categoryPage" class="mainList page">
-    <div class="content ccSearch">
-        <div class="appStatusBar" style="background:#fff"></div>
+    <div class="appStatusBar" style="background:#fff;;"></div>
+    <nav class="bar-flat bar-tab ">
+        <div class="appStatusBar" style="background:#fff;z-index:999;"></div>
         <div class="categoryList list-block" style="">
             <div class="main-nav" id="mainNav"></div>
             <div class="nav-sub-position" id="navSubPosition"></div>
         </div>
-        <div class="" style="position:absolute;width:100%;top:90px;bottom:50px;">
+    </nav>
+
+
+    <div class="content ccSearch">
+
+
+        <div class="productWrapper" style="">
             <div id="productCategory">
                 <div class="productContainer"></div>
             </div>
