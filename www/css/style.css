@@ -1476,14 +1476,14 @@ span.panel-minus-button {
 
 .detail-footer {
     position: absolute;
-    right: 0;
-    left: 0;
+    /*right: 0;*/
+    /*left: 0;*/
     display: flex;
     z-index: 1001;
     height: 3rem;
     background-color: #f7f7f8;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+    /*-webkit-backface-visibility: hidden;*/
+    /*backface-visibility: hidden;*/
     bottom: 0;
     border-top: 1px solid #e6e6e6;
     width: 100%;
@@ -2212,8 +2212,8 @@ span.nav-sub-text.active {
 }
 
 .order-item-desc .desc-title {
-    font-weight: 400;
-    font-size: .8rem;
+    font-weight: 500;
+    font-size: .65rem;
     color: #515151;
 }
 
@@ -2282,13 +2282,12 @@ span.nav-sub-text.active {
     width: 100%;
     right: 0;
     left: 0;
-    display: flex;
     z-index: 1001;
 }
 
 .orderBottomBar .detailSums {
     padding: 0 .332rem;
-    height: 3rem;
+    height: 2.8rem;
 }
 
 .orderBottomBar .detailSums {
@@ -2304,7 +2303,7 @@ span.nav-sub-text.active {
 .orderBottomBar .detailOrderBtn {
     background: #ea5125;
     color: #fff;
-    height: 3rem;
+    height: 2.8rem;
     align-items: center;
     display: flex;
     padding: 0 .5rem;

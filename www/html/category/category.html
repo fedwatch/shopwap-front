@@ -282,13 +282,12 @@
             var startPrice = '';
             var endPrice = '';
             var pageSize = '';
-
+            console.log("getProductInfo running");
 
             var pageOp = $("#productCategory").page({
                 url: BASE_URL + PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
                 param: {categoryIds: categoryIds},
                 processResult: function (result) {
-                    console.log(result)
                     var html = "";
                     if (result.products != null) {
                         $.each(result.products, function (index, data) {

@@ -19,7 +19,7 @@
 		}
 		
 		var config = {
-				url:"/",
+				url:"/",//
 				type:"get",
 				dataType:"json",
 				param:null,
