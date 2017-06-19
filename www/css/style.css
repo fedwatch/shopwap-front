@@ -18,6 +18,13 @@ html,body{
     z-index: 999;
     opacity: .5;
 }
+.blur-style{
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=100, MakeShadow=false);
+　　-webkit-filter: blur(100px);
+　　-moz-filter: blur(100px);
+　　-ms-filter: blur(100px);
+　　filter: blur(100px);
+}
 
 .appStatusBar.indexGreen {
     background: #9EC28E;
