@@ -247,15 +247,15 @@
             },800);
 
 
-            $(window).on('touchmove',function(){
-                console.log("moving")
-                var target = 0;
-                if (target == 300)
-                $('.categoryList').css("position","fixed");
-            });
+//            $(window).on('touchmove',function(){
+//                console.log("moving")
+//                var target = 0;
+//                if (target == 300)
+//                $('.categoryList').css("position","fixed");
+//            });
 
 
-//
+
 //            var scroller = new IScroll('#productCategory', {disableMouse : true,click: iScrollClick(),tap: true,probeType: 2});
 //
 //            function iScrollClick(){
@@ -288,6 +288,7 @@
                 url: BASE_URL + PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
                 param: {categoryIds: categoryIds},
                 processResult: function (result) {
+                    console.log(result)
                     var html = "";
                     if (result.products != null) {
                         $.each(result.products, function (index, data) {
@@ -307,6 +308,7 @@
         }
 
         function initCategoryActive() {
+            $(window).scrollTop();
             $(".nav-tabbar-item").first().find(".nav-render > .nav-text").addClass("active");
             $(".nav-sub-text").first().addClass("active");
             var tabbarBottomline = $("#tabbar-bottomline");
@@ -325,7 +327,6 @@
 
         function getParamsShow(){
             var l = parseURL(location.href);
-
             if(location.protocol === 'http' || location.protocol === 'https'){
                 var categoryId = l.params.categoryId;
                 if(categoryId)
@@ -345,8 +346,7 @@
 </head>
 <body>
 <div id="categoryPage" class="mainList page">
-    <div class="appStatusBar" style="background:#fff;;"></div>
-
+    <div class="appStatusBar" style="background:#fff;position: fixed;;"></div>
 
     <nav class="bar-flat bar-tab ">
         <div class="appStatusBar" style="background:#fff;z-index:999;"></div>
@@ -356,10 +356,7 @@
         </div>
     </nav>
 
-
     <div class="content ccSearch">
-
-
         <div class="productWrapper" style="">
             <div id="productCategory">
                 <div class="productContainer"></div>
@@ -368,8 +365,8 @@
     </div>
 </div>
 <div id="footerNavPage"></div>
+<!--二级商品分类-->
 <script type="text/x-handlebars-template" id="navSubPositionTpl">
-    <!--二级商品分类-->
     <div class="nav-sub-tabs">
         <div class=" nav-sub-tabbar">
             <div class=" nav-sub-tabbar-itemlist">
@@ -386,6 +383,7 @@
         </div>
     </div>
 </script>
+<!--顶部滚动菜单-->
 <script type="text/x-handlebars-template" id="mainNavTpl">
     <div class="nav-tabs">
         <div class="nav-tabbar">
@@ -403,30 +401,33 @@
         </div>
     </div>
     <div id="tabbar-bottomline" class="nav-tabbar-bottomline"></div>
-
-
     <input type="hidden" id="categoryId" value="105">
     <input type="hidden" id="categorySubId" value="">
 </script>
+
+<!--现在的页脚-->
 <script type="text/x-handlebars-template" id="footerTpl">
-    <!--现在的页脚-->
     <nav class="footer-bar bar bar-tab ">
         <a id="home-link" class="tab-item  external" href="../../index.html">
             <i class="icon icon-nav-home"></i>
             <span class="tab-label">首页</span>
         </a>
+
         <a id="category-link" class="tab-item external" href="../../html/category/category.html">
             <i class="icon icon-nav-category"></i>
             <span class="tab-label">分类</span>
         </a>
+
         <a id="cart-link" class="tab-item external" href="../../html/cart/cart.html">
             <i class="icon icon-nav-cart"></i>
             <span class="tab-label">购物车</span>
         </a>
+
         <a id="user-link" class="tab-item external" href="../../html/my/my.html">
             <i class="icon icon-nav-user"></i>
             <span class="tab-label">我的</span>
         </a>
+
     </nav>
 </script>
 </body>
