@@ -54,14 +54,19 @@
 
 
                 if ($this.hasClass('all')) {
+                    $(".contentWrapper").empty();
                     getOrderLists(username, 'all', '1');
                 } else if ($this.hasClass('unconfirmed')) {
+                    $(".contentWrapper").empty();
                     getOrderLists(username, 'unconfirmed', '1');
                 } else if ($this.hasClass('confirmed')) {
+                    $(".contentWrapper").empty();
                     getOrderLists(username, 'confirmed', '1');
                 } else if ($this.hasClass('shipped')) {
+                    $(".contentWrapper").empty();
                     getOrderLists(username, 'shipped', '1');
                 } else if ($this.hasClass('completed')) {
+                    $(".contentWrapper").empty();
                     getOrderLists(username, 'completed', '1');
                 }
 
@@ -76,18 +81,14 @@
                 } else if (completed) {
                     $(".ocItem.completed").addClass("active");
                 }
-
-
             });
 
             // 确认收货
             $(document).on('click', '.confirmReceiptBtn ', function () {
                 var $this = $(this);
-                console.log($this)
+                console.log($this);
                 var sn = $this.data('sn');
-
                 orderComplete(username, [sn]);
-
                 if (store.get("reieverStatus") == true) {
                     $this.text("已收货")
                 } else {
@@ -100,7 +101,6 @@
                 var $this = $(this);
                 store.set("sn", $this.data("sn"));
                 return location.href = '../../../html/user/logistics.html';
-
             });
 
             // 立即付款
@@ -111,7 +111,6 @@
                 console.log(sn);
                 createPayment(username, [sn]);
                 store.set("mergeSn", mergeSn);
-
                 return location.href = '../../../html/payment/alipay/commonPay.html';
             });
 
@@ -142,7 +141,7 @@
                     sn: sn,
                 },
                 success: function (data) {
-                    mergeSn = data.mergeSn
+                    mergeSn = data.mergeSn;
                     console.log(mergeSn)
                 }
             })
@@ -153,19 +152,26 @@
          *  获得订单列表 * 分页
          */
         function getOrderLists(username,orderStatus,pageNumber){
+
+
             var pageOp = $("#shopListShowIndex2").page({
                 url: BASE_URL + ORDER_SITE_URL.LIST.URL,
                 param: {
                     username: username,
                     orderStatus: orderStatus,
-                    pageNumber: pageNumber
+//                    pageNumber: pageNumber
                 },
                 processResult: function (data) {
+                    var html = '';
                     var template = Handlebars.compile($("#cartItemTpl").html());
-                    var html =  template(data);
+                    html +=  template(data);
                     $(".contentWrapper").append(html)
                 }
             });
+            pageOp.load({
+                username: username,
+                orderStatus: orderStatus,
+            })
         }
 
 
@@ -234,15 +240,9 @@
     </nav>
 
 
-    <div class="content">
-        <div id="getListOrders" class="myOrderList list-block">
-            <!--<div class="productContainer">-->
-                <!--<div id="pageResult"></div>-->
-            <!--</div>-->
-
-            <div id="shopListShowIndex2">
-                <div class="productContainer"></div>
-            </div>
+    <div class="content myOrderList">
+        <div id="shopListShowIndex2" style="margin-top:2.5rem;">
+            <div class="productContainer"></div>
         </div>
     </div>
 

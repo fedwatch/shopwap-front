@@ -1724,8 +1724,7 @@ span.nav-text.active {
     /*position: absolute;*/
     width: 100%;
     /*top: 90px;*/
-    bottom: 50px;
-    margin-top:3.5rem;
+
 }
 
 .contentWrapper {
@@ -2016,7 +2015,7 @@ span.nav-sub-text.active {
 
 
 .myOrderList {
-    margin: 3rem 0 !important;
+    /*margin: 1rem 0 !important;*/
 }
 
 .myOrderList .cart-item .cart-store-title-label .storeName {
