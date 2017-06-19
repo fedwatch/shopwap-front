@@ -283,7 +283,7 @@
 					invokeFn(config.onSuccess, data, textStatus, xhr);
 				},
 				error:function(xhr,textStatus, er){
-					console.error("load data fail - " + er);
+					console.error("load data fail - " + xhr,textStatus, er);
 					invokeFn(config.onError, xhr,textStatus, er);
 				},
 				complete:function(){

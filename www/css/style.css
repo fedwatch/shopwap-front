@@ -2,7 +2,7 @@
 html,body{
     height:100%;
     overflow:hidden;
-    -webkit-overflow-scrolling:touch;
+    /*-webkit-overflow-scrolling:touch;*/
 }
 
 /** { touch-action: none; }*/
@@ -1476,20 +1476,15 @@ span.panel-minus-button {
 
 .detail-footer {
     position: absolute;
-    /*right: 0;*/
-    /*left: 0;*/
     display: flex;
     z-index: 1001;
     height: 3rem;
     background-color: #f7f7f8;
-    /*-webkit-backface-visibility: hidden;*/
-    /*backface-visibility: hidden;*/
     bottom: 0;
     border-top: 1px solid #e6e6e6;
     width: 100%;
     align-items: center;
     justify-content: space-around;
-
 }
 
 .cartBadgeBtn {
@@ -1730,7 +1725,7 @@ span.nav-text.active {
     width: 100%;
     /*top: 90px;*/
     bottom: 50px;
-    margin-top:2.5rem;
+    margin-top:3.5rem;
 }
 
 .contentWrapper {
