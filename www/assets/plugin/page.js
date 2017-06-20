@@ -284,6 +284,9 @@
 				},
 				error:function(xhr,textStatus, er){
 					console.log("load data fail - " + xhr,textStatus, er);
+					console.log(xhr);
+					console.log(textStatus);
+					console.log(er);
 					invokeFn(config.onError, xhr,textStatus, er);
 				},
 				complete:function(){

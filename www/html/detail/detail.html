@@ -103,6 +103,10 @@
                         var html = template(data);
                         $("#detailWrapper").html(html);
 
+                        //获取已有购物车物品数量
+                        getCartCount(username, ".cart-badge > .badge");
+
+
                     }
                     else if (data.authStatus == "500") {
                         console.log(data.authMsg);
@@ -114,8 +118,6 @@
             var productImagesSlider = new Swiper('.product-images-slider', {});
 
 
-            //获取已有购物车物品数量
-            getCartCount(username, ".cart-badge > .badge");
 
 
             //监听 购物车
