@@ -68,17 +68,6 @@
                     var data = results;
                     if (data.authStatus == "200") {
 
-                        var items = data['allProducts']['items'];
-//                        console.log(items);
-                        var currentProductSpec = '153';
-                        items.forEach(function(data,index){
-//                            console.log(data.specificationValues[0].id,index);
-                            if(currentProductSpec == data.specificationValues[0].id){
-                                return data.productId
-                            }
-                        })
-
-
                         var template = Handlebars.compile($("#productSliderTpl").html());
                         var html = template(data);
                         $("#productSlider").html(html);
