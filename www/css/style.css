@@ -531,10 +531,12 @@ padding:0.5rem 0
 }
 
 .search-main {
+    width:100%;
     height: 100% !important;
 }
 
 #shopListShowIndex2 {
+    width:100%;
     height: 100%;
 }
 
