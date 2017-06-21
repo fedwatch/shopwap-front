@@ -154,11 +154,18 @@
             });
         }
 
+        function backAction(){
+            store.set("needReload","true");
+            history.go(-1)
+        }
+
     </script>
 </head>
 <body class="page">
 <!---地址在哪里-->
-<div id="address" class="address"></div>
+<div id="address" class="address">
+
+</div>
 <!--地址列表页-->
 <div id="manage-address" class="address manage-address" style="display:none;"></div>
 
@@ -166,7 +173,7 @@
 <script type="text/x-handlebars-template" id="addressTpl">
     <div class="appStatusBar" style="background:#fff"></div>
     <header class="bar bar-nav clearfix">
-        <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)"
+        <a class="button button-link button-nav pull-left external" href="javascript:backAction()"
            data-transition='slide-out'>
             <i class="fa fa-chevron-left"></i>
         </a>

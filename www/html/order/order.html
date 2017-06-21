@@ -23,7 +23,6 @@
     <script type="text/javascript" src="../../js/utils/divideAmount.js"></script>
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
-        jQuery.support.cors = true;
 
         var username = store.get("username");
         var snArrs = store.get("snArrs");
@@ -32,11 +31,31 @@
         var memoArr = store.get("memoArr");
 
         $(function () {
+            jQuery.support.cors = true;
+            checkBackAction();
+            function checkBackAction(){
+                var needReload = store.get("needReload")
+                if(needReload == "true"){
+                    store.set("needReload","false");
+                    location.reload();
+                }
+            }
+            var data = {}
+            var template = Handlebars.compile($("#orderHeaderTpl").html());
+            var html = template(data);
+            $("#orderHeader").html(html);
+
             var username = store.get("username");
             var itemIds = store.get("cartItemId");
             var receiverId = store.get("receiverId");
             orderInfo(username, itemIds);
+
+            window.addEventListener('popstate',function (e) {
+                console.log('detected popstate event')
+            });
         });
+
+
 
         $(document).on("click", ".detailOrderBtn", function (e) {
             e.preventDefault();
@@ -69,7 +88,7 @@
                     itemIds: itemIds,
                 },
                 success: function (data) {
-                    console.log(data);
+//                    console.log(data);
                 }
             });
         }
@@ -91,7 +110,7 @@
                 cache: false,
                 async: false,
                 success: function (data) {
-                    console.log(data);
+//                    console.log(data);
                 }
             });
         }
@@ -111,7 +130,7 @@
                     sn: sn,
                 },
                 success: function (data) {
-                    console.log(data);
+//                    console.log(data);
                 }
             });
         }
@@ -137,7 +156,7 @@
                 cache: false,
                 async: false,
                 success: function (data) {
-                    console.log(data);
+//                    console.log(data);
                     if (data.authStatus == "200") {
                         //存储sn
                         var snArrs = data.snList;
@@ -168,7 +187,7 @@
                 success: function (data) {
                     if (data.authStatus == "200") {
                         var mergeSn = data.mergeSn;
-                        console.log(mergeSn);
+//                        console.log(mergeSn);
                         if (data.mergeSn) {
                             store.set("mergeSn", data.mergeSn);
                             return window.location.href = "../../html/payment/alipay/commonPay.html";
@@ -220,16 +239,14 @@
                     username: username,
                     itemIds: itemIds
                 },
-                cache: false,
+//                cache: false,
                 async: false,
                 success: function (data) {
                     if (data.authStatus == "200") {
                         //orderHeader
 //                        require.async('handlebars', function () {
 //                            var tpl = require('/zqVue/shopwap-front/www/layout/order/orderHeader.tpl');
-                        var template = Handlebars.compile($("#orderHeaderTpl").html());
-                        var html = template(data);
-                        $("#orderHeader").html(html);
+
 //                        });
 
                         //orderAddress
@@ -247,7 +264,7 @@
                         $("#orderDetail").html(html);
 
                         var $amountPayable = data.orders;
-                        console.log(data);
+//                        console.log(data);
                         $amountPayable.map(function (item, index) {
                             var ss = item.amountPayable;
                             var ars = ss.toString().split(".");
@@ -546,8 +563,6 @@
     </script>
 </head>
 <body>
-
-
 <div class="page mainList">
     <div class="appStatusBar" style="background: #fff;"></div>
     <header id="orderHeader" class="bar bar-nav"></header>
