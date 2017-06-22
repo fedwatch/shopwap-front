@@ -179,7 +179,7 @@
                         var amount = data.amount;
                         store.set("amount", amount);
                         if (isBalancePay == true) {
-                            debugger;
+
                             $(".tick").removeClass("tickSelected");
                             var allAmount = store.get("allAmount");
                             $("#balance-yue").css({visibility: "visible"}).find("span").text(data.balancePay);
@@ -193,7 +193,7 @@
                                 $("#payWay").find("#aliPay").text(data.amount);
                             }
                         } else {
-                            debugger;
+
                             $("#paychoice").show();
                             $(".tick").addClass("tickSelected");
                             $("#paychoice").css({display: "block"});
