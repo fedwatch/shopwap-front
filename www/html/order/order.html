@@ -32,6 +32,8 @@
 
         $(function () {
             jQuery.support.cors = true;
+
+
             checkBackAction();
             function checkBackAction(){
                 var needReload = store.get("needReload")
@@ -92,6 +94,8 @@
                 }
             });
         }
+
+
 
         /**
          *  订单取消

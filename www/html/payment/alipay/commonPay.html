@@ -140,6 +140,11 @@
                         var html = template(data);
                         $("#commonPay").html(html);
 
+                        var waitTime = data["waitTime"];
+                        var waitTimeText = toHourMinute(waitTime)
+                        $("#waitTime").text(waitTimeText)
+
+
                         //分割金额显示在页面
                         var allAomuntArr = allAmount.toString().split(".");
                         $(".aInt").text(allAomuntArr[0]);
@@ -157,6 +162,37 @@
                 }
             })
 
+        }
+
+
+        /**
+         *
+         */
+        function toHourMinute(minutes){
+            return (Math.floor(minutes/60) + "小时" + (minutes%60) + "分" );
+//             也可以转换为json，以方便外部使用
+//            return {hour: Math.floor(minutes / 60), minute: (minutes % 60)};
+        }
+
+        /*
+         * 将秒数格式化时间
+         * @param {Number} seconds: 整数类型的秒数
+         * @return {String} time: 格式化之后的时间
+         */
+        function formatTime(seconds) {
+            var min = Math.floor(seconds / 60),
+                second = seconds % 60,
+                hour, newMin, time;
+
+            if (min > 60) {
+                hour = Math.floor(min / 60);
+                newMin = min % 60;
+            }
+
+            if (second < 10) { second = '0' + second;}
+            if (min < 10) { min = '0' + min;}
+
+            return time = hour? (hour + ':' + newMin + ':' + second) : (min + ':' + second);
         }
 
 
@@ -591,7 +627,7 @@
                     </div>
                     <div class="pull-left order-done">
                         <div class="or-title">订单提交成功</div>
-                        <div class="or-title2">请在 {{this.waitTime}} 分钟之内完成支付</div>
+                        <div class="or-title2">请在      <span id="waitTime"></span>钟之内完成支付</div>
                     </div>
                 </div>
                 <div class="desc-content">
