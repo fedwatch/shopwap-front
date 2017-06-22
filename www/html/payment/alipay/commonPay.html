@@ -93,9 +93,9 @@
                var paymentPluginId = store.get("paymentPluginId");
             $(document).on("click", "#balancePayBtn", function () {
 
-                debugger;
+
                 if (isBalancePay == true) {
-                    debugger;
+
                     setTimeout(function () {
                         isBalancePay = false;
                         calculate_amount(username, mergeSn, paymentPluginId, isBalancePay);
