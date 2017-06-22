@@ -595,6 +595,22 @@ padding:0.5rem 0
 #searchPrompt li {
 
 }
+.historyItem{
+    color: #999;
+    padding: .133rem .533rem;
+    text-align: center;
+    border: 1px solid #999;
+    border-radius: .75rem;
+    font-size:.66rem;
+    margin:0 .177rem;
+}
+
+.historyLay{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size:.656rem;
+}
 
 /* 搜索页面头部搜索 */
 .header-search {

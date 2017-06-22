@@ -39,7 +39,7 @@
         var app_request = store.get("app_request") || '3';
         var cardType = store.get("cardType") || '1';
         var cardId = store.get("cardId");
-        var pageNumber = store.get("pageNumber")||0;
+        var pageNumber = store.get("pageNumber") || 0;
 
 
         $(function () {
@@ -78,7 +78,6 @@
                 $("#sendLianLayer").hide();
                 var paymentSn = store.get("paymentSn");
                 location.href = './alipay/paySuccess.html?paymentSn=' + paymentSn;
-
             })
 
             $(document).on('click', '.firstBind', function () {
@@ -95,31 +94,29 @@
                 var expiryDate = $("#creditMonth").val() + $("#creditYear").val() || null;
                 var bankCardNo = store.get("bankCardNo");
                 var app_request_url = location.protocol + "//" + location.host + "../../html/";
-                console.log(amount);
+//                console.log(amount);
 //                console.log(host);
 
 
-                if (realName === '' || typeof  realName === 'undefined'){
+                if (realName === '' || typeof  realName === 'undefined') {
                     $.toast("姓名不可为空");
-                    return ;
+                    return;
                 }
-                if (cardNum === '' || typeof  cardNum === 'undefined'){
+                if (cardNum === '' || typeof  cardNum === 'undefined') {
                     $.toast("身份证不可为空");
-                    return ;
+                    return;
                 }
-                if (verifyCode === '' || typeof  verifyCode === 'undefined'){
+                if (verifyCode === '' || typeof  verifyCode === 'undefined') {
                     $.toast("身份证不可为空");
-                    return ;
+                    return;
                 }
                 boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode,
-                    bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, trueUsername, bankName, app_request_url,realName);
+                    bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, trueUsername, bankName, app_request_url, realName);
                 // location.href = './alipay/paySuccess.html'
 
             })
 
         });
-
-
 
 
         function sendDynamicCode(userPhone, codeFlag) {
@@ -163,10 +160,10 @@
                 async: false,
                 success: function (data) {
                     if (data.authStatus == "212") {
-                        $.toast(data.authMsg,1500)
-                        setTimeout(function(){
+                        $.toast(data.authMsg, 1500)
+                        setTimeout(function () {
                             location.href = "../payment/alipay/commonPay.html";
-                        },1500)
+                        }, 1500)
 
                     } else if (data.authStatus == "200") {
                         var template = Handlebars.compile($("#creditCardTpl").html());
@@ -210,7 +207,7 @@
          * @param app_request_url
          * @param realName
          */
-        function boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode, bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, username, bankName, app_request_url,realName ) {
+        function boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode, bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, username, bankName, app_request_url, realName) {
             $.ajax({
                 url: BASE_URL + PAYMENT_SITE_URL.BOUND_CARD_PAY.URL,
                 type: PAYMENT_SITE_URL.BOUND_CARD_PAY.METHOD,
@@ -248,8 +245,8 @@
                             $("#paymentContent").hide();
                             $("#sendLianLayer").html(html);
                             $("#sendLianLayer").show();
-                            $("#sourcePay").attr("src","sendMoney.html");
-                            $("#sourcePay").css("width","100%").css("height","380px");
+                            $("#sourcePay").attr("src", "sendMoney.html");
+                            $("#sourcePay").css("width", "100%").css("height", "380px");
 //                            window.open("../sendMoney.html");
                         }
                     }
@@ -291,7 +288,8 @@
                             <div class="item-media">卡&nbsp;&nbsp;类&nbsp;&nbsp;型</div>
                             <div class="item-inner">
                                 <div class="item-input">
-                                    <input type="text" placeholder="" value="{{transBankCardType memberBank.bankCardType}}" disabled>
+                                    <input type="text" placeholder=""
+                                           value="{{transBankCardType memberBank.bankCardType}}" disabled>
                                 </div>
                             </div>
                         </div>
@@ -301,7 +299,8 @@
                             <div class="item-media">银行卡号</div>
                             <div class="item-inner">
                                 <div class="item-input">
-                                    <input type="text" placeholder="" value="{{memberBank.bankCardNo}}" autocomplete="off" disabled>
+                                    <input type="text" placeholder="" value="{{memberBank.bankCardNo}}"
+                                           autocomplete="off" disabled>
                                 </div>
                             </div>
                         </div>
@@ -311,7 +310,8 @@
                             <div class="item-media">发&nbsp;&nbsp;卡&nbsp;&nbsp;行</div>
                             <div class="item-inner">
                                 <div class="item-input">
-                                    <input type="text" placeholder="" autocomplete="off" value="{{memberBank.bankName}}" disabled>
+                                    <input type="text" placeholder="" autocomplete="off" value="{{memberBank.bankName}}"
+                                           disabled>
                                 </div>
                             </div>
                         </div>
@@ -438,7 +438,7 @@
 <script type="text/x-handlebars-template" id="sendPaymentTpl">
     <div class="sendPaymentWrapper">
         <div class="content-block">
-            <iframe frameborder="0" width="100%" height="380px" id="sourcePay"  style="display:block;"></iframe>
+            <iframe frameborder="0" width="100%" height="380px" id="sourcePay" style="display:block;"></iframe>
 
             <div class="row">
                 <div class="col-100">
