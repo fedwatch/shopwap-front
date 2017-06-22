@@ -52,6 +52,8 @@
             store.set("type", "payment");
             store.set("app_request", "3");
 
+
+
             $(document).on('click', '.modal-inner .bank-li a', function (e) {
                 e.preventDefault();
                 var $this = $(this);
@@ -88,19 +90,21 @@
                 location.href = './paySuccess.html?paymentSn=' + paymentSn;
 
             });
-
+               var paymentPluginId = store.get("paymentPluginId");
             $(document).on("click", "#balancePayBtn", function () {
-                if (isBalancePay == true) {
-                    setTimeout(function () {
-                        calculate_amount(username, mergeSn, paymentPluginId, isBalancePay);
-                        isBalancePay = false;
-                    }, 500);
 
+                debugger;
+                if (isBalancePay == true) {
+                    debugger;
+                    setTimeout(function () {
+                        isBalancePay = false;
+                        calculate_amount(username, mergeSn, paymentPluginId, isBalancePay);
+                    }, 50);
                 } else {
                     setTimeout(function () {
-                        calculate_amount(username, mergeSn, paymentPluginId, isBalancePay);
                         isBalancePay = true;
-                    }, 500);
+                        calculate_amount(username, mergeSn, paymentPluginId, isBalancePay);
+                    }, 50);
                 }
 
             });
@@ -123,7 +127,7 @@
                 async: false,
                 success: function (data) {
                     if (data.authStatus == "200") {
-                        var paymentPluginId = data.paymentPlugins[0].id;
+                        var paymentPluginId = data.paymentPlugin.id;
                         store.set("paymentPluginId", paymentPluginId);
                         var allAmount = data.allAmount;
                         console.log("sssss:" + allAmount);
@@ -175,20 +179,21 @@
                         var amount = data.amount;
                         store.set("amount", amount);
                         if (isBalancePay == true) {
-
-                           var allAmount = store.get("allAmount");
+                            debugger;
+                            $(".tick").removeClass("tickSelected");
+                            var allAmount = store.get("allAmount");
                             $("#balance-yue").css({visibility: "visible"}).find("span").text(data.balancePay);
                             if (balance >= allAmount) {
-                                $(".tick").removeClass("tickSelected");
+
                                 $("#balance-yue").css({visibility: "visible"}).find("span").text(data.balancePay);
                                 $("#paychoice").css({display: "none"});
                             } else {
-                                $(".tick").addClass("tickSelected");
                                 $("#balance-yue").css({visibility: "visible"}).find("span").text(data.balancePay);
                                 $("#paychoice").css({display: "block"});
                                 $("#payWay").find("#aliPay").text(data.amount);
-                          }
+                            }
                         } else {
+                            debugger;
                             $("#paychoice").show();
                             $(".tick").addClass("tickSelected");
                             $("#paychoice").css({display: "block"});
@@ -638,7 +643,7 @@
                             <div class="card-header checkPay">
                                 <div class="pay-logo"><img src="{{this.paymentPlugin.logo}}"/></div>
                                 <div class="remainPay">
-                                    <span class="morePay" style="visibility: visible">支付<span style="color:#ff503e;"
+                                    <span class="morePay">支付<span style="color:#ff503e;"
                                                                   id="aliPay">{{this.allAmount}}</span></span>
                                     <span class="tick tickys tickSelected" data-value="{{this.paymentPlugin.id}}"></span>
                                 </div>
