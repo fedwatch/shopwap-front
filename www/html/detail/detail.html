@@ -23,11 +23,15 @@
     <script type="text/javascript" src="../../js/utils/transDetails.js"></script>
     <script src="https://jie.net/resources/shop/js/jquery.lazyload.js"></script>
     <script>
+        jQuery.support.cors = true;
         //USERMD
-        var username = store.get("username");
-        var currentProductID = store.get("currentProductID");
-        var userStatus = store.get("userStatus");
+        var username = store.get("username");//用户名、手机号
+        var currentProductID = store.get("currentProductID");//当前产品ID
+        var userStatus = store.get("userStatus"); //用户登录状态
+        console.log(userStatus)
+
         $(function () {
+
             var username = store.get("username");
             var currentProductID = store.get("currentProductID");
             if (typeof currentProductID == 'undefined') {
@@ -36,8 +40,6 @@
                     location.href = '../../index.html';
                 }, 2000)
             }
-
-            jQuery.support.cors = true;
 
             $("img.lazy").lazyload();
 
@@ -112,11 +114,7 @@
                 }
             });
 
-
             var productImagesSlider = new Swiper('.product-images-slider', {});
-
-
-
 
             //监听 购物车
             $(document).on('click', ".cart-badge", function () {
@@ -148,6 +146,9 @@
 
             //立即下单
             $(document).on('click', ".buyNowBtn", function () {
+                var username = store.get("username");
+                var currentProductID = store.get("currentProductID");
+                setSpecificationId(username, currentProductID);
                 if (userStatus) {
                     var cartState = $("#cartState").val();
                     if (cartState == "false") {
@@ -158,8 +159,6 @@
                         $("#goodsDetailsPage").hide();
                     }
                     if (cartState == "true") {
-                        var username = store.get("username");
-                        var currentProductID = store.get("currentProductID");
                         var count = $("input[name=goodsNumber]").val();
                         if (typeof username !== 'undefined' && typeof currentProductID !== 'undefined' && typeof count !== 'undefined'
                             && username !== '' && currentProductID !== '' && count !== '') {
@@ -171,6 +170,8 @@
                         if (mark == true) {
                             addCartForBuyNow(username, currentProductID, count)
                         }
+                    }else{
+                        $.toast("选择商品数量！")
                     }
                 } else {
                     $.toast("请登录才可以进行后续操作", 2000);
@@ -262,7 +263,6 @@
 
             //数量 +
             $(document).on('click', ".goods-plus-btn", function (e) {
-
                 if ($(".numbers-board > .goods-plus-btn").hasClass("active")) {
                     var num = parseInt($("input[name=goodsNumber]").val());
                     num = num + 1;
@@ -324,7 +324,6 @@
 
         function addToCart() {
             if (userStatus) {
-
                 setSpecificationId(username, currentProductID);
                 var amount = store.get("amount");
                 calculateFreight(username, currentProductID, amount, "shippingCost");
@@ -399,6 +398,7 @@
                 async: false,
                 dataType: PRODUCT_SITE_URLS.DATATYPE,
                 success: function (data) {
+//                    debugger;
                     console.log(data);
                     if (data.authStatus == '200') {
                         if (data["product"]) {
