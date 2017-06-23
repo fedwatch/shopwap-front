@@ -102,7 +102,6 @@
 
 
             $(document).on('click', '#registerBtn', function () {
-                console.log(registerResult);
                 if (registerResult.userPass == true && registerResult.userPhone == true && registerResult.smsCode == true) {
                     $registerBtn.addClass('button-success').css($registerBtn_SUCCESS);
                     var enPassword;

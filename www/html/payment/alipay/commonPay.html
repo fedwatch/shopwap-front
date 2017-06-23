@@ -30,7 +30,6 @@
     <script type="text/javascript" src="../../../js/utils/transCommonPay.js"></script>
 
     <script>
-
         var username = store.get("username");
         var mergeSn = store.get("mergeSn");
         var paymentPluginId = store.get("paymentPluginId");
@@ -130,7 +129,7 @@
                         var paymentPluginId = data.paymentPlugin.id;
                         store.set("paymentPluginId", paymentPluginId);
                         var allAmount = data.allAmount;
-                        console.log("sssss:" + allAmount);
+                        console.log("allAmount|订单金额: " + allAmount);
                         store.set("allAmount", allAmount);
                         balance = data.balance;
                         store.set("balance", balance);

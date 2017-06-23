@@ -17,13 +17,10 @@
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../../../assets/plugin/light7/dist/css/light7.css"/>
     <link rel="stylesheet" type="text/css" href="../../../assets/plugin/light7/dist/css/light7-swiper.min.css"/>
-
     <script type="text/javascript" src="../../../assets/plugin/jquery.min.js"></script>
     <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7.min.js"></script>
     <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
     <script type="text/javascript" src="../../../assets/plugin/light7/dist/js/light7-swipeout.js"></script>
-
-
     <script type="text/javascript" src="../../../assets/plugin/handlebars-v1.3.0.js"></script>
     <script type="text/javascript" src="../../../js/config/siteUrl.js"></script>
     <script type="text/javascript" src="../../../js/utils/store.min.js"></script>
@@ -38,7 +35,7 @@
             jQuery.support.cors = true;
             var href = location.href;
             var username = store.get("username");
-            var pageNumber = store.get("pageNumber")||0;
+            var pageNumber = store.get("pageNumber") || 0;
             var n = parseURL(href);
             var paymentSn = n.params.paymentSn;
 
@@ -120,10 +117,15 @@
 
 <script type="text/x-handlebars-template" id="paySuccessTpl">
     <header class="bar bar-nav">
+        {{#order}}
+
+        {{else}}
         <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)"
            data-transition='slide-out'>
             <i class="fa fa-chevron-left"></i>
         </a>
+        {{/order}}
+
         <h1 class="title">支付成功</h1>
     </header>
     <div class="content">

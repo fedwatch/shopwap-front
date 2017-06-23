@@ -42,7 +42,6 @@
 
             // 我的订单 全部 待付款 待发货 待收货 待评价
             $(document).on("click", ".ocItem", function () {
-                console.log("aaa")
                 var $this = $(this);
                 $(".ocItem").removeClass("active");
 
@@ -210,7 +209,7 @@
     <div class="appStatusBar" style="background:#fff;"></div>
     <!--我的订单-->
     <header class="bar bar-nav">
-        <a class="button button-link button-nav pull-left external" href="javascript:history.go(-1)"
+        <a class="button button-link button-nav pull-left external" href="../../../html/my/my.html"
            data-transition='slide-out'>
             <i class="fa fa-chevron-left"></i>
         </a>
