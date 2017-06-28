@@ -89,20 +89,7 @@ header.bar.bar-nav a {
     width: 100%;
 }
 
-/*
-.my_header {
-width: 100%;
-height: auto;
-color:#000000;
-border-bottom: 1px solid #666;
-}
-.my_header .my_header_title{
-display: block;
-text-align: center;
-font-size:1rem;
-padding:0.5rem 0
-}
-*/
+
 .user_profile {
     width: 100%;
     height: 100%;
@@ -132,8 +119,6 @@ padding:0.5rem 0
     width: 100%;
     height: 100%;
     display: flex;
-    /*border-top: 1px solid #ddd;*/
-    /*box-shadow: 0 0 5px #ccc;*/
     display: -webkit-flex;
     align-items: center;
 }
@@ -141,7 +126,6 @@ padding:0.5rem 0
 .login_button_group a {
     width: 50%;
     margin: 1rem .2rem;
-    /*padding:.6rem .6rem;*/
     vertical-align: middle;
     text-align: center;
     border-radius: .5rem;
@@ -254,7 +238,6 @@ padding:0.5rem 0
     overflow: hidden;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    /* Fix of Webkit flickering */
     z-index: 1;
 }
 
@@ -595,21 +578,22 @@ padding:0.5rem 0
 #searchPrompt li {
 
 }
-.historyItem{
+
+.historyItem {
     color: #999;
     padding: .133rem .533rem;
     text-align: center;
     border: 1px solid #999;
     border-radius: .75rem;
-    font-size:.66rem;
-    margin:0 .177rem;
+    font-size: .66rem;
+    margin: 0 .177rem;
 }
 
-.historyLay{
-    display:flex;
+.historyLay {
+    display: flex;
     justify-content: center;
     align-items: center;
-    font-size:.656rem;
+    font-size: .656rem;
 }
 
 /* 搜索页面头部搜索 */
@@ -2547,4 +2531,8 @@ span.nav-sub-text.active {
     text-align: center;
     width: 3rem !important;
     margin-right: .5rem !important;
+}
+
+#paymentContent {
+
 }

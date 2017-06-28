@@ -34,19 +34,18 @@
 
         $(function () {
             jQuery.support.cors = true;
-
-            var username = store.get("username");
-            var mergeSn = store.get("mergeSn");
-            var paymentPluginId = store.get("paymentPluginId");
-            var balance = store.get("balance");
-            var type = store.get("type") || "payment";
-            var amount = store.get("amount");
-            var app_request = store.get("app_request") || '3';
-            var cardId = store.get("cardId");
-            var allAmount = store.get("allAmount");
-            var isLock = store.get("isLock") || false;
-            var pageNumber = store.get("pageNumber") || 0;
-            var isBalancePay = false;
+            var username = store.get("username");//用户名/手机号
+            var mergeSn = store.get("mergeSn");//融合订单编号
+            var paymentPluginId = store.get("paymentPluginId");//支付插件ID
+            var balance = store.get("balance");//账户余额
+            var type = store.get("type") || "payment";//支付方式
+            var amount = store.get("amount");//支付金额
+            var app_request = store.get("app_request") || '3';//APP请求回调URL
+            var cardId = store.get("cardId");//卡片ID
+            var allAmount = store.get("allAmount");//订单金额
+            var isLock = store.get("isLock") || false;//订单锁定状态
+            var pageNumber = store.get("pageNumber") || 0;//页面页码
+            var isBalancePay = false;//余额支付状态
             var ka = false;//首次支付并且没有出现任何异样
 
 
@@ -125,11 +124,9 @@
                             balance = data.balance;
                             store.set("balance", balance);
 
-//                        var tpl = require('/zqVue/shopwap-front/www/layout/payment/alipay/commonPay.tpl');
                             var template = Handlebars.compile($("#commonPayTpl").html());
                             var html = template(data);
                             $("#commonPay").html(html);
-
                             var waitTime = data["waitTime"];
                             var waitTimeText = toHourMinute(waitTime)
                             $("#waitTime").text(waitTimeText)
@@ -146,8 +143,6 @@
                             getBankList(username);
                             //选择支付方式
                             choicePay();
-
-
                         }
                     }
                 })
@@ -456,9 +451,9 @@
             function initSureSubmit() {
                 $(document).on("click","#surePays",function () {
                     var $ticks = $("#payWay").find(".card").find(".tick");
-                    var $selectedTick = $ticks.filter(".tickSelected");
+                    var $selectedTick = $ticks.filter(".tickSelected");//过滤是否选中
                     var value = $selectedTick.data("value") || null;
-
+                    // 余额支付方式被选定
                     if (isBalancePay == true) {
                         if (balance < allAmount && $selectedTick.length == 0) {
                             $.toast("余额不足，请选择支付方式");
@@ -467,7 +462,7 @@
                         } else if (balance > allAmount) {
                             paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username);
                         }
-                    } else {
+                    } else {//非余额支付
                         if ($selectedTick.length > 0) {
                             if (value == "lianlianpayPlugin") {
                                 tankuang();

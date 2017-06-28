@@ -10,9 +10,10 @@ var BASE_URL = "https://jie.net/wap";
 
 
 var GLOBAL_INFO = {
-    api:"0.4.7"
-}
-GLOBAL_INFO.version = '0.0.3';
+    api:"0.4.7",
+    version : '0.0.4'
+};
+
 
 var CONFIG_CATEGORY_MAIN_ID = "105";
 var CONFIG_CATEGORY_SECOND_ID = "112";

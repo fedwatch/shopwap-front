@@ -28,22 +28,21 @@
     <!--<script type="text/javascript" src="../../js/config/getUser.js"></script>-->
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
-        var bankCardNo = store.get("bankCardNo");
-        var username = store.get("username");
-        var isBalancePay = store.get("isBalancePay") || false;
-        var type = store.get("type") || "payment";
-        var paymentPluginId = store.get("paymentPluginId") || "lianlianpayPlugin";
-        var mergeSn = store.get("mergeSn");
-        var amount = store.get("amount");
-        var allAmount = store.get("allAmount");
-        var app_request = store.get("app_request") || '3';
-        var cardType = store.get("cardType") || '1';
-        var cardId = store.get("cardId");
-        var pageNumber = store.get("pageNumber") || 0;
-
-
         $(function () {
             jQuery.support.cors = true;
+            var bankCardNo = store.get("bankCardNo");
+            var username = store.get("username");
+            var isBalancePay = store.get("isBalancePay") || false;
+            var type = store.get("type") || "payment";
+            var paymentPluginId = store.get("paymentPluginId") || "lianlianpayPlugin";
+            var mergeSn = store.get("mergeSn");
+            var amount = store.get("amount");
+            var allAmount = store.get("allAmount");
+            var app_request = store.get("app_request") || '3';
+            var cardType = store.get("cardType") || '1';
+            var cardId = store.get("cardId");
+            var pageNumber = store.get("pageNumber") || 0;
+
             bankcardBind(bankCardNo, username);
 
             var timer = 60;
@@ -116,150 +115,155 @@
 
             })
 
-        });
 
 
-        function sendDynamicCode(userPhone, codeFlag) {
-            $.ajax({
-                url: BASE_URL + USER_SITE_URL.SEND_DYNAMIC_CODE.URL,
-                type: USER_SITE_URL.SEND_DYNAMIC_CODE.METHOD,
-                dataType: USER_SITE_URL.DATATYPE,
-                data: {
-                    userPhone: userPhone,
-                    codeFlag: codeFlag,
-                },
-                cache: true,
-                async: false,
-                success: function (data) {
-                    console.log(data);
-                    if (data.authStatus == '200') {
-                        $.toast(data.authMsg);
-                    } else {
-                        $.toast(data.authMsg);
-                    }
-                }
-            })
-        }
-
-
-        /**
-         * 根据卡号查询卡信息
-         * @param bankCardNo
-         * @param username
-         */
-        function bankcardBind(bankCardNo, username) {
-            $.ajax({
-                url: BASE_URL + PAYMENT_SITE_URL.BANKCARD_BIND.URL,
-                type: PAYMENT_SITE_URL.BANKCARD_BIND.METHOD,
-                dataType: PAYMENT_SITE_URL.DATATYPE,
-                data: {
-                    bankCardNo: bankCardNo,
-                    username: username,
-                },
-                cache: true,
-                async: false,
-                success: function (data) {
-                    if (data.authStatus == "212") {
-                        $.toast(data.authMsg, 1500)
-                        setTimeout(function () {
-                            location.href = "../payment/alipay/commonPay.html";
-                        }, 1500)
-
-                    } else if (data.authStatus == "200") {
-                        var template = Handlebars.compile($("#creditCardTpl").html());
-                        var html = template(data);
-                        $("#credit-card").html(html);
-                        $("#allAmount").text(allAmount);
-
-                        if (data.memberBank) {
-                            store.set("bankCode", data.memberBank.bankCode);
-                            store.set("bankCardType", data.memberBank.bankCardType);
-                            store.set("bankCardNo", data.memberBank.bankCardNo);
-                            store.set("bankName", data.memberBank.bankName);
+            function sendDynamicCode(userPhone, codeFlag) {
+                $.ajax({
+                    url: BASE_URL + USER_SITE_URL.SEND_DYNAMIC_CODE.URL,
+                    type: USER_SITE_URL.SEND_DYNAMIC_CODE.METHOD,
+                    dataType: USER_SITE_URL.DATATYPE,
+                    data: {
+                        userPhone: userPhone,
+                        codeFlag: codeFlag,
+                    },
+                    cache: true,
+                    async: false,
+                    success: function (data) {
+                        console.log(data);
+                        if (data.authStatus == '200') {
+                            $.toast(data.authMsg);
                         } else {
                             $.toast(data.authMsg);
                         }
                     }
-                }
-            })
-        }
+                })
+            }
 
 
-        /**
-         * 绑定银行卡并支付 首次支付
-         * @param isBalancePay
-         * @param type
-         * @param paymentPluginId
-         * @param mergeSn
-         * @param amount
-         * @param app_request
-         * @param bankCardType
-         * @param bankCode
-         * @param bankCardNo
-         * @param cardType
-         * @param cardNum
-         * @param phoneNum
-         * @param verificationCode
-         * @param expiryDate
-         * @param verifyCode
-         * @param username
-         * @param bankName
-         * @param app_request_url
-         * @param realName
-         */
-        function boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode, bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, username, bankName, app_request_url, realName) {
-            $.ajax({
-                url: BASE_URL + PAYMENT_SITE_URL.BOUND_CARD_PAY.URL,
-                type: PAYMENT_SITE_URL.BOUND_CARD_PAY.METHOD,
-                dataType: PAYMENT_SITE_URL.DATATYPE,
-                data: {
-                    isBalancePay: isBalancePay,
-                    type: type,
-                    paymentPluginId: paymentPluginId,
-                    mergeSn: mergeSn,
-                    amount: amount,
-                    app_request: app_request,
-                    bankCardType: bankCardType,
-                    bankCode: bankCode,
-                    bankCardNo: bankCardNo,
-                    cardType: cardType,
-                    cardNum: cardNum,
-                    phoneNum: phoneNum,
-                    verificationCode: verificationCode,
-                    expiryDate: expiryDate,
-                    verifyCode: verifyCode,
-                    username: username,
-                    app_request_url: app_request_url,
-                    realName: realName,
-                    bankName: bankName
-                },
-                cache: true,
-                async: false,
-                success: function (data) {
-                    if (data.authStatus == '200') {
-                        if (data.parameterMap) {
-                            store.set("req_data", data.parameterMap.req_data);
-                            store.set("paymentSn", data.paymentSn);
-                            var template = Handlebars.compile($("#sendPaymentTpl").html());
+            /**
+             * 根据卡号查询卡信息
+             * @param bankCardNo
+             * @param username
+             */
+            function bankcardBind(bankCardNo, username) {
+                $.ajax({
+                    url: BASE_URL + PAYMENT_SITE_URL.BANKCARD_BIND.URL,
+                    type: PAYMENT_SITE_URL.BANKCARD_BIND.METHOD,
+                    dataType: PAYMENT_SITE_URL.DATATYPE,
+                    data: {
+                        bankCardNo: bankCardNo,
+                        username: username,
+                    },
+                    cache: true,
+                    async: false,
+                    success: function (data) {
+                        if (data.authStatus == "212") {
+                            $.toast(data.authMsg, 1500)
+                            setTimeout(function () {
+                                location.href = "../payment/alipay/commonPay.html";
+                            }, 1500)
+
+                        } else if (data.authStatus == "200") {
+                            var template = Handlebars.compile($("#creditCardTpl").html());
                             var html = template(data);
-                            $("#paymentContent").hide();
-                            $("#sendLianLayer").html(html);
-                            $("#sendLianLayer").show();
-                            $("#sourcePay").attr("src", "sendMoney.html");
-                            $("#sourcePay").css("width", "100%").css("height", "380px");
-//                            window.open("../sendMoney.html");
+                            $("#credit-card").html(html);
+                            $("#allAmount").text(allAmount);
+
+                            if (data.memberBank) {
+                                store.set("bankCode", data.memberBank.bankCode);
+                                store.set("bankCardType", data.memberBank.bankCardType);
+                                store.set("bankCardNo", data.memberBank.bankCardNo);
+                                store.set("bankName", data.memberBank.bankName);
+                            } else {
+                                $.toast(data.authMsg);
+                            }
                         }
                     }
-                    else if (data.authStatus == '211') {
-                        location.href = "../alipay/paySuccess.html?paymentSn=" + data.paymentSn;
-                    }
-                    else {
-                        $.toast(data.authMsg);
-                    }
+                })
+            }
 
-                }
-            })
-        }
+
+            /**
+             * 绑定银行卡并支付 首次支付
+             * @param isBalancePay
+             * @param type
+             * @param paymentPluginId
+             * @param mergeSn
+             * @param amount
+             * @param app_request
+             * @param bankCardType
+             * @param bankCode
+             * @param bankCardNo
+             * @param cardType
+             * @param cardNum
+             * @param phoneNum
+             * @param verificationCode
+             * @param expiryDate
+             * @param verifyCode
+             * @param username
+             * @param bankName
+             * @param app_request_url
+             * @param realName
+             */
+            function boundCardPay(isBalancePay, type, paymentPluginId, mergeSn, amount, app_request, bankCardType, bankCode,
+                                  bankCardNo, cardType, cardNum, phoneNum, verificationCode, expiryDate, verifyCode, username,
+                                  bankName, app_request_url, realName) {
+                $.ajax({
+                    url: BASE_URL + PAYMENT_SITE_URL.BOUND_CARD_PAY.URL,
+                    type: PAYMENT_SITE_URL.BOUND_CARD_PAY.METHOD,
+                    dataType: PAYMENT_SITE_URL.DATATYPE,
+                    data: {
+                        isBalancePay: isBalancePay,
+                        type: type,
+                        paymentPluginId: paymentPluginId,
+                        mergeSn: mergeSn,
+                        amount: amount,
+                        app_request: app_request,
+                        bankCardType: bankCardType,
+                        bankCode: bankCode,
+                        bankCardNo: bankCardNo,
+                        cardType: cardType,
+                        cardNum: cardNum,
+                        phoneNum: phoneNum,
+                        verificationCode: verificationCode,
+                        expiryDate: expiryDate,
+                        verifyCode: verifyCode,
+                        username: username,
+                        app_request_url: app_request_url,
+                        realName: realName,
+                        bankName: bankName
+                    },
+                    cache: true,
+                    async: false,
+                    success: function (data) {
+                        if (data.authStatus == '200') {
+                            if (data.parameterMap) {
+                                store.set("req_data", data.parameterMap.req_data);
+                                store.set("paymentSn", data.paymentSn);
+                                var template = Handlebars.compile($("#sendPaymentTpl").html());
+                                var html = template(data);
+                                $("#paymentContent").hide();
+                                $("#sendLianLayer").html(html);
+                                $("#sendLianLayer").show();
+                                $("#sourcePay").attr("src", "sendMoney.html");
+                                $("#sourcePay").css("width", "100%").css("height", "380px");
+//                            window.open("../sendMoney.html");
+                            }
+                        }
+                        else if (data.authStatus == '211') {
+                            location.href = "../alipay/paySuccess.html?paymentSn=" + data.paymentSn;
+                        }
+                        else {
+                            $.toast(data.authMsg);
+                        }
+
+                    }
+                })
+            }
+
+        });
+
+
     </script>
 </head>
 <body class="page">
@@ -426,11 +430,15 @@
                 <div class="credit-button"><a href="javascript:void(0)"
                                               class="firstBind external button button-big button-fill button-success">确认开通并支付</a>
                 </div>
+
+
             </div>
         </div>
 
         <div id="sendLianLayer" style="width:100%;z-index:999;"></div>
-
+        <div>
+            <p style="font-size:.566rem;color:#666;text-align:center;"><i class="fa fa-shield"></i> 信息已安全加密，仅用于银行验证</p>
+        </div>
     </div>
 </script>
 

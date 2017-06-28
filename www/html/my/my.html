@@ -27,12 +27,9 @@
     <script type="text/javascript" src="../../js/utils/getCurrentPage.js"></script>
     <script type="text/javascript" src="../../js/utils/hbCompare.js"></script>
 
-
     <script>
-
-        var username = store.get("username");
-
         $(function(){
+            var username = store.get("username");
             jQuery.support.cors = true;
             var data = {};
             var template = Handlebars.compile($("#footerBarTpl").html());
@@ -40,39 +37,51 @@
 //            $("#footer").html(html);
             getIndex(username);
             getCurrentPage();
+            function getIndex(username) {
+                $.ajax({
+                    url: BASE_URL + MEMBER_SITE_URL.INDEX.URL,
+                    type: MEMBER_SITE_URL.INDEX.METHOD,
+                    dataType: MEMBER_SITE_URL.DATATYPE,
+                    data: {
+                        username: username
+                    },
+                    success: function (data) {
+                        if (data.authStatus == '200') {
+
+                            var template = Handlebars.compile($("#headerTpl").html());
+                            var html = template(data);
+                            $("#my_header").html(html);
+                            $(".user-id").text(username);
+
+                            var template = Handlebars.compile($("#userColumnTpl").html());
+                            var html = template(data);
+                            $("#userColumn").html(html);
+                        }
+                        else if (data.authStatus == '403') {
+                            store.clear();
+                            $.toast(data.authMsg, 1500);
+                            setTimeout(function () {
+                                return location.href = '../my/login/login.html';
+                            }, 1500)
+
+                        }
+                    }
+                });
+            }
+
+
+            $(document).on("click",".showVersion",function (e) {
+                e.preventDefault();
+                showVersion();
+            });
+
+            function showVersion(){
+                var ver = GLOBAL_INFO.version;
+                $.toast("当前版本号为："+ver);
+            }
         })
 
-        function getIndex(username) {
-            $.ajax({
-                url: BASE_URL + MEMBER_SITE_URL.INDEX.URL,
-                type: MEMBER_SITE_URL.INDEX.METHOD,
-                dataType: MEMBER_SITE_URL.DATATYPE,
-                data: {
-                    username: username
-                },
-                success: function (data) {
-                    if (data.authStatus == '200') {
 
-                        var template = Handlebars.compile($("#headerTpl").html());
-                        var html = template(data);
-                        $("#my_header").html(html);
-                        $(".user-id").text(username);
-
-                        var template = Handlebars.compile($("#userColumnTpl").html());
-                        var html = template(data);
-                        $("#userColumn").html(html);
-                    }
-                    else if (data.authStatus == '403') {
-                        store.clear();
-                        $.toast(data.authMsg, 1500);
-                        setTimeout(function () {
-                            return location.href = '../my/login/login.html';
-                        }, 1500)
-
-                    }
-                }
-            });
-        }
 
     </script>
 </head>
@@ -96,12 +105,12 @@
                 </div>
             </li>
             <!--<li class="item-content item-link">-->
-            <!--&lt;!&ndash;<div class="item-media"><i class="icon icon-me"></i></div>&ndash;&gt;-->
-            <!--<div class="item-inner">-->
-            <!--<a href="/html/my/coupon/coupon.html" class="external" style="width:100%;display:block;">-->
-            <!--<div class="item-title">优惠券</div>-->
-            <!--</a>-->
-            <!--</div>-->
+                <!--<div class="item-media"><i class="icon icon-me"></i></div>-->
+                <!--<div class="item-inner">-->
+                    <!--<a href="" class="external" style="width:100%;display:block;">-->
+                        <!--<div class="item-title">优惠券</div>-->
+                    <!--</a>-->
+                <!--</div>-->
             <!--</li>-->
             <li class="item-content item-link">
                 <!--<div class="item-media"><i class="icon icon-message"></i></div>-->
@@ -112,7 +121,7 @@
                 </div>
             </li>
             <!--<li class="item-content item-link">-->
-                <!--&lt;!&ndash;<div class="item-media"><i class="icon icon-star"></i></div>&ndash;&gt;-->
+                <!--<div class="item-media"><i class="icon icon-star"></i></div>-->
                 <!--<div class="item-inner">-->
                     <!--<a href="/html/my/account/accountSecurity.html" style="width:100%;display: block;" class="external">-->
                         <!--<div class="item-title">账号安全</div>-->
@@ -120,7 +129,7 @@
                 <!--</div>-->
             <!--</li>-->
             <!--<li class="item-content item-link">-->
-                <!--&lt;!&ndash;<div class="item-media"><i class="icon icon-friends"></i></div>&ndash;&gt;-->
+                <!--<div class="item-media"><i class="icon icon-friends"></i></div>-->
                 <!--<div class="item-inner">-->
                     <!--<a href="/html/my/feedback/feedback.html" style="width:100%;display: block;" class="external">-->
                         <!--<div class="item-title">-->
@@ -146,8 +155,33 @@
                         <div class="item-title">
                             联系客服
                             <span class="pull-right" style="color:#ff503e;">
-                            400-921-7818
-                        </span>
+                                400-921-7818
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            </li>
+            <!--<li class="item-content item-link">-->
+                <!--&lt;!&ndash;<div class="item-media"><i class="icon icon-friends"></i></div>&ndash;&gt;-->
+
+            <!--</li>-->
+        </ul>
+        <ul style="margin-top:10%;">
+            <li class="item-content item-link">
+                <div class="item-inner">
+                    <a href="javascript:void(0)" onclick="localStorage.clear();$.toast('缓存数据已清空');setTimeout(function(){location.reload();},1500)" class="external" style="width:100%;display: block;">
+                        <div class="item-title">
+                            清除缓存
+                            <span style="font-size:.456rem;color:#666;">建议使用：处理页面异常数据</span>
+                        </div>
+                    </a>
+                </div>
+            </li>
+            <li class="item-content item-link">
+                <div class="item-inner">
+                    <a href="javascript:void(0)"  class="external showVersion" style="width:100%;display: block;">
+                        <div class="item-title">
+                            当前版本
                         </div>
                     </a>
                 </div>
