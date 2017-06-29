@@ -66,10 +66,9 @@
                         if (data.authStatus == "200") {
                             store.set("username", username);
                             store.set("userStatus", true);
-                            $.toast(data.authMsg + " 3 秒后自动跳转", 3000);
                             setTimeout(function () {
                                 location.href = "../../../index.html"
-                            }, 3000);
+                            }, 0);
                         } else {
                             $.toast(data.authMsg);
                             $userPhone.val("");
