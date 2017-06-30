@@ -4,16 +4,19 @@
 //基本URL
 // var BASE_URL = "http://"+location.host+"/wap";
 // var BASE_URL = "http://192.168.3.70:8888/wap";
-// var BASE_URL = "http://192.168.3.28/wap";
-var BASE_URL = "https://jie.net/wap";
+var BASE_URL = "http://192.168.3.28/wap";
+// var BASE_URL = "https://jie.net/wap";
 // var BASE_URL = "http://60.205.84.124/wap";
 
-
+var time = new Date();
+var t = time.getTime();
 var GLOBAL_INFO = {
-    api:"0.4.7",
-    version : '0.0.4'
+    api:"v2",
+    version : '1.0.0.1706290923',
+    t:t
 };
 
+console.log(GLOBAL_INFO)
 
 var CONFIG_CATEGORY_MAIN_ID = "105";
 var CONFIG_CATEGORY_SECOND_ID = "112";
@@ -173,6 +176,7 @@ var COMMON_SITE_URL = {
     //商品查询
     SEARCH: {URL: "/product/search", METHOD: "GET"}
 };
+
 
 
 

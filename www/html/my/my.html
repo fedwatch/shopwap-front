@@ -28,7 +28,7 @@
     <script type="text/javascript" src="../../js/utils/hbCompare.js"></script>
 
     <script>
-        $(function(){
+        $(function () {
             var username = store.get("username");
             jQuery.support.cors = true;
             var data = {};
@@ -70,17 +70,38 @@
             }
 
 
-            $(document).on("click",".showVersion",function (e) {
+            $(document).on("click", ".showVersion", function (e) {
                 e.preventDefault();
                 showVersion();
             });
 
-            function showVersion(){
+            function showVersion() {
                 var ver = GLOBAL_INFO.version;
-                $.toast("当前版本号为："+ver);
+                $.toast("当前版本号为：" + ver);
+            }
+
+            checkUserStatus();
+            function checkUserStatus() {
+                setInterval(function(){
+                    var url = 'http://192.168.3.28/wap/member/index?username=17821621378';
+                    var options = {};
+                    if ('serviceWorker' in navigator) {
+                        fetch(url, options).then(function (e) {
+                            if(e.status == '200'){
+                                console.log(e.statusText)
+                            }
+                        }, function (e) {
+                            console.log(e)
+                        }).then(function () {
+                            console.log("[finished]  ::  "+ url + " ")
+                        });
+                    }
+                },
+                    900000
+//                    1000
+                );
             }
         })
-
 
 
     </script>
@@ -105,12 +126,12 @@
                 </div>
             </li>
             <!--<li class="item-content item-link">-->
-                <!--<div class="item-media"><i class="icon icon-me"></i></div>-->
-                <!--<div class="item-inner">-->
-                    <!--<a href="" class="external" style="width:100%;display:block;">-->
-                        <!--<div class="item-title">优惠券</div>-->
-                    <!--</a>-->
-                <!--</div>-->
+            <!--<div class="item-media"><i class="icon icon-me"></i></div>-->
+            <!--<div class="item-inner">-->
+            <!--<a href="" class="external" style="width:100%;display:block;">-->
+            <!--<div class="item-title">优惠券</div>-->
+            <!--</a>-->
+            <!--</div>-->
             <!--</li>-->
             <li class="item-content item-link">
                 <!--<div class="item-media"><i class="icon icon-message"></i></div>-->
@@ -121,32 +142,32 @@
                 </div>
             </li>
             <!--<li class="item-content item-link">-->
-                <!--<div class="item-media"><i class="icon icon-star"></i></div>-->
-                <!--<div class="item-inner">-->
-                    <!--<a href="/html/my/account/accountSecurity.html" style="width:100%;display: block;" class="external">-->
-                        <!--<div class="item-title">账号安全</div>-->
-                    <!--</a>-->
-                <!--</div>-->
+            <!--<div class="item-media"><i class="icon icon-star"></i></div>-->
+            <!--<div class="item-inner">-->
+            <!--<a href="/html/my/account/accountSecurity.html" style="width:100%;display: block;" class="external">-->
+            <!--<div class="item-title">账号安全</div>-->
+            <!--</a>-->
+            <!--</div>-->
             <!--</li>-->
             <!--<li class="item-content item-link">-->
-                <!--<div class="item-media"><i class="icon icon-friends"></i></div>-->
-                <!--<div class="item-inner">-->
-                    <!--<a href="/html/my/feedback/feedback.html" style="width:100%;display: block;" class="external">-->
-                        <!--<div class="item-title">-->
-                            <!--意见反馈-->
-                        <!--</div>-->
-                    <!--</a>-->
-                <!--</div>-->
+            <!--<div class="item-media"><i class="icon icon-friends"></i></div>-->
+            <!--<div class="item-inner">-->
+            <!--<a href="/html/my/feedback/feedback.html" style="width:100%;display: block;" class="external">-->
+            <!--<div class="item-title">-->
+            <!--意见反馈-->
+            <!--</div>-->
+            <!--</a>-->
+            <!--</div>-->
             <!--</li>-->
             <!--<li class="item-content item-link">-->
-                <!--<div class="item-media"><i class="icon icon-card"></i></div>-->
-                <!--<div class="item-inner">-->
-                    <!--<a href="account/" style="width:100%;display: block;" class="external">-->
-                        <!--<div class="item-title">-->
-                            <!--银行卡管理-->
-                        <!--</div>-->
-                    <!--</a>-->
-                <!--</div>-->
+            <!--<div class="item-media"><i class="icon icon-card"></i></div>-->
+            <!--<div class="item-inner">-->
+            <!--<a href="account/" style="width:100%;display: block;" class="external">-->
+            <!--<div class="item-title">-->
+            <!--银行卡管理-->
+            <!--</div>-->
+            <!--</a>-->
+            <!--</div>-->
             <!--</li>-->
             <li class="item-content item-link">
                 <!--<div class="item-media"><i class="icon icon-friends"></i></div>-->
@@ -162,31 +183,31 @@
                 </div>
             </li>
             <!--<li class="item-content item-link">-->
-                <!--&lt;!&ndash;<div class="item-media"><i class="icon icon-friends"></i></div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="item-media"><i class="icon icon-friends"></i></div>&ndash;&gt;-->
 
             <!--</li>-->
         </ul>
-        <ul style="margin-top:10%;">
-            <li class="item-content item-link">
-                <div class="item-inner">
-                    <a href="javascript:void(0)" onclick="localStorage.clear();$.toast('缓存数据已清空');setTimeout(function(){location.reload();},1500)" class="external" style="width:100%;display: block;">
-                        <div class="item-title">
-                            清除缓存
-                            <span style="font-size:.456rem;color:#666;">建议使用：处理页面异常数据</span>
-                        </div>
-                    </a>
-                </div>
-            </li>
-            <li class="item-content item-link">
-                <div class="item-inner">
-                    <a href="javascript:void(0)"  class="external showVersion" style="width:100%;display: block;">
-                        <div class="item-title">
-                            当前版本
-                        </div>
-                    </a>
-                </div>
-            </li>
-        </ul>
+        <!--<ul style="margin-top:10%;">-->
+        <!--<li class="item-content item-link">-->
+        <!--<div class="item-inner">-->
+        <!--<a href="javascript:void(0)" onclick="localStorage.clear();$.toast('缓存数据已清空');setTimeout(function(){location.reload();},1500)" class="external" style="width:100%;display: block;">-->
+        <!--<div class="item-title">-->
+        <!--清除缓存-->
+        <!--<span style="font-size:.456rem;color:#666;">建议使用：处理页面异常数据</span>-->
+        <!--</div>-->
+        <!--</a>-->
+        <!--</div>-->
+        <!--</li>-->
+        <!--<li class="item-content item-link">-->
+        <!--<div class="item-inner">-->
+        <!--<a href="javascript:void(0)"  class="external showVersion" style="width:100%;display: block;">-->
+        <!--<div class="item-title">-->
+        <!--当前版本-->
+        <!--</div>-->
+        <!--</a>-->
+        <!--</div>-->
+        <!--</li>-->
+        <!--</ul>-->
     </div>
 
 </script>

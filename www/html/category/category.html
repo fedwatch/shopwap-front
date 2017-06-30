@@ -108,18 +108,23 @@
                     },
                     processResult: function (result) {
                         var html = "";
-                        if (result.products != null) {
-                            $.each(result.products, function (index, data) {
-                                html += '<div class="col-50 productCategory" >' +
-                                    '<a href="javascript:;"  data-id="' + data.id + '" class="external">' +
-                                    '<div class="productWindow" >' +
-                                    '<img src="' + data.image + '" alt="' + data.name + '" title="' + data.name + '" >' +
-                                    '<h4 class="product-title">' + data.name + '</h4>' +
-                                    '<span class="product-price-box" >￥<span style="font-size:.65rem;">' + data.price + '</span>' + '</span>' +
-                                    '<span class="product-buyer-number-box" >已有 <span>' + data.sales + '</span>人购买</span>' + '</div>' +
-                                    '</a>' + '</div>';
-                            });
+                        if(result.authStatus == '200'){
+                            if (result.products != null) {
+                                $.each(result.products, function (index, data) {
+                                    html += '<div class="col-50 productCategory" >' +
+                                        '<a href="javascript:;"  data-id="' + data.id + '" class="external">' +
+                                        '<div class="productWindow" >' +
+                                        '<img src="' + data.image + '" alt="' + data.name + '" title="' + data.name + '" >' +
+                                        '<h4 class="product-title">' + data.name + '</h4>' +
+                                        '<span class="product-price-box" >￥<span style="font-size:.65rem;">' + data.price + '</span>' + '</span>' +
+                                        '<span class="product-buyer-number-box" >已有 <span>' + data.sales + '</span>人购买</span>' + '</div>' +
+                                        '</a>' + '</div>';
+                                });
+                            }
+                        }else if (result.authStatus == '500'){
+                            html += '<div style="color:#666;font-size:.666rem;text-align:center;padding:.255rem 0;">这就是我们的底线~</div>'
                         }
+
                         return html;
                     }
                 });
