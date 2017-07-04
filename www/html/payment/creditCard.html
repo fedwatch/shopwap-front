@@ -178,6 +178,19 @@
                                 $.toast(data.authMsg);
                             }
                         }
+                        /**
+                         * 403 处理
+                         */
+                        else if (data.authStatus == '403'){
+                            $.toast(data.authMsg, 1500);
+                            setTimeout(function () {
+                                location.href = "../../html/my/login/login.html";
+                            }, 1500)
+
+                        }
+
+
+
                     }
                 })
             }

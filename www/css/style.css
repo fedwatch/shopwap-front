@@ -386,6 +386,9 @@ header.bar.bar-nav a {
     padding: 0 .255rem;
 }
 
+.shop-cate{
+    width:100%;
+}
 .shop-index .shop-cate .active-t {
     margin: 0.5rem 0;
     height: 9.1rem;
@@ -639,7 +642,7 @@ header.bar.bar-nav a {
     width: .8rem;
     height: .8rem;
     left: 16%;
-    top: 35px;
+    top: 5%;
 }
 
 .header-search .navbar-search .cancelText {

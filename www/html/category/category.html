@@ -36,6 +36,16 @@
         $(function () {
             jQuery.support.cors = true;
             var username = store.get("username");
+            /**
+             * 用户最近的一次浏览记录
+             */
+            var userBrowserHistory = {
+                mainCategory:"",
+                secondCategory:""
+            };
+
+
+
 
             // footerNav
             var data = {};
@@ -137,12 +147,24 @@
                 })
             }
 
+            //获取用户最近的一次浏览记录
+            function getUserBrowserHistory(){
+                var mainCategory = $("#categoryId").val();
+                var secondCategory = $("#categorySubId").val();
+                userBrowserHistory.mainCategory = mainCategory;
+                userBrowserHistory.secondCategory = secondCategory;
+                store.set("userBrowserHistory",userBrowserHistory);
+            }
+
+
+
             /**
              * 主分类
              */
             $(document).on('click', '.nav-tabbar-item .nav-text', function (e) {
                 var $this = $(this);
-                $("#categoryId").val($this.data("category-id"));
+                $("#categoryId").val($this.data("category-id"));//获取主分类id
+                getUserBrowserHistory();
                 var w = $this.offset().left;
                 $(".nav-tabbar-item .nav-text").removeClass("active");
                 $this.addClass("active");
@@ -200,6 +222,8 @@
                 $(".nav-sub-render .nav-sub-text").removeClass("active");
                 $this.addClass("active");
                 $("#categorySubId").val($this.data("category-sub-id"));
+                getUserBrowserHistory();
+
 
                 var categoryIdsHidden = $("#categoryId").val();
                 var categorySubId = $("#categorySubId").val();
@@ -211,6 +235,13 @@
 
                 getResults(keyword, categoryIds, brandIds, startPrice, endPrice, 'productCategory');
             });
+//
+//            $(document).on("touchstart touchmove",".nav-scrollview",function (e) {
+//                $("#tabbar-bottomline").hide();
+//            });
+//            $(document).on("touchend",".nav-scrollview",function (e) {
+//                $("#tabbar-bottomline").show();
+//            });
 
             /**
              *
@@ -230,7 +261,7 @@
 
             setTimeout(function () {
                 getParamsShow();
-            }, 800);
+            }, 500);
 
 
             var scroller = new IScroll('.productContainer', {
@@ -250,6 +281,7 @@
                     return parseFloat(s[0] + s[3]) < 44 ? false : true
                 }
             }
+//            getBrowserHistory();
         });
 
 
@@ -268,7 +300,9 @@
 
         }
 
-
+        /**
+         * 获取访问链接参数 指定显示
+         */
         function getParamsShow() {
             var l = parseURL(location.href);
             if (location.protocol === 'http' || location.protocol === 'https') {
@@ -284,6 +318,21 @@
                 $(".nav-scrollview").scrollLeft(left)
                 $(document).find("span.nav-text[data-category-id=" + res[1] + "]").click();
             }
+        }
+
+        function getBrowserHistory(){
+            var userBrowserSync = store.get("userBrowserHistory");
+
+            if(userBrowserSync){
+                var mainCategory = userBrowserSync.mainCategory;
+                var secondCategory = userBrowserSync.secondCategory;
+                var l = $(document).find("span.nav-text[data-category-id=" + mainCategory + "]").offset().left;
+                $(".nav-scrollview").scrollLeft(l)
+                $(document).find("span.nav-text[data-category-id=" + mainCategory + "]").click();
+                $(document).find("span.nav-sub-text[data-category-sub-id=" + secondCategory + "]").click();
+                console.log(userBrowserSync);
+            }
+
         }
 
     </script>

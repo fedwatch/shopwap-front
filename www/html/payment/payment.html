@@ -28,18 +28,17 @@
 
         //银行卡验证方法
         $(function () {
-
-            //        require.async('handlebars', function () {
+            jQuery.support.cors = true;
             var data = {};
-            //            var tpl = require('/zqVue/shopwap-front/www/layout/payment/directPay/bindCard.tpl');
             var template = Handlebars.compile($("#bindCardTpl").html());
             var html = template(data);
             $("#bind-card").html(html);
-            //        });
 
-            jQuery.support.cors = true;
+            /**
+             * 银行卡格式效验
+             */
             $(document).on("click", "#bind-button", function () {
-                var bankno = $("#bankno").val();
+                var bankno = $.trim($("#bankno").val());
                 var flag = bankCheck(bankno);
                 if (flag === true) {
                     $.toast("银行卡正确");

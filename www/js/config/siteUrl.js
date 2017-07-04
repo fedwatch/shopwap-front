@@ -4,19 +4,47 @@
 //基本URL
 // var BASE_URL = "http://"+location.host+"/wap";
 // var BASE_URL = "http://192.168.3.70:8888/wap";
-var BASE_URL = "http://192.168.3.28/wap";
-// var BASE_URL = "https://jie.net/wap";
+// var BASE_URL = "http://192.168.3.28/wap";
+var BASE_URL = "https://jie.net/wap";
 // var BASE_URL = "http://60.205.84.124/wap";
 
 var time = new Date();
 var t = time.getTime();
 var GLOBAL_INFO = {
-    api:"v2",
-    version : '1.0.0.1706290923',
-    t:t
+    api: "v2",
+    version: '1.0.0.1706290923',
+    t: t,
+    netStatusText: "当前网络环境",
+    netStatus: {
+        FIRST_CONNECT: "[首次] 已连接",
+        FIRST_DISCONNECT: "[首次] 未连接",
+        CONNECT: "重新连接",
+        DISCONNECT: "连接断开"
+    }
+
 };
 
-console.log(GLOBAL_INFO)
+// console.log(GLOBAL_INFO);
+
+(function($){
+    $(function(){
+        window.addEventListener("online", online, false);
+        window.addEventListener("offline", offline, false);
+        function online() {
+            $.notification({
+                title: GLOBAL_INFO.netStatusText,
+                text: GLOBAL_INFO.netStatus.CONNECT,
+            });
+        }
+        function offline() {
+            $.notification({
+                title: GLOBAL_INFO.netStatusText,
+                text: GLOBAL_INFO.netStatus.DISCONNECT,
+            });
+        }
+    })
+})(jQuery || window.jQuery);
+
 
 var CONFIG_CATEGORY_MAIN_ID = "105";
 var CONFIG_CATEGORY_SECOND_ID = "112";
