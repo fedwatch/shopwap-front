@@ -36,6 +36,7 @@
         $(function () {
             jQuery.support.cors = true;
             var username = store.get("username");
+
             /**
              * 用户最近的一次浏览记录
              */
@@ -43,9 +44,6 @@
                 mainCategory:"",
                 secondCategory:""
             };
-
-
-
 
             // footerNav
             var data = {};
@@ -100,12 +98,8 @@
             var brandIds = '';
             var startPrice = '';
             var endPrice = '';
-
             getResults(keyword, categoryIds, brandIds, startPrice, endPrice, 'productCategory');
-
             initCategoryActive();
-
-
             function getResults(keyword, categoryIds, brandIds, startPrice, endPrice, DOM) {
                 var pageOp = $("#" + DOM).page({
                     url: BASE_URL + PRODUCT_SITE_URLS.PRODUCT_SEARCH.URL,
@@ -133,6 +127,8 @@
                             }
                         }else if (result.authStatus == '500'){
                             html += '<div style="color:#666;font-size:.666rem;text-align:center;padding:.255rem 0;">这就是我们的底线~</div>'
+                        }else if (result.authStatus == '400'){
+                            $.toast("已经到底了 ^_^ ")
                         }
 
                         return html;
@@ -170,6 +166,8 @@
                 $this.addClass("active");
                 var tabbarBottomline = $("#tabbar-bottomline");
                 tabbarBottomline.css("transform", "translate3d(" + w + "px, 0px, 0px)");
+                tabbarBottomline.css("-webkit-transform", "translate3d(" + w + "px, 0px, 0px)");
+
                 var textLen = $(this).text().length;
                 if (textLen == 4) {
                     tabbarBottomline.css("width", "5rem");
@@ -322,7 +320,6 @@
 
         function getBrowserHistory(){
             var userBrowserSync = store.get("userBrowserHistory");
-
             if(userBrowserSync){
                 var mainCategory = userBrowserSync.mainCategory;
                 var secondCategory = userBrowserSync.secondCategory;
@@ -350,9 +347,13 @@
 
 
     <div class="content ccSearch">
-        <div id="productCategory" style="margin-top:5.5rem;">
+        <div id="productCategory" style="margin-top:5.5rem;max-height: ">
             <div class="productContainer"></div>
         </div>
+        <div id="bottomLineText" style="display:none;">
+            <p class="" style="font-size:.7rem;color:#666;text-align:center;">我们是有底线的~</p>
+        </div>
+
     </div>
 </div>
 

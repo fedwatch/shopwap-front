@@ -83,11 +83,11 @@
             checkUserStatus();
             function checkUserStatus() {
                 setInterval(function(){
-                    var url = 'http://192.168.3.28/wap/member/index?username=17821621378';
+                    var url = BASE_URL+'/member/index?username=17821621378';
                     var options = {};
                     if ('serviceWorker' in navigator) {
                         fetch(url, options).then(function (e) {
-                            if(e.status == '200'){
+                            if(e.status === '200'){
                                 console.log(e.statusText)
                             }
                         }, function (e) {

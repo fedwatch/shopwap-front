@@ -7,10 +7,10 @@
     <!--js 头部引入-->
     <meta charset="UTF-8">
     <meta content="telephone=no" name="format-detection"/>
-
+    <meta name="render" content="webkit">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=Edge" />
     <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="../../css/style.css">
@@ -465,6 +465,10 @@
         function calcResultToHTML() {
             var total = calcCart();
             $(".totalGoodsPrices > .sign-number").text(total);
+            var l = $(".totalGoodsPrices .sign-number").text().length;
+            if(l > 9){
+                $(".totalGoodsPrices .sign-number").css("font-size",".556rem")
+            }
         }
 
         //计算已选择商品总价
@@ -523,7 +527,7 @@
                     </span>
                 <div class="cart-item-display-flex">
                     <div class="cart-item-price-box psu pull-left">
-                        <span style="">￥</span>
+                        <span class="sign-symbol">￥</span>
                         <span class="sign-number ">
                                 {{price}}
                             </span>
@@ -588,7 +592,7 @@
                     <span class="cart-item-buying-desc">{{specificationsName}}</span>
                     <div class="cart-unselect-item-display-flex">
                         <div class="cart-item-price-box  pull-left">
-                            <span style="">￥</span>
+                            <span class="sign-symbol">￥</span>
                             <span class="sign-number ">{{productPrice}}</span>
                             <!--.-->
                             <!--<span class="deci-number">00</span>-->
@@ -637,14 +641,10 @@
         </span>
 
         </div>
-
         <div class="totalGoodsPrices cart-item-price-box">
-            <span style="">￥</span>
+            <span class="sign-symbol">￥</span>
             <span class="sign-number">0</span>
-            <!--.<span class="deci-number">00</span>-->
         </div>
-
-
         <div id="checkoutBtn">
             <a href="javascript:void(0)" class="external" style="color:#fff;">下单结算</a>
         </div>
@@ -676,6 +676,4 @@
 <script type="text/javascript" src="../../assets/plugin/jquery.min.js"></script>
 <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7.min.js"></script>
 <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
-<script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7-swipeout.js"></script>
-</body>
-</html>
+<script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7-swipeout.js"></sc

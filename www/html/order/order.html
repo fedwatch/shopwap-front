@@ -247,44 +247,27 @@
                 async: false,
                 success: function (data) {
                     if (data.authStatus == "200") {
-                        //orderHeader
-//                        require.async('handlebars', function () {
-//                            var tpl = require('/zqVue/shopwap-front/www/layout/order/orderHeader.tpl');
 
-//                        });
-
-                        //orderAddress
-//                        require.async('handlebars', function () {
-//                            var tpl = require('/zqVue/shopwap-front/www/layout/order/orderAddress.tpl');
                         var template = Handlebars.compile($("#orderAddressTpl").html());
                         var html = template(data);
                         $("#orderAddress").html(html);
-//                        });
-                        //orderDetail
-//                        require.async('handlebars', function () {
-//                            var tpl = require('/zqVue/shopwap-front/www/layout/order/orderDetail.tpl');
+
                         var template = Handlebars.compile($("#orderDetailTpl").html());
                         var html = template(data);
                         $("#orderDetail").html(html);
 
                         var $amountPayable = data.orders;
-//                        console.log(data);
                         $amountPayable.map(function (item, index) {
                             var ss = item.amountPayable;
                             var ars = ss.toString().split(".");
                             $(".int-part").eq(index).text(ars[0]);
                             $(".small-part").eq(index).text(ars[1]);
-                        })
+                        });
 
-//                        });
 
-                        //orderBottomBar
-//                        require.async('handlebars', function () {
-//                        var tpl = require('/zqVue/shopwap-front/www/layout/order/orderBottomBar.tpl');
                         var template = Handlebars.compile($("#orderBottomBarTpl").html());
                         var html = template(data);
                         $("#orderBottomBar").html(html);
-//                        });
 
                         //用户留言
                         var $memo = data.orders;

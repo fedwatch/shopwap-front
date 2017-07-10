@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>分类 - 街街网</title>
+    <!--js 头部引入-->
+    <meta charset="UTF-8">
+    <meta content="telephone=no" name="format-detection"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/page.css">
+
+    <link rel="manifest" href="../../manifest.json">
+    <script type="text/javascript" src="../../assets/plugin/jquery.min.js"></script>
+    <script type="text/javascript" src="../../assets/plugin/iscroll.js"></script>
+    <script type="text/javascript" src="../../assets/plugin/iscroll-probe.js"></script>
+    <script type="text/javascript" src="../../assets/plugin/page.js"></script>
+    <!--<script type="text/javascript" src="/www/assets/plugin/sea.js"></script>-->
+    <!--<script type="text/javascript" src="/www/assets/plugin/seajs-text.js"></script>-->
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../assets/plugin/light7/dist/css/light7.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/plugin/light7/dist/css/light7-swiper.min.css"/>
+    <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7.min.js"></script>
+    <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
+    <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7-swipeout.js"></script>
+    <script type="text/javascript" src="../../assets/plugin/handlebars-v1.3.0.js"></script>
+    <script type="text/javascript" src="../../assets/plugin/idangerous.swiper.min.js"></script>
+    <script type="text/javascript" src="../../js/utils/store.min.js"></script>
+    <script type="text/javascript" src="../../js/utils/getCurrentPage.js"></script>
+    <script type="text/javascript" src="../../js/utils/parseUrl.js"></script>
+    <script type="text/javascript" src="../../js/config/siteUrl.js"></script>
+
+
+    <script>
+
+    </script>
+</head>
+<body>
+
+<script type="text/x-handlebars-template" id="goodsCategory">
+<div class="goodsCategory">
+    <nav>
+        <ul>
+            {{#each categoryList}}
+            <li>
+                <a href="javascript:void(0);" data-category-id="{{id}}">
+                    <span>
+                        <img src="{{url}}" alt="{{name}}" class="navIcon icon icon-round">
+                    </span>
+                    <span>{{name}}</span>
+                </a>
+            </li>
+            {{/each}}
+        </ul>
+    </nav>
+</div>
+</script>
+
+<script type="text/x-handlebars-template" id="goodsDetails">
+    <div class="goodsDetailsHeader">
+        <span>
+            <i class="icon icon-circle"></i>
+        </span>
+        <h1 class="goodsDetailsTitle">{{name}}</h1>
+        <a href="javascript:void(0)" data-sub-link="{{main-sub-id}}" >
+            <i class="fa fa-arrowRight"></i>
+        </a>
+    </div>
+    <div class="goodsDetailsBody">
+        <a href="javascript:void(0);" class="" data-category-sub-id="{{sub-id}}">
+            {{#if importantStyle}}
+            <span class="style">{{name}}</span>
+            {{else}}
+            <span>{{name}}</span>
+            {{/if}}
+        </a>
+    </div>
+</script>
+
+
+</body>
+</html>

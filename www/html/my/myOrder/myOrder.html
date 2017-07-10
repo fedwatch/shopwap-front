@@ -37,7 +37,7 @@
         $(function () {
             jQuery.support.cors = true;
             var username = store.get("username");
-            getOrderLists(username,'all','1');
+            getOrderLists(username, 'all', '1');
             $($(".ocItem")[0]).addClass("active");
 
             // 我的订单 全部 待付款 待发货 待收货 待评价
@@ -113,15 +113,22 @@
                 return location.href = '../../../html/payment/alipay/commonPay.html';
             });
 
-            var scroller = new IScroll('.productContainer', {disableMouse : true,click: iScrollClick(),tap: true,probeType: 2});
-            function iScrollClick(){
+            var scroller = new IScroll('.productContainer', {
+                disableMouse: true,
+                click: iScrollClick(),
+                tap: true,
+                probeType: 2
+            });
+
+            function iScrollClick() {
                 // workaround click bug iscroll #674
                 if (/iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent)) return false;
                 if (/Chrome/i.test(navigator.userAgent)) return (/Android/i.test(navigator.userAgent));
                 if (/Silk/i.test(navigator.userAgent)) return false;
                 if (/Android/i.test(navigator.userAgent)) {
-                    var s=navigator.userAgent.substr(navigator.userAgent.indexOf('Android')+8,3);
-                    return parseFloat(s[0]+s[3]) < 44 ? false : true}
+                    var s = navigator.userAgent.substr(navigator.userAgent.indexOf('Android') + 8, 3);
+                    return parseFloat(s[0] + s[3]) < 44 ? false : true
+                }
             }
 
         });
@@ -150,9 +157,7 @@
         /**
          *  获得订单列表 * 分页
          */
-        function getOrderLists(username,orderStatus,pageNumber){
-
-
+        function getOrderLists(username, orderStatus, pageNumber) {
             var pageOp = $("#shopListShowIndex2").page({
                 url: BASE_URL + ORDER_SITE_URL.LIST.URL,
                 param: {
@@ -162,9 +167,23 @@
                 },
                 processResult: function (data) {
                     var html = '';
-                    var template = Handlebars.compile($("#cartItemTpl").html());
-                    html +=  template(data);
-                    $(".contentWrapper").append(html)
+                    var pulldown = false;
+                    if (data.authStatus == '200') {
+                        var template = Handlebars.compile($("#cartItemTpl").html());
+                        html += template(data);
+                        pulldown = false;
+                        if (!pulldown)
+                            $(".contentWrapper").append(html)
+                    } else if (data.authStatus == '400') {
+                        var last_page = $(".last_page");
+                        if(last_page)
+                            last_page.remove();
+                        html += '<div class="last_page" style="color:#333;text-align: center;font-size:.564rem;padding:2.5rem 0;">已经是最后一页了</div>';
+                        pulldown = true;
+                        if (pulldown){
+                            $(".contentWrapper").append(html)
+                        }
+                    }
                 }
             });
             pageOp.load({
@@ -253,7 +272,8 @@
     {{#each orders}}
     <div class="cart-item">
         <div class="cart-store-title-label">
-            <span class="pull-left storeName"><i class="icon icon-store-icon"></i> {{this.bizSupplierInfo.shopName}}</span>
+            <span class="pull-left storeName"><i
+                    class="icon icon-store-icon"></i> {{this.bizSupplierInfo.shopName}}</span>
             <span class="pull-right tradeStatus"> {{transOrderStatus this.orderStatus}} </span>
         </div>
         {{#each orderItems}}
@@ -284,7 +304,8 @@
 
         </div>
         <div class="totalBox">
-            共 <span class="totalQuant">{{this.quantity}}</span> 件商品 合计：￥<span class="totalPrice">{{this.subtotal}}</span>
+            共 <span class="totalQuant">{{this.quantity}}</span> 件商品 合计：￥<span
+                class="totalPrice">{{this.subtotal}}</span>
             (含运费 ￥<span class="logPrice">{{this.freight}}</span>)
         </div>
         {{/each}}
