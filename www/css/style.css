@@ -1161,6 +1161,10 @@ header.bar.bar-nav a {
     line-height: 1rem;
     width: 70%;
 }
+.myOrderList .cart-item .cart-store-img-text-label .cart-item-text {
+    line-height: 1rem;
+    width: 80%;
+}
 
 .cart-item-text h2.cart-item-buying-title {
     font-size: .65rem;

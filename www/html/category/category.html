@@ -56,6 +56,9 @@
             findRoots(username);
             var categoryId = $("#categoryId").val();
             findSubs(username,categoryId);
+
+
+
             function findRoots(username){
                 $.ajax({
                     url: BASE_URL + PRODUCT_SITE_URLS.FIND_ROOTS.URL,
@@ -73,11 +76,16 @@
                     }
                 });
             }
+            /**
+             *
+             * @params username
+             * @params id
+             */
             function findSubs(username,id) {
                 $.ajax({
                     url: BASE_URL + PRODUCT_SITE_URLS.FIND_SUBS.URL,
                     type: PRODUCT_SITE_URLS.FIND_SUBS.METHOD,
-                    data: {username: username, id: categoryId},
+                    data: {username: username, id: id},
                     dataType: PRODUCT_SITE_URLS.DATATYPE,
                     async: false,
                     success: function (data) {

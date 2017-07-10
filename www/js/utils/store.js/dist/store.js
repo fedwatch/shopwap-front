@@ -148,3 +148,14 @@
     for (var a in Store.prototype) store[a] = Store.prototype[a];
     return store;
 });
+
+(function($){
+    $(function(){
+        var ua = navigator.userAgent;
+        if(ua.indexOf("Android")>0 || ua.indexOf("iPhone")>0 || ua.indexOf("iPad")>0){//移动端
+
+        }else{
+
+        }
+    })
+})(jQuery || window.jQuery);

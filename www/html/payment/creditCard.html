@@ -21,7 +21,7 @@
     <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7-swipeout.js"></script>
     <script type="text/javascript" src="../../assets/plugin/handlebars-v1.3.0.js"></script>
     <script type="text/javascript" src="../../js/config/siteUrl.js"></script>
-    <script type="text/javascript" src="../../js/utils/store.min.js"></script>
+    <script type="text/javascript" src="../../js/utils/store.js/dist/store.js"></script>
     <script type="text/javascript" src="../../js/utils/getTemplate.js"></script>
     <script type="text/javascript" src="../../js/utils/transCommonPay.js"></script>
     <script type="text/javascript" src="../../js/utils/parseUrl.js"></script>
@@ -93,9 +93,6 @@
                 var expiryDate = $("#creditMonth").val() + $("#creditYear").val() || null;//
                 var bankCardNo = store.get("bankCardNo");
                 var app_request_url = location.protocol + "//" + location.host + "../../html/";
-//                console.log(amount);
-//                console.log(host);
-
 
                 if (realName === '' || typeof  realName === 'undefined') {
                     $.toast("姓名不可为空");
@@ -158,7 +155,7 @@
                     async: false,
                     success: function (data) {
                         if (data.authStatus == "212") {
-                            $.toast(data.authMsg, 1500)
+                            $.toast(data.authMsg, 1500);
                             setTimeout(function () {
                                 location.href = "../payment/alipay/commonPay.html";
                             }, 1500)

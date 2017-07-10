@@ -29,12 +29,12 @@
 
     <script>
         $(function () {
-            var username = store.get("username");
             jQuery.support.cors = true;
+            var username = store.get("username");
             var data = {};
             var template = Handlebars.compile($("#footerBarTpl").html());
             var html = template(data);
-//            $("#footer").html(html);
+
             getIndex(username);
             getCurrentPage();
             function getIndex(username) {
