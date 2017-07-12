@@ -34,11 +34,44 @@
 
         var reieverStatus;
         var username = store.get("username");
+        var pullDownStatus = store.set("pullDownStatus",false);
         $(function () {
             jQuery.support.cors = true;
             var username = store.get("username");
-            getOrderLists(username, 'all', '1');
+//            $(".contentWrapper").empty();
+
             $($(".ocItem")[0]).addClass("active");
+//            getOrderLists(username, 'all', '0');
+
+            $("#shopListShowIndex2").page({
+                url: BASE_URL + ORDER_SITE_URL.LIST.URL,
+                param: {
+                    username: username,
+                    orderStatus: 'all',
+                    pageNumber: 1,
+                    refresh:false
+                },
+                processResult: function (data) {
+                    var html = '';
+                    var pulldown = store.get("pullDownStatus");
+//                    console.log(pulldown);
+                    if (data.authStatus == '200') {
+                        var template = Handlebars.compile($("#cartItemTpl").html());
+                        html += template(data);
+
+                        if (pulldown == false)
+                            $(".contentWrapper").append(html)
+                    }
+                    else if (data.authStatus == '400') {
+                        var last_page = $(".last_page");
+                        if(last_page)
+                            last_page.remove();
+                        html += '<div class="last_page">已经是最后一页了</div>';
+                        $(".contentWrapper").append(html);
+                        store.set("pullDownStatus",true);
+                    }
+                }
+            });
 
             // 我的订单 全部 待付款 待发货 待收货 待评价
             $(document).on("click", ".ocItem", function () {
@@ -51,22 +84,21 @@
                 var shipped = $this.hasClass('shipped');
                 var completed = $this.hasClass('completed');
 
-
                 if ($this.hasClass('all')) {
                     $(".contentWrapper").empty();
-                    getOrderLists(username, 'all', '1');
+                    getOrderLists(username, 'all', '0');
                 } else if ($this.hasClass('unconfirmed')) {
                     $(".contentWrapper").empty();
-                    getOrderLists(username, 'unconfirmed', '1');
+                    getOrderLists(username, 'unconfirmed', '0');
                 } else if ($this.hasClass('confirmed')) {
                     $(".contentWrapper").empty();
-                    getOrderLists(username, 'confirmed', '1');
+                    getOrderLists(username, 'confirmed', '0');
                 } else if ($this.hasClass('shipped')) {
                     $(".contentWrapper").empty();
-                    getOrderLists(username, 'shipped', '1');
+                    getOrderLists(username, 'shipped', '0');
                 } else if ($this.hasClass('completed')) {
                     $(".contentWrapper").empty();
-                    getOrderLists(username, 'completed', '1');
+                    getOrderLists(username, 'completed', '0');
                 }
 
                 if (all) {
@@ -85,13 +117,12 @@
             // 确认收货
             $(document).on('click', '.confirmReceiptBtn ', function () {
                 var $this = $(this);
-                console.log($this);
                 var sn = $this.data('sn');
                 orderComplete(username, [sn]);
                 if (store.get("reieverStatus") == true) {
-                    $this.text("已收货")
+                    $this.text("已收货");
                 } else {
-                    $this.text("确认收货")
+                    $this.text("确认收货");
                 }
             });
 
@@ -106,8 +137,6 @@
             $(document).on("click", ".paymentBtn", function () {
                 var $this = $(this);
                 var sn = $this.data("sn");
-                console.log(username);
-                console.log(sn);
                 createPayment(username, [sn]);
                 store.set("mergeSn", mergeSn);
                 return location.href = '../../../html/payment/alipay/commonPay.html';
@@ -131,96 +160,100 @@
                 }
             }
 
-        });
 
-        var mergeSn;
+            var mergeSn;
 
-        function createPayment(username, sn) {
-            $.ajax({
-                url: BASE_URL + ORDER_SITE_URL.CREATE_PAYMENT.URL,
-                type: ORDER_SITE_URL.CREATE_PAYMENT.METHOD,
-                dataType: ORDER_SITE_URL.DATATYPE,
-                cache: true,
-                async: false,
-                data: {
-                    username: username,
-                    sn: sn,
-                },
-                success: function (data) {
-                    mergeSn = data.mergeSn;
-                    console.log(mergeSn)
-                }
-            })
-        }
+            function createPayment(username, sn) {
+                $.ajax({
+                    url: BASE_URL + ORDER_SITE_URL.CREATE_PAYMENT.URL,
+                    type: ORDER_SITE_URL.CREATE_PAYMENT.METHOD,
+                    dataType: ORDER_SITE_URL.DATATYPE,
+                    cache: true,
+                    async: false,
+                    data: {
+                        username: username,
+                        sn: sn,
+                    },
+                    success: function (data) {
+                        mergeSn = data.mergeSn;
+                        console.log(mergeSn)
+                    }
+                })
+            }
 
 
-        /**
-         *  获得订单列表 * 分页
-         */
-        function getOrderLists(username, orderStatus, pageNumber) {
-            var pageOp = $("#shopListShowIndex2").page({
-                url: BASE_URL + ORDER_SITE_URL.LIST.URL,
-                param: {
-                    username: username,
-                    orderStatus: orderStatus,
-//                    pageNumber: pageNumber
-                },
-                processResult: function (data) {
-                    var html = '';
-                    var pulldown = false;
-                    if (data.authStatus == '200') {
-                        var template = Handlebars.compile($("#cartItemTpl").html());
-                        html += template(data);
-                        pulldown = false;
-                        if (!pulldown)
-                            $(".contentWrapper").append(html)
-                    } else if (data.authStatus == '400') {
-                        var last_page = $(".last_page");
-                        if(last_page)
-                            last_page.remove();
-                        html += '<div class="last_page" style="color:#333;text-align: center;font-size:.564rem;padding:2.5rem 0;">已经是最后一页了</div>';
-                        pulldown = true;
-                        if (pulldown){
-                            $(".contentWrapper").append(html)
+            /**
+             *  获得订单列表 * 分页
+             */
+            function getOrderLists(username, orderStatus, pageNumber) {
+                var pageOp = $("#shopListShowIndex2").page({
+                    url: BASE_URL + ORDER_SITE_URL.LIST.URL,
+                    param: {
+                        username: username,
+                        orderStatus: orderStatus,
+                        pageNumber: pageNumber
+                    },
+                    processResult: function (data) {
+                        var html = '';
+                        var pulldown = store.get("pullDownStatus");
+//                        console.log(pulldown);
+                        if (data.authStatus == '200') {
+                            var template = Handlebars.compile($("#cartItemTpl").html());
+                            html += template(data);
+
+                            if (pulldown == false)
+                                $(".contentWrapper").append(html)
+                        }
+                        else if (data.authStatus == '400') {
+                            var last_page = $(".last_page");
+                            if(last_page)
+                                last_page.remove();
+                            html += '<div class="last_page">已经是最后一页了</div>';
+                            $(".contentWrapper").append(html);
+                            store.set("pullDownStatus",true);
                         }
                     }
-                }
-            });
-            pageOp.load({
-                username: username,
-                orderStatus: orderStatus,
-            })
-        }
-
-
-        /**
-         *
-         * @param username
-         * @param sn
-         */
-        function orderComplete(username, sn) {
-            $.ajax({
-                url: BASE_URL + ORDER_SITE_URL.COMPLETE.URL,
-                type: ORDER_SITE_URL.COMPLETE.METHOD,
-                dataType: ORDER_SITE_URL.DATATYPE,
-                data: {
+                });
+                pageOp.load({
                     username: username,
-                    sn: sn
-                },
-                cache: true,
-                async: false,
-                success: function (data) {
-                    if (data.authStatus == '200') {
-                        store.set("reieverStatus", true);
-                        $.toast(data.authMsg);
-                    } else {
-                        store.set("reieverStatus", false);
-                        $.toast(data.authMsg)
-                    }
+                    orderStatus: orderStatus,
+                    pageNumber: pageNumber,
+                })
+            }
 
-                }
-            })
-        }
+
+            /**
+             * 获取订单完成
+             * @param username
+             * @param sn
+             */
+            function orderComplete(username, sn) {
+                $.ajax({
+                    url: BASE_URL + ORDER_SITE_URL.COMPLETE.URL,
+                    type: ORDER_SITE_URL.COMPLETE.METHOD,
+                    dataType: ORDER_SITE_URL.DATATYPE,
+                    data: {
+                        username: username,
+                        sn: sn
+                    },
+                    cache: true,
+                    async: false,
+                    success: function (data) {
+                        if (data.authStatus == '200') {
+                            store.set("reieverStatus", true);
+                            $.toast(data.authMsg);
+                        } else {
+                            store.set("reieverStatus", false);
+                            $.toast(data.authMsg)
+                        }
+
+                    }
+                })
+            }
+
+        });
+
+
     </script>
 </head>
 <body>

@@ -14,17 +14,14 @@
     <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../../assets/plugin/light7/dist/css/light7-swiper.min.css"/>
     <script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7-swiper.min.js"></script>
-    <!--<script type="text/javascript" src="../../assets/plugin/light7/dist/js/light7-swipeout.js"></script>-->
+
     <script type="text/javascript" src="../../assets/plugin/idangerous.swiper.min.js"></script>
     <script type="text/javascript" src="../../assets/plugin/handlebars-v1.3.0.js"></script>
     <script type="text/javascript" src="../../js/config/siteUrl.js"></script>
     <script type="text/javascript" src="../../js/utils/store.min.js"></script>
-    <!--<script type="text/javascript" src="../../js/utils/getTemplate.js"></script>-->
     <script type="text/javascript" src="../../js/utils/transDetails.js"></script>
-    <script src="https://jie.net/resources/shop/js/jquery.lazyload.js"></script>
+    <script type="text/javascript" src="../../js/utils/jquery.lazyload.js"></script>
     <script>
-
-
         $(function () {
             jQuery.support.cors = true;
             //USERMD
@@ -312,6 +309,11 @@
                             } else {
                                 console.log("item id 不存在")
                             }
+                        }else if(data.authStatus === '403'){
+                            $.toast("请登录才可以进行后续操作", 2000);
+                            setTimeout(function () {
+                                location.href = '../../html/my/login/login.html';
+                            }, 2000)
                         }else{
                             $.toast(data.authMsg);
                         }
@@ -469,10 +471,6 @@
 
 
         });
-
-
-
-
     </script>
 </head>
 <body>
@@ -552,11 +550,14 @@
 
 
 <script type="text/x-handlebars-template" id="topLinkMenuTpl">
-    <div class="backLink">
-        <a href="javascript:history.go(-1);" class="external">
-            <i class="icon icon-detail-back-icon"></i>
-        </a>
+    <div style="width:3rem;height:3rem;" onclick="javascript:history.go(-1);">
+        <div class="backLink">
+            <a href="javascript:void(0)" class="external">
+                <i class="icon icon-detail-back-icon"></i>
+            </a>
+        </div>
     </div>
+
 </script>
 
 
