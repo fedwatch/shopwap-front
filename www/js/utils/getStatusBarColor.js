@@ -1,6 +1,4 @@
-
-
-function getStatusBarColor(){
+function getStatusBarColor() {
     var barColor = "#666";
-    $(".appStatusBar").css("background",barColor);
+    $(".appStatusBar").css("background", barColor);
 }

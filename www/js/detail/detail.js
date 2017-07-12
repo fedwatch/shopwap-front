@@ -10,12 +10,12 @@ define(function (require, exports, module) {
 
     jQuery.support.cors = true;
     $(function () {
-        if(typeof currentProductID == 'undefined'){
-            $.toast("非法访问! 2 秒后跳转到首页",2000);
+        if (typeof currentProductID == 'undefined') {
+            $.toast("非法访问! 2 秒后跳转到首页", 2000);
 
             setTimeout(function () {
                 location.href = '../index.html';
-            },2000)
+            }, 2000)
         }
 
 
@@ -24,11 +24,11 @@ define(function (require, exports, module) {
         //     effect : "fadeIn",
         // });
 
-        setSpecificationId(username,currentProductID)
+        setSpecificationId(username, currentProductID)
 
         //监听 购物车
         $(document).on('click', ".cart-badge", function () {
-            if(userStatus){
+            if (userStatus) {
                 getCartCount(username, ".cart-badge > .badge");
                 var sum = $(".cart-badge > .badge").text();
                 if (sum == "0") {
@@ -37,7 +37,7 @@ define(function (require, exports, module) {
                 } else {
                     window.location.href = "/www/html/cart/cart.html";
                 }
-            }else{
+            } else {
                 $.toast("请登录才可以进行后续操作");
                 return location.href = '/www/html/my/login/login.html';
             }
@@ -60,7 +60,7 @@ define(function (require, exports, module) {
 
         //立即下单
         $(document).on('click', ".buyNowBtn", function () {
-            if(userStatus){
+            if (userStatus) {
                 var cartState = $("#cartState").val();
                 if (cartState == "false") {
                     $("#goodsDetailMask").show();
@@ -73,22 +73,22 @@ define(function (require, exports, module) {
                     var username = store.get("username");
                     var currentProductID = store.get("currentProductID");
                     var count = $("input[name=goodsNumber]").val();
-                    if(typeof username !== 'undefined' && typeof currentProductID !== 'undefined' && typeof count !== 'undefined'
-                        &&  username !== '' && currentProductID !== '' && count !== ''){
-                        store.set("mark",true);
-                    }else{
-                        store.set("mark",false);
+                    if (typeof username !== 'undefined' && typeof currentProductID !== 'undefined' && typeof count !== 'undefined'
+                        && username !== '' && currentProductID !== '' && count !== '') {
+                        store.set("mark", true);
+                    } else {
+                        store.set("mark", false);
                     }
                     var mark = store.get("mark");
-                    if(mark == true){
-                        addCartForBuyNow(username,currentProductID,count)
+                    if (mark == true) {
+                        addCartForBuyNow(username, currentProductID, count)
                     }
                 }
-            }else{
-                $.toast("请登录才可以进行后续操作",2000);
+            } else {
+                $.toast("请登录才可以进行后续操作", 2000);
                 setTimeout(function () {
                     location.href = '/www/html/my/login/login.html';
-                },2000)
+                }, 2000)
             }
 
         });
@@ -170,7 +170,7 @@ define(function (require, exports, module) {
      *  count:1
      *  itemId:3081
      */
-    function addCartForBuyNow(username,currentProductID,count){
+    function addCartForBuyNow(username, currentProductID, count) {
         $.ajax({
             url: BASE_URL + CART_SITE_URL.CART_ADD.URL,
             type: CART_SITE_URL.CART_ADD.METHOD,
@@ -179,16 +179,16 @@ define(function (require, exports, module) {
                 productId: currentProductID,
                 quantity: count
             },
-            cache:true,
-            async:false,
+            cache: true,
+            async: false,
             dataType: CART_SITE_URL.DATATYPE,
             success: function (data) {
                 if (data.authStatus == "200") {
-                    if(data.itemId){
-                        store.set("cartItemId",[data.itemId]);
+                    if (data.itemId) {
+                        store.set("cartItemId", [data.itemId]);
                         $("#cartState").val(false)
                         return location.href = "/www/html/order/order.html";
-                    }else{
+                    } else {
                         console.log("item id 不存在")
                     }
 
@@ -198,7 +198,7 @@ define(function (require, exports, module) {
     }
 
     function addToCart() {
-        if (userStatus){
+        if (userStatus) {
             var amount = store.get("amount");
             calculateFreight(username, currentProductID, amount, "shippingCost");
             var cartState = $("#cartState").val();
@@ -211,7 +211,7 @@ define(function (require, exports, module) {
             }
 
             var count = $("input[name=goodsNumber]").val();
-            store.set("currentProductCount",count);
+            store.set("currentProductCount", count);
             if (cartState == "true") {
                 $.ajax({
                     url: BASE_URL + CART_SITE_URL.CART_ADD.URL,
@@ -221,8 +221,8 @@ define(function (require, exports, module) {
                         productId: currentProductID,
                         quantity: count
                     },
-                    cache:true,
-                    async:false,
+                    cache: true,
+                    async: false,
                     dataType: CART_SITE_URL.DATATYPE,
                     success: function (data) {
                         if (data.authStatus == "200") {
@@ -233,7 +233,7 @@ define(function (require, exports, module) {
                     }
                 })
             }
-        }else{
+        } else {
             $.toast("请登录才可以进行后续操作");
             location.href = '/www/html/my/login/login.html';
         }
@@ -262,8 +262,8 @@ define(function (require, exports, module) {
                 username: username,
                 id: currentProductID
             },
-            cache:true,
-            async:false,
+            cache: true,
+            async: false,
             dataType: PRODUCT_SITE_URLS.DATATYPE,
             success: function (results) {
                 var data = results;
@@ -342,8 +342,8 @@ define(function (require, exports, module) {
                     });
 
                 }
-                else if (data.authStatus == "500"){
-                   console.log(data.authMsg);
+                else if (data.authStatus == "500") {
+                    console.log(data.authMsg);
                 }
             }
         })
@@ -356,7 +356,7 @@ define(function (require, exports, module) {
      * @param username
      * @param currentProductID
      */
-    function setSpecificationId(username,currentProductID) {
+    function setSpecificationId(username, currentProductID) {
         // usermd
         $.ajax({
             url: BASE_URL + PRODUCT_SITE_URLS.PRODUCT_VIEW.URL,
@@ -365,12 +365,12 @@ define(function (require, exports, module) {
                 username: username,
                 id: currentProductID
             },
-            cache:true,
-            async:false,
+            cache: true,
+            async: false,
             dataType: PRODUCT_SITE_URLS.DATATYPE,
             success: function (data) {
-                if(data.authStatus == '200'){
-                    if(data["product"]){
+                if (data.authStatus == '200') {
+                    if (data["product"]) {
                         var specificationValues = data["product"].specificationValues;
                         var productSpec = [];
                         specificationValues.map(function (data) {
@@ -381,7 +381,7 @@ define(function (require, exports, module) {
                             $("#specification-id-" + productSpec[i]).removeClass("active").addClass("active");
                         }
                     }
-                }else{
+                } else {
                     $.toast(data.authMsg);
                     return history.go(-1);
                 }
@@ -407,8 +407,8 @@ define(function (require, exports, module) {
                 id: id,
                 buyCount: buyCount
             },
-            cache:true,
-            async:false,
+            cache: true,
+            async: false,
             dataType: PRODUCT_SITE_URLS.DATATYPE,
             success: function (data) {
                 // console.log(data);
@@ -428,8 +428,8 @@ define(function (require, exports, module) {
             data: {
                 username: username,
             },
-            cache:true,
-            async:false,
+            cache: true,
+            async: false,
             dataType: CART_SITE_URL.DATATYPE,
             success: function (data) {
                 if (data.authStatus == "200") {

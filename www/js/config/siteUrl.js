@@ -26,8 +26,8 @@ var GLOBAL_INFO = {
 
 // console.log(GLOBAL_INFO);
 
-(function($){
-    $(function(){
+(function ($) {
+    $(function () {
         window.addEventListener("online", online, false);
         window.addEventListener("offline", offline, false);
         function online() {
@@ -36,6 +36,7 @@ var GLOBAL_INFO = {
                 text: GLOBAL_INFO.netStatus.CONNECT,
             });
         }
+
         function offline() {
             $.notification({
                 title: GLOBAL_INFO.netStatusText,

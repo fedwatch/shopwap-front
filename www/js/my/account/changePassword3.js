@@ -19,7 +19,7 @@ define(function (require, exports, module) {
             var flg = surePassword($userPassword, $sureUserPassword);
             var username = store.get("username");
             if (flg == true) {
-                resetPassword(username,$sureUserPasswordVal);
+                resetPassword(username, $sureUserPasswordVal);
             } else {
                 return;
             }
@@ -33,23 +33,23 @@ define(function (require, exports, module) {
      * @param username
      * @param newPwd
      */
-    function resetPassword(username,newPwd){
+    function resetPassword(username, newPwd) {
         $.ajax({
             url: BASE_URL + USER_SITE_URL.RESET_PASSWORD.URL,
             type: USER_SITE_URL.RESET_PASSWORD.METHOD,
             dataType: USER_SITE_URL.DATATYPE,
             data: {
-                username : username,
-                newPwd : newPwd
+                username: username,
+                newPwd: newPwd
             },
-            cache:true,
-            async:false,
+            cache: true,
+            async: false,
             success: function (data) {
                 if (data.authStatus == "200") {
                     store.clear();
                     $.toast(data.authMsg);
                     return window.location.href = "./changePasswordSuccess.html";
-                }else{
+                } else {
                     $.toast(data.authMsg);
                 }
             }
@@ -63,7 +63,7 @@ define(function (require, exports, module) {
      * @param newPwd
      * @param pwd
      */
-    function updatePassword(username,newPwd,pwd){
+    function updatePassword(username, newPwd, pwd) {
         $.ajax({
             url: BASE_URL + USER_SITE_URL.UPDATE_PASSWORD.URL,
             type: USER_SITE_URL.UPDATE_PASSWORD.METHOD,
@@ -73,22 +73,19 @@ define(function (require, exports, module) {
                 newPwd: newPwd,
                 pwd: pwd
             },
-            cache:true,
-            async:false,
+            cache: true,
+            async: false,
             success: function (data) {
                 if (data.authStatus == '200') {
                     store.clear();
                     $.toast(data.authMsg);
                     return window.location.href = "./changePasswordSuccess.html";
-                }else{
+                } else {
                     $.toast(data.authMsg);
                 }
             }
         });
     }
-
-
-
 
 
     require.async('handlebars', function () {

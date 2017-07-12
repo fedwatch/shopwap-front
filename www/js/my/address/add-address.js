@@ -33,8 +33,8 @@ define(function (require, exports, module) {
                         username: username,
                         id: addressId
                     },
-                    cache:true,
-                    async:false,
+                    cache: true,
+                    async: false,
                     success: function (data) {
                         // console.log(data.authMsg);
                         if (data.authStatus == '200') {
@@ -44,7 +44,7 @@ define(function (require, exports, module) {
                             $userZipCode.val(data.receiver.zipCode);
                             $cityPicker.val(data.receiver.area.fullName);
                             $areaId.val(data.receiver.area.id);
-                            store.set("areaId",data.receiver.area.id);
+                            store.set("areaId", data.receiver.area.id);
                             if (data.receiver.isDefault == true) {
                                 $userDefault.click();
                             }
@@ -89,7 +89,7 @@ define(function (require, exports, module) {
             var $this = $(this);
             var username = store.get("username");
             var consignee = $userNameAddr.val();
-            if(consignee == '' || typeof consignee == "undefined"){
+            if (consignee == '' || typeof consignee == "undefined") {
                 $.toast("联系人不可为空");
                 return;
             }
@@ -97,15 +97,15 @@ define(function (require, exports, module) {
             var address = $userAddress.val();
             var zipCode = $userZipCode.val();
             var phone = $userPhoneS.val();
-            if (phone == '' || typeof phone == "undefined"){
+            if (phone == '' || typeof phone == "undefined") {
                 $.toast("手机号不可为空");
                 return;
             }
-            if( address == '' || typeof address == "undefined"){
+            if (address == '' || typeof address == "undefined") {
                 $.toast("地址不可为空");
                 return;
             }
-           // var isDefault = userDefault;
+            // var isDefault = userDefault;
             if (editStatus == null || editStatus == false) {
                 receiverSave(username, consignee, areaId, address, zipCode, phone, userDefault)
 
@@ -134,8 +134,8 @@ define(function (require, exports, module) {
                 pageNumber: pageNumber,
                 pageSize: pageSize,
             },
-            cache:true,
-            async:false,
+            cache: true,
+            async: false,
             success: function (data) {
                 if (data.authStatus) {
                     var tpl = require('/zqVue/shopwap-front/www/layout/my/address/address.tpl');
@@ -163,16 +163,16 @@ define(function (require, exports, module) {
                 phone: phone,
                 isDefault: userDefault,
             },
-            cache:true,
-            async:false,
+            cache: true,
+            async: false,
             success: function (data) {
-                if(data.authStatus == '200'){
+                if (data.authStatus == '200') {
                     $.toast(data.authMsg);
                     return history.go(-1);
-                }else if (data.authStatus == '403'){
-                    $.toast(data.authMsg,3000);
+                } else if (data.authStatus == '403') {
+                    $.toast(data.authMsg, 3000);
                     return location.href = '/www/html/my/login/login.html';
-                }else if(data.authStatus == '500'){
+                } else if (data.authStatus == '500') {
                     $.toast(data.authMsg);
                     return;
                 }
@@ -196,16 +196,16 @@ define(function (require, exports, module) {
                 phone: phone,
                 isDefault: userDefault,
             },
-            cache:true,
-            async:false,
+            cache: true,
+            async: false,
             success: function (data) {
-                if(data.authStatus == '200'){
+                if (data.authStatus == '200') {
                     $.toast(data.authMsg);
                     return history.go(-1);
-                }else if (data.authStatus == '403'){
-                    $.toast(data.authMsg,3000);
+                } else if (data.authStatus == '403') {
+                    $.toast(data.authMsg, 3000);
                     return location.href = '/www/html/my/login/login.html';
-                }else if(data.authStatus == '500'){
+                } else if (data.authStatus == '500') {
                     $.toast(data.authMsg);
                     return;
                 }

@@ -2,7 +2,7 @@
  * 我的订单
  * Created by Administrator on 2017/3/21.
  */
-define(function(require,exports,module){
+define(function (require, exports, module) {
     require('jquery');
     require('swiper');
     require('store');
@@ -17,7 +17,7 @@ define(function(require,exports,module){
     var username = store.get("username");
     $(function () {
         // 我的订单 全部 待付款 待发货 待收货 待评价
-        $(document).on("click",".ocItem",function () {
+        $(document).on("click", ".ocItem", function () {
             var $this = $(this);
             $(".ocItem").removeClass("active");
 
@@ -28,27 +28,27 @@ define(function(require,exports,module){
             var completed = $this.hasClass('completed');
 
 
-            if($this.hasClass('all')){
-                getListOrders(username,'all','1');
-            }else if($this.hasClass('unconfirmed')){
-                getListOrders(username,'unconfirmed','1');
-            }else if($this.hasClass('confirmed')){
-                getListOrders(username,'confirmed','1');
-            } else if($this.hasClass('shipped')){
-                getListOrders(username,'shipped','1');
-            } else if($this.hasClass('completed')){
-                getListOrders(username,'completed','1');
+            if ($this.hasClass('all')) {
+                getListOrders(username, 'all', '1');
+            } else if ($this.hasClass('unconfirmed')) {
+                getListOrders(username, 'unconfirmed', '1');
+            } else if ($this.hasClass('confirmed')) {
+                getListOrders(username, 'confirmed', '1');
+            } else if ($this.hasClass('shipped')) {
+                getListOrders(username, 'shipped', '1');
+            } else if ($this.hasClass('completed')) {
+                getListOrders(username, 'completed', '1');
             }
 
-            if(all){
+            if (all) {
                 $(".ocItem.all").addClass("active");
-            }else if (unconfirmed){
+            } else if (unconfirmed) {
                 $(".ocItem.unconfirmed").addClass("active");
-            }else if (confirmed){
+            } else if (confirmed) {
                 $(".ocItem.confirmed").addClass("active");
-            }else if (shipped){
+            } else if (shipped) {
                 $(".ocItem.shipped").addClass("active");
-            }else if (completed){
+            } else if (completed) {
                 $(".ocItem.completed").addClass("active");
             }
 
@@ -56,16 +56,16 @@ define(function(require,exports,module){
         });
 
         // 确认收货
-        $(document).on('click','.confirmReceiptBtn ',function(){
+        $(document).on('click', '.confirmReceiptBtn ', function () {
             var $this = $(this);
             console.log($this)
             var sn = $this.data('sn');
 
-            orderComplete(username,[sn]);
+            orderComplete(username, [sn]);
 
-            if(store.get("reieverStatus") == true){
+            if (store.get("reieverStatus") == true) {
                 $this.text("已收货")
-            }else{
+            } else {
                 $this.text("确认收货")
             }
 
@@ -82,27 +82,27 @@ define(function(require,exports,module){
         });
 
         // 查看物流
-        $(document).on("click",".checkLogBtn",function () {
+        $(document).on("click", ".checkLogBtn", function () {
             var $this = $(this);
-            store.set("sn",$this.data("sn"));
+            store.set("sn", $this.data("sn"));
             return location.href = '/www/html/user/logistics.html';
 
         });
 
         // 立即付款
-        $(document).on("click",".paymentBtn",function () {
+        $(document).on("click", ".paymentBtn", function () {
             var $this = $(this);
             var sn = $this.data("sn");
             console.log(username);
             console.log(sn);
-            createPayment(username,[sn]);
-            store.set("mergeSn",mergeSn);
+            createPayment(username, [sn]);
+            store.set("mergeSn", mergeSn);
 
             return location.href = '/www/html/payment/alipay/commonPay.html';
         });
 
         // 立即评价
-        $(document).on('click',".commentBtn",function () {
+        $(document).on('click', ".commentBtn", function () {
 
         });
 
@@ -110,18 +110,18 @@ define(function(require,exports,module){
 
     var mergeSn;
 
-    function createPayment(username,sn){
+    function createPayment(username, sn) {
         $.ajax({
-            url:BASE_URL+ORDER_SITE_URL.CREATE_PAYMENT.URL,
-            type:ORDER_SITE_URL.CREATE_PAYMENT.METHOD,
-            dataType:ORDER_SITE_URL.DATATYPE,
-            cache:true,
-            async:false,
-            data:{
-                username:username,
-                sn :sn,
+            url: BASE_URL + ORDER_SITE_URL.CREATE_PAYMENT.URL,
+            type: ORDER_SITE_URL.CREATE_PAYMENT.METHOD,
+            dataType: ORDER_SITE_URL.DATATYPE,
+            cache: true,
+            async: false,
+            data: {
+                username: username,
+                sn: sn,
             },
-            success:function (data) {
+            success: function (data) {
                 mergeSn = data.mergeSn
                 console.log(mergeSn)
             }
@@ -153,28 +153,28 @@ define(function(require,exports,module){
      * @param username
      * @param orderStatus   订单状态
      *
-         全部:all
-         待付款:unconfirmed
-         待发货:confirmed
-         待收货:shipped
-         待评价:completed
+     全部:all
+     待付款:unconfirmed
+     待发货:confirmed
+     待收货:shipped
+     待评价:completed
      * @param pageNumber
      */
-    function getListOrders(username,orderStatus,pageNumber){
+    function getListOrders(username, orderStatus, pageNumber) {
         $.ajax({
-            url:BASE_URL+ORDER_SITE_URL.LIST.URL,
-            type:ORDER_SITE_URL.LIST.METHOD,
-            dataType:ORDER_SITE_URL.DATATYPE,
-            data:{
-                username:username,
-                orderStatus :orderStatus,
-                pageNumber :pageNumber
+            url: BASE_URL + ORDER_SITE_URL.LIST.URL,
+            type: ORDER_SITE_URL.LIST.METHOD,
+            dataType: ORDER_SITE_URL.DATATYPE,
+            data: {
+                username: username,
+                orderStatus: orderStatus,
+                pageNumber: pageNumber
             },
-            cache:true,
-            async:false,
-            success:function (data) {
-                require.async('handlebars',function(){
-                    require.async('transMyOrder',function(){
+            cache: true,
+            async: false,
+            success: function (data) {
+                require.async('handlebars', function () {
+                    require.async('transMyOrder', function () {
                         var tpl = require('/zqVue/shopwap-front/www/layout/my/orderData.tpl');
                         var template = Handlebars.compile(tpl);
                         var html = template(data);
@@ -190,23 +190,23 @@ define(function(require,exports,module){
      * @param username
      * @param sn
      */
-    function orderComplete(username,sn){
+    function orderComplete(username, sn) {
         $.ajax({
-            url:BASE_URL+ORDER_SITE_URL.COMPLETE.URL,
-            type:ORDER_SITE_URL.COMPLETE.METHOD,
-            dataType:ORDER_SITE_URL.DATATYPE,
-            data:{
-                username:username,
-                sn :sn
+            url: BASE_URL + ORDER_SITE_URL.COMPLETE.URL,
+            type: ORDER_SITE_URL.COMPLETE.METHOD,
+            dataType: ORDER_SITE_URL.DATATYPE,
+            data: {
+                username: username,
+                sn: sn
             },
-            cache:true,
-            async:false,
-            success:function (data) {
-                if(data.authStatus == '200'){
-                    store.set("reieverStatus",true);
+            cache: true,
+            async: false,
+            success: function (data) {
+                if (data.authStatus == '200') {
+                    store.set("reieverStatus", true);
                     $.toast(data.authMsg);
-                }else{
-                    store.set("reieverStatus",false);
+                } else {
+                    store.set("reieverStatus", false);
                     $.toast(data.authMsg)
                 }
 
@@ -215,23 +215,22 @@ define(function(require,exports,module){
     }
 
 
-
     // modifySuccess
-    require.async('handlebars',function(){
+    require.async('handlebars', function () {
         $.ajax({
-            url:BASE_URL+ORDER_SITE_URL.LIST.URL,
-            type:ORDER_SITE_URL.LIST.METHOD,
-            dataType:ORDER_SITE_URL.DATATYPE,
-            data:{
-                username:username,
-                orderStatus :'all',
-                pageNumber :'1'
+            url: BASE_URL + ORDER_SITE_URL.LIST.URL,
+            type: ORDER_SITE_URL.LIST.METHOD,
+            dataType: ORDER_SITE_URL.DATATYPE,
+            data: {
+                username: username,
+                orderStatus: 'all',
+                pageNumber: '1'
             },
-            cache:true,
-            async:false,
-            success:function (data) {
-                require.async('handlebars',function(){
-                    require.async('transMyOrder',function(){
+            cache: true,
+            async: false,
+            success: function (data) {
+                require.async('handlebars', function () {
+                    require.async('transMyOrder', function () {
                         var tpl = require('/zqVue/shopwap-front/www/layout/my/myOrder.tpl');
                         var template = Handlebars.compile(tpl);
                         var html = template(data);

@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/3/21.
  */
-define(function(require,exports,module){
+define(function (require, exports, module) {
     require('jquery');
     require('siteUrl');
     require('store');
@@ -18,11 +18,11 @@ define(function(require,exports,module){
         // var username = store.get("username");
         // paySubmit(isBalancePay,type,paymentPluginId,mergeSn,amount,cardId,app_request,username);
 
-        setTimeout(function(){
+        setTimeout(function () {
             var req_data = store.get("req_data");
             $("#req_data").val(req_data);
             $("#sendMoneyForm").submit();
-        },0)
+        }, 0)
     });
 
     /**
@@ -36,12 +36,12 @@ define(function(require,exports,module){
      * @param app_request
      * @param username
      */
-    function paySubmit(isBalancePay,type ,paymentPluginId,mergeSn,amount ,cardId ,app_request ,username){
+    function paySubmit(isBalancePay, type, paymentPluginId, mergeSn, amount, cardId, app_request, username) {
         $.ajax({
-            url:BASE_URL+PAYMENT_SITE_URL.PAY_SUBMIT.URL,
-            type:PAYMENT_SITE_URL.PAY_SUBMIT.METHOD,
-            dataType:PAYMENT_SITE_URL.DATATYPE,
-            data:{
+            url: BASE_URL + PAYMENT_SITE_URL.PAY_SUBMIT.URL,
+            type: PAYMENT_SITE_URL.PAY_SUBMIT.METHOD,
+            dataType: PAYMENT_SITE_URL.DATATYPE,
+            data: {
                 isBalancePay: isBalancePay,
                 type: type,
                 paymentPluginId: paymentPluginId,
@@ -51,20 +51,19 @@ define(function(require,exports,module){
                 app_request: app_request,
                 username: username,
             },
-            success:function (data) {
-               if (data.status == "200" && data.su == true){
-                   $.toast("支付跳转中")
-                   return location.href = '/www/html/payment/alipay/paySuccess.html'
-               }
-               // else{
-               //     $.toast("支付失败");
-               //     return history.go(-1);
-               // }
+            success: function (data) {
+                if (data.status == "200" && data.su == true) {
+                    $.toast("支付跳转中")
+                    return location.href = '/www/html/payment/alipay/paySuccess.html'
+                }
+                // else{
+                //     $.toast("支付失败");
+                //     return history.go(-1);
+                // }
 
             }
         })
     }
-
 
 
 });

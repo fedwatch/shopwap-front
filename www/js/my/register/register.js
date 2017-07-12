@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/3/10.
  */
-define(function(require,exports,module){
+define(function (require, exports, module) {
     require('jquery');
     require('swiper');
     require('light7');
@@ -29,11 +29,11 @@ define(function(require,exports,module){
          * @type {{background: string, color: string, border: string}}
          */
         var $getSMSCodeBtn_FAILED = {
-            background:"#c7c7c7",
-            color:"#515151",
-            border:"#c7c7c7",
-            borderTopLeftRadius:"0",
-            borderTopRightRadius:"2rem",
+            background: "#c7c7c7",
+            color: "#515151",
+            border: "#c7c7c7",
+            borderTopLeftRadius: "0",
+            borderTopRightRadius: "2rem",
             borderBottomRightRadius: "2rem",
             borderBottomLeftRadius: "0",
             width: "5.24rem"
@@ -43,11 +43,11 @@ define(function(require,exports,module){
          * @type {{background: string, color: string, border: string}}
          */
         var $getSMSCodeBtn_SUCCESS = {
-            background:"#ffdf0b",
-            border:"0",
-            color:"#515151",
-            borderTopLeftRadius:"0",
-            borderTopRightRadius:"2rem",
+            background: "#ffdf0b",
+            border: "0",
+            color: "#515151",
+            borderTopLeftRadius: "0",
+            borderTopRightRadius: "2rem",
             borderBottomRightRadius: "2rem",
             borderBottomLeftRadius: "0",
             width: "5.24rem"
@@ -57,70 +57,70 @@ define(function(require,exports,module){
          * @type {{background: string, color: string, border: string}}
          */
         var $registerBtn_FAILED = {
-            background:"#c7c7c7",
-            color:"#515151",
-            border:"#c7c7c7",
+            background: "#c7c7c7",
+            color: "#515151",
+            border: "#c7c7c7",
         };
         /**
          * 注册按钮 成功
          * @type {{background: string, color: string, border: string}}
          */
         var $registerBtn_SUCCESS = {
-            background:"#f84b15",
-            color:"#fff",
-            border:"#f84b15"
+            background: "#f84b15",
+            color: "#fff",
+            border: "#f84b15"
         };
 
 
-        $(document).on('blur','#userPhone',function () {
-            var userPhoneVal =  $userPhone.val();
+        $(document).on('blur', '#userPhone', function () {
+            var userPhoneVal = $userPhone.val();
             checkMobile(userPhoneVal);
         });
 
 
-        $(document).on('click','#registerBtn',function () {
+        $(document).on('click', '#registerBtn', function () {
             console.log(registerResult);
-            if(registerResult.userPass == true && registerResult.userPhone == true && registerResult.smsCode == true){
+            if (registerResult.userPass == true && registerResult.userPhone == true && registerResult.smsCode == true) {
                 $registerBtn.addClass('button-success').css($registerBtn_SUCCESS);
                 var enPassword;
                 $.ajax({
-                    url: BASE_URL+USER_SITE_URL.PUBLIC_KEY.URL,
+                    url: BASE_URL + USER_SITE_URL.PUBLIC_KEY.URL,
                     type: USER_SITE_URL.PUBLIC_KEY.METHOD,
-                    cache:true,
-                    async:false,
-                    dataType:USER_SITE_URL.DATATYPE,
-                    success: function(data) {
+                    cache: true,
+                    async: false,
+                    dataType: USER_SITE_URL.DATATYPE,
+                    success: function (data) {
                         var rsaKey = new RSAKey();
                         rsaKey.setPublic(b64tohex(data.modulus), b64tohex(data.exponent));
                         enPassword = hex2b64(rsaKey.encrypt($userPass.val()));
                     }
                 });
                 $.ajax({
-                    url:BASE_URL+USER_SITE_URL.USER_REGISTER.URL,
-                    dataType:USER_SITE_URL.DATATYPE,
-                    type:USER_SITE_URL.USER_REGISTER.METHOD,
-                    cache:true,
-                    async:false,
-                    data:{
-                        username:$.trim($userPhone.val()),
-                        enPassword:enPassword,
-                        smsCode:$.trim($smsCode.val())
+                    url: BASE_URL + USER_SITE_URL.USER_REGISTER.URL,
+                    dataType: USER_SITE_URL.DATATYPE,
+                    type: USER_SITE_URL.USER_REGISTER.METHOD,
+                    cache: true,
+                    async: false,
+                    data: {
+                        username: $.trim($userPhone.val()),
+                        enPassword: enPassword,
+                        smsCode: $.trim($smsCode.val())
                     },
-                    success:function (data) {
-                        if(data.authStatus == "200"){
-                            $.toast(data.authMsg,3000);
-                            setTimeout(function(){
-                                return location.href="/www/html/my/my.html"
-                            },3000);
+                    success: function (data) {
+                        if (data.authStatus == "200") {
+                            $.toast(data.authMsg, 3000);
+                            setTimeout(function () {
+                                return location.href = "/www/html/my/my.html"
+                            }, 3000);
 
-                        }else{
+                        } else {
                             $.toast(data.authMsg);
                         }
                     }
                 });
-            }else if (registerResult.userPass == false || registerResult.userPhone == false || registerResult.smsCode == false){
+            } else if (registerResult.userPass == false || registerResult.userPhone == false || registerResult.smsCode == false) {
                 $registerBtn.removeClass('button-success').css($registerBtn_FAILED);
-            }else if(typeof registerResult == 'undefined'){
+            } else if (typeof registerResult == 'undefined') {
                 $.toast("请填写你的手机号和登录密码！");
             }
         })
@@ -131,7 +131,7 @@ define(function(require,exports,module){
             if (regex.test(str)) {
                 console.log("手机号码正确");
                 $userPhoneError.hide();
-                $getSMSCodeBtn.css($getSMSCodeBtn_SUCCESS).attr("disabled",false);
+                $getSMSCodeBtn.css($getSMSCodeBtn_SUCCESS).attr("disabled", false);
                 registerResult.userPhone = true;
                 $userPhone.closest('li.register_input').removeClass("error");
                 console.log(registerResult);
@@ -139,7 +139,7 @@ define(function(require,exports,module){
             } else {
                 console.log("手机号码不正确");
                 $userPhoneError.show();
-                $getSMSCodeBtn.css($getSMSCodeBtn_FAILED).attr("disabled",true);
+                $getSMSCodeBtn.css($getSMSCodeBtn_FAILED).attr("disabled", true);
                 registerResult.userPhone = false;
                 $userPhone.closest('li.register_input').addClass("error");
                 console.log(registerResult);
@@ -148,13 +148,13 @@ define(function(require,exports,module){
         }
 
         function checkPassword(str) {
-            if(str.length <8 || str == '' || str.length > 16){
+            if (str.length < 8 || str == '' || str.length > 16) {
                 $userPassError.show();
                 console.log("用户密码不正确");
                 registerResult.userPass = false;
                 $userPass.closest('li.register_input').addClass("error");
                 console.log(registerResult);
-            }else{
+            } else {
                 $userPassError.hide();
                 registerResult.userPass = true;
                 $userPass.closest('li.register_input').removeClass("error");
@@ -165,13 +165,13 @@ define(function(require,exports,module){
 
 
         function checkSMSCode(str) {
-            if(str.length <4 || str == ''){
+            if (str.length < 4 || str == '') {
                 $userSMSCodeError.show();
                 console.log("验证码不正确");
                 registerResult.smsCode = false;
                 $smsCode.closest('li.register_input').addClass("error");
                 console.log(registerResult);
-            }else{
+            } else {
                 $userSMSCodeError.hide();
                 registerResult.smsCode = true;
                 $smsCode.closest('li.register_input').removeClass("error");
@@ -180,40 +180,40 @@ define(function(require,exports,module){
             }
         }
 
-        $(document).on('blur','#userPass',function () {
+        $(document).on('blur', '#userPass', function () {
             var userPassVal = $userPass.val();
             console.log(userPassVal);
             checkPassword(userPassVal);
             // checkRegisterBtn()
         })
 
-        $smsCode.on('blur',function () {
+        $smsCode.on('blur', function () {
             var smsCodeVal = $smsCode.val();
             checkSMSCode(smsCodeVal);
         });
 
 
-        $(document).on('click','#getSMSCodeBtn',function () {
-            if($userPhone.val() !== ''){
+        $(document).on('click', '#getSMSCodeBtn', function () {
+            if ($userPhone.val() !== '') {
                 var phoneNum = $("#userPhone").val();
                 console.log(phoneNum);
                 $.ajax({
-                    url:BASE_URL+USER_SITE_URL.SEND_DYNAMIC_CODE.URL,
-                    type:USER_SITE_URL.SEND_DYNAMIC_CODE.METHOD,
-                    dataType:USER_SITE_URL.DATATYPE,
-                    async:false,
-                    data: {userPhone: phoneNum,codeFlag:"1"},
-                    success:function (data) {
-                        if (data.authStatus == "200"){
+                    url: BASE_URL + USER_SITE_URL.SEND_DYNAMIC_CODE.URL,
+                    type: USER_SITE_URL.SEND_DYNAMIC_CODE.METHOD,
+                    dataType: USER_SITE_URL.DATATYPE,
+                    async: false,
+                    data: {userPhone: phoneNum, codeFlag: "1"},
+                    success: function (data) {
+                        if (data.authStatus == "200") {
                             $.toast(data.authMsg);
-                        }else{
+                        } else {
                             $.toast(data.authMsg);
                         }
                         getSMSTimer();
                     }
                 })
-            }else{
-                $.toast("请填写您的手机号！",2000);
+            } else {
+                $.toast("请填写您的手机号！", 2000);
             }
 
         });
@@ -225,17 +225,17 @@ define(function(require,exports,module){
             var nums = SETTIMESECOND;
             $("#getSMSCodeBtn").css($getSMSCodeBtn_FAILED);
             //将按钮置为 不可点击
-            $("#getSMSCodeBtn").attr("disabled",true);
-            $("#getSMSCodeBtn").text(nums+' s');
-            smsCodeBtn = setInterval(function(){
+            $("#getSMSCodeBtn").attr("disabled", true);
+            $("#getSMSCodeBtn").text(nums + ' s');
+            smsCodeBtn = setInterval(function () {
                 nums--;
-                if(nums > 0){
-                    $("#getSMSCodeBtn").text(nums+' s');
-                }else{
+                if (nums > 0) {
+                    $("#getSMSCodeBtn").text(nums + ' s');
+                } else {
                     clearInterval(smsCodeBtn); //清除js定时器
                     //将按钮置为 可点击
                     $("#getSMSCodeBtn").css($getSMSCodeBtn_SUCCESS);
-                    $("#getSMSCodeBtn").attr("disabled",false);
+                    $("#getSMSCodeBtn").attr("disabled", false);
                     $("#getSMSCodeBtn").text('获取验证码');
                     nums = SETTIMESECOND; //重置时间
                 }
@@ -244,15 +244,13 @@ define(function(require,exports,module){
     });
 
     // registerPage
-    require.async('handlebars',function(){
+    require.async('handlebars', function () {
         var data = genData;
         var tpl = require('/zqVue/shopwap-front/www/layout/my/register.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(data);
         $("#registerPage").html(html);
     });
-
-
 
 
 });

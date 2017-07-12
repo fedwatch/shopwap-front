@@ -1,192 +1,229 @@
-.pay-content{
-    background-color:#fff;
+.pay-content {
+    background-color: #fff;
 }
-.pay-content .title-p{
-    background-color:#eb4c1e;
-    padding:0.667rem 0.75rem;
+
+.pay-content .title-p {
+    background-color: #eb4c1e;
+    padding: 0.667rem 0.75rem;
 }
-.pay-content .title-p .order-img img{
-    height:1.88rem;
-    width:1.88rem;
-    margin-top:0.35rem;
+
+.pay-content .title-p .order-img img {
+    height: 1.88rem;
+    width: 1.88rem;
+    margin-top: 0.35rem;
 }
-.pay-content .or-title{
-    font-size:0.789rem;
-    color:#fff;
+
+.pay-content .or-title {
+    font-size: 0.789rem;
+    color: #fff;
 }
-.pay-content .or-title2{
-    font-size:0.667rem;
-    color:#fff;
+
+.pay-content .or-title2 {
+    font-size: 0.667rem;
+    color: #fff;
 }
-.pay-content .order-done{
-    margin-left:0.6rem;
-    line-height:1.4rem;
+
+.pay-content .order-done {
+    margin-left: 0.6rem;
+    line-height: 1.4rem;
 }
-.pay-content .desc-content{
-    padding:0 0.75rem;
+
+.pay-content .desc-content {
+    padding: 0 0.75rem;
 }
-.pay-content .pay-amount{
-    color:#212121;
-    font-size:0.789rem;
-    padding:1.5rem 0 0.9rem 0;
-    margin-bottom:0.91rem;
-    border-bottom:dashed 1px #999999;
+
+.pay-content .pay-amount {
+    color: #212121;
+    font-size: 0.789rem;
+    padding: 1.5rem 0 0.9rem 0;
+    margin-bottom: 0.91rem;
+    border-bottom: dashed 1px #999999;
 }
-.pay-content .pay-span2{
-    font-size:1.457rem;
-    color:#eb4c1e;
+
+.pay-content .pay-span2 {
+    font-size: 1.457rem;
+    color: #eb4c1e;
 }
-.pay-content .pay-span3{
-    font-size:0.971rem;
+
+.pay-content .pay-span3 {
+    font-size: 0.971rem;
 }
-.pay-content .order-addr{
-   font-size:0.789rem;
+
+.pay-content .order-addr {
+    font-size: 0.789rem;
 }
-.pay-content .detail-addr{
-    display:inline-block;
-    line-height:1.4rem;
-    padding-left:3.946rem;
-    padding-bottom:0.9rem;
+
+.pay-content .detail-addr {
+    display: inline-block;
+    line-height: 1.4rem;
+    padding-left: 3.946rem;
+    padding-bottom: 0.9rem;
 }
-#commonPay .cards-list .card{
-    margin:0;
+
+#commonPay .cards-list .card {
+    margin: 0;
     box-shadow: none;
 }
-#commonPay .pay-logo{
-    font-size:0.789rem;
+
+#commonPay .pay-logo {
+    font-size: 0.789rem;
 }
-#commonPay .pay-logo img{
-    width:3.673rem;
+
+#commonPay .pay-logo img {
+    width: 3.673rem;
     height: 0.91rem;
-    vertical-align:middle;
-    padding-right:0.4rem;
+    vertical-align: middle;
+    padding-right: 0.4rem;
 }
-#commonPay .tick{
-    display:inline-block;
-    width:20px;
-    height:20px;
-    border:solid 1px #e2e2e2;
-    border-radius:2px;
-    vertical-align:middle;
+
+#commonPay .tick {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: solid 1px #e2e2e2;
+    border-radius: 2px;
+    vertical-align: middle;
 }
-#commonPay .tickSelected{
-    display:inline-block;
-    width:20px;
-    height:20px;
-    background:url("../assets/images/tickSelected.png") no-repeat;
-    background-size:100% 100%;
-    vertical-align:middle;
+
+#commonPay .tickSelected {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url("../assets/images/tickSelected.png") no-repeat;
+    background-size: 100% 100%;
+    vertical-align: middle;
 }
-#commonPay .morePay{
-    display:inline-block;
-    text-align:center;
-    vertical-align:middle;
-    margin-right:0.4rem;
-    font-size:0.789rem;
-    visibility:hidden;
+
+#commonPay .morePay {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin-right: 0.4rem;
+    font-size: 0.789rem;
+    visibility: hidden;
 }
-.select-bank{
-    background-color:#f0f0f0;
-    font-size:0.789rem;
-    color:#212121;
-    padding:0.91rem 0;
-    border-top-right-radius:0.3rem;
-    border-top-left-radius:0.3rem;
+
+.select-bank {
+    background-color: #f0f0f0;
+    font-size: 0.789rem;
+    color: #212121;
+    padding: 0.91rem 0;
+    border-top-right-radius: 0.3rem;
+    border-top-left-radius: 0.3rem;
 }
-.cancel-m{
-    position:absolute;
-    right:0.91rem;
-    color:#1b949f;
-    font-size:0.789rem;
+
+.cancel-m {
+    position: absolute;
+    right: 0.91rem;
+    color: #1b949f;
+    font-size: 0.789rem;
 }
-.bank-li{
-    width:100%;
-    background-color:#fff;
+
+.bank-li {
+    width: 100%;
+    background-color: #fff;
 
 }
-.bank-li a{
-    text-align:left;
-    color:#212121;
-    font-weight:normal;
-    font-size:0.789rem;
+
+.bank-li a {
+    text-align: left;
+    color: #212121;
+    font-weight: normal;
+    font-size: 0.789rem;
 }
-.bank-a{
-    display:inline-block;
-    width:94%;
-    padding:0.7rem 0;
-   border-bottom:solid 1px #e6e6e6;
+
+.bank-a {
+    display: inline-block;
+    width: 94%;
+    padding: 0.7rem 0;
+    border-bottom: solid 1px #e6e6e6;
 }
-.but-a{
-    color:#1b949f;
+
+.but-a {
+    color: #1b949f;
 }
-.pay-way{
-    color:#999999;
-    padding:1.5rem 0 0.4rem 0.75rem;
-    font-size:0.667rem;
+
+.pay-way {
+    color: #999999;
+    padding: 1.5rem 0 0.4rem 0.75rem;
+    font-size: 0.667rem;
 }
-.attract{
-    margin-right:0.3rem;
+
+.attract {
+    margin-right: 0.3rem;
 }
-.bank-but{
-    font-size:0.789rem;
-    color:#1b949f;
-    text-align:center;
-    background-color:#fff;
+
+.bank-but {
+    font-size: 0.789rem;
+    color: #1b949f;
+    text-align: center;
+    background-color: #fff;
 
 }
-.bank-but-radius{
-   border-bottom-left-radius:0.3rem;
-   border-bottom-right-radius:0.3rem;
+
+.bank-but-radius {
+    border-bottom-left-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
 }
-.bankMask{
-    display:none;
+
+.bankMask {
+    display: none;
 }
+
 /*******支付成功*******/
-.paySuccess-bg{
-    margin:1.821rem 0.75rem 1rem 0.75rem;
-    background:url("../assets/images/sucess-bg.png") no-repeat;
-    -webkit-background-size:100% 100%;
-    -moz-background-size:100% 100%;
-    background-size:100% 100%;
+.paySuccess-bg {
+    margin: 1.821rem 0.75rem 1rem 0.75rem;
+    background: url("../assets/images/sucess-bg.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    background-size: 100% 100%;
 }
-.paySuccess-bg .title5{
-    padding-bottom:1.275rem;
-    font-size:0.789rem;
-    color:#212121;
-    text-align:center;
-    border-bottom:dashed 1px #999999;
+
+.paySuccess-bg .title5 {
+    padding-bottom: 1.275rem;
+    font-size: 0.789rem;
+    color: #212121;
+    text-align: center;
+    border-bottom: dashed 1px #999999;
 }
-.paySuccess-bg .ang8{
-    width:1.88rem;
-    height:1.88rem;
-    margin-top:0.5rem;
-    background:url('../assets/images/ang9.png') no-repeat;
-    -webkit-background-size:100% 100%;
-    -moz-background-size:100% 100%;
-    background-size:100% 100%;
+
+.paySuccess-bg .ang8 {
+    width: 1.88rem;
+    height: 1.88rem;
+    margin-top: 0.5rem;
+    background: url('../assets/images/ang9.png') no-repeat;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    background-size: 100% 100%;
 }
-.paySuccess-bg .ang9{
-    width:1.88rem;
-    height:1.88rem;
-    margin-top:0.5rem;
-    background:url('../assets/images/ang10.png') no-repeat;
-    -webkit-background-size:100% 100%;
-    -moz-background-size:100% 100%;
-    background-size:100% 100%;
+
+.paySuccess-bg .ang9 {
+    width: 1.88rem;
+    height: 1.88rem;
+    margin-top: 0.5rem;
+    background: url('../assets/images/ang10.png') no-repeat;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    background-size: 100% 100%;
 }
-.paySuccess-bg .pay-succ-con{
-    padding:1.94rem 1.214rem 0.971rem 1.214rem;
+
+.paySuccess-bg .pay-succ-con {
+    padding: 1.94rem 1.214rem 0.971rem 1.214rem;
 }
-.paySuccess-bg  .sum-am{
-    padding-left:0.607rem;
+
+.paySuccess-bg .sum-am {
+    padding-left: 0.607rem;
 }
-.paySuccess-bg  .sum-am div{
-    text-align:left;
+
+.paySuccess-bg .sum-am div {
+    text-align: left;
 }
-.paySuccess-bg  .sum-t{
-    padding-bottom:0.4rem;
+
+.paySuccess-bg .sum-t {
+    padding-bottom: 0.4rem;
 }
-.paySuccess-bg .user-desc{
-    padding-top:1.275rem;
-    font-size:0.667rem;
+
+.paySuccess-bg .user-desc {
+    padding-top: 1.275rem;
+    font-size: 0.667rem;
 }

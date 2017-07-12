@@ -4,6 +4,7 @@
 (function ($) {
     $(function () {
         var ua = getOs();
+
         function getOs() {
             var u = navigator.userAgent;
             if (u.indexOf("MSIE") > 0) {
@@ -22,6 +23,7 @@
                 return "Gecko";
             }
         }
+
         console.log(ua)
 
     })

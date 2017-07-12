@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/3/10.
  */
-define(function(require,exports,module){
+define(function (require, exports, module) {
     require('jquery');
     require("swiper");
     // require("lazyload");
@@ -12,7 +12,7 @@ define(function(require,exports,module){
     require("siteUrl");
 
     jQuery.support.cors = true;
-    var MD_URL = '//'+location.host+'/www';
+    var MD_URL = '//' + location.host + '/www';
     $(function () {
 
         // $("img.lazy").lazyload({
@@ -37,26 +37,25 @@ define(function(require,exports,module){
         });
 
 
-        $(document).on("click",".bt-img a",function () {
+        $(document).on("click", ".bt-img a", function () {
             var $this = $(this);
             var id = $this.data("id");
-            store.set("currentProductID",id);
-            return location.href = MD_URL+"/html/detail/detail.html";
+            store.set("currentProductID", id);
+            return location.href = MD_URL + "/html/detail/detail.html";
         })
 
     });
 
 
-
-    function findAreaByIp(){
+    function findAreaByIp() {
         $.ajax({
-            url:BASE_URL+PRODUCT_SITE_URLS.FIND_AREA_BY_IP.URL,
-            dataType:PRODUCT_SITE_URLS.DATATYPE,
-            type:PRODUCT_SITE_URLS.FIND_AREA_BY_IP.METHOD,
-            success:function (data) {
-                if(data.authStatus == '200'){
-                    store.set("areaId",data.area.id);
-                }else{
+            url: BASE_URL + PRODUCT_SITE_URLS.FIND_AREA_BY_IP.URL,
+            dataType: PRODUCT_SITE_URLS.DATATYPE,
+            type: PRODUCT_SITE_URLS.FIND_AREA_BY_IP.METHOD,
+            success: function (data) {
+                if (data.authStatus == '200') {
+                    store.set("areaId", data.area.id);
+                } else {
                     console.log(data.authMsg);
                     console.log(data.authStatus);
                 }
@@ -65,19 +64,19 @@ define(function(require,exports,module){
     }
 
 
-    require.async('handlebars',function(){
+    require.async('handlebars', function () {
         var getData = {};
-        var tpl =  require('/zqVue/shopwap-front/www/layout/index/category.tpl');
+        var tpl = require('/zqVue/shopwap-front/www/layout/index/category.tpl');
         var template = Handlebars.compile(tpl);
         var html = template(getData);
         $("#category").html(html);
     });
 
     // banner
-    require.async('handlebars',function(){
+    require.async('handlebars', function () {
         var data = {
             banner: [
-                {url:"//jie.net/static/dragonboat0522/wap/dragonboat.html",image:"../assets/images/banner-1.jpg"},
+                {url: "//jie.net/static/dragonboat0522/wap/dragonboat.html", image: "../assets/images/banner-1.jpg"},
             ],
         };
         var tpl = require('/zqVue/shopwap-front/www/layout/index/banner.tpl');
@@ -87,9 +86,9 @@ define(function(require,exports,module){
     });
 
     // navbarSearch
-    require.async('handlebars',function(){
+    require.async('handlebars', function () {
         var data = {
-            data:'搜索'
+            data: '搜索'
         };
         var tpl = require('/zqVue/shopwap-front/www/layout/index/navbarSearch.tpl');
         var template = Handlebars.compile(tpl);
@@ -98,7 +97,7 @@ define(function(require,exports,module){
     });
 
     // footerNav
-    require.async('handlebars',function(){
+    require.async('handlebars', function () {
         var data = {};
         var tpl = require('/zqVue/shopwap-front/www/layout/common/footerBar.tpl');
         var template = Handlebars.compile(tpl);

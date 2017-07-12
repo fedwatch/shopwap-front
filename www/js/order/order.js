@@ -29,9 +29,9 @@ define(function (require, exports, module) {
         e.preventDefault();
         var itemIds = store.get("cartItemId");
         var receiverId = store.get("receiverId");
-        if(receiverId){
+        if (receiverId) {
             calculate(username, receiverId, itemIds);
-        }else{
+        } else {
             $.toast("默认地址未选！");
             return;
         }

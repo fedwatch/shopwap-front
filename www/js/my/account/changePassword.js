@@ -64,7 +64,7 @@ define(function (require, exports, module) {
 
         var vertCodeState = true;
         $(document).on('click', '.vert-code', function () {
-            if(vertCodeState == true){
+            if (vertCodeState == true) {
                 var $phoneNumberVal = $("#phone-num").val();
                 var currentUsername = store.get("username");
                 checkPhone($phoneNumberVal);

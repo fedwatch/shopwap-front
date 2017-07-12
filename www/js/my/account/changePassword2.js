@@ -23,7 +23,6 @@ define(function (require, exports, module) {
         }
 
 
-
         function checkPassword(str) {
             var strong = /^(?![a-zA-z]+$)(?!\d+$)(?![!@#$%^&*]+$)(?![a-zA-z\d]+$)(?![a-zA-z!@#$%^&*]+$)(?![\d!@#$%^&*]+$)[a-zA-Z\d!@#$%^&*]+$/;
             var middle = /^(?![a-zA-z]+$)(?!\d+$)(?![!@#$%^&*]+$)[a-zA-Z\d!@#$%^&*]+$/;
@@ -77,8 +76,8 @@ define(function (require, exports, module) {
                         newPwd: newPwd,
                         pwd: pwd
                     },
-                    cache:true,
-                    async:false,
+                    cache: true,
+                    async: false,
                     success: function (data) {
                         if (data.authStatus == '200') {
                             $.toast(data.authMsg);

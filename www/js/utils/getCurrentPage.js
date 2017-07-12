@@ -1,7 +1,7 @@
 function getCurrentPage() {
     var protocol = location.protocol;
     var path = location.pathname;
-    if(protocol === 'http' || protocol === 'https'){
+    if (protocol === 'http' || protocol === 'https') {
         if (path.indexOf("index") == 0) {
             $("#home-link").addClass("active");
         } else if (path.indexOf("category") == 0) {
@@ -16,7 +16,7 @@ function getCurrentPage() {
             $("#cart-link").removeClass("active");
             $("#user-link").removeClass("active");
         }
-    }else{
+    } else {
 
         if (path.indexOf("index") !== -1) {
             $("#home-link").addClass("active");

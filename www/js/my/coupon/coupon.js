@@ -28,8 +28,8 @@ define(function (require, exports, module) {
             url: "/getData",
             dataType: "json",
             type: "get",
-            cache:true,
-            async:false,
+            cache: true,
+            async: false,
             success: function (data) {
                 var tpl = require('/zqVue/shopwap-front/www/layout/my/coupon.tpl');
                 var template = Handlebars.compile(tpl);

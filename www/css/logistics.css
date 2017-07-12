@@ -1,76 +1,92 @@
-.logistics  .logistics-log{
-    width:1.214rem;
-    height:1.214rem;
+.logistics .logistics-log {
+    width: 1.214rem;
+    height: 1.214rem;
 
-    background-size:100% 100%;
-}
-.logistics .logistics-log.sf{
-    background:url(../assets/images/logistics1.png) center center no-repeat;
-}
-.logistics   .logistics-desc{
-    line-height:1.2rem;
-}
-.logistics .logistics-title{
-    font-size:0.667rem;
-    color:#000000;
-    padding-left:0.364rem;
-}
-.logistics  .express-company{
-    color:#eb4c1e;
-
-}
-.logistics .logic-detail{
-    width:100%;
-    font-size:0.667rem;
-    color:#999999;
-}
-.logistics .logic-detail .status-title{
-    font-size:0.789rem;
-}
-.logistics .logic-detail .status{
-    font-size:0.789rem;
-    color:#eb4c1e;
-}
-.logistics .logic-detail span{
-    padding-left:0.6rem;
-}
-.logistics  .logistics-path{
-    font-size:0.667rem;
-    color:#999999;
-}
-.logistics  .arrive-time{
-    padding-top:0.506rem;
-}
-.logistics .logistics-c .logistics-path .logistics-phone{
-    color:#1b949e;
-}
-.logistics .logistics-c .logistics-path .title-company{
-
-}
-.logistics  .logistics_con{
-         padding:1.153rem 0;
+    background-size: 100% 100%;
 }
 
-.logistics  .status-list {
+.logistics .logistics-log.sf {
+    background: url(../assets/images/logistics1.png) center center no-repeat;
+}
+
+.logistics .logistics-desc {
+    line-height: 1.2rem;
+}
+
+.logistics .logistics-title {
+    font-size: 0.667rem;
+    color: #000000;
+    padding-left: 0.364rem;
+}
+
+.logistics .express-company {
+    color: #eb4c1e;
+
+}
+
+.logistics .logic-detail {
+    width: 100%;
+    font-size: 0.667rem;
+    color: #999999;
+}
+
+.logistics .logic-detail .status-title {
+    font-size: 0.789rem;
+}
+
+.logistics .logic-detail .status {
+    font-size: 0.789rem;
+    color: #eb4c1e;
+}
+
+.logistics .logic-detail span {
+    padding-left: 0.6rem;
+}
+
+.logistics .logistics-path {
+    font-size: 0.667rem;
+    color: #999999;
+}
+
+.logistics .arrive-time {
+    padding-top: 0.506rem;
+}
+
+.logistics .logistics-c .logistics-path .logistics-phone {
+    color: #1b949e;
+}
+
+.logistics .logistics-c .logistics-path .title-company {
+
+}
+
+.logistics .logistics_con {
+    padding: 1.153rem 0;
+}
+
+.logistics .status-list {
     margin: 0;
     padding: 0;
     list-style: none;
     font-size: 12px;
-    white-space:normal;
+    white-space: normal;
 }
 
-.logistics  .status-list li {
+.logistics .status-list li {
     margin-bottom: -2px;
 }
-.logistics  .status-list li {
+
+.logistics .status-list li {
     height: auto;
 
 }
-.logistics  .logistics_con .status-list li{
-    color:#353535;
+
+.logistics .logistics_con .status-list li {
+    color: #353535;
     border-left: 2px solid #d9d9d9;
 }
-.logistics  .status-list li:before {
+
+.logistics .status-list li:before {
     content: '';
     /**border: 3px solid #f3f3f3;**/
     border: 3px solid #fff;
@@ -81,39 +97,46 @@
     border-radius: 100%;
     margin-left: -8px;
     margin-right: 10px;
-    vertical-align:middle;
+    vertical-align: middle;
 }
 
-.logistics   .latest{
+.logistics .latest {
 
 }
-.logistics  .status-list .latest:before {
-    width:0.789rem;
-    height:0.789rem;
+
+.logistics .status-list .latest:before {
+    width: 0.789rem;
+    height: 0.789rem;
     background-color: #fe4300;
     border-color: #f8e9e4;
     border: 2px solid #f9c9bb;
-    margin-left:-0.5035rem;
+    margin-left: -0.5035rem;
 }
-.logistics  .hidden{
-    visibility:hidden;
+
+.logistics .hidden {
+    visibility: hidden;
 }
-.logistics .logistics-c{
-    margin-left:1.153rem;
-    border-bottom:solid 1px #dadada;
-    margin-top:-18px;
-    padding-bottom:0.85rem;
+
+.logistics .logistics-c {
+    margin-left: 1.153rem;
+    border-bottom: solid 1px #dadada;
+    margin-top: -18px;
+    padding-bottom: 0.85rem;
 }
-.status-list li{
-    padding-top:0.91rem;
+
+.status-list li {
+    padding-top: 0.91rem;
 
 }
-.logistics .first-c{
-    border-bottom:none;
+
+.logistics .first-c {
+    border-bottom: none;
 }
-.logistics .lastest-c{
-    color:#eb4c1e;
+
+.logistics .lastest-c {
+    color: #eb4c1e;
 }
-.logistics .lastest-time{
-    color:#000000;
+
+.logistics .lastest-time {
+    color: #000000;
 }
