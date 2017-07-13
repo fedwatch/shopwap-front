@@ -1244,7 +1244,9 @@ header.bar.bar-nav a {
 .panel-plus-minus .panel-plus-minus-wrapper {
     width: 100%;
     display: inline-flex;
+    display: -webkit-inline-flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .cart-item-buying-desc {
@@ -1262,7 +1264,7 @@ input.panel-text-input {
     width: 2rem;
     height: 2rem;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     border: 1px solid #e6e6e6;
 }
 
@@ -1380,6 +1382,8 @@ span.panel-minus-button {
     text-align: right;
     width: 20%;
     padding:0 .355rem;
+    display: flex;
+    display: -webkit-flex;
 }
 
 .totalGoodsPrices .sign-symbol {
@@ -2548,4 +2552,11 @@ span.nav-sub-text.active {
 
 #bottomLineText{
     padding:2.5rem 0;
+}
+
+.last_page{
+    color: #333;
+    text-align: center;
+    font-size: .564rem;
+    padding: 2.5rem 0;
 }

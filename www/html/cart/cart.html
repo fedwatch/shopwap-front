@@ -101,8 +101,6 @@
                 var $cartItemEditPanel = $siblingsDOM.children('div.cart-item-edit-panel');
                 $cartItemText.show();
                 $cartItemEditPanel.hide();
-
-
             });
 
             // 触发 删除 事件
@@ -152,7 +150,6 @@
                 var id = $(this).parents(".failGoods").find(".cart-off-store-img-text-label").data("id");
                 $(this).parents(".failGoods").remove();
                 cartDelete(username, [id]);
-                // $(".offEditPanel").hide();
             });
 
 
