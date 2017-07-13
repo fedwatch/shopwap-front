@@ -30,11 +30,12 @@
     <script type="text/javascript" src="../../js/config/getUser.js"></script>
     <script>
         $(function () {
+//            跨域设置
             jQuery.support.cors = true;
             var username = store.get("username");
             var userStatus = store.get("userStatus");
             var storeData = {};
-
+//            加载模版
             var template = Handlebars.compile($("#cartTpl").html());
             var html = template(storeData);
             $("#cartPage").html(html);
@@ -55,6 +56,7 @@
             var html = template(storeData);
             $("#nothingBuy").html(html);
 
+//            获取模版数据
             cartList(username);
 
             // 触发 编辑 事件
@@ -121,7 +123,7 @@
                 var cartStoreId = [];
                 var cartProductId = [];
                 var stackVideo = "";
-
+                //购物车删除
                 cartDelete(username, removeItems);
                 if (selectedLength == 1) {
                     $this.parent().parent().parent().remove();

@@ -34,7 +34,7 @@
             var data = {};
             var template = Handlebars.compile($("#footerBarTpl").html());
             var html = template(data);
-
+//            获取用户信息
             getIndex(username);
             getCurrentPage();
             function getIndex(username) {
@@ -80,6 +80,7 @@
                 $.toast("当前版本号为：" + ver);
             }
 
+            //检查用户状态
             checkUserStatus();
             function checkUserStatus() {
                 setInterval(function(){

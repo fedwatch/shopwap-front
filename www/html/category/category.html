@@ -51,10 +51,12 @@
             var html = template(data);
             $("#footerNavPage").html(html);
 
-
+            //获取当前页状态
             getCurrentPage();
+//            找根目录
             findRoots(username);
             var categoryId = $("#categoryId").val();
+//            找子目录
             findSubs(username,categoryId);
 
 
@@ -250,7 +252,7 @@
 //            });
 
             /**
-             *
+             * 跳转商品详情
              */
             function getProductDetail(id) {
                 store.set("currentProductID", id);
@@ -326,6 +328,9 @@
             }
         }
 
+        /**
+         * 获取浏览器历史记录
+         */
         function getBrowserHistory(){
             var userBrowserSync = store.get("userBrowserHistory");
             if(userBrowserSync){
